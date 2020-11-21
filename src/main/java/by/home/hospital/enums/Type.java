@@ -1,4 +1,4 @@
-package by.home.hospiital.enums;
+package by.home.hospital.enums;
 
 public enum Type {
     PROCEDURE,

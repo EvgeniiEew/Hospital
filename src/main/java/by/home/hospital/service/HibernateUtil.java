@@ -1,4 +1,4 @@
-package by.home.hospiital.service;
+package by.home.hospital.service;
 
 import lombok.extern.log4j.Log4j;
 import org.hibernate.SessionFactory;

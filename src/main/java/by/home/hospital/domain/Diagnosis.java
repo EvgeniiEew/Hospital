@@ -1,7 +1,5 @@
 package by.home.hospital.domain;
 
-import by.home.hospital.enums.AppointmentStatus;
-import by.home.hospital.enums.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,19 +11,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Appointment {
+public class Diagnosis {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     private String name;
+    @OneToMany(mappedBy = "diagnosis")
+    private List<DiagnosisPatient> diagnosisPatients;
 
-    @Enumerated(EnumType.STRING)
-    private Type type;
-
-    @Enumerated(EnumType.STRING)
-    private AppointmentStatus status;
-
-    @OneToMany(mappedBy = "appointment")
-    private List<AppointmentUsers> appointmentUsers;
 }

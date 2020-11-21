@@ -1,6 +1,8 @@
-package by.home.hospiital.enums;
+package by.home.hospital.enums;
 
 public enum Position {
     DOCTORS,
-    NURSE;
+    NURSE,
+    PATIENT,
+    ADMIN;
 }

@@ -1,4 +1,4 @@
-package by.home.hospiital.filter;
+package by.home.hospital.filter;
 
 import org.apache.log4j.Logger;
 

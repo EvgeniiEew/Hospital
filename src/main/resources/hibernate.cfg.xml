@@ -5,7 +5,7 @@
     <session-factory>
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/Project</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/hospital_db</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">1111</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->
@@ -17,20 +17,22 @@
         <!-- Set the current session context -->
         <property name="current_session_context_class">thread</property>
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
         <!-- dbcp connection pool configuration -->
         <property name="hibernate.dbcp.initialSize">5</property>
         <property name="hibernate.dbcp.maxTotal">20</property>
         <property name="hibernate.dbcp.maxIdle">10</property>
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
-<!--        <mapping class="by.grodno.pvt.site.webappsample.model.OldUser" />-->
-<!--        -->
-<!--        <mapping class="by.grodno.pvt.site.webappsample.domain.Course" />-->
-<!--        <mapping class="by.grodno.pvt.site.webappsample.domain.StudentCourse" />-->
-<!--        <mapping class="by.grodno.pvt.site.webappsample.domain.GraduationMark" />-->
-<!--        <mapping class="by.grodno.pvt.site.webappsample.domain.Schedule" />-->
-<!--        <mapping class="by.grodno.pvt.site.webappsample.domain.Credentials" />-->
-<!--        <mapping class="by.grodno.pvt.site.webappsample.domain.User" />-->
+
+        <mapping class="by.home.hospital.domain.Appointment"/>
+        <mapping class="by.home.hospital.domain.AppointmentUsers"/>
+        <mapping class="by.home.hospital.domain.Credentials"/>
+        <mapping class="by.home.hospital.domain.Diagnosis"/>
+        <mapping class="by.home.hospital.domain.DiagnosisPatient"/>
+        <mapping class="by.home.hospital.domain.DoctorDitales"/>
+        <mapping class="by.home.hospital.domain.Epicrisis"/>
+        <mapping class="by.home.hospital.domain.PatientDetails"/>
+        <mapping class="by.home.hospital.domain.User"/>
     </session-factory>
 </hibernate-configuration>
