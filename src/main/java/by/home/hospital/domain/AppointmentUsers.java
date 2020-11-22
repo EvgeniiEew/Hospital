@@ -12,8 +12,8 @@ public class AppointmentUsers {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "patient_id")
+    private User patient;
 
     @ManyToOne
     @JoinColumn(name = "appointment_id")

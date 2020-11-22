@@ -38,6 +38,6 @@ public class User {
     @OneToOne(mappedBy = "doctor")
     private PatientDetails patientDetails;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
     private List<AppointmentUsers> appointmentUsers;
 }
