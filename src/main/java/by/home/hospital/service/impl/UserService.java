@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class HibernateUserService implements UserRepository {
+public class UserService implements UserRepository {
 
     private ISessionProvider sessionProvider;
 
-    public HibernateUserService(ISessionProvider sessionProvider) {
+    public UserService(ISessionProvider sessionProvider) {
         this.sessionProvider = sessionProvider;
     }
 
@@ -35,13 +35,13 @@ public class HibernateUserService implements UserRepository {
     public List<User> getUsers() {
 
         EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
-
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
-        CriteriaQuery<User> cr = cb.createQuery(User.class);
-
-        return entityManager.createQuery(cr.select(cr.from(User.class))).getResultList();
-
+//
+//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//
+//        CriteriaQuery<User> cr = cb.createQuery(User.class);
+//
+//        return entityManager.createQuery(cr.select(cr.from(User.class))).getResultList();
+        return entityManager.createQuery("Select u from User u", User.class).getResultList();
     }
 
     @Override

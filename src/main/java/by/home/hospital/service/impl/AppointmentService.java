@@ -13,10 +13,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Service
-public class HibernateAppointmentService implements AppointmentRepository{
+public class AppointmentService implements AppointmentRepository{
     private ISessionProvider sessionProvider;
 
-    public HibernateAppointmentService(ISessionProvider sessionProvider) {
+    public AppointmentService(ISessionProvider sessionProvider) {
         this.sessionProvider = sessionProvider;
     }
 

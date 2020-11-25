@@ -1,9 +1,9 @@
 package by.home.hospital.domain;
 
 import by.home.hospital.enums.Position;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,28 +22,32 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Position position;
 
-//    @OneToMany(mappedBy = "users")
-//    private List<AppointmentUsers> appointmentUsers;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "credential_id", referencedColumnName = "id")
     private Credentials credentials;
 
-    @OneToOne(mappedBy = "doctor")
+    @EqualsAndHashCode.Exclude
+    @OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
     private DoctorDitales doctorDitales;
 
-    @OneToOne(mappedBy = "patient")
+    @EqualsAndHashCode.Exclude
+    @OneToOne(mappedBy = "patient", fetch = FetchType.LAZY)
     private Epicrisis epicrisis;
 
-    @OneToOne(mappedBy = "doctor")
+    @EqualsAndHashCode.Exclude
+    @OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
     private PatientDetails patientDetails;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
-    public List<AppointmentUsers> appointmentUsers;
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    public List<AppointmentUsers> appointmentPatient;
 
-//
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE)
-    public List<AppointmentUsers> appointmentDocte;
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public List<AppointmentUsers> appointmentDoctor;
 
-//
 }
