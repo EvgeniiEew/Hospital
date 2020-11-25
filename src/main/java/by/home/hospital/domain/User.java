@@ -39,5 +39,11 @@ public class User {
     private PatientDetails patientDetails;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
-    private List<AppointmentUsers> appointmentUsers;
+    public List<AppointmentUsers> appointmentUsers;
+
+//
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE)
+    public List<AppointmentUsers> appointmentDocte;
+
+//
 }

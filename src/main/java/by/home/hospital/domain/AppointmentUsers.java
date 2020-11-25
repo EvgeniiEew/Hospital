@@ -15,6 +15,12 @@ public class AppointmentUsers {
     @JoinColumn(name = "patient_id")
     private User patient;
 
+//
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private User doctor;
+//
+
     @ManyToOne
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;

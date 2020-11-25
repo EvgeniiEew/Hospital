@@ -1,7 +1,7 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.Credentials;
-import by.home.hospital.service.CredentialsRepository;
+import by.home.hospital.domain.Diagnosis;
+import by.home.hospital.service.DiagnosisRepository;
 import by.home.hospital.service.until.ISessionProvider;
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
@@ -12,44 +12,43 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Service
-public class CredentialsService implements CredentialsRepository {
+public class DiagnosisService implements DiagnosisRepository {
     private ISessionProvider sessionProvider;
 
-    public CredentialsService(ISessionProvider sessionProvider) {
+    public DiagnosisService(ISessionProvider sessionProvider) {
         this.sessionProvider = sessionProvider;
     }
 
     @Override
-    public void addCredentials(Credentials credentials) {
+    public void addDiagnosis(Diagnosis diagnosis) {
         Session entityManager = sessionProvider.getEntityManager().getCurrentSession();
         entityManager.getTransaction().begin();
-        entityManager.persist(credentials);
+        entityManager.persist(diagnosis);
         entityManager.getTransaction().commit();
 
     }
 
     @Override
-    public List<Credentials> getCredentials() {
+    public List<Diagnosis> getDiagnosis() {
 
         EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
-        CriteriaQuery<Credentials> cr = cb.createQuery(Credentials.class);
+        CriteriaQuery<Diagnosis> cr = cb.createQuery(Diagnosis.class);
 
-        return entityManager.createQuery(cr.select(cr.from(Credentials.class))).getResultList();
+        return entityManager.createQuery(cr.select(cr.from(Diagnosis.class))).getResultList();
 
     }
 
     @Override
-    public void deleteCredentials(Integer number) {
+    public void deleteDiagnosis(Integer number) {
 
         EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
 
         entityManager.getTransaction().begin();
-        entityManager.remove(new Credentials());
+        entityManager.remove(new Diagnosis());
         entityManager.getTransaction().commit();
 
     }
-
 }

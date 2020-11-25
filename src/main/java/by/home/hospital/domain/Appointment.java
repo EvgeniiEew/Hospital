@@ -23,9 +23,19 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private Type type;
 
+    public void setStatus(AppointmentStatus status) {
+        this.status = status;
+    }
+
+    public AppointmentStatus getStatus() {
+        return status;
+    }
+
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
     @OneToMany(mappedBy = "appointment")
     private List<AppointmentUsers> appointmentUsers;
+
+
 }

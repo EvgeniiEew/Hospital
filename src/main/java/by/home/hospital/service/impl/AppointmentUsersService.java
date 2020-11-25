@@ -1,7 +1,7 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.Credentials;
-import by.home.hospital.service.CredentialsRepository;
+import by.home.hospital.domain.AppointmentUsers;
+import by.home.hospital.service.AppointmentUsersRepository;
 import by.home.hospital.service.until.ISessionProvider;
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
@@ -12,42 +12,42 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Service
-public class CredentialsService implements CredentialsRepository {
+public class AppointmentUsersService implements AppointmentUsersRepository {
     private ISessionProvider sessionProvider;
 
-    public CredentialsService(ISessionProvider sessionProvider) {
+    public AppointmentUsersService(ISessionProvider sessionProvider) {
         this.sessionProvider = sessionProvider;
     }
 
     @Override
-    public void addCredentials(Credentials credentials) {
+    public void addAppointmentUsers(AppointmentUsers appointmentUsers) {
         Session entityManager = sessionProvider.getEntityManager().getCurrentSession();
         entityManager.getTransaction().begin();
-        entityManager.persist(credentials);
+        entityManager.persist(appointmentUsers);
         entityManager.getTransaction().commit();
 
     }
 
     @Override
-    public List<Credentials> getCredentials() {
+    public List<AppointmentUsers> getAppointmentUsers() {
 
         EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
-        CriteriaQuery<Credentials> cr = cb.createQuery(Credentials.class);
+        CriteriaQuery<AppointmentUsers> cr = cb.createQuery(AppointmentUsers.class);
 
-        return entityManager.createQuery(cr.select(cr.from(Credentials.class))).getResultList();
+        return entityManager.createQuery(cr.select(cr.from(AppointmentUsers.class))).getResultList();
 
     }
 
     @Override
-    public void deleteCredentials(Integer number) {
+    public void deleteAppointmentUsers(Integer number) {
 
         EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
 
         entityManager.getTransaction().begin();
-        entityManager.remove(new Credentials());
+        entityManager.remove(new AppointmentUsers());
         entityManager.getTransaction().commit();
 
     }
