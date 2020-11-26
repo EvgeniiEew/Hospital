@@ -1,6 +1,8 @@
 package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Credentials;
+import by.home.hospital.domain.User;
+import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.CredentialsRepository;
 import by.home.hospital.service.until.ISessionProvider;
 import org.hibernate.Session;
@@ -11,6 +13,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
+import static by.home.hospital.enums.Position.PATIENT;
+
 @Service
 public class CredentialsService implements CredentialsRepository {
     private ISessionProvider sessionProvider;
@@ -20,10 +24,19 @@ public class CredentialsService implements CredentialsRepository {
     }
 
     @Override
-    public void addCredentials(Credentials credentials) {
+    public void registerPatient(PatientRegisterDto patientRegisterDto) {
         Session entityManager = sessionProvider.getEntityManager().getCurrentSession();
         entityManager.getTransaction().begin();
-        entityManager.persist(credentials);
+        User user1 = new User();
+        user1.setPosition(PATIENT);
+        Credentials creds1 = new Credentials();
+        creds1.setFirstName(patientRegisterDto.getFirstName());
+        creds1.setLastName(patientRegisterDto.getLastName());
+        creds1.setLogin(patientRegisterDto.getLogin());
+        creds1.setPassword(patientRegisterDto.getPassword());
+        user1.setCredentials(creds1);
+        entityManager.persist(creds1);
+        entityManager.persist(user1);
         entityManager.getTransaction().commit();
 
     }

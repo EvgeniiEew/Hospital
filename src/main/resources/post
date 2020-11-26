@@ -1,0 +1,8 @@
+http://localhost:8090/register/patient
+{
+        "firstName": "Sanyauuu",
+        "lastName": "werfpidru",
+        "login": "1232327678",
+        "password": "98765224321"
+    }
+

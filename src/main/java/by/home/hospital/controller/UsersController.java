@@ -2,6 +2,7 @@ package by.home.hospital.controller;
 
 
 import by.home.hospital.domain.User;
+import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,7 +17,7 @@ import java.util.List;
 @RestController
 public class UsersController {
 
-    @Autowired
+@Autowired
     private UserRepository repo;
 
     @PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -28,4 +29,6 @@ public class UsersController {
     public List<User> getAllUsers() {
         return repo.getUsers();
     }
+
+
 }
