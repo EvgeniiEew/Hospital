@@ -2,9 +2,8 @@ package by.home.hospital.domain;
 
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Type;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -34,6 +33,9 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "appointment")
     private List<AppointmentUsers> appointmentUsers;
 

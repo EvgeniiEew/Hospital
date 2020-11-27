@@ -20,10 +20,10 @@ public class UsersController {
 @Autowired
     private UserRepository repo;
 
-    @PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void saveUser(@RequestBody User user) {
-        repo.addUser(user);
-    }
+//    @PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public void saveUser(@RequestBody User user) {
+//        repo.addUser(user);
+//    }
 
     @GetMapping("/users")
     public List<User> getAllUsers() {

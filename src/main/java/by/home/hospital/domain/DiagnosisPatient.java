@@ -1,8 +1,7 @@
 package by.home.hospital.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,10 +14,16 @@ public class DiagnosisPatient {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "patientDetails_id")
     private PatientDetails patientDetails;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "diagnosis_id")
     private Diagnosis diagnosis;

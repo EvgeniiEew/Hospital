@@ -15,11 +15,9 @@ public class Credentials {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @Length(min = 6, max = 20)
     @Column(nullable = false)
     private String firstName;
 
-    @Length(min = 6, max = 20)
     @Column(nullable = false)
     private String lastName;
 

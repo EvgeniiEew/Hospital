@@ -1,8 +1,7 @@
 package by.home.hospital.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -20,6 +19,9 @@ public class DoctorDitales {
     @Column(nullable = false)
     private String name;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "doctorId", referencedColumnName = "id")
     private User doctor;

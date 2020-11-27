@@ -1,8 +1,7 @@
 package by.home.hospital.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,11 +10,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class Diagnosis {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private String name;
     @OneToMany(mappedBy = "diagnosis")
     private List<DiagnosisPatient> diagnosisPatients;

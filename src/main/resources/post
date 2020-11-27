@@ -1,8 +1,22 @@
-http://localhost:8090/register/patient
-{
+class CredentialsController
+        http://localhost:8090/register/patient
+        {
         "firstName": "Sanyauuu",
         "lastName": "werfpidru",
         "login": "1232327678",
         "password": "98765224321"
-    }
+         }
 
+         http://localhost:8090/credanchials
+          @GetMapping("/credanchials")
+
+        class UsersController
+
+        http://localhost:8090/users
+         @GetMapping("/users")
+
+
+SELECT credentials.firstname ,credentials.lastname , users.position,
+doctor_ditales.name
+FROM credentials, doctor_ditales , users
+WHERE  users.id = doctor_ditales.doctorid and credentials.id = users.credential_id
