@@ -39,5 +39,7 @@ public class Appointment {
     @OneToMany(mappedBy = "appointment")
     private List<AppointmentUsers> appointmentUsers;
 
-
+    @EqualsAndHashCode.Exclude
+    @OneToOne(mappedBy = "appointment", fetch = FetchType.LAZY)
+    private Epicrisis epicrisis;
 }

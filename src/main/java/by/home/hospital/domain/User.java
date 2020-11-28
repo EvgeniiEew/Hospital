@@ -33,9 +33,6 @@ public class User {
     @OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
     private DoctorDitales doctorDitales;
 
-    @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "patient", fetch = FetchType.LAZY)
-    private Epicrisis epicrisis;
 
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)

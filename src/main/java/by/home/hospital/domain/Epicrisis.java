@@ -20,8 +20,8 @@ public class Epicrisis {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "patient_id", referencedColumnName = "id")
-    private User patient;
+    @JoinColumn(name = "appointment_id", referencedColumnName = "id")
+    private Appointment appointment;
 
 
 }
