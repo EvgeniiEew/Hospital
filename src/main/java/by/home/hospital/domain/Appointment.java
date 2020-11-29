@@ -33,6 +33,12 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
+    public Appointment(String name, Type type, AppointmentStatus status) {
+        this.name = name;
+        this.type = type;
+        this.status = status;
+    }
+
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

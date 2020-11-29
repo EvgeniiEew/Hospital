@@ -22,4 +22,11 @@ public class AppointmentUsers {
     @ManyToOne
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
+
+    public AppointmentUsers(User patient, User doctor, Appointment appointment) {
+    }
+
+    public AppointmentUsers() {
+
+    }
 }

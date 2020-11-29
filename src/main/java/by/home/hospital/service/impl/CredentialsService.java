@@ -37,6 +37,9 @@ public class CredentialsService implements CredentialsRepository {
         user1.setCredentials(creds1);
         entityManager.persist(creds1);
         entityManager.persist(user1);
+
+        //вызывать метод крединшила
+
         entityManager.getTransaction().commit();
 
     }

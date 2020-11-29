@@ -19,7 +19,7 @@ public class CredentialsController {
 
 
     //auth controller
-    @PostMapping(path = "/register/patient" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/patient/register" , consumes = MediaType.APPLICATION_JSON_VALUE)
     public void registerPatient(@RequestBody PatientRegisterDto patientRegisterDto) {
         repo.registerPatient(patientRegisterDto);
     }

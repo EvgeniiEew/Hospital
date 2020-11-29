@@ -27,4 +27,7 @@ public class DiagnosisPatient {
     @ManyToOne
     @JoinColumn(name = "diagnosis_id")
     private Diagnosis diagnosis;
+
+    public DiagnosisPatient(PatientDetails patientDetails, Diagnosis diagnosis) {
+    }
 }

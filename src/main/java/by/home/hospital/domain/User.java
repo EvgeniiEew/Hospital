@@ -35,7 +35,7 @@ public class User {
 
 
     @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "patient", fetch = FetchType.LAZY)
     private PatientDetails patientDetails;
 
     @JsonIgnore
@@ -47,4 +47,13 @@ public class User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     public List<AppointmentUsers> appointmentDoctor;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public User(int id, Position position, Credentials credentials) {
+        this.id = id;
+        this.position = position;
+        this.credentials = credentials;
+    }
 }

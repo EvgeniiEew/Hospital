@@ -23,11 +23,23 @@ public class PatientDetails {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "doctorId", referencedColumnName = "id")
-    private User doctor;
+    @JoinColumn(name = "patientId", referencedColumnName = "id")
+    private User patient;
 
     @OneToMany(mappedBy = "patientDetails", cascade = CascadeType.REMOVE)
    // @JoinColumn(name = "diagnosis_id")//
     private List<DiagnosisPatient> diagnosisPatients;
 
+    public PatientDetails(int id, Status status) {
+        this.id = id;
+        this.status = status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setDoctor(User doctor) {
+        this.patient = doctor;
+    }
 }
