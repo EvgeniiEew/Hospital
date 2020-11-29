@@ -3,35 +3,30 @@ package by.home.hospital.service.impl;
 import by.home.hospital.domain.DoctorDitales;
 import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.service.DoctorDitalesRepository;
-import by.home.hospital.service.until.ISessionProvider;
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Transactional
 @Service
 public class DoctorDitalesService implements DoctorDitalesRepository {
-    private ISessionProvider sessionProvider;
 
-    public DoctorDitalesService(ISessionProvider sessionProvider) {
-        this.sessionProvider = sessionProvider;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void addDoctorDitales(DoctorDitales doctorDitales) {
-        Session entityManager = sessionProvider.getEntityManager().getCurrentSession();
-        entityManager.getTransaction().begin();
         entityManager.persist(doctorDitales);
-        entityManager.getTransaction().commit();
 
     }
 
     @Override
     public List<DoctorInfoDto> getDoctorInfoDto() {
-        EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
         return entityManager.createNativeQuery(" SELECT credentials.firstname , " +
                 "credentials.lastname , users.position, doctor_ditales.name FROM credentials, " +
                 "doctor_ditales , users WHERE  users.id = doctor_ditales.doctorid and" +
@@ -41,10 +36,7 @@ public class DoctorDitalesService implements DoctorDitalesRepository {
 
     @Override
     public void deleteDoctorDitales(Integer number) {
-        EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
-        entityManager.getTransaction().begin();
         entityManager.remove(new DoctorDitales());
-        entityManager.getTransaction().commit();
 
     }
 }

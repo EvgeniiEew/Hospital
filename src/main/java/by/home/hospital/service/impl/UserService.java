@@ -1,53 +1,37 @@
 package by.home.hospital.service.impl;
 
 import java.util.List;
-
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.PersistenceContext;
 
 import by.home.hospital.domain.User;
 import by.home.hospital.service.UserRepository;
-import by.home.hospital.service.until.ISessionProvider;
-import org.hibernate.Session;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@Transactional
 public class UserService implements UserRepository {
 
-    private ISessionProvider sessionProvider;
-
-    public UserService(ISessionProvider sessionProvider) {
-        this.sessionProvider = sessionProvider;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void addUser(User user) {
-        Session entityManager = sessionProvider.getEntityManager().getCurrentSession();
-        entityManager.getTransaction().begin();
         entityManager.persist(user);
-        entityManager.getTransaction().commit();
 
     }
 
     @Override
     public List<User> getUsers() {
-
-        EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
-//
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//
-//        CriteriaQuery<User> cr = cb.createQuery(User.class);
-//
-//        return entityManager.createQuery(cr.select(cr.from(User.class))).getResultList();
         return entityManager.createQuery("Select u from User u", User.class).getResultList();
     }
 
     @Override
     public void deleteUser(Integer number) {
 
-        EntityManager entityManager = sessionProvider.getEntityManager().createEntityManager();
 
         entityManager.getTransaction().begin();
         entityManager.remove(new User());
