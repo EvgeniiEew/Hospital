@@ -1,8 +1,8 @@
 package by.home.hospital.enums;
 
 public enum Status {
-    NULL,
-    INSPECTION,
+    NOT_EXAMINED,
+    EXAMINED,
     CHECKING,
     CHECKOUT;
 }
