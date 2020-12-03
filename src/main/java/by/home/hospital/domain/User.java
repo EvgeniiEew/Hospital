@@ -56,4 +56,6 @@ public class User {
         this.position = position;
         this.credentials = credentials;
     }
+
+
 }

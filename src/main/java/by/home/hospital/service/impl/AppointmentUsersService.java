@@ -4,11 +4,13 @@ import by.home.hospital.domain.*;
 import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.service.AppointmentUsersRepository;
+import by.home.hospital.service.PatientDetailsRepository;
+import org.jcp.xml.dsig.internal.SignerOutputStream;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,30 +23,47 @@ import static by.home.hospital.enums.Status.CHECKING;
 public class AppointmentUsersService implements AppointmentUsersRepository {
     @PersistenceContext
     private EntityManager entityManager;
-
+    @Autowired
+    private PatientDetailsRepository patientDetailsRepository;
 
     //todo
     @Override
     public void addAppointmentUsers(ExaminationDoctorDto examinationDoctorDto) {
         //!!! foreach для appointmentDto!! создать лист апойтментов
-        AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentArray().get(0); //  извлечь назначение из массива назначений
+        AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentArray().get(0);
+
+        //  извлечь назначение из массива назначений
         Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), appointmentDto.getStatus()); // создать назначение
         // статус ppointment appointment = new из енума!!!
 
         Diagnosis diagnosis = new Diagnosis(examinationDoctorDto.getDiagnosisDto()); //создать диагноз
         //сзодать diagnisis patient и прилинковать ему диагноз
-        DiagnosisPatient diagnosisPatient = new DiagnosisPatient(new PatientDetails(examinationDoctorDto.getPatientIdDto(), CHECKING), diagnosis);
-//        String p =  String.valueOf(examinationDoctorDto.getPatientIdDto());
-//        String d = String.valueOf(examinationDoctorDto.getIdDoctor());
-//        List patient =  ddd.createNativeQuery("SELECT * FROM public.users where id = " + p).getResultList();
-//        List doctor =   ddd.createNativeQuery("SELECT * FROM public.users where id = " + d).getResultList();
-        User patient = new User();
-        User doctor = new User();
-        patient.setId(examinationDoctorDto.getPatientIdDto());
-        doctor.setId(examinationDoctorDto.getIdDoctor());
-        AppointmentUsers appointmentUsers = new AppointmentUsers(patient, doctor, appointment);
-        entityManager.persist(diagnosisPatient);
+
+        List<PatientDetails> patientDetails = patientDetailsRepository.getPatientDetailsById(examinationDoctorDto.getPatientIdDto());
+        System.out.println( patientDetails.size());
+        PatientDetails pd =  patientDetails.get(0);
+        pd.setStatus(CHECKING);
+
+        DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
+        diagnosisPatient.setPatientDetails(pd);
+        diagnosisPatient.setDiagnosis(diagnosis);
+
+
+        User patient = entityManager.find(User.class, examinationDoctorDto.getPatientIdDto());
+        User doctor = entityManager.find(User.class, examinationDoctorDto.getIdDoctor());
+
+        AppointmentUsers appointmentUsers = new AppointmentUsers();
+        appointmentUsers.setAppointment(appointment);
+        appointmentUsers.setDoctor(doctor);
+        appointmentUsers.setPatient(patient);
+
+
+        entityManager.persist(appointment);
         entityManager.persist(appointmentUsers);
+        entityManager.persist(diagnosis);
+        entityManager.merge(pd);
+        entityManager.persist(diagnosisPatient);
+
 
     }
 

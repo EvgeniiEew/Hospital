@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
@@ -32,6 +33,13 @@ public class PatientDetailsService implements PatientDetailsRepository {
         CriteriaQuery<PatientDetails> cr = cb.createQuery(PatientDetails.class);
 
         return entityManager.createQuery(cr.select(cr.from(PatientDetails.class))).getResultList();
+
+    }
+    @Override
+   public List<PatientDetails> getPatientDetailsById(int id){
+      Query query= entityManager.createQuery("Select u from PatientDetails u WHERE patientId = :id" , PatientDetails.class  );
+        query.setParameter("id", id);
+        return query.getResultList();
 
     }
 

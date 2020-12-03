@@ -9,5 +9,7 @@ public interface PatientDetailsRepository {
 
     void addPatientDetails(PatientDetails patientDetails);
 
+    List<PatientDetails> getPatientDetailsById(int id);
+
     void deletePatientDetails(Integer number);
 }
