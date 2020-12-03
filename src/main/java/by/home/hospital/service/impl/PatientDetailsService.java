@@ -35,12 +35,13 @@ public class PatientDetailsService implements PatientDetailsRepository {
         return entityManager.createQuery(cr.select(cr.from(PatientDetails.class))).getResultList();
 
     }
-    @Override
-   public List<PatientDetails> getPatientDetailsById(int id){
-      Query query= entityManager.createQuery("Select u from PatientDetails u WHERE patientId = :id" , PatientDetails.class  );
-        query.setParameter("id", id);
-        return query.getResultList();
 
+    @Override
+    public PatientDetails getPatientDetailsById(int id) {
+        Query query = entityManager.createQuery("Select u from PatientDetails u WHERE patientId = :id", PatientDetails.class);
+        query.setParameter("id", id);
+        List<PatientDetails> patientDetailsList = query.getResultList();
+        return patientDetailsList.get(0);
     }
 
     @Override

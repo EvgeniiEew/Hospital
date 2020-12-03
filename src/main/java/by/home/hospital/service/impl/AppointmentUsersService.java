@@ -36,18 +36,14 @@ public class AppointmentUsersService implements AppointmentUsersRepository {
         Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), appointmentDto.getStatus()); // создать назначение
         // статус ppointment appointment = new из енума!!!
 
-        Diagnosis diagnosis = new Diagnosis(examinationDoctorDto.getDiagnosisDto()); //создать диагноз
-        //сзодать diagnisis patient и прилинковать ему диагноз
+        Diagnosis diagnosis = new Diagnosis(examinationDoctorDto.getDiagnosisDto());
 
-        List<PatientDetails> patientDetails = patientDetailsRepository.getPatientDetailsById(examinationDoctorDto.getPatientIdDto());
-        System.out.println( patientDetails.size());
-        PatientDetails pd =  patientDetails.get(0);
-        pd.setStatus(CHECKING);
+        PatientDetails patientDetails = patientDetailsRepository.getPatientDetailsById(examinationDoctorDto.getPatientIdDto());
+        patientDetails.setStatus(CHECKING);
 
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
-        diagnosisPatient.setPatientDetails(pd);
+        diagnosisPatient.setPatientDetails(patientDetails);
         diagnosisPatient.setDiagnosis(diagnosis);
-
 
         User patient = entityManager.find(User.class, examinationDoctorDto.getPatientIdDto());
         User doctor = entityManager.find(User.class, examinationDoctorDto.getIdDoctor());
@@ -57,11 +53,10 @@ public class AppointmentUsersService implements AppointmentUsersRepository {
         appointmentUsers.setDoctor(doctor);
         appointmentUsers.setPatient(patient);
 
-
         entityManager.persist(appointment);
         entityManager.persist(appointmentUsers);
         entityManager.persist(diagnosis);
-        entityManager.merge(pd);
+        entityManager.merge(patientDetails);
         entityManager.persist(diagnosisPatient);
 
 
