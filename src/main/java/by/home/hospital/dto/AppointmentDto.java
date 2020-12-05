@@ -1,18 +1,15 @@
 package by.home.hospital.dto;
 
-import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Type;
 
 public class AppointmentDto {
 
     private String name;
     private Type type;
-    private AppointmentStatus status; //убрать
 
-    public AppointmentDto(String name, Type type, AppointmentStatus status) {
+    public AppointmentDto(String name, Type type) {
         this.name = name;
         this.type = type;
-        this.status = status;
     }
 
     public String getName() {
@@ -23,10 +20,6 @@ public class AppointmentDto {
         return type;
     }
 
-    public AppointmentStatus getStatus() {
-        return status;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -35,7 +28,4 @@ public class AppointmentDto {
         this.type = type;
     }
 
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
 }

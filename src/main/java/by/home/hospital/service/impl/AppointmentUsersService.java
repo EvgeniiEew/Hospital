@@ -3,9 +3,9 @@ package by.home.hospital.service.impl;
 import by.home.hospital.domain.*;
 import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.dto.ExaminationDoctorDto;
+import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.AppointmentUsersRepository;
 import by.home.hospital.service.PatientDetailsRepository;
-import org.jcp.xml.dsig.internal.SignerOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,37 +29,31 @@ public class AppointmentUsersService implements AppointmentUsersRepository {
     //todo
     @Override
     public void addAppointmentUsers(ExaminationDoctorDto examinationDoctorDto) {
-        //!!! foreach для appointmentDto!! создать лист апойтментов
-        AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentArray().get(0);
-
-        //  извлечь назначение из массива назначений
-        Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), appointmentDto.getStatus()); // создать назначение
-        // статус ppointment appointment = new из енума!!!
-
+        for (AppointmentDto appointmentDto : examinationDoctorDto.getAppointmentArray()
+        ) {
+            Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.DONE);
+            Epicrisis epicrisis = new Epicrisis();
+            epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
+            epicrisis.setAppointment(appointment);
+            User patient = entityManager.find(User.class, examinationDoctorDto.getPatientIdDto());
+            User doctor = entityManager.find(User.class, examinationDoctorDto.getIdDoctor());
+            AppointmentUsers appointmentUsers = new AppointmentUsers();
+            appointmentUsers.setAppointment(appointment);
+            appointmentUsers.setDoctor(doctor);
+            appointmentUsers.setPatient(patient);
+            entityManager.persist(appointment);
+            entityManager.persist(appointmentUsers);
+            entityManager.persist(epicrisis);
+        }
         Diagnosis diagnosis = new Diagnosis(examinationDoctorDto.getDiagnosisDto());
-
         PatientDetails patientDetails = patientDetailsRepository.getPatientDetailsById(examinationDoctorDto.getPatientIdDto());
         patientDetails.setStatus(CHECKING);
-
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
         diagnosisPatient.setPatientDetails(patientDetails);
         diagnosisPatient.setDiagnosis(diagnosis);
-
-        User patient = entityManager.find(User.class, examinationDoctorDto.getPatientIdDto());
-        User doctor = entityManager.find(User.class, examinationDoctorDto.getIdDoctor());
-
-        AppointmentUsers appointmentUsers = new AppointmentUsers();
-        appointmentUsers.setAppointment(appointment);
-        appointmentUsers.setDoctor(doctor);
-        appointmentUsers.setPatient(patient);
-
-        entityManager.persist(appointment);
-        entityManager.persist(appointmentUsers);
         entityManager.persist(diagnosis);
         entityManager.merge(patientDetails);
         entityManager.persist(diagnosisPatient);
-
-
     }
 
     @Override

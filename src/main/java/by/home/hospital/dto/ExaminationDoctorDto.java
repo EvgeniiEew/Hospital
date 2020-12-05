@@ -11,5 +11,6 @@ public class ExaminationDoctorDto {
     private final int idDoctor;
     private final String diagnosisDto;
     private final ArrayList<AppointmentDto> appointmentArray;
+    private final String epicrisis;
 
 }
