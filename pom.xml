@@ -16,8 +16,6 @@
         <hiber.version>5.4.23.Final</hiber.version>
         <hiber-validator.version>6.1.6.Final</hiber-validator.version>
     </properties>
-
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -109,10 +107,10 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
         </dependency>
-         <dependency>
-             <groupId>org.springframework.data</groupId>
-             <artifactId>spring-data-jpa</artifactId>
-         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
     </dependencies>
 

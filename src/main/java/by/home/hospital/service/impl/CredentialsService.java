@@ -4,8 +4,8 @@ import by.home.hospital.domain.Credentials;
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
-import by.home.hospital.service.CredentialsRepository;
-import by.home.hospital.service.PatientDetailsRepository;
+import by.home.hospital.service.ICredentialsService;
+import by.home.hospital.service.IPatientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +21,11 @@ import static by.home.hospital.enums.Position.PATIENT;
 
 @Transactional
 @Service
-public class CredentialsService implements CredentialsRepository {
+public class CredentialsService implements ICredentialsService {
     @PersistenceContext
     private EntityManager entityManager;
     @Autowired
-    private PatientDetailsRepository patientDetailsRepository;
+    private IPatientDetailsService IPatientDetailsService;
 
     @Override
     public void registerPatient(PatientRegisterDto patientRegisterDto) {
@@ -42,7 +42,7 @@ public class CredentialsService implements CredentialsRepository {
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setStatus(NOT_EXAMINED);
         patientDetails.setPatient(user1);
-        patientDetailsRepository.addPatientDetails(patientDetails);
+        IPatientDetailsService.addPatientDetails(patientDetails);
     }
 
     @Override

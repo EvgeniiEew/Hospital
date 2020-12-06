@@ -2,7 +2,7 @@ package by.home.hospital.controller;
 
 import by.home.hospital.domain.Credentials;
 import by.home.hospital.dto.PatientRegisterDto;
-import by.home.hospital.service.CredentialsRepository;
+import by.home.hospital.service.ICredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class CredentialsController {
     @Autowired
-    private CredentialsRepository repo;
+    private ICredentialsService repo;
 
 
     //auth controller

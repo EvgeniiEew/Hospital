@@ -1,41 +1,43 @@
 package by.home.hospital.service.impl;
 
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import by.home.hospital.domain.User;
-import by.home.hospital.service.UserRepository;
+import by.home.hospital.service.repository.UserJpaRepo;
+import by.home.hospital.service.IUserServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
 @Transactional
-public class UserService implements UserRepository {
+public class UserService implements IUserServices {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    UserJpaRepo userJpaRepo;
 
-    @Override
+//    @PersistenceContext
+//    private EntityManager entityManager;
+
     public void addUser(User user) {
-        entityManager.persist(user);
+//        entityManager.persist(user);
 
     }
 
-    @Override
+
     public List<User> getUsers() {
-        return entityManager.createQuery("Select u from User u", User.class).getResultList();
+        // return entityManager.createQuery("Select u from User u", User.class).getResultList();
+        return userJpaRepo.findAll();
     }
 
-    @Override
+
     public void deleteUser(Integer number) {
 
 
-        entityManager.getTransaction().begin();
-        entityManager.remove(new User());
-        entityManager.getTransaction().commit();
+//        entityManager.getTransaction().begin();
+//        entityManager.remove(new User());
+//        entityManager.getTransaction().commit();
 
     }
 }

@@ -5,7 +5,7 @@ import by.home.hospital.dto.ExaminationDoctorDto;
 
 import java.util.List;
 
-public interface AppointmentUsersRepository {
+public interface IAppointmentUsersService {
 
     List<AppointmentUsers> getAppointmentUsers();
 

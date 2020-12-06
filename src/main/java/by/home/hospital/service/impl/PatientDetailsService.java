@@ -1,7 +1,7 @@
 package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.PatientDetails;
-import by.home.hospital.service.PatientDetailsRepository;
+import by.home.hospital.service.IPatientDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,10 +14,9 @@ import java.util.List;
 
 @Transactional
 @Service
-public class PatientDetailsService implements PatientDetailsRepository {
+public class PatientDetailsService implements IPatientDetailsService {
     @PersistenceContext
     private EntityManager entityManager;
-
 
     @Override
     public void addPatientDetails(PatientDetails patientDetails) {
@@ -26,19 +25,14 @@ public class PatientDetailsService implements PatientDetailsRepository {
 
     @Override
     public List<PatientDetails> getPatientDetails() {
-
-
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
         CriteriaQuery<PatientDetails> cr = cb.createQuery(PatientDetails.class);
-
         return entityManager.createQuery(cr.select(cr.from(PatientDetails.class))).getResultList();
-
     }
 
     @Override
     public PatientDetails getPatientDetailsById(int id) {
-        Query query = entityManager.createQuery("Select u from PatientDetails u WHERE patientId = :id", PatientDetails.class);
+        Query query = entityManager.createQuery("Select u from PatientDetails u WHERE patient_id = :id", PatientDetails.class);
         query.setParameter("id", id);
         List<PatientDetails> patientDetailsList = query.getResultList();
         return patientDetailsList.get(0);
@@ -47,6 +41,5 @@ public class PatientDetailsService implements PatientDetailsRepository {
     @Override
     public void deletePatientDetails(Integer number) {
         entityManager.remove(new PatientDetails());
-
     }
 }

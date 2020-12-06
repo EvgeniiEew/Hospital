@@ -10,10 +10,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class Credentials {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @Column(nullable = false)
     private String firstName;
@@ -34,4 +35,7 @@ public class Credentials {
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "credentials")
     private User user;
+
+    public Credentials(String firstName, String lastName, String login, String password) {
+    }
 }

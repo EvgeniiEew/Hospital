@@ -4,7 +4,7 @@ import by.home.hospital.domain.PatientDetails;
 
 import java.util.List;
 
-public interface PatientDetailsRepository {
+public interface IPatientDetailsService {
     List<PatientDetails> getPatientDetails();
 
     void addPatientDetails(PatientDetails patientDetails);

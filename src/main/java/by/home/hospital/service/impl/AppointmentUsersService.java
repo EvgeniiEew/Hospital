@@ -4,8 +4,8 @@ import by.home.hospital.domain.*;
 import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.enums.AppointmentStatus;
-import by.home.hospital.service.AppointmentUsersRepository;
-import by.home.hospital.service.PatientDetailsRepository;
+import by.home.hospital.service.IAppointmentUsersService;
+import by.home.hospital.service.IPatientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,17 +20,17 @@ import static by.home.hospital.enums.Status.CHECKING;
 
 @Transactional
 @Service
-public class AppointmentUsersService implements AppointmentUsersRepository {
+public class AppointmentUsersService implements IAppointmentUsersService {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Autowired
-    private PatientDetailsRepository patientDetailsRepository;
+    private IPatientDetailsService IPatientDetailsService;
 
     //todo
     @Override
     public void addAppointmentUsers(ExaminationDoctorDto examinationDoctorDto) {
-        for (AppointmentDto appointmentDto : examinationDoctorDto.getAppointmentArray()
-        ) {
+        for (AppointmentDto appointmentDto : examinationDoctorDto.getAppointmentArray()) {
             Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.DONE);
             Epicrisis epicrisis = new Epicrisis();
             epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
@@ -46,7 +46,7 @@ public class AppointmentUsersService implements AppointmentUsersRepository {
             entityManager.persist(epicrisis);
         }
         Diagnosis diagnosis = new Diagnosis(examinationDoctorDto.getDiagnosisDto());
-        PatientDetails patientDetails = patientDetailsRepository.getPatientDetailsById(examinationDoctorDto.getPatientIdDto());
+        PatientDetails patientDetails = IPatientDetailsService.getPatientDetailsById(examinationDoctorDto.getPatientIdDto());
         patientDetails.setStatus(CHECKING);
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
         diagnosisPatient.setPatientDetails(patientDetails);

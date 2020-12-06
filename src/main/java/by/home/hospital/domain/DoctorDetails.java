@@ -1,6 +1,7 @@
 package by.home.hospital.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,19 +11,17 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "Doctor_Ditales")
-public class DoctorDitales {
-
+public class DoctorDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     @Column(nullable = false)
     private String name;
 
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "doctorId", referencedColumnName = "id")
     private User doctor;
 

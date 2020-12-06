@@ -1,7 +1,7 @@
 package by.home.hospital.enums;
 
 public enum Position {
-    DOCTORS,
+    DOCTOR,
     NURSE,
     PATIENT,
     ADMIN;

@@ -16,8 +16,8 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     private Position position;
@@ -31,7 +31,7 @@ public class User {
 
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
-    private DoctorDitales doctorDitales;
+    private DoctorDetails doctorDetails;
 
 
     @EqualsAndHashCode.Exclude
@@ -40,7 +40,7 @@ public class User {
 
     @JsonIgnore
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     public List<AppointmentUsers> appointmentPatient;
 
     @EqualsAndHashCode.Exclude

@@ -1,9 +1,8 @@
 package by.home.hospital.domain;
 
 import by.home.hospital.enums.Status;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,11 +20,16 @@ public class PatientDetails {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "patientId", referencedColumnName = "id")
     private User patient;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "patientDetails", cascade = CascadeType.REMOVE)
    // @JoinColumn(name = "diagnosis_id")//
     private List<DiagnosisPatient> diagnosisPatients;
