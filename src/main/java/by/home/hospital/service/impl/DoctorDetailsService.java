@@ -61,7 +61,6 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         DoctorDetails doctorDetails = new DoctorDetails();
         doctorDetails.setDoctor(user);
         doctorDetails.setName(doctorRegisterDto.getDoctorDitales());
-//        user.setDoctorDitales(doctorDitales);
         doctorDitalesJpaRepository.save(doctorDetails);
     }
 

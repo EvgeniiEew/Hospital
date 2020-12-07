@@ -5,6 +5,7 @@ import by.home.hospital.domain.PatientDetails;
 import java.util.List;
 
 public interface IPatientDetailsService {
+
     List<PatientDetails> getPatientDetails();
 
     void addPatientDetails(PatientDetails patientDetails);
@@ -12,4 +13,7 @@ public interface IPatientDetailsService {
     PatientDetails getPatientDetailsById(int id);
 
     void deletePatientDetails(Integer number);
+
+    //изменить статус пациента на RECEPTION_PENDING в ожидании приема
+    void patientStatusСhange(Integer number);
 }

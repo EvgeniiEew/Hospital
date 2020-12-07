@@ -15,7 +15,7 @@ import java.util.List;
 public class PatientDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     private Status status;

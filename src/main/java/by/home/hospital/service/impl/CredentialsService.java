@@ -6,7 +6,9 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.IPatientDetailsService;
+import by.home.hospital.service.repository.CredentialsJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
