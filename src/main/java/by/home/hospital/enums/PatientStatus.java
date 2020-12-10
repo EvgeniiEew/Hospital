@@ -1,6 +1,6 @@
 package by.home.hospital.enums;
 
-public enum Status {
+public enum PatientStatus {
     NOT_EXAMINED,
     RECEPTION_PENDING,
     EXAMINED,

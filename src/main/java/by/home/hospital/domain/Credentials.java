@@ -10,7 +10,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 public class Credentials {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,9 +32,7 @@ public class Credentials {
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "credentials")
+    @OneToOne(mappedBy = "credentials", fetch = FetchType.LAZY)
     private User user;
 
-    public Credentials(String firstName, String lastName, String login, String password) {
-    }
 }

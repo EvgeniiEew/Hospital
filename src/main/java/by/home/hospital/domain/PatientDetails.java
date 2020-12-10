@@ -1,6 +1,6 @@
 package by.home.hospital.domain;
 
-import by.home.hospital.enums.Status;
+import by.home.hospital.enums.PatientStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -18,7 +18,7 @@ public class PatientDetails {
     private Integer id;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private PatientStatus status;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -34,13 +34,13 @@ public class PatientDetails {
    // @JoinColumn(name = "diagnosis_id")//
     private List<DiagnosisPatient> diagnosisPatients;
 
-    public PatientDetails(int id, Status status) {
+    public PatientDetails(int id, PatientStatus patientStatus) {
         this.id = id;
-        this.status = status;
+        this.status = patientStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setPatientStatus(PatientStatus patientStatus) {
+        this.status = patientStatus;
     }
 
     public void setDoctor(User doctor) {

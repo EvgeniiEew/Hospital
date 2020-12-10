@@ -2,19 +2,21 @@ package by.home.hospital.dto;
 
 
 import by.home.hospital.enums.Position;
+import lombok.Data;
 
+@Data
 public class DoctorInfoDto {
 
     private String firstName;
     private String lastName;
-    private String name;
     private Position position;
+    private String name;
 
-    public DoctorInfoDto(String firstName, String lastName, String name, Position position) {
+    public DoctorInfoDto(String firstName, String lastName, Position position, String name) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.name = name;
         this.position = position;
+        this.name = name;
     }
 
     public String getFirstName() {

@@ -6,17 +6,19 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.enums.Position;
+import by.home.hospital.service.IDoctorDetailsRepository;
 import by.home.hospital.service.repository.CredentialsJpaRepository;
 import by.home.hospital.service.repository.DoctorDitalesJpaRepository;
 import by.home.hospital.service.repository.UserJpaRepo;
-import by.home.hospital.service.IDoctorDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -38,12 +40,18 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         entityManager.persist(doctorDetails);
     }
 
-    @Override
     public List<DoctorInfoDto> getDoctorInfoDto() {
-        return entityManager.createNativeQuery(" SELECT credentials.firstname , " +
-                "credentials.lastname , users.position, doctor_ditales.name FROM credentials, " +
-                "doctor_ditales , users WHERE  users.id = doctor_ditales.doctorid and" +
-                " credentials.id = users.credential_id ").getResultList();
+        HashSet<User> users = this.userJpaRepo.findAllByPosition(Position.DOCTOR);
+        List<DoctorInfoDto> doctorInfoDtoList = users.stream().map(user -> {
+            Credentials credentials = user.getCredentials();
+            return new DoctorInfoDto(
+                    credentials.getFirstName(),
+                    credentials.getLastName(),
+                    user.getPosition(),
+                    user.getDoctorDetails().getName()
+            );
+        }).collect(Collectors.toList());
+        return doctorInfoDtoList;
     }
 
     @Override

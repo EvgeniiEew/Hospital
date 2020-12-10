@@ -2,7 +2,6 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.service.IPatientDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-import static by.home.hospital.enums.Status.RECEPTION_PENDING;
+import static by.home.hospital.enums.PatientStatus.RECEPTION_PENDING;
 
 @Transactional
 @Service
@@ -50,7 +49,7 @@ public class PatientDetailsService implements IPatientDetailsService {
     @Override
     public void patientStatusСhange(Integer number){
         PatientDetails patientDetails = getPatientDetailsById(number);
-        patientDetails.setStatus(RECEPTION_PENDING);
+        patientDetails.setPatientStatus(RECEPTION_PENDING);
         addPatientDetails(patientDetails);
     }
 }

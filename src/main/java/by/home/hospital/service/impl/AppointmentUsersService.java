@@ -16,7 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-import static by.home.hospital.enums.Status.CHECKING;
+import static by.home.hospital.enums.PatientStatus.CHECKING;
 
 @Transactional
 @Service
@@ -47,7 +47,7 @@ public class AppointmentUsersService implements IAppointmentUsersService {
         }
         Diagnosis diagnosis = new Diagnosis(examinationDoctorDto.getDiagnosisDto());
         PatientDetails patientDetails = IPatientDetailsService.getPatientDetailsById(examinationDoctorDto.getPatientIdDto());
-        patientDetails.setStatus(CHECKING);
+        patientDetails.setPatientStatus(CHECKING);
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
         diagnosisPatient.setPatientDetails(patientDetails);
         diagnosisPatient.setDiagnosis(diagnosis);

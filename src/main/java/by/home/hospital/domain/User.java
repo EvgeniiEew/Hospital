@@ -24,18 +24,17 @@ public class User {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "credential_id", referencedColumnName = "id")
     private Credentials credentials;
 
     @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "doctor", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "doctor", fetch = FetchType.EAGER)
     private DoctorDetails doctorDetails;
 
 
     @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "patient", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
     private PatientDetails patientDetails;
 
     @JsonIgnore

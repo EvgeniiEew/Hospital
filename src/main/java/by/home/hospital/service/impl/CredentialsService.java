@@ -6,9 +6,7 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.IPatientDetailsService;
-import by.home.hospital.service.repository.CredentialsJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +16,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-import static by.home.hospital.enums.Status.NOT_EXAMINED;
+import static by.home.hospital.enums.PatientStatus.NOT_EXAMINED;
 import static by.home.hospital.enums.Position.PATIENT;
 
 @Transactional
@@ -42,7 +40,7 @@ public class CredentialsService implements ICredentialsService {
         entityManager.persist(creds1);
         entityManager.persist(user1);
         PatientDetails patientDetails = new PatientDetails();
-        patientDetails.setStatus(NOT_EXAMINED);
+        patientDetails.setPatientStatus(NOT_EXAMINED);
         patientDetails.setPatient(user1);
         IPatientDetailsService.addPatientDetails(patientDetails);
     }
