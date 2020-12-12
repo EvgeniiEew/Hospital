@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>Getting Started: Serving Web Content</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <link rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -9,21 +9,26 @@
       crossorigin="anonymous">
 <body>
     <body>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <li class="nav-item active"><a class="nav-link" aria-current="page" href="/home">Home</a></li>
+        </div>
+
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
-                <th scope="col">Name</th>
-<!--                <th scope="col">Position</th>-->
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Направление</th>
+                <!--                <th scope="col">Position</th>-->
             </tr>
             </thead>
 
             <tr th:each="doctor : ${doctorInfoDtos}">
-                <td th:text="${doctor.firstName}" />
-                <td th:text="${doctor.lastName}" />
-                <td th:text="${doctor.name}" />
-<!--                <td th:text="${doctor.position}"/>-->
+                <td th:text="${doctor.firstName}"/>
+                <td th:text="${doctor.lastName}"/>
+                <td th:text="${doctor.name}"/>
+                <!--                <td th:text="${doctor.position}"/>-->
             </tr>
         </table>
     </body>
