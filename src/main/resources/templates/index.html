@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Hospital</title>
+    <!-- Bootstrap core CSS -->
+    <!--<link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css"-->
+    <!--      rel="stylesheet">-->
+    <link href="https://bootswatch.com/4/spacelab/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div style="pointer-events: none; color: white">Больница</div>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">На главную
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/doctors">Врачи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/patient/status">Очередь пациентов на запись</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/patient/examination">Кабинет осмотра</a>
+                </li>
+            </ul>
+            <div style="float: right;">
+                <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="starter-template text-center py-5 px-3">
+            <h1>Добро пожаловать на наш сайт!</h1>
+            <p class="lead">В нашей больнице осуществляют осмотр и прием врачи.
+                <br> На осмотр можно записаться в разделе регистрации</p>
+        </div>
+    </main>
+</body>
+</html>

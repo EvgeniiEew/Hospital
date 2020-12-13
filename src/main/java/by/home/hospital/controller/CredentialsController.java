@@ -4,8 +4,6 @@ import by.home.hospital.domain.Credentials;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -23,11 +21,11 @@ public class CredentialsController {
 
     //auth controller
     @PostMapping("/patient/registers")
-    public String registerPatient(Model model, @RequestParam String firstName, String lastName ,String  login, String password) {
+    public String registerPatient( @RequestParam String firstName, String lastName ,String  login, String password) {
         PatientRegisterDto patientRegisterDto = new PatientRegisterDto(firstName, lastName, login, password);
 
         credentialsService.registerPatient(patientRegisterDto);
-        return "indexList" ;
+        return "index";
     }
 //    private final String patientRegister "regPatient";
 //
@@ -39,9 +37,7 @@ public class CredentialsController {
 
 
         @GetMapping("/patient/register")
-        public String registerPage(Model model) {
-            Date date = new Date();
-            model.addAttribute("date" ,date);
+        public String registerPage() {
             return "patientRegisterList";
         }
 

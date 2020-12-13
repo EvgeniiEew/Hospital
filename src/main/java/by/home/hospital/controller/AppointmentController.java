@@ -14,7 +14,7 @@ public class AppointmentController {
     @Autowired
     private IAppointmentUsersService service;
 
-    @PostMapping(path = "/examination/patient", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/patient/examination", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void registerPatient(@RequestBody ExaminationDoctorDto examinationDoctorDto) {
         service.addAppointmentUsers(examinationDoctorDto);
     }

@@ -19,16 +19,16 @@ public class PatientDitalesController {
     @Autowired
     private PatientDetailsService patientDetailsService;
 
-    @PostMapping("/patient/stat/{id}" )
+    @PostMapping("/patient/{id}/status" )
     public String patientStatusСhange(@PathVariable("id") Integer id ) {
         service.patientStatusСhange(id);
-        return "redirect:/patient/stat";
+        return "redirect:/patient/status";
     }
 
     private final String patientNotExamid = "patientsNotExamindedList";
 
 
-    @GetMapping("/patient/stat")
+    @GetMapping("/patient/status")
     public String getDoctorDetails(Model model) {
         List<PatientWhisStatusDto> patientsNotExaminded = this.patientDetailsService.getPatientsNotExaminded();
         model.addAttribute("patientsNotExaminded", patientsNotExaminded);

@@ -9,47 +9,45 @@
       crossorigin="anonymous">
 <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css"
       rel="stylesheet">
-    <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <nav class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item active"><a class="nav-link" aria-current="page" href="/home">Home</a></li>
-                    </ul>
-                </div>
-            </nav>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <nav class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item active"><a class="nav-link" aria-current="page" href="/home">Home</a></li>
+                </ul>
+            </div>
         </nav>
-        </tr>
-        <main class="container">
-            <div class="starter-template text py-5 px-3">
-                <table class="table">
+    </nav>
+    <main class="container">
+        <div class="starter-template text py-5 px-3">
+            <table class="table">
 
-                    <thead class="thead-dark">
-                    <tr>
-                        <!--                <th scope="col">idPatient</th>-->
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фамилия</th>
-                        <th scope="col">Статус</th>
-                        <th scope="col">Записать</th>
+                <thead class="thead-dark">
+                <tr>
+                    <!--                <th scope="col">idPatient</th>-->
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Записать пациента на обследование</th>
 
-                        <!--                <th scope="col">Position</th>-->
-                    </tr>
-                    </thead>
+                    <!--                <th scope="col">Position</th>-->
+                </tr>
+                </thead>
 
-                    <tr th:each="patient : ${patientsNotExaminded}">
-                        <!--                <td th:text="${patient.id}" />-->
-                        <td th:text="${patient.firstName}"/>
-                        <td th:text="${patient.lastName}"/>
-                        <td th:text="${patient.status}"/>
-                        <td>
-<!--                            <a href="/patient/stat/" data-th-href="=${patient.id}"> depatrments users</a>-->
-                            <form method="POST" enctype="multipart/form-data" th:action="@{/patient/stat/{uid}(uid=${patient.id})}">
-                        <td><input type="submit" value="Upload" /></td>
-                            </form>
-                        </td>
-                        <!--                <td th:text="${doctor.position}"/>-->
-                    </tr>
-                </table>
-        </main>
+                <tr th:each="patient : ${patientsNotExaminded}">
+                    <!--                <td th:text="${patient.id}" />-->
+                    <td th:text="${patient.firstName}"/>
+                    <td th:text="${patient.lastName}"/>
+                    <td th:text="${patient.status}"/>
+                    <!--                            <a href="/patient/stat/" data-th-href="=${patient.id}"> depatrments users</a>-->
+                    <form method="POST" enctype="multipart/form-data"
+                          th:action="@{/patient/{uid}/status (uid=${patient.id})}">
+                        <td><input type="submit" value="Записать"/></td>
+                    </form>
+                    <!--                <td th:text="${doctor.position}"/>-->
+                </tr>
+            </table>
+    </main>
 </body>
 </html>
