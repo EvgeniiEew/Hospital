@@ -14,4 +14,6 @@ public class HomeController {
         model.addAttribute("date" ,date);
         return "indexList";
     }
+
+
 }
