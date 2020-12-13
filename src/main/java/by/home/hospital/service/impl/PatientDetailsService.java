@@ -53,6 +53,10 @@ public class PatientDetailsService implements IPatientDetailsService {
         return patientDetailsList.get(0);
     }
 
+    public PatientDetails getPatientDetaisByIdUser(int idUser) {
+        return this.patientDitalesjpaRepository.findById(idUser);
+    }
+
     @Override
     public void deletePatientDetails(Integer number) {
         entityManager.remove(new PatientDetails());
@@ -61,7 +65,7 @@ public class PatientDetailsService implements IPatientDetailsService {
     //изменить статус пациента на RECEPTION_PENDING в ожидании приема
     @Override
     public void patientStatusСhange(Integer number) {
-        PatientDetails patientDetails = getPatientDetailsById(number);
+        PatientDetails patientDetails = getPatientDetaisByIdUser(number);
         patientDetails.setPatientStatus(RECEPTION_PENDING);
         addPatientDetails(patientDetails);
     }
@@ -80,7 +84,7 @@ public class PatientDetailsService implements IPatientDetailsService {
 
 
     public List<PatientWhisStatusDto> getPatientWithStatus(PatientStatus status) {
-        HashSet<PatientDetails> patientDetails = patientDitalesjpaRepository.findAllByStatus( status);
+        HashSet<PatientDetails> patientDetails = patientDitalesjpaRepository.findAllByStatus(status);
 //        List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> new PatientWhisStatusDto(
 //                patientDetails1.getId(),
 //                patientDetails1.getStatus()

@@ -10,7 +10,7 @@ public interface IPatientDetailsService {
 
     void addPatientDetails(PatientDetails patientDetails);
 
-    PatientDetails getPatientDetailsById(int id);
+    PatientDetails getPatientDetailsById(int idPatient);
 
     void deletePatientDetails(Integer number);
 

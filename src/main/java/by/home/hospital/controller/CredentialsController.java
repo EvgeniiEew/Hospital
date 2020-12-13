@@ -25,7 +25,13 @@ public class CredentialsController {
     public void registerPatient(@RequestBody PatientRegisterDto patientRegisterDto) {
         credentialsService.registerPatient(patientRegisterDto);
     }
-
+//    private final String patientRegister "regPatient";
+//
+//    @PostMapping(path = "/patient/register")
+//    public void registerPatient(@RequestBody PatientRegisterDto patientRegisterDto) {
+//        credentialsService.registerPatient(patientRegisterDto);
+//        return;
+//    }
 
     @GetMapping("/credanchials")
     public String  getCredentials(Model model) {

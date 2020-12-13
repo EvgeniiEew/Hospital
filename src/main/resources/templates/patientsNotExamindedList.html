@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>Getting Started: Serving Web Content</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <link rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous">
-<body>
+<link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css"
+      rel="stylesheet">
     <body>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">idPatient</th>
-                <th scope="col">PatientName</th>
-                <th scope="col">PatientLastName</th>
-                <th scope="col">StatusPatient</th>
-                <!--                <th scope="col">Position</th>-->
-            </tr>
-            </thead>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <nav class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item active"><a class="nav-link" aria-current="page" href="/home">Home</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </nav>
+        </tr>
+        <main class="container">
+            <div class="starter-template text py-5 px-3">
+                <table class="table">
 
-            <tr th:each="patient : ${patientsNotExaminded}">
-                <td th:text="${patient.id}" />
-                <td th:text="${patient.firstName}" />
-                <td th:text="${patient.lastName}" />
-                <td th:text="${patient.status}" />
-                <!--                <td th:text="${doctor.position}"/>-->
-            </tr>
-        </table>
-    </body>
+                    <thead class="thead-dark">
+                    <tr>
+                        <!--                <th scope="col">idPatient</th>-->
+                        <th scope="col">Имя</th>
+                        <th scope="col">Фамилия</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Записать</th>
+
+                        <!--                <th scope="col">Position</th>-->
+                    </tr>
+                    </thead>
+
+                    <tr th:each="patient : ${patientsNotExaminded}">
+                        <!--                <td th:text="${patient.id}" />-->
+                        <td th:text="${patient.firstName}"/>
+                        <td th:text="${patient.lastName}"/>
+                        <td th:text="${patient.status}"/>
+                        <td>
+<!--                            <a href="/patient/stat/" data-th-href="=${patient.id}"> depatrments users</a>-->
+                            <form method="POST" enctype="multipart/form-data" th:action="@{/patient/stat/{uid}(uid=${patient.id})}">
+                        <td><input type="submit" value="Upload" /></td>
+                            </form>
+                        </td>
+                        <!--                <td th:text="${doctor.position}"/>-->
+                    </tr>
+                </table>
+        </main>
 </body>
 </html>
