@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,9 +20,8 @@ public class CredentialsController {
 
     //auth controller
     @PostMapping("/patient/registers")
-    public String registerPatient( @RequestParam String firstName, String lastName ,String  login, String password) {
+    public String registerPatient(@RequestParam String firstName, String lastName, String login, String password) {
         PatientRegisterDto patientRegisterDto = new PatientRegisterDto(firstName, lastName, login, password);
-
         credentialsService.registerPatient(patientRegisterDto);
         return "index";
     }
@@ -36,15 +34,15 @@ public class CredentialsController {
 //    }
 
 
-        @GetMapping("/patient/register")
-        public String registerPage() {
-            return "patientRegisterList";
-        }
+    @GetMapping("/patient/register")
+    public String registerPage() {
+        return "patientRegisterList";
+    }
 
-        @GetMapping("/credanchials")
-    public String  getCredentials(Model model) {
-        List <Credentials> credentials = credentialsService.getCredentials().stream().collect(Collectors.toList());
-        model.addAttribute("credentials",credentials);
+    @GetMapping("/credanchials")
+    public String getCredentials(Model model) {
+        List<Credentials> credentials = credentialsService.getCredentials().stream().collect(Collectors.toList());
+        model.addAttribute("credentials", credentials);
         return "credentialsList";
     }
 }

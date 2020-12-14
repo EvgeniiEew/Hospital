@@ -17,27 +17,17 @@ public class UserService implements IUserServices {
     @Autowired
     UserJpaRepo userJpaRepo;
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
 
     public void addUser(User user) {
-//        entityManager.persist(user);
-
     }
 
 
     public List<User> getUsers() {
-        // return entityManager.createQuery("Select u from User u", User.class).getResultList();
         return userJpaRepo.findAll();
     }
 
 
     public void deleteUser(Integer number) {
-
-
-//        entityManager.getTransaction().begin();
-//        entityManager.remove(new User());
-//        entityManager.getTransaction().commit();
 
     }
 }

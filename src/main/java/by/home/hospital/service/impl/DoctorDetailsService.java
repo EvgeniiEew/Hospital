@@ -54,6 +54,7 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         return doctorInfoDtoList;
     }
 
+
     @Override
     public void registerDoctor(DoctorRegisterDto doctorRegisterDto) {
         Credentials credentials = new Credentials();

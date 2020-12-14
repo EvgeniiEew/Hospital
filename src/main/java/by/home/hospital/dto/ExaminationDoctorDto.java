@@ -8,7 +8,7 @@ import java.util.ArrayList;
 @Data
 public class ExaminationDoctorDto {
     private final int patientIdDto;
-    private final int idDoctor;
+    private final int idDoctor =20;
     private final String diagnosisDto;
     private final ArrayList<AppointmentDto> appointmentArray;
     private final String epicrisis;

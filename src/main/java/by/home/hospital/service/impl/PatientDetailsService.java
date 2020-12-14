@@ -53,6 +53,20 @@ public class PatientDetailsService implements IPatientDetailsService {
         return patientDetailsList.get(0);
     }
 
+    public List<PatientWhisStatusDto> getUserById(Integer id) {
+        HashSet<PatientDetails> patientDetails = this.patientDitalesjpaRepository.getPatientDetailsById(id);
+        List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> {
+            User user = patientDetails1.getPatient();
+            return new PatientWhisStatusDto(
+                    user.getId(),
+                    user.getCredentials().getFirstName(),
+                    user.getCredentials().getLastName(),
+                    patientDetails1.getStatus()
+            );
+        }).collect(Collectors.toList());
+        return patientWhisStatusDtos;
+    }
+
     public PatientDetails getPatientDetaisByIdUser(int idUser) {
         return this.patientDitalesjpaRepository.findById(idUser);
     }
@@ -78,7 +92,7 @@ public class PatientDetailsService implements IPatientDetailsService {
         return this.getPatientWithStatus(CHECKOUT);
     }
 
-        //записаны на прием в ожиданнии назначения
+    //записаны на прием в ожиданнии назначения
     public List<PatientWhisStatusDto> getReceptionPendingPatient() {
         return this.getPatientWithStatus(RECEPTION_PENDING);
     }
