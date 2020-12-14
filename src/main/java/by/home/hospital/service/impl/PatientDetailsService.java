@@ -74,14 +74,19 @@ public class PatientDetailsService implements IPatientDetailsService {
         return this.getPatientWithStatus(NOT_EXAMINED);
     }
 
-    public List<PatientWhisStatusDto> getCheckingPatient() {
-        return this.getPatientWithStatus(CHECKING);
-    }
-
     public List<PatientWhisStatusDto> getCheckoutPatient() {
         return this.getPatientWithStatus(CHECKOUT);
     }
 
+        //записаны на прием в ожиданнии назначения
+    public List<PatientWhisStatusDto> getReceptionPendingPatient() {
+        return this.getPatientWithStatus(RECEPTION_PENDING);
+    }
+
+
+    public List<PatientWhisStatusDto> getCheckingPatient() {
+        return this.getPatientWithStatus(CHECKING);
+    }
 
     public List<PatientWhisStatusDto> getPatientWithStatus(PatientStatus status) {
         HashSet<PatientDetails> patientDetails = patientDitalesjpaRepository.findAllByStatus(status);
