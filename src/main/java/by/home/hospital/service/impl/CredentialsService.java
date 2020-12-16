@@ -6,6 +6,7 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.IPatientDetailsService;
+import by.home.hospital.service.repository.CredentialsJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.Optional;
 
 import static by.home.hospital.enums.PatientStatus.NOT_EXAMINED;
 import static by.home.hospital.enums.Position.PATIENT;
@@ -24,8 +26,12 @@ import static by.home.hospital.enums.Position.PATIENT;
 public class CredentialsService implements ICredentialsService {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Autowired
     private IPatientDetailsService IPatientDetailsService;
+
+    @Autowired
+    private CredentialsJpaRepository credentialsJpaRepository;
 
     @Override
     public void registerPatient(PatientRegisterDto patientRegisterDto) {
@@ -59,5 +65,11 @@ public class CredentialsService implements ICredentialsService {
         entityManager.remove(new Credentials());
 
     }
+
+    @Override
+    public Optional<Credentials> findByLogin(String credentialLogin) {
+        return credentialsJpaRepository.findByLogin(credentialLogin);
+    }
+
 
 }

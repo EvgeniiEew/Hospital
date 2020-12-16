@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
@@ -38,10 +39,21 @@
     </nav>
     <main class="container">
         <div class="starter-template text-center py-5 px-3">
-            <h1>Добро пожаловать на наш сайт!</h1>
-            <p class="lead">В нашей больнице осуществляют осмотр и прием врачи.
+            <h1>Добро пожаловать на наш сайт
+<!--                <p>-->
+<!--                 <span sec:authentication="principal.login">Udefined</span>-->
+<!--            </p>!-->
+            </h1>
+            <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.
                 <br> На осмотр можно записаться в разделе регистрации</p>
         </div>
     </main>
+    <br />
+    <br />
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+    </form>
+
 </body>
 </html>
