@@ -44,8 +44,8 @@
                     </form>
 
                     <form method="POST" enctype="multipart/form-data"
-                          th:action="@{/patient/{uid}/status (uid=${patient.id})}">
-                        <td><input style="background-color: indianred" type="submit"  value="Удалить"/></td>
+                          th:action="@{/patient/status/{uid}/reset (uid=${patient.id})}">
+                        <td><input style="background-color: indianred" type="submit"  value="Вернуть в очередь на запись"/></td>
                     </form>
                 </tr>
             </table>

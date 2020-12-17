@@ -78,9 +78,16 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     //изменить статус пациента на RECEPTION_PENDING в ожидании приема
     @Override
-    public void patientStatusСhange(Integer number) {
+    public void patientStatusСhangeToReceptionPending(Integer number) {
         PatientDetails patientDetails = getPatientDetaisByIdUser(number);
         patientDetails.setPatientStatus(RECEPTION_PENDING);
+        addPatientDetails(patientDetails);
+    }
+
+    @Override
+    public void PatientStatusReceptionPendingToNotExaminet(Integer number) {
+        PatientDetails patientDetails = getPatientDetaisByIdUser(number);
+        patientDetails.setPatientStatus(NOT_EXAMINED);
         addPatientDetails(patientDetails);
     }
 

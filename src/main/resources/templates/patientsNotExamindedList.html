@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
@@ -48,6 +48,11 @@
                     <!--                <td th:text="${doctor.position}"/>-->
                 </tr>
             </table>
+        </div>
     </main>
+                    <p>
+                        Добро пожаловать
+                     <span sec:authentication="principal.username">Udefined</span>
+                </p>!
 </body>
 </html>

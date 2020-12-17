@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/doctors", "/home","/patient/register",  "/patient/registers")
                 .permitAll()
@@ -26,11 +26,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/users")
+                .defaultSuccessUrl("/home")
                 .and()
                 .logout()
                 .permitAll();
-
     }
 
     @SuppressWarnings("deprecation")
