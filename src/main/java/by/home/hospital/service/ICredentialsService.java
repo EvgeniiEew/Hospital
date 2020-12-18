@@ -14,4 +14,5 @@ public interface ICredentialsService {
     void deleteCredentials(Integer number);
 
     Optional<Credentials> findByLogin(String credentialLogin);
+
 }

@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
     <style>
         * {
             box-sizing: border-box;
@@ -97,7 +97,8 @@
     </p>
 
     <div class="container">
-        <form action="/action_page.php">
+        <!--        <form METHOD="post" action="/patient/examination">-->
+        <form METHOD="post" action="/patient/examination">
             <div class="row">
 
                 <div class="col-25">
@@ -121,11 +122,9 @@
                 </div>
 
                 <div class="col-75">
-                    <input type="text" id="nameId" name="name" placeholder="nameAppoitment..">
+                    <input type="text" id="nameId" name="nameApointment" placeholder="nameAppoitment..">
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-25">
                     <label for="TypeId">Тип назначения</label>
@@ -138,14 +137,10 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="subject">Subject</label>
-                </div>
-                <div class="col-75">
-                    <textarea id="subject" name="subject" placeholder="..." style="height:200px"></textarea>
-                </div>
-            </div>
+            change this
+<!--            <div>-->
+<!--               <input type="text" id="idPatient" name="idPatient" value="${credenchial.id}">-->
+<!--            </div>-->
             <div class="row">
                 <input type="submit" value="Submit">
             </div>

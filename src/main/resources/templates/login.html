@@ -4,7 +4,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Getting Started: Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <link rel="stylesheet"
@@ -14,19 +14,20 @@
 
 
 <body>
-    <div th:if="${param.error}">Invalid username and password.</div>
-    <div th:if="${param.logout}">You have been logged out.</div>
-    <form th:action="@{/login}" method="post">
+    <div  th:if="${param.error}">Неверное имя пользователя и пароль.</div>
+    <div  th:if="${param.logout}">Вы вышли из системы.</div>
+
+    <form th:action="@{/login}" method="post" class="container center_div" style="width: 400px; padding: 40px">
         <div>
-            <label> User Name : <input type="text" name="username" />
+            <label> Логин <input type="text" name="username"/>
             </label>
         </div>
         <div>
-            <label> Password: <input type="password" name="password" />
+            <label> Пароль <input type="password" name="password"/>
             </label>
         </div>
         <div>
-            <input type="submit" value="Sign In" />
+            <input type="submit" value="Войти"/>
         </div>
     </form>
 </body>

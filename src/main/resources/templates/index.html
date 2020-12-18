@@ -29,29 +29,35 @@
                     <a class="nav-link" href="/patient/status">Очередь пациентов на запись</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/patient/status/receptionPending">Кабинет осмотра</a>
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR')" href="/patient/status/receptionPending">Кабинет
+                        осмотра</a>
                 </li>
             </ul>
+
             <div style="float: right;">
                 <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>
+            </div>
+
+            <div style="float: right">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" class="btn-success" value="Войти/Выход"/>
+                </form>
             </div>
         </div>
     </nav>
     <main class="container">
         <div class="starter-template text-center py-5 px-3">
             <h1>Добро пожаловать на наш сайт
-
+                <!--                <p>-->
+                <!--                 <span sec:authentication="principal.login">Udefined</span>-->
+                <!--            </p>!-->
             </h1>
             <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.
                 <br> На осмотр можно записаться в разделе регистрации</p>
         </div>
     </main>
-    <br />
-    <br />
-
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out" />
-    </form>
+    <br/>
+    <br/>
 
 </body>
 </html>
