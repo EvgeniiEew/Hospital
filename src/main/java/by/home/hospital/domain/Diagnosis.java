@@ -14,7 +14,7 @@ import java.util.List;
 public class Diagnosis {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
 
     public Diagnosis(String name) {
         this.name = name;

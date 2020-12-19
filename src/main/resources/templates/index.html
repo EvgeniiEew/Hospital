@@ -32,6 +32,11 @@
                     <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR')" href="/patient/status/receptionPending">Кабинет
                         осмотра</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR')" href="/patient/roomExamination/FulfillmentOfAppointments">Операционная
+                        </a>
+                </li>
             </ul>
 
             <div style="float: right;">

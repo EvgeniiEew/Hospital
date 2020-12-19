@@ -36,7 +36,8 @@ public class UserService implements IUserServices {
 
     }
 
-    public Integer getUserByCredentials_Id(String login) {
+    //достать userIdDoctor из  CredentialLogin
+    public Integer getUserIdByCredentials_login(String login) {
         Integer id = this.credentialsService.findByLogin(login).get().getId();
         return this.userJpaRepo.getUserByCredentials_Id(id).getId();
     }

@@ -123,7 +123,6 @@ public class PatientDetailsService implements IPatientDetailsService {
                     user.getCredentials().getFirstName(),
                     user.getCredentials().getLastName(),
                     patientDetails1.getStatus());
-
         }).collect(Collectors.toList());
         return patientWhisStatusDtos;
     }

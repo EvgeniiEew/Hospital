@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous">
+<link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <nav class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item active"><a class="nav-link" aria-current="page" href="/home">Home</a></li>
+                </ul>
+            </div>
+        </nav>
+    </nav>
+    <main class="container">
+        <div class="starter-template text py-5 px-3">
+            <table class="table">
+
+                <thead class="thead-dark">
+                <tr>
+
+                    <th scope="col">ID_Назначения</th>
+                    <th scope="col">Назначение</th>
+                    <th scope="col">тип назанчения</th>
+                    <th scope="col">Статус назначения</th>
+                    <!--                    <th scope="col">Диагноз пациента</th>-->
+                    <!--                    <th scope="col">Выполнить назначение</th>-->
+
+                </tr>
+                </thead>
+
+                <tr th:each="appoitmentColumn : ${appointmentUsers}">
+                    <td th:text="${appoitmentColumn.idApointment}"/>
+                    <td th:text="${appoitmentColumn.infoAppointment}"/>
+                    <td th:text="${appoitmentColumn.type}"/>
+                    <td th:text="${appoitmentColumn.status}"/>
+                    <!--                    <form method="POST" enctype="multipart/form-data"-->
+                    <!--                          th:action="@{/patient/{uid}/status (uid=${patient.id})}">-->
+                    <!--                        <td><input type="submit" value="Записать"/></td>-->
+                    <!--                    </form>-->
+                </tr>
+            </table>
+        </div>
+    </main>
+    <p>
+        Добро пожаловать
+        <span sec:authentication="principal.username">Udefined</span>
+    </p>!
+</body>
+</html>

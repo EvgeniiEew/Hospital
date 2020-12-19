@@ -43,12 +43,12 @@ public class CredentialsService implements ICredentialsService {
         creds1.setLogin(patientRegisterDto.getLogin());
         creds1.setPassword(patientRegisterDto.getPassword());
         user1.setCredentials(creds1);
-        entityManager.persist(creds1);
-        entityManager.persist(user1);
+        this.entityManager.persist(creds1);
+        this.entityManager.persist(user1);
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setPatientStatus(NOT_EXAMINED);
         patientDetails.setPatient(user1);
-        IPatientDetailsService.addPatientDetails(patientDetails);
+        this.IPatientDetailsService.addPatientDetails(patientDetails);
     }
 
     @Override
@@ -56,19 +56,19 @@ public class CredentialsService implements ICredentialsService {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Credentials> cr = cb.createQuery(Credentials.class);
-        return entityManager.createQuery(cr.select(cr.from(Credentials.class))).getResultList();
+        return this.entityManager.createQuery(cr.select(cr.from(Credentials.class))).getResultList();
 
     }
 
     @Override
     public void deleteCredentials(Integer number) {
-        entityManager.remove(new Credentials());
+        this.entityManager.remove(new Credentials());
 
     }
 
     @Override
     public Optional<Credentials> findByLogin(String credentialLogin) {
-        return credentialsJpaRepository.findByLogin(credentialLogin);
+        return this.credentialsJpaRepository.findByLogin(credentialLogin);
     }
 
 
