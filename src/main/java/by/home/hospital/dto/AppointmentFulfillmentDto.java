@@ -14,6 +14,5 @@ public class AppointmentFulfillmentDto {
     private String infoAppointment;
     private String type;
     private String status;
-//    private String info_diagnosis;
 //    private String info_epicris;
 }

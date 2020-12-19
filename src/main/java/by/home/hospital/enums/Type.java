@@ -4,5 +4,4 @@ public enum Type {
     PROCEDURE,
     DRUG,
     OPERATION;
-
 }

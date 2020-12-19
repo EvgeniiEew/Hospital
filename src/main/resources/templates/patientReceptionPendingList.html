@@ -2,13 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <link href="https://bootswatch.com/4/spacelab/bootstrap.min.css" rel="stylesheet">
 </head>
-<link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous">
-<link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css"
-      rel="stylesheet">
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <nav class="container-fluid">
@@ -40,12 +36,13 @@
                     <form method="POST" enctype="multipart/form-data"
 
                           th:action="@{/patient/roomExamination/{uid}/ (uid=${patient.id})}">
-                         <td><input style="background-color: chartreuse" type="submit" value="Осмотреть"/></td>
+                        <td><input style="background-color: chartreuse" type="submit" value="Осмотреть"/></td>
                     </form>
 
                     <form method="POST" enctype="multipart/form-data"
                           th:action="@{/patient/status/{uid}/reset (uid=${patient.id})}">
-                        <td><input style="background-color: indianred" type="submit"  value="Вернуть в очередь на запись"/></td>
+                        <td><input style="background-color: indianred" type="submit"
+                                   value="Вернуть в очередь на запись"/></td>
                     </form>
                 </tr>
             </table>

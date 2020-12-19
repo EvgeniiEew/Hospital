@@ -53,22 +53,19 @@ public class PatientDetailsService implements IPatientDetailsService {
         return patientDetailsList.get(0);
     }
 
-    public List<PatientWhisStatusDto> getUserById(Integer id) {
-        HashSet<PatientDetails> patientDetails = this.patientDitalesjpaRepository.getPatientDetailsById(id);
-        List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> {
-            User user = patientDetails1.getPatient();
-            return new PatientWhisStatusDto(
-                    user.getId(),
-                    user.getCredentials().getFirstName(),
-                    user.getCredentials().getLastName(),
-                    patientDetails1.getStatus()
-            );
-        }).collect(Collectors.toList());
-        return patientWhisStatusDtos;
+    public PatientWhisStatusDto getUserById(Integer id) {
+        PatientDetails patientDetails = this.patientDitalesjpaRepository.findById(id).get();
+        User user = patientDetails.getPatient();
+        return new PatientWhisStatusDto(
+                user.getId(),
+                user.getCredentials().getFirstName(),
+                user.getCredentials().getLastName(),
+                patientDetails.getStatus()
+        );
     }
 
-    public PatientDetails getPatientDetaisByIdUser(int idUser) {
-        return this.patientDitalesjpaRepository.findById(idUser);
+    public PatientDetails getPatientDetaisByIdUser(Integer idUser) {
+        return this.patientDitalesjpaRepository.findById(idUser).get();
     }
 
     @Override
@@ -91,20 +88,23 @@ public class PatientDetailsService implements IPatientDetailsService {
         addPatientDetails(patientDetails);
     }
 
+    //---
     public List<PatientWhisStatusDto> getPatientsNotExaminded() {
         return this.getPatientWithStatus(NOT_EXAMINED);
     }
 
+    //--
     public List<PatientWhisStatusDto> getCheckoutPatient() {
         return this.getPatientWithStatus(CHECKOUT);
     }
 
+    //--
     //записаны на прием в ожиданнии назначения
     public List<PatientWhisStatusDto> getReceptionPendingPatient() {
         return this.getPatientWithStatus(RECEPTION_PENDING);
     }
 
-
+    //--
     public List<PatientWhisStatusDto> getCheckingPatient() {
         return this.getPatientWithStatus(CHECKING);
     }
