@@ -31,7 +31,7 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     @Override
     public void addAppointmentUsers(ExaminationDoctorDto examinationDoctorDto) {
         for (AppointmentDto appointmentDto : examinationDoctorDto.getAppointmentArray()) {
-            Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.DONE);
+            Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.PENDING);
             Epicrisis epicrisis = new Epicrisis();
             epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
             epicrisis.setAppointment(appointment);

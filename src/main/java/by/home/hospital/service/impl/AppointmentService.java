@@ -30,14 +30,6 @@ public class AppointmentService implements IAppointmentService {
         )).collect(Collectors.toList());
         return appointmentFulfillmentDtos;
     }
-//---
-    public List<AppointmentFulfillmentDto> getListAppointmentWithStatusDone() {
-        return this.findAllByStatus(AppointmentStatus.DONE);
-    }
-//---
-    public List<AppointmentFulfillmentDto> getListAppointmentWithStatusPending() {
-        return this.findAllByStatus(AppointmentStatus.PENDING);
-    }
 
     public List<AppointmentFulfillmentDto> findAllByStatus(AppointmentStatus status) {
         List<Appointment> appointments = this.appoitmentJpaRepository.findAllByStatus(status);

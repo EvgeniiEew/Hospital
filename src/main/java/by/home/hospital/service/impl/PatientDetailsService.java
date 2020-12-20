@@ -1,14 +1,11 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.Credentials;
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientWhisStatusDto;
 import by.home.hospital.enums.PatientStatus;
-import by.home.hospital.enums.Position;
 import by.home.hospital.service.IPatientDetailsService;
 import by.home.hospital.service.repository.PatientDitalesjpaRepository;
-import by.home.hospital.service.repository.UserJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -88,21 +85,12 @@ public class PatientDetailsService implements IPatientDetailsService {
         addPatientDetails(patientDetails);
     }
 
-    //---
-    public List<PatientWhisStatusDto> getPatientsNotExaminded() {
-        return this.getPatientWithStatus(NOT_EXAMINED);
-    }
 
     //--
     public List<PatientWhisStatusDto> getCheckoutPatient() {
         return this.getPatientWithStatus(CHECKOUT);
     }
 
-    //--
-    //записаны на прием в ожиданнии назначения
-    public List<PatientWhisStatusDto> getReceptionPendingPatient() {
-        return this.getPatientWithStatus(RECEPTION_PENDING);
-    }
 
     //--
     public List<PatientWhisStatusDto> getCheckingPatient() {

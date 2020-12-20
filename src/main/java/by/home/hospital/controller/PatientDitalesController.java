@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+import static by.home.hospital.enums.PatientStatus.NOT_EXAMINED;
+import static by.home.hospital.enums.PatientStatus.RECEPTION_PENDING;
+
 @Controller
 public class PatientDitalesController {
     @Autowired
@@ -31,7 +34,7 @@ public class PatientDitalesController {
     //зарегистрировавшиеся не добавленые на прием  пациенты
     @GetMapping("/patient/status")
     public String getPatientWithStatusNotExamined(Model model) {
-        List<PatientWhisStatusDto> patientsNotExaminded = this.patientDetailsService.getPatientsNotExaminded();
+        List<PatientWhisStatusDto> patientsNotExaminded = this.patientDetailsService.getPatientWithStatus(NOT_EXAMINED);
         model.addAttribute("patientsNotExaminded", patientsNotExaminded);
         return this.patientNotExamid;
     }
@@ -39,7 +42,7 @@ public class PatientDitalesController {
     //записаны на прием в ожидании назначения
     @GetMapping("/patient/status/receptionPending")
     public String getPatientWithStatusReceptionPending(Model model) {
-        List<PatientWhisStatusDto> patientReceptionPending = this.patientDetailsService.getReceptionPendingPatient();
+        List<PatientWhisStatusDto> patientReceptionPending = this.patientDetailsService.getPatientWithStatus(RECEPTION_PENDING);
         model.addAttribute("patientReceptionPending", patientReceptionPending);
         return this.patientReceptionPending;
     }

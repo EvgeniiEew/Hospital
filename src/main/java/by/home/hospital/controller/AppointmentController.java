@@ -5,6 +5,7 @@ import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.dto.AppointmentFulfillmentDto;
 import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.dto.PatientWhisStatusDto;
+import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Type;
 import by.home.hospital.service.IAppointmentUsersService;
 import by.home.hospital.service.impl.AppointmentService;
@@ -69,7 +70,7 @@ public class AppointmentController {
     //Выполнение Назначений
     @GetMapping("/patient/roomExamination/FulfillmentOfAppointments")
     public String getPatientForFulfillmentOfAppointments(Model model) {
-        List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.getListAppointmentWithStatusPending();
+        List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.PENDING);
         List<Diagnosis> diagnoses = this.diagnosisService.findAll();
         model.addAttribute("appointmentUsers", appointmentUsers);
         model.addAttribute("diagnoses", diagnoses);
@@ -79,7 +80,7 @@ public class AppointmentController {
     //выполненые назначения
     @GetMapping("/patient/roomExamination/StatusPendingApoitment")
     public String getPatientWhereStatusApointmentPending(Model model) {
-        List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.getListAppointmentWithStatusDone();
+        List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.DONE);
         List<Diagnosis> diagnoses = this.diagnosisService.findAll();
         model.addAttribute("appointmentUsers", appointmentUsers);
         model.addAttribute("diagnoses", diagnoses);
