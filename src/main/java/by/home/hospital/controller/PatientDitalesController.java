@@ -17,6 +17,8 @@ import static by.home.hospital.enums.PatientStatus.RECEPTION_PENDING;
 
 @Controller
 public class PatientDitalesController {
+    private final String patientNotExamid = "patientsNotExamindedList";
+    private final String patientReceptionPending = "patientReceptionPendingList";
     @Autowired
     private IPatientDetailsService service;
     @Autowired
@@ -28,8 +30,6 @@ public class PatientDitalesController {
         return "redirect:/patient/status";
     }
 
-    private final String patientNotExamid = "patientsNotExamindedList";
-    private final String patientReceptionPending = "patientReceptionPendingList";
 
     //зарегистрировавшиеся не добавленые на прием  пациенты
     @GetMapping("/patient/status")

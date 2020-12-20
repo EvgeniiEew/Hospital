@@ -3,6 +3,7 @@ package by.home.hospital.service.impl;
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientWhisStatusDto;
+import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.enums.PatientStatus;
 import by.home.hospital.service.IPatientDetailsService;
 import by.home.hospital.service.repository.PatientDitalesjpaRepository;
@@ -28,7 +29,7 @@ public class PatientDetailsService implements IPatientDetailsService {
     @PersistenceContext
     private EntityManager entityManager;
     @Autowired
-    PatientDitalesjpaRepository patientDitalesjpaRepository;
+    private PatientDitalesjpaRepository patientDitalesjpaRepository;
 
     @Override
     public void addPatientDetails(PatientDetails patientDetails) {
@@ -113,5 +114,11 @@ public class PatientDetailsService implements IPatientDetailsService {
                     patientDetails1.getStatus());
         }).collect(Collectors.toList());
         return patientWhisStatusDtos;
+    }
+
+    public void setStatusCheckoutPatientById(ResultProcedurFormDto resultProcedurFormDto) {
+        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsById(resultProcedurFormDto.getIdPatientUser());
+        patientDetails.setStatus(CHECKOUT);
+       PatientDetails patientDetails1 =   this.patientDitalesjpaRepository.save(patientDetails);
     }
 }

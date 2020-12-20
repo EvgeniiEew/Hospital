@@ -1,17 +1,11 @@
 package by.home.hospital.controller;
 
 import by.home.hospital.domain.Diagnosis;
-import by.home.hospital.dto.AppointmentDto;
-import by.home.hospital.dto.AppointmentFulfillmentDto;
-import by.home.hospital.dto.ExaminationDoctorDto;
-import by.home.hospital.dto.PatientWhisStatusDto;
+import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Type;
 import by.home.hospital.service.IAppointmentUsersService;
-import by.home.hospital.service.impl.AppointmentService;
-import by.home.hospital.service.impl.DiagnosisService;
-import by.home.hospital.service.impl.PatientDetailsService;
-import by.home.hospital.service.impl.UserService;
+import by.home.hospital.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -27,10 +21,14 @@ import static java.lang.Integer.valueOf;
 
 @Controller
 public class AppointmentController {
+
     private final String roomExamination = "roomForExaminationList";
     private final String FulfillmentOfAppointment = "FulfillmentOfAppointmentsList";
     private final String StatusPendingApointment = "PendingAppointmentsList";
+    private final String PERFORMANCE_APPOINTMENT = "performanceAppointmentList";
 
+    @Autowired
+    private EpicrisisService epicrisisService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -71,9 +69,9 @@ public class AppointmentController {
     @GetMapping("/patient/roomExamination/FulfillmentOfAppointments")
     public String getPatientForFulfillmentOfAppointments(Model model) {
         List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.PENDING);
-        List<Diagnosis> diagnoses = this.diagnosisService.findAll();
+        // List<Diagnosis> diagnoses = this.diagnosisService.findAll();
         model.addAttribute("appointmentUsers", appointmentUsers);
-        model.addAttribute("diagnoses", diagnoses);
+        // model.addAttribute("diagnoses", diagnoses);
         return this.FulfillmentOfAppointment;
     }
 
@@ -85,5 +83,22 @@ public class AppointmentController {
         model.addAttribute("appointmentUsers", appointmentUsers);
         model.addAttribute("diagnoses", diagnoses);
         return this.StatusPendingApointment;
+    }
+
+    // выполнение процедур.операций.медикаментов
+    @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/{idAppointment}/")
+    public String getPatientForPerfomanceAppointment(@PathVariable("idAppointment") Integer idAppointment, Model model) {
+        MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
+        model.addAttribute("makingAppointmentsDto",makingAppointmentsDto);
+        return this.PERFORMANCE_APPOINTMENT;
+    }
+
+    //занесение результатов конечного выполнения процедур в базу
+    @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/result")
+    public String getResultProcedures(ResultProcedurFormDto resultProcedurFormDto){
+        this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
+        this.patientDetailsService.setStatusCheckoutPatientById(resultProcedurFormDto);
+        this.epicrisisService.saveEpicris(resultProcedurFormDto);
+       return  "redirect:/patient/roomExamination/FulfillmentOfAppointments";
     }
 }

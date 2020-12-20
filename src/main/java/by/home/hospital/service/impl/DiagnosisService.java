@@ -14,7 +14,7 @@ import java.util.List;
 public class DiagnosisService implements IDiagnosisService {
 
     @Autowired
-    DiagnosisJpaRepository diagnosisJpaRepository;
+    private  DiagnosisJpaRepository diagnosisJpaRepository;
 
     @Override
     public List<Diagnosis> findAll() {

@@ -10,4 +10,5 @@ public interface DiagnosisJpaRepository extends JpaRepository<Diagnosis, Integer
 
     List<Diagnosis> findAll();
 
+    
 }

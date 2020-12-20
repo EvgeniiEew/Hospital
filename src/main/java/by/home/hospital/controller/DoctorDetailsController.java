@@ -14,11 +14,9 @@ import java.util.List;
 
 @Controller
 public class DoctorDetailsController {
-
+    private final String doctorInfoHtml = "doctorInfoDtosList";
     @Autowired
     private IDoctorDetailsRepository iDoctorDetailsRepository;
-
-    private final String doctorInfoHtml = "doctorInfoDtosList";
 
     @GetMapping("/doctors")
     public String getDoctorDetails(Model model) {

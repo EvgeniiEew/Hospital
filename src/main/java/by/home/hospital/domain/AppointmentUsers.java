@@ -1,18 +1,18 @@
 package by.home.hospital.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class AppointmentUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -35,10 +35,7 @@ public class AppointmentUsers {
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
-    public AppointmentUsers(User patient, User doctor, Appointment appointment) {
-    }
 
-    public AppointmentUsers() {
 
-    }
+
 }

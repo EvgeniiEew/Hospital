@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class DiagnosisPatient {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
 
     @JsonIgnore
     @ToString.Exclude

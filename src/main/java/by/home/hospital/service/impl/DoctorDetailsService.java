@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorDetailsService implements IDoctorDetailsRepository {
     @Autowired
-    CredentialsJpaRepository credentialsJpaRepository;
+    private   CredentialsJpaRepository credentialsJpaRepository;
 
     @Autowired
-    DoctorDitalesJpaRepository doctorDitalesJpaRepository;
+    private  DoctorDitalesJpaRepository doctorDitalesJpaRepository;
 
     @Autowired
-    UserJpaRepo userJpaRepo;
+    private   UserJpaRepo userJpaRepo;
 
     @PersistenceContext
     private EntityManager entityManager;

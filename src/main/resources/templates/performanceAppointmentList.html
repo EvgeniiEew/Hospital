@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://bootswatch.com/4/spacelab/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <h2>Выполение процедур</h2>
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Назаначение №</th>
+                <th scope="col">Информация назначения</th>
+                <th scope="col">Тип выполняемого назначения</th>
+                <th scope="col">Статус процедуры</th>
+                <th scope="col">Предворительная запись в выписке</th>
+                <th scope="col">Назначеный диагноз при поступлении</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="makingAppDTO : ${makingAppointmentsDto}">
+                <td th:text="${makingAppDTO.idApointment}"/>
+                <td th:text="${makingAppDTO.infoAppointment}"/>
+                <td th:text="${makingAppDTO.type}"/>
+                <td th:text="${makingAppDTO.status}"/>
+                <td th:text="${makingAppDTO.info_epicris}"/>
+                <td th:text="${makingAppDTO.nameDiagnisis}"/>
+                <!--         Вернуть id patienta       <td th:text="${makingAppDTO.idPatientDitales}"/>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-container">
+        <form METHOD="post" action="/patient/roomExamination/FulfillmentOfAppointments/performance/result">
+            <fieldset>
+                <legend>Дописать результат проведения</legend>
+                <div class="form-group">
+                    <label for="resaultEpicris">Инфо к выполняемому назначению, заметки.</label>
+                    <input type="text" class="form-control" id="resaultEpicris" name="resaultEpicris"
+                           placeholder="epicris..">
+                </div>
+                <div class="form-group" th:object="${makingAppointmentsDto}">
+                    <label for="idPatientUser"></label>
+                    <input hidden="hidden" type="text" id="idPatientUser" name="idPatientUser" th:value="*{idPatientDitales}">
+                </div>
+                <div class="form-group" th:object="${makingAppointmentsDto}">
+                    <label for="idAppointment"></label>
+                    <input hidden="hidden" type="text" id="idAppointment" name="idAppointment" th:value="*{idApointment}">
+                </div>
+                <button type="submit" class="btn btn-primary">Выполнить назначение</button>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

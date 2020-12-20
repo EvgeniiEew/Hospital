@@ -31,6 +31,7 @@
                     <th scope="col">Назначение</th>
                     <th scope="col">тип назанчения</th>
                     <th scope="col">Статус назначения</th>
+                    <th scope="col">Выполнить назначение</th>
                 </tr>
                 </thead>
                 <tr th:each="appoitmentColumn : ${appointmentUsers}">
@@ -38,6 +39,12 @@
                     <td th:text="${appoitmentColumn.infoAppointment}"/>
                     <td th:text="${appoitmentColumn.type}"/>
                     <td th:text="${appoitmentColumn.status}"/>
+
+                    <form method="Post" enctype="multipart/form-data"
+                          th:action="@{/patient/roomExamination/FulfillmentOfAppointments/performance/{uid}/ (uid=${appoitmentColumn.idApointment})}">
+                        <td><input type="submit" value="Выполнить"/></td>
+                    </form>
+
                 </tr>
             </table>
         </div>

@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Epicrisis {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
 
     private String info;
 

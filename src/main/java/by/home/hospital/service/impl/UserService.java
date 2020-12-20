@@ -1,13 +1,10 @@
 package by.home.hospital.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
-import by.home.hospital.domain.Credentials;
 import by.home.hospital.domain.User;
 import by.home.hospital.service.repository.UserJpaRepo;
 import by.home.hospital.service.IUserServices;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements IUserServices {
 
     @Autowired
-    UserJpaRepo userJpaRepo;
+    private UserJpaRepo userJpaRepo;
 
     @Autowired
-    CredentialsService credentialsService;
+    private CredentialsService credentialsService;
 
     public void addUser(User user) {
     }
