@@ -38,14 +38,14 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     @Override
     public List<PatientDetails> getPatientDetails() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
         CriteriaQuery<PatientDetails> cr = cb.createQuery(PatientDetails.class);
         return entityManager.createQuery(cr.select(cr.from(PatientDetails.class))).getResultList();
     }
 
     @Override
     public PatientDetails getPatientDetailsById(int id) {
-        Query query = entityManager.createQuery("Select u from PatientDetails u WHERE patient_id = :id", PatientDetails.class);
+        Query query = this.entityManager.createQuery("Select u from PatientDetails u WHERE patient_id = :id", PatientDetails.class);
         query.setParameter("id", id);
         List<PatientDetails> patientDetailsList = query.getResultList();
         return patientDetailsList.get(0);
@@ -68,7 +68,7 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     @Override
     public void deletePatientDetails(Integer number) {
-        entityManager.remove(new PatientDetails());
+        this.entityManager.remove(new PatientDetails());
     }
 
     //изменить статус пациента на RECEPTION_PENDING в ожидании приема
@@ -86,25 +86,8 @@ public class PatientDetailsService implements IPatientDetailsService {
         addPatientDetails(patientDetails);
     }
 
-
-    //--
-    public List<PatientWhisStatusDto> getCheckoutPatient() {
-        return this.getPatientWithStatus(CHECKOUT);
-    }
-
-
-    //--
-    public List<PatientWhisStatusDto> getCheckingPatient() {
-        return this.getPatientWithStatus(CHECKING);
-    }
-
     public List<PatientWhisStatusDto> getPatientWithStatus(PatientStatus status) {
-        HashSet<PatientDetails> patientDetails = patientDitalesjpaRepository.findAllByStatus(status);
-//        List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> new PatientWhisStatusDto(
-//                patientDetails1.getId(),
-//                patientDetails1.getStatus()
-//        )).collect(Collectors.toList());
-//        return patientWhisStatusDtos;
+        HashSet<PatientDetails> patientDetails = this.patientDitalesjpaRepository.findAllByStatus(status);
         List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> {
             User user = patientDetails1.getPatient();
             return new PatientWhisStatusDto(

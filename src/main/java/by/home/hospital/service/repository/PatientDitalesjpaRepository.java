@@ -9,7 +9,9 @@ import java.util.HashSet;
 public interface PatientDitalesjpaRepository extends JpaRepository<PatientDetails, Integer> {
     HashSet<PatientDetails> findAllByStatus(PatientStatus status);
 
-   PatientDetails getPatientDetailsById(Integer id);
+    PatientDetails getPatientDetailsById(Integer id);
 
     PatientDetails getPatientDetailsByPatientId(Integer id);
+
+    PatientDetails save(PatientDetails patientDetails);
 }

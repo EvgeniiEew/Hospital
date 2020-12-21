@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class CredentialsController {
+    private final String IDNEX = "index";
+    private final String CREDENTIALS = "credentialsList";
+    private final String PATIENT_REGISTER = "patientRegisterList";
 
     @Autowired
     private ICredentialsService credentialsService;
@@ -23,7 +26,7 @@ public class CredentialsController {
     public String registerPatient(@RequestParam String firstName, String lastName, String login, String password) {
         PatientRegisterDto patientRegisterDto = new PatientRegisterDto(firstName, lastName, login, password);
         credentialsService.registerPatient(patientRegisterDto);
-        return "index";
+        return this.IDNEX;
     }
 //    private final String patientRegister "regPatient";
 //
@@ -36,13 +39,13 @@ public class CredentialsController {
 
     @GetMapping("/patient/register")
     public String registerPage() {
-        return "patientRegisterList";
+        return this.PATIENT_REGISTER;
     }
 
     @GetMapping("/credanchials")
     public String getCredentials(Model model) {
         List<Credentials> credentials = credentialsService.getCredentials().stream().collect(Collectors.toList());
         model.addAttribute("credentials", credentials);
-        return "credentialsList";
+        return this.CREDENTIALS;
     }
 }

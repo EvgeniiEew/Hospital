@@ -7,7 +7,6 @@ import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.IAppointmentService;
 import by.home.hospital.service.repository.*;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,7 +59,7 @@ public class AppointmentService implements IAppointmentService {
     public MakingAppointmentsDto getFormForMakingAppointmentsDto(Integer idAppointment) {
         Epicrisis epicrisis = this.epicrisisService.getByAppointment_Id(idAppointment);
         Appointment appointment = this.appoitmentJpaRepository.getById(idAppointment);
-        AppointmentUsers appointmentUsers = appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(idAppointment);
+        AppointmentUsers appointmentUsers = this.appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(idAppointment);
         PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
         String diagnosis = this.diagnosisPatientJpaRepository.getDiagnosisPatientByPatientDetailsId(patientDetails.getId()).getDiagnosis().getName();
         return new MakingAppointmentsDto(idAppointment, patientDetails.getId(), appointment.getName(), appointment.getType().toString(),

@@ -7,8 +7,7 @@ import java.util.List;
 
 
 public interface DiagnosisJpaRepository extends JpaRepository<Diagnosis, Integer> {
-
     List<Diagnosis> findAll();
 
-    
+    Diagnosis save(Diagnosis diagnosis);
 }

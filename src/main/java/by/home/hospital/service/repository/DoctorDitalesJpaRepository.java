@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 
-public interface DoctorDitalesJpaRepository extends JpaRepository<DoctorDetails,Integer> {
+public interface DoctorDitalesJpaRepository extends JpaRepository<DoctorDetails, Integer> {
 
 
 }

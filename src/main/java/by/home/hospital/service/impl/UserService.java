@@ -25,7 +25,7 @@ public class UserService implements IUserServices {
 
 
     public List<User> getUsers() {
-        return userJpaRepo.findAll();
+        return this.userJpaRepo.findAll();
     }
 
 

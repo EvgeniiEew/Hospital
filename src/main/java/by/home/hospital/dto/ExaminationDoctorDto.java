@@ -10,7 +10,8 @@ public class ExaminationDoctorDto {
     private final int patientIdDto;
     private final int idDoctor ;
     private final String diagnosisDto;
-    private final ArrayList<AppointmentDto> appointmentArray;
+   // private final ArrayList<AppointmentDto> appointmentArray;
+    private final AppointmentDto appointmentDto;
     private final String epicrisis;
 
 }

@@ -21,10 +21,11 @@ public class CredentialAuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String credentialLogin) throws UsernameNotFoundException {
-        return credentialsService.findByLogin(credentialLogin).map(credentials ->  new User(credentials.getLogin(),
+        return credentialsService.findByLogin(credentialLogin).map(credentials -> new User(credentials.getLogin(),
                 credentials.getPassword(), toAuthorities(credentials)))
                 .orElse(null);
     }
+
     private Collection<? extends GrantedAuthority> toAuthorities(Credentials findByUserName) {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + findByUserName.getUser().getPosition()));
     }

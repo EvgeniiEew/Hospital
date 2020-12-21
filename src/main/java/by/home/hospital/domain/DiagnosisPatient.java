@@ -28,6 +28,4 @@ public class DiagnosisPatient {
     @JoinColumn(name = "diagnosis_id")
     private Diagnosis diagnosis;
 
-//    public DiagnosisPatient(PatientDetails patientDetails, Diagnosis diagnosis) {
-//    }
 }

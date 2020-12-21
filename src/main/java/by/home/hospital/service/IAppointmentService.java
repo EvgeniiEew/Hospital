@@ -9,7 +9,4 @@ import java.util.List;
 public interface IAppointmentService {
     List<AppointmentFulfillmentDto> findAll();
 
-//    void addAppointment(Appointment appointment);
-//
-//    void deleteAppointment(Integer number);
 }

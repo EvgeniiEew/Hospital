@@ -14,7 +14,8 @@ import java.util.List;
 
 @Controller
 public class DoctorDetailsController {
-    private final String doctorInfoHtml = "doctorInfoDtosList";
+    private final String DOCTOR_INFO_DTO = "doctorInfoDtosList";
+
     @Autowired
     private IDoctorDetailsRepository iDoctorDetailsRepository;
 
@@ -22,7 +23,7 @@ public class DoctorDetailsController {
     public String getDoctorDetails(Model model) {
         List<DoctorInfoDto> doctorInfoDtos = this.iDoctorDetailsRepository.getDoctorInfoDto();
         model.addAttribute("doctorInfoDtos", doctorInfoDtos);
-        return this.doctorInfoHtml;
+        return this.DOCTOR_INFO_DTO;
     }
 
     @PostMapping(path = "/doctor/register")

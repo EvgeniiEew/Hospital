@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppointmentUsersJpaRepository extends JpaRepository<AppointmentUsers, Integer> {
     AppointmentUsers getAppointmentUsersByAppointmentId(Integer IdAppointment);
+
+    AppointmentUsers save(AppointmentUsers appointmentUsers);
 }

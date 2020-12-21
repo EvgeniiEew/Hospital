@@ -17,8 +17,8 @@ import static by.home.hospital.enums.PatientStatus.RECEPTION_PENDING;
 
 @Controller
 public class PatientDitalesController {
-    private final String patientNotExamid = "patientsNotExamindedList";
-    private final String patientReceptionPending = "patientReceptionPendingList";
+    private final String PATIENT_NOT_EXAMID = "patientsNotExamindedList";
+    private final String PATIENT_RECEPTION_PENDING = "patientReceptionPendingList";
     @Autowired
     private IPatientDetailsService service;
     @Autowired
@@ -36,7 +36,7 @@ public class PatientDitalesController {
     public String getPatientWithStatusNotExamined(Model model) {
         List<PatientWhisStatusDto> patientsNotExaminded = this.patientDetailsService.getPatientWithStatus(NOT_EXAMINED);
         model.addAttribute("patientsNotExaminded", patientsNotExaminded);
-        return this.patientNotExamid;
+        return this.PATIENT_NOT_EXAMID;
     }
 
     //записаны на прием в ожидании назначения
@@ -44,7 +44,7 @@ public class PatientDitalesController {
     public String getPatientWithStatusReceptionPending(Model model) {
         List<PatientWhisStatusDto> patientReceptionPending = this.patientDetailsService.getPatientWithStatus(RECEPTION_PENDING);
         model.addAttribute("patientReceptionPending", patientReceptionPending);
-        return this.patientReceptionPending;
+        return this.PATIENT_RECEPTION_PENDING;
     }
 
     @PostMapping("/patient/status/{id}/reset")
