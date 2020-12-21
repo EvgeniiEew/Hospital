@@ -21,7 +21,7 @@ public class EpicrisisService implements IEpicrisisService {
 
     public void saveEpicris(ResultProcedurFormDto resultProcedurFormDto) {
         Epicrisis epicrisis = getByAppointment_Id(resultProcedurFormDto.getIdAppointment());
-        epicrisis.getInfo().concat(" "+ resultProcedurFormDto.getResaultEpicris());
-        Epicrisis epicrisi =  this.epicrisisJpaRepository.saveAndFlush(epicrisis);
+        epicrisis.setInfo(epicrisis.getInfo().concat(" " +resultProcedurFormDto.getResaultEpicris()));
+        this.epicrisisJpaRepository.save(epicrisis);
     }
 }

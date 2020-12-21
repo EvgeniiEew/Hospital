@@ -61,10 +61,8 @@ public class AppointmentService implements IAppointmentService {
         Epicrisis epicrisis = this.epicrisisService.getByAppointment_Id(idAppointment);
         Appointment appointment = this.appoitmentJpaRepository.getById(idAppointment);
         AppointmentUsers appointmentUsers = appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(idAppointment);
-        Integer idUserPatient = appointmentUsers.getPatient().getId();
-        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(idUserPatient);
-        DiagnosisPatient diagnosisPatient = this.diagnosisPatientJpaRepository.getDiagnosisPatientByPatientDetailsId(patientDetails.getId());
-        String diagnosis = diagnosisPatient.getDiagnosis().getName();
+        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
+        String diagnosis = this.diagnosisPatientJpaRepository.getDiagnosisPatientByPatientDetailsId(patientDetails.getId()).getDiagnosis().getName();
         return new MakingAppointmentsDto(idAppointment, patientDetails.getId(), appointment.getName(), appointment.getType().toString(),
                 appointment.getStatus().toString(), epicrisis.getInfo(), diagnosis);
     }
