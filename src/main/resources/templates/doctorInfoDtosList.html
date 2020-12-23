@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <link href="https://bootswatch.com/4/spacelab/bootstrap.min.css" rel="stylesheet">
+    <th:block th:insert="fragments/header.html :: css"/>
 </head>
 <body>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <nav class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item active"><a class="nav-link" aria-current="page" href="/home">Home</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </nav>
-        </tr>
+        <th:block th:insert="fragments/navBar.html :: navBar"/>
         <main class="container">
             <div class="starter-template text py-5 px-3">
                 <table class="table">
@@ -36,6 +28,7 @@
                 </table>
             </div>
         </main>
+        <th:block th:insert="fragments/scripts.html :: js"/>
     </body>
 </body>
 </html>

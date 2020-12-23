@@ -36,7 +36,6 @@ public class CredentialsController {
 //        return;
 //    }
 
-
     @GetMapping("/patient/register")
     public String registerPage() {
         return this.PATIENT_REGISTER;

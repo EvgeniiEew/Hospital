@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://bootswatch.com/4/spacelab/bootstrap.min.css" rel="stylesheet">
+    <th:block th:insert="fragments/header.html :: css"/>
 </head>
 <body>
+    <th:block th:insert="fragments/navBar.html :: navBar"/>
     <h2>Выполение процедур</h2>
     <div>
         <table class="table table-hover">
@@ -54,5 +53,6 @@
             </fieldset>
         </form>
     </div>
+    <th:block th:insert="fragments/scripts.html :: js"/>
 </body>
 </html>

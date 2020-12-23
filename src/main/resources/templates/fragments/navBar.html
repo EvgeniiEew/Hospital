@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<title>Getting Started: Serving Web Content</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<head>
-    <title>Hospital</title>
-    <th:block th:insert="fragments/header.html :: css"/>
-</head>
-<body>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 
+<th:block th:fragment="navBar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
         <div class="collapse navbar-collapse" id="navbarColor01">
@@ -47,19 +40,5 @@
             </div>
         </div>
     </nav>
-    <main class="container">
-        <div class="starter-template text-center py-5 px-3">
-            <h1>Добро пожаловать на сайт Больницы №0
-                <!--                <p>-->
-                <!--                 <span sec:authentication="principal.login">Udefined</span>-->
-                <!--            </p>!-->
-            </h1>
-            <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.
-                <br> На осмотр можно записаться в разделе регистрации</p>
-        </div>
-    </main>
-    <br/>
-    <br/>
-    <th:block th:insert="fragments/scripts.html :: js"/>
-</body>
+</th:block>
 </html>

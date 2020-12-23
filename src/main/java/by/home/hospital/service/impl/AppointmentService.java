@@ -66,7 +66,7 @@ public class AppointmentService implements IAppointmentService {
                 appointment.getStatus().toString(), epicrisis.getInfo(), diagnosis);
     }
 
-    //занесение результатов проведения процедур в базу
+    //занесение результатов проведения процедур в базу //?
     public void setPendingAppointmentStatusByID(ResultProcedurFormDto resultProcedurFormDto) {
         Appointment appointment = this.appoitmentJpaRepository.getOne(resultProcedurFormDto.getIdAppointment());
         appointment.setStatus(AppointmentStatus.DONE);

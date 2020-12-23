@@ -80,7 +80,7 @@ public class AppointmentController {
         model.addAttribute("diagnoses", diagnoses);
         return this.STATUS_PENDING_APPOINTMENT;
     }
-
+//?
     // выполнение процедур.операций.медикаментов
     @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/{idAppointment}/")
     public String getPatientForPerfomanceAppointment(@PathVariable("idAppointment") Integer idAppointment, Model model) {
@@ -89,7 +89,7 @@ public class AppointmentController {
         return this.PERFORMANCE_APPOINTMENT;
     }
 
-    //занесение результатов конечного выполнения процедур в базу
+    //занесение результатов конечного выполнения процедур в базу //
     @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/result")
     public String getResultProcedures(ResultProcedurFormDto resultProcedurFormDto) {
         this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
