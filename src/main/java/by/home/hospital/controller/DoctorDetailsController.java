@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 public class DoctorDetailsController {
     private final String DOCTOR_INFO_DTO = "doctorInfoDtosList";
+    private final String DOCTOR_CREATE = "doctorCreateList";
 
     @Autowired
     private IDoctorDetailsRepository iDoctorDetailsRepository;
@@ -26,9 +27,15 @@ public class DoctorDetailsController {
         return this.DOCTOR_INFO_DTO;
     }
 
+    @GetMapping("/doctor/ceate")
+    public String setDoctor(){
+        return this.DOCTOR_CREATE;
+    }
+
     @PostMapping(path = "/doctor/register")
-    public void registerDoctor(@ModelAttribute DoctorRegisterDto doctorRegisterDto, Model model) {
+    public String registerDoctor( DoctorRegisterDto doctorRegisterDto) {
         this.iDoctorDetailsRepository.registerDoctor(doctorRegisterDto);
+        return "redirect:/home";
     }
 
 }

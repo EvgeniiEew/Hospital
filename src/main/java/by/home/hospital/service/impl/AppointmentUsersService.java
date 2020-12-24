@@ -37,8 +37,7 @@ public class AppointmentUsersService implements IAppointmentUsersService {
         this.setEpicrisis(examinationDoctorDto);
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setName(examinationDoctorDto.getDiagnosisDto());
-        Integer num = examinationDoctorDto.getPatientIdDto();
-        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsById(num);
+        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(examinationDoctorDto.getPatientIdDto());
         patientDetails.setPatientStatus(CHECKING);
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
         diagnosisPatient.setPatientDetails(patientDetails);
