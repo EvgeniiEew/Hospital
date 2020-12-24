@@ -17,12 +17,6 @@ public class Credentials {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
     @Length(min = 6, max = 20)
     @Column(nullable = false, unique = true, updatable = false)
     private String login;

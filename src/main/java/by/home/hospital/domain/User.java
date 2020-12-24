@@ -19,6 +19,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
     @Enumerated(EnumType.STRING)
     private Position position;
 

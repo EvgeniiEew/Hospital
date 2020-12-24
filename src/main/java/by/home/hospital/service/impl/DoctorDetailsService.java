@@ -45,8 +45,8 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         List<DoctorInfoDto> doctorInfoDtoList = users.stream().map(user -> {
             Credentials credentials = user.getCredentials();
             return new DoctorInfoDto(
-                    credentials.getFirstName(),
-                    credentials.getLastName(),
+                    user.getFirstName(),
+                    user.getLastName(),
                     user.getPosition(),
                     user.getDoctorDetails().getName()
             );
@@ -58,12 +58,12 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
     @Override
     public void registerDoctor(DoctorRegisterDto doctorRegisterDto) {
         Credentials credentials = new Credentials();
-        credentials.setFirstName(doctorRegisterDto.getFirstName());
-        credentials.setLastName(doctorRegisterDto.getLastName());
         credentials.setLogin(doctorRegisterDto.getLogin());
         credentials.setPassword(doctorRegisterDto.getPassword());
         credentialsJpaRepository.saveAndFlush(credentials);
         User user = new User();
+        user.setFirstName(doctorRegisterDto.getFirstName());
+        user.setLastName(doctorRegisterDto.getLastName());
         user.setPosition(Position.DOCTOR);
         user.setCredentials(credentials);
         userJpaRepo.saveAndFlush(user);

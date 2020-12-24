@@ -56,8 +56,8 @@ public class PatientDetailsService implements IPatientDetailsService {
         User user = patientDetails.getPatient();
         return new PatientWhisStatusDto(
                 user.getId(),
-                user.getCredentials().getFirstName(),
-                user.getCredentials().getLastName(),
+                user.getFirstName(),
+                user.getLastName(),
                 patientDetails.getStatus()
         );
     }
@@ -92,8 +92,8 @@ public class PatientDetailsService implements IPatientDetailsService {
             User user = patientDetails1.getPatient();
             return new PatientWhisStatusDto(
                     patientDetails1.getId(),
-                    user.getCredentials().getFirstName(),
-                    user.getCredentials().getLastName(),
+                    user.getFirstName(),
+                    user.getLastName(),
                     patientDetails1.getStatus());
         }).collect(Collectors.toList());
         return patientWhisStatusDtos;

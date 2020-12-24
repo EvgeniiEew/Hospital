@@ -38,10 +38,12 @@
             </table>
         </div>
     </main>
+    <div sec:authorize="isAuthenticated()">
                     <p>
                         Добро пожаловать
                      <span sec:authentication="principal.username">Udefined</span>
                 </p>!
+    </div>
     <th:block th:insert="fragments/scripts.html :: js"/>
 </body>
 </html>

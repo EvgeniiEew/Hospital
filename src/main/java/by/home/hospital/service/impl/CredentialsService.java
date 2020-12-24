@@ -37,9 +37,9 @@ public class CredentialsService implements ICredentialsService {
     public void registerPatient(PatientRegisterDto patientRegisterDto) {
         User user1 = new User();
         user1.setPosition(PATIENT);
+        user1.setFirstName(patientRegisterDto.getFirstName());
+        user1.setLastName(patientRegisterDto.getLastName());
         Credentials creds1 = new Credentials();
-        creds1.setFirstName(patientRegisterDto.getFirstName());
-        creds1.setLastName(patientRegisterDto.getLastName());
         creds1.setLogin(patientRegisterDto.getLogin());
         creds1.setPassword(patientRegisterDto.getPassword());
         user1.setCredentials(creds1);
