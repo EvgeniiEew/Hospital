@@ -5,7 +5,7 @@ import by.home.hospital.domain.DiagnosisPatient;
 import java.util.List;
 
 public interface IDiagnosisPatientService {
-//    List<DiagnosisPatient> getDiagnosisPatient();
+    //    List<DiagnosisPatient> getDiagnosisPatient();
 //
 //    void addDiagnosisPatient(DiagnosisPatient diagnosisPatient);
 //

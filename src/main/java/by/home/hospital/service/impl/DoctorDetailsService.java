@@ -24,13 +24,13 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorDetailsService implements IDoctorDetailsRepository {
     @Autowired
-    private   CredentialsJpaRepository credentialsJpaRepository;
+    private CredentialsService credentialsService;
 
     @Autowired
-    private  DoctorDitalesJpaRepository doctorDitalesJpaRepository;
+    private DoctorDitalesJpaRepository doctorDitalesJpaRepository;
 
     @Autowired
-    private   UserJpaRepo userJpaRepo;
+    private UserService userService;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -41,7 +41,7 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
     }
 
     public List<DoctorInfoDto> getDoctorInfoDto() {
-        HashSet<User> users = this.userJpaRepo.findAllByPosition(Position.DOCTOR);
+        HashSet<User> users = this.userService.findAllByPosition(Position.DOCTOR);
         List<DoctorInfoDto> doctorInfoDtoList = users.stream().map(user -> {
             Credentials credentials = user.getCredentials();
             return new DoctorInfoDto(
@@ -60,13 +60,13 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         Credentials credentials = new Credentials();
         credentials.setLogin(doctorRegisterDto.getLogin());
         credentials.setPassword(doctorRegisterDto.getPassword());
-        credentialsJpaRepository.saveAndFlush(credentials);
+        credentialsService.saveAndFlush(credentials);
         User user = new User();
         user.setFirstName(doctorRegisterDto.getFirstName());
         user.setLastName(doctorRegisterDto.getLastName());
         user.setPosition(Position.DOCTOR);
         user.setCredentials(credentials);
-        userJpaRepo.saveAndFlush(user);
+        userService.saveAndFlush(user);
         DoctorDetails doctorDetails = new DoctorDetails();
         doctorDetails.setDoctor(user);
         doctorDetails.setName(doctorRegisterDto.getDoctorDitales());

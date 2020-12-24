@@ -5,7 +5,6 @@ import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.IAppointmentUsersService;
-import by.home.hospital.service.IPatientDetailsService;
 import by.home.hospital.service.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,46 +20,47 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     @Autowired
     private AppointmentUsersJpaRepository appointmentUsersJpaRepository;
     @Autowired
-    private EpicrisisJpaRepository epicrisisJpaRepository;
+    private EpicrisisService epicrisisService;
     @Autowired
-    private AppoitmentJpaRepository appoitmentJpaRepository;
+    private AppointmentService appointmentService;
     @Autowired
-    private DiagnosisPatientJpaRepository diagnosisPatientJpaRepository;
+    private DiagnosisPatientService diagnosisPatientService;
     @Autowired
-    private PatientDitalesjpaRepository patientDitalesjpaRepository;
+    private PatientDetailsService patientDetailsService;
     @Autowired
-    private DiagnosisJpaRepository diagnosisJpaRepository;
+    private DiagnosisService diagnosisService;
     @Autowired
-    private UserJpaRepo userJpaRepo;
+    private UserService userService;
 
     public void setAppointmentParameters(ExaminationDoctorDto examinationDoctorDto) {
         this.setEpicrisis(examinationDoctorDto);
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setName(examinationDoctorDto.getDiagnosisDto());
-        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(examinationDoctorDto.getPatientIdDto());
+        PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(examinationDoctorDto.getPatientIdDto());
         patientDetails.setPatientStatus(CHECKING);
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
         diagnosisPatient.setPatientDetails(patientDetails);
         diagnosisPatient.setDiagnosis(diagnosis);
-        this.diagnosisJpaRepository.save(diagnosis);
-        this.patientDitalesjpaRepository.save(patientDetails);
-        this.diagnosisPatientJpaRepository.save(diagnosisPatient);
+        this.diagnosisService.save(diagnosis);
+        this.patientDetailsService.save(patientDetails);
+        this.diagnosisPatientService.save(diagnosisPatient);
     }
-    public void setEpicrisis(ExaminationDoctorDto examinationDoctorDto){
+
+    public void setEpicrisis(ExaminationDoctorDto examinationDoctorDto) {
         AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentDto();
         Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.PENDING);
         Epicrisis epicrisis = new Epicrisis();
         epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
         epicrisis.setAppointment(appointment);
-        User patient = this.userJpaRepo.getUserById(examinationDoctorDto.getPatientIdDto());
-        User doctor = this.userJpaRepo.getUserById(examinationDoctorDto.getIdDoctor());
+        User patient = this.userService.getUserById(examinationDoctorDto.getPatientIdDto());
+        User doctor = this.userService.getUserById(examinationDoctorDto.getIdDoctor());
         AppointmentUsers appointmentUsers = new AppointmentUsers();
         appointmentUsers.setAppointment(appointment);
         appointmentUsers.setDoctor(doctor);
         appointmentUsers.setPatient(patient);
-        this.appoitmentJpaRepository.save(appointment);
+        this.appointmentService.save(appointment);
         this.appointmentUsersJpaRepository.save(appointmentUsers);
-        this.epicrisisJpaRepository.save(epicrisis);
+        this.epicrisisService.save(epicrisis);
     }
 
     @Override
@@ -70,6 +70,15 @@ public class AppointmentUsersService implements IAppointmentUsersService {
 //        return entityManager.createQuery(cr.select(cr.from(AppointmentUsers.class))).getResultList();
         return null;
     }
+
+    public AppointmentUsers getAppointmentUsersByAppointmentId(Integer IdAppointment) {
+        return this.appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(IdAppointment);
+    }
+
+    public AppointmentUsers save(AppointmentUsers appointmentUsers) {
+        return this.appointmentUsersJpaRepository.save(appointmentUsers);
+    }
+
 
     @Override
     public void deleteAppointmentUsers(Integer number) {

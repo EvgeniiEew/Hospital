@@ -28,7 +28,7 @@ public class CredentialsService implements ICredentialsService {
     private EntityManager entityManager;
 
     @Autowired
-    private IPatientDetailsService IPatientDetailsService;
+    private PatientDetailsService patientDetailsService;
 
     @Autowired
     private CredentialsJpaRepository credentialsJpaRepository;
@@ -48,7 +48,7 @@ public class CredentialsService implements ICredentialsService {
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setPatientStatus(NOT_EXAMINED);
         patientDetails.setPatient(user1);
-        this.IPatientDetailsService.addPatientDetails(patientDetails);
+        this.patientDetailsService.addPatientDetails(patientDetails);
     }
 
     @Override
@@ -59,7 +59,9 @@ public class CredentialsService implements ICredentialsService {
         return this.entityManager.createQuery(cr.select(cr.from(Credentials.class))).getResultList();
 
     }
-
+    public void saveAndFlush(Credentials credentials){
+        this.credentialsJpaRepository.saveAndFlush(credentials);
+    }
     @Override
     public void deleteCredentials(Integer number) {
         this.entityManager.remove(new Credentials());

@@ -5,6 +5,7 @@ import by.home.hospital.domain.Diagnosis;
 import java.util.List;
 
 public interface IDiagnosisService {
+
     List<Diagnosis> findAll();
 
 }

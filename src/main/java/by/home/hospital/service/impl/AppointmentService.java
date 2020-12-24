@@ -19,49 +19,45 @@ import java.util.stream.Collectors;
 public class AppointmentService implements IAppointmentService {
 
     @Autowired
-    private DiagnosisPatientJpaRepository diagnosisPatientJpaRepository;
+    private DiagnosisPatientService diagnosisPatientService;
     @Autowired
-    private PatientDitalesjpaRepository patientDitalesjpaRepository;
-    @Autowired
-    private UserJpaRepo userJpaRepo;
+    private PatientDetailsService patientDetailsService;
     @Autowired
     private AppoitmentJpaRepository appoitmentJpaRepository;
     @Autowired
     private EpicrisisService epicrisisService;
     @Autowired
-    private AppointmentUsersJpaRepository appointmentUsersJpaRepository;
+    private AppointmentUsersService appointmentUsersService;
 
     @Override
     public List<AppointmentFulfillmentDto> findAll() {
         List<Appointment> appointmentsfromJpa = this.appoitmentJpaRepository.findAll();
-        List<AppointmentFulfillmentDto> appointmentFulfillmentDtos = appointmentsfromJpa.stream().map(appointment -> new AppointmentFulfillmentDto(
+        return appointmentsfromJpa.stream().map(appointment -> new AppointmentFulfillmentDto(
                 appointment.getId(),
                 appointment.getName(),
                 appointment.getType().toString(),
                 appointment.getStatus().toString()
         )).collect(Collectors.toList());
-        return appointmentFulfillmentDtos;
     }
 
     public List<AppointmentFulfillmentDto> findAllByStatus(AppointmentStatus status) {
         List<Appointment> appointments = this.appoitmentJpaRepository.findAllByStatus(status);
-        List<AppointmentFulfillmentDto> patientWhisStatusDtos = appointments.stream().map(appointment ->
+        return appointments.stream().map(appointment ->
                 new AppointmentFulfillmentDto(
                         appointment.getId(),
                         appointment.getName(),
                         appointment.getType().toString(),
                         appointment.getStatus().toString()
                 )).collect(Collectors.toList());
-        return patientWhisStatusDtos;
     }
 
     // заполнение формы для выполения процедур.операций.лекарств
     public MakingAppointmentsDto getFormForMakingAppointmentsDto(Integer idAppointment) {
         Epicrisis epicrisis = this.epicrisisService.getByAppointment_Id(idAppointment);
         Appointment appointment = this.appoitmentJpaRepository.getById(idAppointment);
-        AppointmentUsers appointmentUsers = this.appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(idAppointment);
-        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
-        String diagnosis = this.diagnosisPatientJpaRepository.getDiagnosisPatientByPatientDetailsId(patientDetails.getId()).getDiagnosis().getName();
+        AppointmentUsers appointmentUsers = this.appointmentUsersService.getAppointmentUsersByAppointmentId(idAppointment);
+        PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
+        String diagnosis = this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId()).getDiagnosis().getName();
         return new MakingAppointmentsDto(idAppointment, patientDetails.getId(), appointment.getName(), appointment.getType().toString(),
                 appointment.getStatus().toString(), epicrisis.getInfo(), diagnosis);
     }
@@ -70,6 +66,10 @@ public class AppointmentService implements IAppointmentService {
     public void setPendingAppointmentStatusByID(ResultProcedurFormDto resultProcedurFormDto) {
         Appointment appointment = this.appoitmentJpaRepository.getOne(resultProcedurFormDto.getIdAppointment());
         appointment.setStatus(AppointmentStatus.DONE);
+        this.appoitmentJpaRepository.save(appointment);
+    }
+
+    public void save(Appointment appointment) {
         this.appoitmentJpaRepository.save(appointment);
     }
 

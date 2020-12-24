@@ -1,5 +1,6 @@
 package by.home.hospital.service.impl;
 
+import by.home.hospital.domain.DiagnosisPatient;
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientWhisStatusDto;
@@ -51,6 +52,10 @@ public class PatientDetailsService implements IPatientDetailsService {
         return patientDetailsList.get(0);
     }
 
+    public void  save(PatientDetails patientDetails){
+        this.patientDitalesjpaRepository.save(patientDetails);
+    }
+
     public PatientWhisStatusDto getUserById(Integer id) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.findById(id).get();
         User user = patientDetails.getPatient();
@@ -99,9 +104,15 @@ public class PatientDetailsService implements IPatientDetailsService {
         return patientWhisStatusDtos;
     }
 
+    public PatientDetails getPatientDetailsByPatientId(Integer id) {
+        return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
+    }
+
     public void setStatusCheckoutPatientById(ResultProcedurFormDto resultProcedurFormDto) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsById(resultProcedurFormDto.getIdPatientUser());
         patientDetails.setStatus(CHECKOUT);
-       PatientDetails patientDetails1 =   this.patientDitalesjpaRepository.save(patientDetails);
+        PatientDetails patientDetails1 = this.patientDitalesjpaRepository.save(patientDetails);
     }
+
+
 }

@@ -1,8 +1,10 @@
 package by.home.hospital.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
 
 import by.home.hospital.domain.User;
+import by.home.hospital.enums.Position;
 import by.home.hospital.service.repository.UserJpaRepo;
 import by.home.hospital.service.IUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UserService implements IUserServices {
     public void addUser(User user) {
     }
 
+    public User getUserById(Integer id) {
+        return this.userJpaRepo.getUserById(id);
+    }
 
     public List<User> getUsers() {
         return this.userJpaRepo.findAll();
@@ -31,6 +36,14 @@ public class UserService implements IUserServices {
 
     public void deleteUser(Integer number) {
 
+    }
+
+    public HashSet<User> findAllByPosition(Position position) {
+        return this.userJpaRepo.findAllByPosition(position);
+    }
+
+    public void saveAndFlush(User user) {
+        this.userJpaRepo.saveAndFlush(user);
     }
 
     //достать userIdDoctor из  CredentialLogin
