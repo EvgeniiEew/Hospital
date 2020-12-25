@@ -1,6 +1,5 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.DiagnosisPatient;
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientWhisStatusDto;

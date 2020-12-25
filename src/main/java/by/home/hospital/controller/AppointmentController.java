@@ -6,6 +6,8 @@ import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Type;
 import by.home.hospital.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,8 @@ public class AppointmentController {
     private final String FULFILLMENT_OF_APPOINTMENT = "FulfillmentOfAppointmentsList";
     private final String STATUS_PENDING_APPOINTMENT = "PendingAppointmentsList";
     private final String PERFORMANCE_APPOINTMENT = "performanceAppointmentList";
-
+    @Autowired
+    private ConversionService convertionService;
     @Autowired
     private EpicrisisService epicrisisService;
     @Autowired
@@ -38,19 +41,24 @@ public class AppointmentController {
     @Autowired
     private DiagnosisService diagnosisService;
 
+//    @PostMapping("/patient/examination")
+//    public String examinationPatient(String diagnosisDto, String epicrisis, String nameApointment,
+//                                  String name, String idPatient, Authentication authentication) {
+//        ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
+//                valueOf(idPatient),
+//                this.userService.getUserIdByCredentials_login(authentication.getName()),
+//                diagnosisDto,
+//                new AppointmentDto(nameApointment, Type.valueOf(name)),
+//                epicrisis);
+//        this.service.setAppointmentParameters(examinationDoctorDto);
+//        return "redirect:/patient/status/receptionPending";
+//    }
     @PostMapping("/patient/examination")
-    public String registerPatient(String diagnosisDto, String epicrisis, String nameApointment,
-                                  String name, String idPatient, Authentication authentication) {
-        ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
-                valueOf(idPatient),
-                this.userService.getUserIdByCredentials_login(authentication.getName()),
-                diagnosisDto,
-                new AppointmentDto(nameApointment, Type.valueOf(name)),
-                epicrisis);
-        this.service.setAppointmentParameters(examinationDoctorDto);
+    public String examinationPatient(UserExaminationDto userExaminationDto , Authentication authentication) {
+        userExaminationDto.setAuthentication(authentication);
+        this.service.setAppointmentParameters(convertionService.convert(userExaminationDto,ExaminationDoctorDto.class));
         return "redirect:/patient/status/receptionPending";
     }
-
     // создает страницу для комната осмотра создания назначений принимает id пациента с кабинета осмотра
     //список назаначений , Type назначений + строку назаначений
     //отправляет поля для ExaminationDoctorDto
