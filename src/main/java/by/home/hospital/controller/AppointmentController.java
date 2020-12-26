@@ -3,10 +3,8 @@ package by.home.hospital.controller;
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
-import by.home.hospital.enums.Type;
 import by.home.hospital.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-import static java.lang.Integer.valueOf;
 
 @Controller
 public class AppointmentController {
@@ -31,8 +28,6 @@ public class AppointmentController {
     @Autowired
     private EpicrisisService epicrisisService;
     @Autowired
-    private UserService userService;
-    @Autowired
     private AppointmentUsersService service;
     @Autowired
     private PatientDetailsService patientDetailsService;
@@ -41,7 +36,7 @@ public class AppointmentController {
     @Autowired
     private DiagnosisService diagnosisService;
 
-//    @PostMapping("/patient/examination")
+    //    @PostMapping("/patient/examination")
 //    public String examinationPatient(String diagnosisDto, String epicrisis, String nameApointment,
 //                                  String name, String idPatient, Authentication authentication) {
 //        ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
@@ -53,15 +48,19 @@ public class AppointmentController {
 //        this.service.setAppointmentParameters(examinationDoctorDto);
 //        return "redirect:/patient/status/receptionPending";
 //    }
+    //
+
     @PostMapping("/patient/examination")
-    public String examinationPatient(UserExaminationDto userExaminationDto , Authentication authentication) {
+    public String examinationPatient(UserExaminationDto userExaminationDto, Authentication authentication) {
         userExaminationDto.setAuthentication(authentication);
-        this.service.setAppointmentParameters(convertionService.convert(userExaminationDto,ExaminationDoctorDto.class));
+        this.service.setAppointmentParameters(convertionService.convert(userExaminationDto, ExaminationDoctorDto.class));
         return "redirect:/patient/status/receptionPending";
     }
+
     // создает страницу для комната осмотра создания назначений принимает id пациента с кабинета осмотра
     //список назаначений , Type назначений + строку назаначений
     //отправляет поля для ExaminationDoctorDto
+    // patient/inspection/  - осмотреть
     @PostMapping("/patient/roomExamination/{id}/")
     public String getRoomForExamination(@PathVariable("id") Integer id, Model model) {
         PatientWhisStatusDto user = this.patientDetailsService.getUserById(id);
@@ -69,7 +68,7 @@ public class AppointmentController {
         return this.ROOM_EXAMINATION;
     }
 
-    //Выполнение Назначений
+    //patient/allAppointment - комната со списком всех  Назначений для выбора на выполнение
     @GetMapping("/patient/roomExamination/FulfillmentOfAppointments")
     public String getPatientForFulfillmentOfAppointments(Model model) {
         List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.PENDING);
@@ -79,7 +78,7 @@ public class AppointmentController {
         return this.FULFILLMENT_OF_APPOINTMENT;
     }
 
-    //выполненые назначения
+    // /patient/getAppointment/ -    получиение  назначения и диагнозов
     @GetMapping("/patient/roomExamination/StatusPendingApoitment")
     public String getPatientWhereStatusApointmentPending(Model model) {
         List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.DONE);
@@ -88,8 +87,8 @@ public class AppointmentController {
         model.addAttribute("diagnoses", diagnoses);
         return this.STATUS_PENDING_APPOINTMENT;
     }
-//?
-    // выполнение процедур.операций.медикаментов
+
+    //? /patient/FulfillmentOfAppointments/{idAppointment}/  -выполнить назаначение
     @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/{idAppointment}/")
     public String getPatientForPerfomanceAppointment(@PathVariable("idAppointment") Integer idAppointment, Model model) {
         MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
@@ -97,7 +96,7 @@ public class AppointmentController {
         return this.PERFORMANCE_APPOINTMENT;
     }
 
-    //занесение результатов конечного выполнения процедур в базу //
+    ///patient/addAppointmentToTheDatabase   - занесение результатов конечного выполнения процедур в базу
     @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/result")
     public String getResultProcedures(ResultProcedurFormDto resultProcedurFormDto) {
         this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);

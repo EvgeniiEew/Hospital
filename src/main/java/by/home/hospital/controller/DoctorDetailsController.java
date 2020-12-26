@@ -26,7 +26,7 @@ public class DoctorDetailsController {
         model.addAttribute("doctorInfoDtos", doctorInfoDtos);
         return this.DOCTOR_INFO_DTO;
     }
-
+        //doctor/listRegister/
     @GetMapping("/doctor/ceate")
     public String setDoctor(){
         return this.DOCTOR_CREATE;

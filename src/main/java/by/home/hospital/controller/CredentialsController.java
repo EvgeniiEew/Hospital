@@ -28,13 +28,6 @@ public class CredentialsController {
         credentialsService.registerPatient(patientRegisterDto);
         return this.IDNEX;
     }
-//    private final String patientRegister "regPatient";
-//
-//    @PostMapping(path = "/patient/register")
-//    public void registerPatient(@RequestBody PatientRegisterDto patientRegisterDto) {
-//        credentialsService.registerPatient(patientRegisterDto);
-//        return;
-//    }
 
     @GetMapping("/patient/register")
     public String registerPage() {
