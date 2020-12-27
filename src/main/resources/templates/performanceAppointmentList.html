@@ -27,13 +27,12 @@
                 <td th:text="${makingAppDTO.status}"/>
                 <td th:text="${makingAppDTO.info_epicris}"/>
                 <td th:text="${makingAppDTO.nameDiagnisis}"/>
-                <!--         Вернуть id patienta       <td th:text="${makingAppDTO.idPatientDitales}"/>-->
             </tr>
             </tbody>
         </table>
     </div>
     <div class="form-container">
-        <form METHOD="post" action="/patient/roomExamination/FulfillmentOfAppointments/performance/result">
+        <form METHOD="post" action="/patient/addAppointmentToTheDatabase">
             <fieldset>
                 <legend>Дописать результат проведения</legend>
                 <div class="form-group">

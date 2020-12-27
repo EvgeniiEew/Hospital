@@ -23,8 +23,9 @@ public class AppointmentController {
     private final String FULFILLMENT_OF_APPOINTMENT = "FulfillmentOfAppointmentsList";
     private final String STATUS_PENDING_APPOINTMENT = "PendingAppointmentsList";
     private final String PERFORMANCE_APPOINTMENT = "performanceAppointmentList";
+
     @Autowired
-    private ConversionService convertionService;
+    private ConversionService conversionService;
     @Autowired
     private EpicrisisService epicrisisService;
     @Autowired
@@ -36,40 +37,27 @@ public class AppointmentController {
     @Autowired
     private DiagnosisService diagnosisService;
 
-    //    @PostMapping("/patient/examination")
-//    public String examinationPatient(String diagnosisDto, String epicrisis, String nameApointment,
-//                                  String name, String idPatient, Authentication authentication) {
-//        ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
-//                valueOf(idPatient),
-//                this.userService.getUserIdByCredentials_login(authentication.getName()),
-//                diagnosisDto,
-//                new AppointmentDto(nameApointment, Type.valueOf(name)),
-//                epicrisis);
-//        this.service.setAppointmentParameters(examinationDoctorDto);
-//        return "redirect:/patient/status/receptionPending";
-//    }
-    //
 
     @PostMapping("/patient/examination")
     public String examinationPatient(UserExaminationDto userExaminationDto, Authentication authentication) {
         userExaminationDto.setAuthentication(authentication);
-        this.service.setAppointmentParameters(convertionService.convert(userExaminationDto, ExaminationDoctorDto.class));
+        this.service.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
         return "redirect:/patient/status/receptionPending";
     }
 
     // создает страницу для комната осмотра создания назначений принимает id пациента с кабинета осмотра
     //список назаначений , Type назначений + строку назаначений
     //отправляет поля для ExaminationDoctorDto
-    // patient/inspection/  - осмотреть
-    @PostMapping("/patient/roomExamination/{id}/")
+    //  - осмотреть
+    @PostMapping("/patient/{id}/inspection")
     public String getRoomForExamination(@PathVariable("id") Integer id, Model model) {
         PatientWhisStatusDto user = this.patientDetailsService.getUserById(id);
         model.addAttribute("user", user);
         return this.ROOM_EXAMINATION;
     }
 
-    //patient/allAppointment - комната со списком всех  Назначений для выбора на выполнение
-    @GetMapping("/patient/roomExamination/FulfillmentOfAppointments")
+    //комната со списком всех  Назначений для выбора на выполнение
+    @GetMapping("/patient/appointment")
     public String getPatientForFulfillmentOfAppointments(Model model) {
         List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.PENDING);
         // List<Diagnosis> diagnoses = this.diagnosisService.findAll();
@@ -78,8 +66,8 @@ public class AppointmentController {
         return this.FULFILLMENT_OF_APPOINTMENT;
     }
 
-    // /patient/getAppointment/ -    получиение  назначения и диагнозов
-    @GetMapping("/patient/roomExamination/StatusPendingApoitment")
+    //     получиение  назначения и диагнозов
+    @GetMapping("/patient/getAppointment")
     public String getPatientWhereStatusApointmentPending(Model model) {
         List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.DONE);
         List<Diagnosis> diagnoses = this.diagnosisService.findAll();
@@ -88,20 +76,20 @@ public class AppointmentController {
         return this.STATUS_PENDING_APPOINTMENT;
     }
 
-    //? /patient/FulfillmentOfAppointments/{idAppointment}/  -выполнить назаначение
-    @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/{idAppointment}/")
+    //  -выполнить назаначение
+    @PostMapping("/patient/FulfillmentOfAppointments/{idAppointment}/")
     public String getPatientForPerfomanceAppointment(@PathVariable("idAppointment") Integer idAppointment, Model model) {
         MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
         model.addAttribute("makingAppointmentsDto", makingAppointmentsDto);
         return this.PERFORMANCE_APPOINTMENT;
     }
 
-    ///patient/addAppointmentToTheDatabase   - занесение результатов конечного выполнения процедур в базу
-    @PostMapping("/patient/roomExamination/FulfillmentOfAppointments/performance/result")
+    // занесение результатов конечного выполнения процедур в базу
+    @PostMapping("/patient/addAppointmentToTheDatabase")
     public String getResultProcedures(ResultProcedurFormDto resultProcedurFormDto) {
         this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
         this.patientDetailsService.setStatusCheckoutPatientById(resultProcedurFormDto);
         this.epicrisisService.saveEpicris(resultProcedurFormDto);
-        return "redirect:/patient/roomExamination/FulfillmentOfAppointments";
+        return "redirect:/patient/appointment";
     }
 }

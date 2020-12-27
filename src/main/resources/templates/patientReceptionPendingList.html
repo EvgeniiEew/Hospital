@@ -27,7 +27,7 @@
                     <td th:text="${patient.status}"/>
                     <form method="POST" enctype="multipart/form-data"
 
-                          th:action="@{/patient/roomExamination/{uid}/ (uid=${patient.id})}">
+                          th:action="@{/patient/{uid}/inspection (uid=${patient.id})}">
                         <td><input style="background-color: chartreuse" type="submit" value="Осмотреть"/></td>
                     </form>
 

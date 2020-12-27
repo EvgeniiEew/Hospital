@@ -26,14 +26,15 @@ public class DoctorDetailsController {
         model.addAttribute("doctorInfoDtos", doctorInfoDtos);
         return this.DOCTOR_INFO_DTO;
     }
-        //doctor/listRegister/
-    @GetMapping("/doctor/ceate")
-    public String setDoctor(){
+
+    //doctor/listRegister/
+    @GetMapping("/doctor/create")
+    public String setDoctor() {
         return this.DOCTOR_CREATE;
     }
 
     @PostMapping(path = "/doctor/register")
-    public String registerDoctor( DoctorRegisterDto doctorRegisterDto) {
+    public String registerDoctor(DoctorRegisterDto doctorRegisterDto) {
         this.iDoctorDetailsRepository.registerDoctor(doctorRegisterDto);
         return "redirect:/home";
     }

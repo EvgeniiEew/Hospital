@@ -32,7 +32,7 @@ public class CredentialsService implements ICredentialsService {
 
     @Autowired
     private CredentialsJpaRepository credentialsJpaRepository;
-
+//ent remove devaite
     @Override
     public void registerPatient(PatientRegisterDto patientRegisterDto) {
         User user1 = new User();

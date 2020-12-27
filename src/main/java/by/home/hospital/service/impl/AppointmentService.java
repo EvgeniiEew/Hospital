@@ -69,8 +69,8 @@ public class AppointmentService implements IAppointmentService {
         this.appoitmentJpaRepository.save(appointment);
     }
 
-    public void save(Appointment appointment) {
-        this.appoitmentJpaRepository.save(appointment);
+    public Appointment save(Appointment appointment) {
+     return    this.appoitmentJpaRepository.save(appointment);
     }
 
 }

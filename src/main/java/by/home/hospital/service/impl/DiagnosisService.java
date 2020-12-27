@@ -21,7 +21,7 @@ public class DiagnosisService implements IDiagnosisService {
         return this.diagnosisJpaRepository.findAll();
     }
 
-    public void save(Diagnosis diagnosis){
-        this.diagnosisJpaRepository.save(diagnosis);
+    public Diagnosis save(Diagnosis diagnosis){
+      return   this.diagnosisJpaRepository.save(diagnosis);
     }
 }

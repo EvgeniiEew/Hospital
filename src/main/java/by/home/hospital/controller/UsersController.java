@@ -18,7 +18,8 @@ public class UsersController {
     @Autowired
     private IUserServices repo;
 
-    @GetMapping("/home")
+    //просто /
+    @GetMapping("/")
     public String homePage() {
         return this.INDEX;
     }

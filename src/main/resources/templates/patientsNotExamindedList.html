@@ -19,21 +19,17 @@
                     <th scope="col">Статус</th>
                     <th scope="col">Записать пациента на обследование</th>
 
-                    <!--                <th scope="col">Position</th>-->
                 </tr>
                 </thead>
 
                 <tr th:each="patient : ${patientsNotExaminded}">
-                    <!--                <td th:text="${patient.id}" />-->
                     <td th:text="${patient.firstName}"/>
                     <td th:text="${patient.lastName}"/>
                     <td th:text="${patient.status}"/>
-                    <!--                            <a href="/patient/stat/" data-th-href="=${patient.id}"> depatrments users</a>-->
                     <form method="POST" enctype="multipart/form-data"
                           th:action="@{/patient/{uid}/status (uid=${patient.id})}">
                         <td><input type="submit" value="Записать"/></td>
                     </form>
-                    <!--                <td th:text="${doctor.position}"/>-->
                 </tr>
             </table>
         </div>

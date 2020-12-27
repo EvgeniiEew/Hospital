@@ -32,43 +32,51 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     @Autowired
     private UserService userService;
 
+    public Diagnosis createDiagnosis(String nameDiagnosis) {
+        Diagnosis diagnosis = new Diagnosis();
+        diagnosis.setName(nameDiagnosis);
+        return this.diagnosisService.save(diagnosis);
+    }
+
+    public PatientDetails createPatientDetails(Integer id) {
+        PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(id);
+        patientDetails.setPatientStatus(CHECKING);
+        return this.patientDetailsService.save(patientDetails);
+    }
+
     public void setAppointmentParameters(ExaminationDoctorDto examinationDoctorDto) {
         this.setEpicrisis(examinationDoctorDto);
-        Diagnosis diagnosis = new Diagnosis();
-        diagnosis.setName(examinationDoctorDto.getDiagnosisDto());
-        PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(examinationDoctorDto.getPatientIdDto());
-        patientDetails.setPatientStatus(CHECKING);
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
-        diagnosisPatient.setPatientDetails(patientDetails);
-        diagnosisPatient.setDiagnosis(diagnosis);
-        this.diagnosisService.save(diagnosis);
-        this.patientDetailsService.save(patientDetails);
+        diagnosisPatient.setPatientDetails(this.createPatientDetails(examinationDoctorDto.getPatientIdDto()));
+        diagnosisPatient.setDiagnosis(this.createDiagnosis(examinationDoctorDto.getDiagnosisDto()));
         this.diagnosisPatientService.save(diagnosisPatient);
     }
 
+
     public void setEpicrisis(ExaminationDoctorDto examinationDoctorDto) {
+
         AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentDto();
         Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.PENDING);
+        this.appointmentService.save(appointment);
+
         Epicrisis epicrisis = new Epicrisis();
         epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
         epicrisis.setAppointment(appointment);
+        this.epicrisisService.save(epicrisis);
+
         User patient = this.userService.getUserById(examinationDoctorDto.getPatientIdDto());
         User doctor = this.userService.getUserById(examinationDoctorDto.getIdDoctor());
         AppointmentUsers appointmentUsers = new AppointmentUsers();
         appointmentUsers.setAppointment(appointment);
         appointmentUsers.setDoctor(doctor);
         appointmentUsers.setPatient(patient);
-        this.appointmentService.save(appointment);
         this.appointmentUsersJpaRepository.save(appointmentUsers);
-        this.epicrisisService.save(epicrisis);
+
     }
 
     @Override
     public List<AppointmentUsers> getAppointmentUsers() {
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<AppointmentUsers> cr = cb.createQuery(AppointmentUsers.class);
-//        return entityManager.createQuery(cr.select(cr.from(AppointmentUsers.class))).getResultList();
-        return null;
+        return this.appointmentUsersJpaRepository.findAll();
     }
 
     public AppointmentUsers getAppointmentUsersByAppointmentId(Integer IdAppointment) {
@@ -81,7 +89,7 @@ public class AppointmentUsersService implements IAppointmentUsersService {
 
 
     @Override
-    public void deleteAppointmentUsers(Integer number) {
-        //  entityManager.remove(new AppointmentUsers());
+    public void deleteAppointmentUsers(Integer id) {
+        this.appointmentUsersJpaRepository.deleteById(id);
     }
 }

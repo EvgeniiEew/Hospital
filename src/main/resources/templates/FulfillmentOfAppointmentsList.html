@@ -28,7 +28,7 @@
                     <td th:text="${appoitmentColumn.status}"/>
 
                     <form method="Post" enctype="multipart/form-data"
-                          th:action="@{/patient/roomExamination/FulfillmentOfAppointments/performance/{uid}/ (uid=${appoitmentColumn.idApointment})}">
+                          th:action="@{/patient/FulfillmentOfAppointments/{uid}/ (uid=${appoitmentColumn.idApointment})}">
                         <td><input type="submit" value="Выполнить"/></td>
                     </form>
 
@@ -41,7 +41,7 @@
         <span sec:authentication="principal.username">Udefined</span>
     </p>!
     <li class="nav-item active"><a class="nav-link" aria-current="page"
-                                   href="/patient/roomExamination/StatusPendingApoitment">Выполненые
+                                   href="/patient/getAppointment">Выполненые
         назначения</a></li>
     <th:block th:insert="fragments/scripts.html :: js"/>
 </body>

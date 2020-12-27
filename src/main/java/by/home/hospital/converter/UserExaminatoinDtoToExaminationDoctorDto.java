@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.core.convert.converter.Converter;
 
-import static java.lang.Integer.valueOf;
+import static java.lang.Integer.parseInt;
 
 @Component
 public class UserExaminatoinDtoToExaminationDoctorDto implements Converter<UserExaminationDto, ExaminationDoctorDto>{
@@ -19,7 +19,7 @@ public class UserExaminatoinDtoToExaminationDoctorDto implements Converter<UserE
     @Override
     public ExaminationDoctorDto convert(UserExaminationDto userExaminationDto) {
         ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
-                valueOf(userExaminationDto.getIdPatient()),
+              parseInt(userExaminationDto.getIdPatient()),
                 this.userService.getUserIdByCredentials_login(userExaminationDto.getAuthentication().getName()),
                 userExaminationDto.getDiagnosisDto(),
                 new AppointmentDto(userExaminationDto.getNameApointment(),

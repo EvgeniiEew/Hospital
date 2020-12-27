@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+///
 public class UserExaminationDto {
     private String diagnosisDto;
     private String epicrisis;
