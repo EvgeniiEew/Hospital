@@ -1,6 +1,8 @@
 <html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:th="http://www.thymeleaf.org">
-
+<head>
+    <th:block th:insert="fragments/header.html :: css"/>
+</head>
 <th:block th:fragment="navBar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
@@ -29,14 +31,21 @@
                 </li>
             </ul>
 
-            <div style="float: right;">
-                <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>
-            </div>
+            <!--        Кнопка регистрации должна быть одна на при регистрации будет выбор -->
+            <div class="action-buttons">
+                <div class="register-button">
+                    <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>
+                </div>
 
-            <div style="float: right">
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" class="btn-success" value="Войти"/>
-                </form>
+                <div class="register-button">
+                    <a class="btn btn-success" href="/doctor/ceate">Регистрация доктора </a>
+                </div>
+
+                <div class="login-button">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" class="btn btn-success" value="Войти"/>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>

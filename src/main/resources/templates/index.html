@@ -1,65 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<title>Getting Started: Serving Web Content</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Добро пожаловать на сайт Больницы №0</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <title>Hospital</title>
     <th:block th:insert="fragments/header.html :: css"/>
 </head>
 <body>
+    <th:block th:insert="fragments/navBar.html :: navBar"/>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">На главную
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/doctors">Врачи</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/patient/status">Очередь пациентов на запись</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR')" href="/patient/status/receptionPending">Кабинет
-                        осмотра</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR')"
-                       href="/patient/appointment">Операционная
-                    </a>
-                </li>
-            </ul>
-
-            <div style="float: right;">
-                <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>
-            </div>
-
-            <div style="float: right">
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" class="btn-success" value="Войти"/>
-                </form>
-            </div>
+    <div class="main-video-container">
+        <div class="main-video-container-overlay"></div>
+        <div class="main-video js-homepage-hero__video-wrapper"
+             data-video="https://www.olathehealth.org/wp-content/themes/olathe/assets/images/Wings-Jan-2018.mp4"
+             data-poster="https://www.olathehealth.org/wp-content/themes/olathe/assets/images/Dr.jpg"
+             data-breakpoints-inited="true">
+            <video autoplay="" loop="" muted="" class="homepage-hero__video js-homepage-hero__video"
+                   poster="https://www.olathehealth.org/wp-content/themes/olathe/assets/images/Dr.jpg">
+                <source src="https://www.olathehealth.org/wp-content/themes/olathe/assets/images/Wings-Jan-2018.mp4"
+                        type="video/mp4">
+            </video>
         </div>
-    </nav>
-    <main class="container">
+    </div>
+
+    <main class="main container">
         <div class="starter-template text-center py-5 px-3">
             <h1>Добро пожаловать на сайт Больницы №0
+                <!--                <p>-->
+                <!--                 <span sec:authentication="principal.login">Udefined</span>-->
+                <!--            </p>!-->
             </h1>
             <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.
                 <br> На осмотр можно записаться в разделе регистрации</p>
         </div>
     </main>
-    <br/>
-    <br/>
-    <div style="float: right;">
-        <a class="btn btn-success" href="/doctor/create">Регистрация доктора </a>
-    </div>
+
+    <th:block th:insert="fragments/footer.html :: footer"/>
+
     <th:block th:insert="fragments/scripts.html :: js"/>
 </body>
 </html>
