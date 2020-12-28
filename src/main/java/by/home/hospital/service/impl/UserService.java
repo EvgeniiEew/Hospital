@@ -1,17 +1,15 @@
 package by.home.hospital.service.impl;
 
-import java.util.HashSet;
-import java.util.List;
-
 import by.home.hospital.domain.User;
 import by.home.hospital.enums.Position;
-import by.home.hospital.service.repository.UserJpaRepo;
 import by.home.hospital.service.IUserServices;
+import by.home.hospital.service.repository.UserJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import java.util.HashSet;
+import java.util.List;
 
 
 @Transactional
@@ -24,9 +22,6 @@ public class UserService implements IUserServices {
     @Autowired
     private CredentialsService credentialsService;
 
-    public void addUser(User user) {
-    }
-
     public User getUserById(Integer id) {
         return this.userJpaRepo.getUserById(id);
     }
@@ -37,13 +32,14 @@ public class UserService implements IUserServices {
 
 
     public void deleteUser(Integer number) {
-
+        this.userJpaRepo.deleteById(number);
     }
 
     public HashSet<User> findAllByPosition(Position position) {
         return this.userJpaRepo.findAllByPosition(position);
     }
 
+    @Override
     public void save(User user) {
         this.userJpaRepo.save(user);
     }

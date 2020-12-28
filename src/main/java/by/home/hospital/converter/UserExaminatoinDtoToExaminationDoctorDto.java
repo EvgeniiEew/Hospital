@@ -6,8 +6,8 @@ import by.home.hospital.dto.UserExaminationDto;
 import by.home.hospital.enums.Type;
 import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import static java.lang.Integer.parseInt;
 

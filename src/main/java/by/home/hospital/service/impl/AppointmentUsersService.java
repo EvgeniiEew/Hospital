@@ -5,7 +5,7 @@ import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.IAppointmentUsersService;
-import by.home.hospital.service.repository.*;
+import by.home.hospital.service.repository.AppointmentUsersJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,9 +52,9 @@ public class AppointmentUsersService implements IAppointmentUsersService {
         this.diagnosisPatientService.save(diagnosisPatient);
     }
 
-
+//    public void creat
     public void setEpicrisis(ExaminationDoctorDto examinationDoctorDto) {
-
+//передеать апп в два метода
         AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentDto();
         Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.PENDING);
         this.appointmentService.save(appointment);

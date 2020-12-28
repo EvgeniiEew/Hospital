@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,7 +43,7 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         )).collect(Collectors.toList());
     }
 
-
+//разбить
     @Override
     public void registerDoctor(DoctorRegisterDto doctorRegisterDto) {
         Credentials credentials = new Credentials();

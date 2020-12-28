@@ -9,6 +9,7 @@ import by.home.hospital.service.repository.CredentialsJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,7 @@ public class CredentialsService implements ICredentialsService {
     @Autowired
     private CredentialsJpaRepository credentialsJpaRepository;
 
+//    /.разбить
     @Override
     public void registerPatient(PatientRegisterDto patientRegisterDto) {
         User user1 = new User();

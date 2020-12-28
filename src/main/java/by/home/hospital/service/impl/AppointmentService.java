@@ -1,6 +1,9 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.*;
+import by.home.hospital.domain.Appointment;
+import by.home.hospital.domain.AppointmentUsers;
+import by.home.hospital.domain.Epicrisis;
+import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.dto.AppointmentFulfillmentDto;
 import by.home.hospital.dto.MakingAppointmentsDto;
 import by.home.hospital.dto.ResultProcedurFormDto;
