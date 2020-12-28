@@ -11,11 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,33 +21,26 @@ import static by.home.hospital.enums.PatientStatus.*;
 @Service
 public class PatientDetailsService implements IPatientDetailsService {
 
-    @PersistenceContext
-    private EntityManager entityManager;
     @Autowired
     private PatientDitalesjpaRepository patientDitalesjpaRepository;
 
     @Override
-    public void addPatientDetails(PatientDetails patientDetails) {
-        entityManager.persist(patientDetails);
+    public void savePatientDetails(PatientDetails patientDetails) {
+        patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
     public List<PatientDetails> getPatientDetails() {
-        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-        CriteriaQuery<PatientDetails> cr = cb.createQuery(PatientDetails.class);
-        return entityManager.createQuery(cr.select(cr.from(PatientDetails.class))).getResultList();
+        return patientDitalesjpaRepository.findAll();
     }
 
     @Override
     public PatientDetails getPatientDetailsById(int id) {
-        Query query = this.entityManager.createQuery("Select u from PatientDetails u WHERE patient_id = :id", PatientDetails.class);
-        query.setParameter("id", id);
-        List<PatientDetails> patientDetailsList = query.getResultList();
-        return patientDetailsList.get(0);
+        return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
     }
 
-    public PatientDetails  save(PatientDetails patientDetails){
-      return   this.patientDitalesjpaRepository.save(patientDetails);
+    public PatientDetails save(PatientDetails patientDetails) {
+        return this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     public PatientWhisStatusDto getUserById(Integer id) {
@@ -72,22 +60,21 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     @Override
     public void deletePatientDetails(Integer number) {
-        this.entityManager.remove(new PatientDetails());
+        this.patientDitalesjpaRepository.deleteById(number);
     }
 
-    //изменить статус пациента на RECEPTION_PENDING в ожидании приема
     @Override
     public void patientStatusСhangeToReceptionPending(Integer number) {
         PatientDetails patientDetails = getPatientDetaisByIdUser(number);
         patientDetails.setPatientStatus(RECEPTION_PENDING);
-        addPatientDetails(patientDetails);
+        this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
     public void PatientStatusReceptionPendingToNotExaminet(Integer number) {
         PatientDetails patientDetails = getPatientDetaisByIdUser(number);
         patientDetails.setPatientStatus(NOT_EXAMINED);
-        addPatientDetails(patientDetails);
+        this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     public List<PatientWhisStatusDto> getPatientWithStatus(PatientStatus status) {
@@ -110,7 +97,7 @@ public class PatientDetailsService implements IPatientDetailsService {
     public void setStatusCheckoutPatientById(ResultProcedurFormDto resultProcedurFormDto) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsById(resultProcedurFormDto.getIdPatientUser());
         patientDetails.setStatus(CHECKOUT);
-        PatientDetails patientDetails1 = this.patientDitalesjpaRepository.save(patientDetails);
+        this.patientDitalesjpaRepository.save(patientDetails);
     }
 
 

@@ -44,8 +44,8 @@ public class UserService implements IUserServices {
         return this.userJpaRepo.findAllByPosition(position);
     }
 
-    public void saveAndFlush(User user) {
-        this.userJpaRepo.saveAndFlush(user);
+    public void save(User user) {
+        this.userJpaRepo.save(user);
     }
 
     //достать userIdDoctor из  CredentialLogin

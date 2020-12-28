@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface DoctorDitalesJpaRepository extends JpaRepository<DoctorDetails, Integer> {
 
-
+void deleteById(Integer id);
 }

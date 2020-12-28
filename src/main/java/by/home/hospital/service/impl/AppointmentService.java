@@ -6,7 +6,7 @@ import by.home.hospital.dto.MakingAppointmentsDto;
 import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.IAppointmentService;
-import by.home.hospital.service.repository.*;
+import by.home.hospital.service.repository.AppoitmentJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,7 +70,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     public Appointment save(Appointment appointment) {
-     return    this.appoitmentJpaRepository.save(appointment);
+        return this.appoitmentJpaRepository.save(appointment);
     }
 
 }

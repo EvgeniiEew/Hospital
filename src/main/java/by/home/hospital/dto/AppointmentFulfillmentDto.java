@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//дто для предоставления назначений;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +13,4 @@ public class AppointmentFulfillmentDto {
     private String infoAppointment;
     private String type;
     private String status;
-//    private String info_epicris;
 }

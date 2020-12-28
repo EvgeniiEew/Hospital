@@ -14,14 +14,14 @@ import java.util.List;
 public class DiagnosisService implements IDiagnosisService {
 
     @Autowired
-    private  DiagnosisJpaRepository diagnosisJpaRepository;
+    private DiagnosisJpaRepository diagnosisJpaRepository;
 
     @Override
     public List<Diagnosis> findAll() {
         return this.diagnosisJpaRepository.findAll();
     }
 
-    public Diagnosis save(Diagnosis diagnosis){
-      return   this.diagnosisJpaRepository.save(diagnosis);
+    public Diagnosis save(Diagnosis diagnosis) {
+        return this.diagnosisJpaRepository.save(diagnosis);
     }
 }

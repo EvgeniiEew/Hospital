@@ -30,26 +30,19 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
     @Autowired
     private UserService userService;
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Override
     public void addDoctorDetails(DoctorDetails doctorDetails) {
-        entityManager.persist(doctorDetails);
+        this.doctorDitalesJpaRepository.save(doctorDetails);
     }
 
     public List<DoctorInfoDto> getDoctorInfoDto() {
         HashSet<User> users = this.userService.findAllByPosition(Position.DOCTOR);
-        List<DoctorInfoDto> doctorInfoDtoList = users.stream().map(user -> {
-            Credentials credentials = user.getCredentials();
-            return new DoctorInfoDto(
-                    user.getFirstName(),
-                    user.getLastName(),
-                    user.getPosition(),
-                    user.getDoctorDetails().getName()
-            );
-        }).collect(Collectors.toList());
-        return doctorInfoDtoList;
+        return users.stream().map(user -> new DoctorInfoDto(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPosition(),
+                user.getDoctorDetails().getName()
+        )).collect(Collectors.toList());
     }
 
 
@@ -64,7 +57,7 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         user.setLastName(doctorRegisterDto.getLastName());
         user.setPosition(Position.DOCTOR);
         user.setCredentials(credentials);
-        userService.saveAndFlush(user);
+        userService.save(user);
         DoctorDetails doctorDetails = new DoctorDetails();
         doctorDetails.setDoctor(user);
         doctorDetails.setName(doctorRegisterDto.getDoctorDitales());
@@ -73,6 +66,6 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
 
     @Override
     public void deleteDoctorDetails(Integer number) {
-        entityManager.remove(new DoctorDetails());
+        this.doctorDitalesJpaRepository.deleteById(number);
     }
 }

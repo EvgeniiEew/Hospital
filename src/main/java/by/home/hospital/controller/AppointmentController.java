@@ -89,7 +89,7 @@ public class AppointmentController {
     public String getResultProcedures(ResultProcedurFormDto resultProcedurFormDto) {
         this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
         this.patientDetailsService.setStatusCheckoutPatientById(resultProcedurFormDto);
-        this.epicrisisService.saveEpicris(resultProcedurFormDto);
+        this.epicrisisService.saveEpicrisFromDto(resultProcedurFormDto);
         return "redirect:/patient/appointment";
     }
 }

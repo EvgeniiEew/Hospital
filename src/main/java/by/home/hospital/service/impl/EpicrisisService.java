@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class EpicrisisService implements IEpicrisisService {
+
     @Autowired
     private EpicrisisJpaRepository epicrisisJpaRepository;
 
@@ -19,7 +20,7 @@ public class EpicrisisService implements IEpicrisisService {
         return this.epicrisisJpaRepository.getByAppointment_Id(apointmentId);
     }
 
-    public void saveEpicris(ResultProcedurFormDto resultProcedurFormDto) {
+    public void saveEpicrisFromDto(ResultProcedurFormDto resultProcedurFormDto) {
         Epicrisis epicrisis = getByAppointment_Id(resultProcedurFormDto.getIdAppointment());
         epicrisis.setInfo(epicrisis.getInfo().concat(" " + resultProcedurFormDto.getResaultEpicris()));
         this.epicrisisJpaRepository.save(epicrisis);
