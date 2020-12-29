@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Добро пожаловать на вашу страницу</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Моя страница</title>
+    <th:block th:insert="fragments/header.html :: css"/>
+</head>
+<body>
+    <th:block th:insert="fragments/navBar.html :: navBar"/>
+    <main>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Login</th>
+                <th scope="col">Роль на сайте</th>
+            </tr>
+            </thead>
+            <tr th:each="vie : ${view}">
+                <td th:text="${vie.firstName}"/>
+                <td th:text="${vie.lastName}"/>
+                <td th:text="${login}"/>
+                <td th:text="${vie.position}"/>
+            </tr>
+        </table>
+    </main>
+    <th:block th:insert="fragments/scripts.html :: js"/>
+</body>
+</html>
