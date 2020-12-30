@@ -8,14 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 public class CredentialsController {
-    private final String IDNEX = "index";
     private final String CREDENTIALS = "credentialsList";
     private final String PATIENT_REGISTER = "patientRegisterList";
 
@@ -23,12 +21,10 @@ public class CredentialsController {
     private ICredentialsService credentialsService;
 
 
-    //auth controller
     @PostMapping("/patient/registers")
-    public String registerPatient(@RequestParam String firstName, String lastName, String login, String password) {
-        PatientRegisterDto patientRegisterDto = new PatientRegisterDto(firstName, lastName, login, password);
+    public String registerPatient(PatientRegisterDto patientRegisterDto){
         credentialsService.registerPatient(patientRegisterDto);
-        return this.IDNEX;
+        return "redirect:/";
     }
 
     @GetMapping("/patient/register")

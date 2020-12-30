@@ -12,11 +12,11 @@ public class UserToMyViewDto implements Converter<String, MyViewDto> {
     @Autowired
     private UserService userService;
 
-
     @Override
     public MyViewDto convert(String source) {
         User user = this.userService.getUserById(this.userService.getUserIdByCredentials_login(source));
         MyViewDto myViewDto = new MyViewDto(
+                user.getId(),
                 user.getFirstName(), user.getLastName(), user.getPosition().toString()
         );
 

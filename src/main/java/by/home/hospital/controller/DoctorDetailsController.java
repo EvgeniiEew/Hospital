@@ -35,7 +35,7 @@ public class DoctorDetailsController {
     @PostMapping(path = "/doctor/register")
     public String registerDoctor(DoctorRegisterDto doctorRegisterDto) {
         this.iDoctorDetailsRepository.registerDoctor(doctorRegisterDto);
-        return "redirect:/home";
+        return "redirect:/";
     }
 
 }

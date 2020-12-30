@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyViewDto {
-
+    private Integer id;
     private String firstName;
     private String lastName;
     private String position;

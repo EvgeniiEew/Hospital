@@ -27,6 +27,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Position position;
 
+    private String avatarFileName;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
