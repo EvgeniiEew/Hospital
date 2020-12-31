@@ -3,6 +3,7 @@ package by.home.hospital.service.impl;
 import by.home.hospital.domain.Credentials;
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
+import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.repository.CredentialsJpaRepository;
@@ -28,22 +29,28 @@ public class CredentialsService implements ICredentialsService {
     @Autowired
     private CredentialsJpaRepository credentialsJpaRepository;
 
-//    /.разбить
-    @Override
-    public void registerPatient(PatientRegisterDto patientRegisterDto) {
-        User user1 = new User();
-        user1.setPosition(PATIENT);
-        user1.setFirstName(patientRegisterDto.getFirstName());
-        user1.setLastName(patientRegisterDto.getLastName());
+    private Credentials createCredentials(PatientRegisterDto patientRegisterDto){
         Credentials creds1 = new Credentials();
         creds1.setLogin(patientRegisterDto.getLogin());
         creds1.setPassword(patientRegisterDto.getPassword());
-        user1.setCredentials(creds1);
         this.credentialsJpaRepository.save(creds1);
-        this.userService.save(user1);
+        return creds1;
+    }
+
+    private  User createUser(PatientRegisterDto patientRegisterDto){
+        User user = new User();
+        user.setPosition(PATIENT);
+        user.setFirstName(patientRegisterDto.getFirstName());
+        user.setLastName(patientRegisterDto.getLastName());
+        user.setCredentials(this.createCredentials(patientRegisterDto));
+        this.userService.save(user);
+        return user;
+    }
+    @Override
+    public void registerPatient(PatientRegisterDto patientRegisterDto) {
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setPatientStatus(NOT_EXAMINED);
-        patientDetails.setPatient(user1);
+        patientDetails.setPatient(this.createUser(patientRegisterDto));
         this.patientDetailsService.savePatientDetails(patientDetails);
     }
 
@@ -66,5 +73,11 @@ public class CredentialsService implements ICredentialsService {
         return this.credentialsJpaRepository.findByLogin(credentialLogin);
     }
 
+    public Credentials saveCredentialsFromDoctorRegisterDto(DoctorRegisterDto doctorRegisterDto){
+        Credentials credentials = new Credentials();
+        credentials.setLogin(doctorRegisterDto.getLogin());
+        credentials.setPassword(doctorRegisterDto.getPassword());
+       return this.credentialsJpaRepository.save(credentials);
+    }
 
 }

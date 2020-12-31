@@ -43,21 +43,10 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         )).collect(Collectors.toList());
     }
 
-//разбить
     @Override
     public void registerDoctor(DoctorRegisterDto doctorRegisterDto) {
-        Credentials credentials = new Credentials();
-        credentials.setLogin(doctorRegisterDto.getLogin());
-        credentials.setPassword(doctorRegisterDto.getPassword());
-        credentialsService.saveAndFlush(credentials);
-        User user = new User();
-        user.setFirstName(doctorRegisterDto.getFirstName());
-        user.setLastName(doctorRegisterDto.getLastName());
-        user.setPosition(Position.DOCTOR);
-        user.setCredentials(credentials);
-        userService.save(user);
         DoctorDetails doctorDetails = new DoctorDetails();
-        doctorDetails.setDoctor(user);
+        doctorDetails.setDoctor(this.userService.saveUserFromDoctorRegisterDto(doctorRegisterDto));
         doctorDetails.setName(doctorRegisterDto.getDoctorDitales());
         doctorDitalesJpaRepository.save(doctorDetails);
     }

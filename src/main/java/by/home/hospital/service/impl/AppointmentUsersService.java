@@ -45,34 +45,36 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     }
 
     public void setAppointmentParameters(ExaminationDoctorDto examinationDoctorDto) {
-        this.setEpicrisis(examinationDoctorDto);
+        this.setAppointmentUser(examinationDoctorDto);
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
         diagnosisPatient.setPatientDetails(this.createPatientDetails(examinationDoctorDto.getPatientIdDto()));
         diagnosisPatient.setDiagnosis(this.createDiagnosis(examinationDoctorDto.getDiagnosisDto()));
         this.diagnosisPatientService.save(diagnosisPatient);
     }
 
-//    public void creat
-    public void setEpicrisis(ExaminationDoctorDto examinationDoctorDto) {
-//передеать апп в два метода
+    private Appointment createAppointment(ExaminationDoctorDto examinationDoctorDto) {
         AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentDto();
-        Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(), AppointmentStatus.PENDING);
+        Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(),
+                AppointmentStatus.PENDING);
         this.appointmentService.save(appointment);
-
+        return appointment;
+    }
+    private void createEpicris(ExaminationDoctorDto examinationDoctorDto, Appointment appointment) {
         Epicrisis epicrisis = new Epicrisis();
         epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
         epicrisis.setAppointment(appointment);
         this.epicrisisService.save(epicrisis);
-
+    }
+    public void setAppointmentUser(ExaminationDoctorDto examinationDoctorDto) {
+        Appointment appointment = this.createAppointment(examinationDoctorDto);
+        this.createEpicris(examinationDoctorDto, appointment);
         User patient = this.userService.getUserById(examinationDoctorDto.getPatientIdDto());
         User doctor = this.userService.getUserById(examinationDoctorDto.getIdDoctor());
         AppointmentUsers appointmentUsers = new AppointmentUsers();
         appointmentUsers.setAppointment(appointment);
         appointmentUsers.setDoctor(doctor);
         appointmentUsers.setPatient(patient);
-        this.appointmentUsersJpaRepository.save(appointmentUsers);
-
-    }
+        this.appointmentUsersJpaRepository.save(appointmentUsers); }
 
     @Override
     public List<AppointmentUsers> getAppointmentUsers() {
