@@ -8,7 +8,6 @@ import org.springframework.security.core.Authentication;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-///
 public class UserExaminationDto {
     private String diagnosisDto;
     private String epicrisis;

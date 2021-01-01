@@ -31,7 +31,7 @@ public class PatientDetails {
     @EqualsAndHashCode.Exclude
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "patientDetails", cascade = CascadeType.REMOVE)
-   // @JoinColumn(name = "diagnosis_id")//
+    // @JoinColumn(name = "diagnosis_id")//
     private List<DiagnosisPatient> diagnosisPatients;
 
     public PatientDetails(int id, PatientStatus patientStatus) {

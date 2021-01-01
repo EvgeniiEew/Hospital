@@ -9,8 +9,6 @@ import java.util.Optional;
 public interface ICredentialsService {
     List<Credentials> getCredentials();
 
-    void registerPatient(PatientRegisterDto patientRegisterDto);
-
     void deleteCredentials(Integer number);
 
     Optional<Credentials> findByLogin(String credentialLogin);

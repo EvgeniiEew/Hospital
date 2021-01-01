@@ -8,7 +8,6 @@ public interface IPatientDetailsService {
 
     List<PatientDetails> getPatientDetails();
 
-    void savePatientDetails(PatientDetails patientDetails);
 
     PatientDetails getPatientDetailsById(int idPatient);
 

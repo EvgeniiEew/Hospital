@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 import static java.lang.Integer.parseInt;
 
 @Component
-public class UserExaminatoinDtoToExaminationDoctorDto implements Converter<UserExaminationDto, ExaminationDoctorDto>{
+public class UserExaminatoinDtoToExaminationDoctorDto implements Converter<UserExaminationDto, ExaminationDoctorDto> {
     @Autowired
     private UserService userService;
 
     @Override
     public ExaminationDoctorDto convert(UserExaminationDto userExaminationDto) {
         ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
-              parseInt(userExaminationDto.getIdPatient()),
+                parseInt(userExaminationDto.getIdPatient()),
                 this.userService.getUserIdByCredentials_login(userExaminationDto.getAuthentication().getName()),
                 userExaminationDto.getDiagnosisDto(),
                 new AppointmentDto(userExaminationDto.getNameApointment(),

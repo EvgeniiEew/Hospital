@@ -4,9 +4,7 @@ import by.home.hospital.domain.Appointment;
 import by.home.hospital.domain.AppointmentUsers;
 import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.domain.PatientDetails;
-import by.home.hospital.dto.AppointmentFulfillmentDto;
-import by.home.hospital.dto.MakingAppointmentsDto;
-import by.home.hospital.dto.ResultProcedurFormDto;
+import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.IAppointmentService;
 import by.home.hospital.service.repository.AppoitmentJpaRepository;
@@ -76,6 +74,12 @@ public class AppointmentService implements IAppointmentService {
         return this.appoitmentJpaRepository.save(appointment);
     }
 
+    public Appointment createAppointmentFormExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto) {
+        AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentDto();
+        Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(),
+                AppointmentStatus.PENDING);
+        return this.appoitmentJpaRepository.save(appointment);
+    }
 }
 
 

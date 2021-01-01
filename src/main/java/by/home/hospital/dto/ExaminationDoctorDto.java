@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ExaminationDoctorDto {
-    private final int patientIdDto;
+    private final int patientId;
     private final int idDoctor;
-    private final String diagnosisDto;
+    private final String diagnosis;
     private final AppointmentDto appointmentDto;
     private final String epicrisis;
 

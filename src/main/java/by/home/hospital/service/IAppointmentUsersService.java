@@ -8,7 +8,5 @@ public interface IAppointmentUsersService {
 
     List<AppointmentUsers> getAppointmentUsers();
 
-  //  void addAppointmentUsers(ExaminationDoctorDto examinationDoctorDto);
-
     void deleteAppointmentUsers(Integer number);
 }

@@ -17,6 +17,7 @@ public interface PatientDitalesjpaRepository extends JpaRepository<PatientDetail
     PatientDetails save(PatientDetails patientDetails);
 
     void deleteById(Integer id);
+
     List<PatientDetails> findAll();
 
 

@@ -8,8 +8,12 @@ import java.util.List;
 
 public interface AppoitmentJpaRepository extends JpaRepository<Appointment, Integer> {
     List<Appointment> findAll();
+
     List<Appointment> findAllByStatus(AppointmentStatus status);
+
     Appointment getById(Integer id);
+
     Appointment getOne(Integer id);
+
     Appointment save(Appointment appointment);
 }

@@ -3,6 +3,7 @@ package by.home.hospital.controller;
 import by.home.hospital.domain.Credentials;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
+import by.home.hospital.service.impl.PatientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +20,12 @@ public class CredentialsController {
 
     @Autowired
     private ICredentialsService credentialsService;
-
+    @Autowired
+    private PatientDetailsService patientDetailsService;
 
     @PostMapping("/patient/registers")
-    public String registerPatient(PatientRegisterDto patientRegisterDto){
-        credentialsService.registerPatient(patientRegisterDto);
+    public String registerPatient(PatientRegisterDto patientRegisterDto) {
+        this.patientDetailsService.savePatientRegister(patientRegisterDto);
         return "redirect:/";
     }
 

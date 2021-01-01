@@ -32,23 +32,16 @@ public class UsersController {
     private final String INDEX = "index";
     private final String VIEW = "myViewList";
     @Autowired
-    private UserService userService;
-    @Autowired
     private ConversionService conversionService;
     @Autowired
     private StorageService imgService;
     @Autowired
     private IUserServices repo;
 
-    //просто /
     @GetMapping("/")
     public String homePage() {
         return this.INDEX;
     }
-//    @PostMapping(path = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public void saveUser(@RequestBody User user) {
-//        repo.addUser(user);
-//    }
 
     @GetMapping("/users")
     public List<User> getAllUsers() {

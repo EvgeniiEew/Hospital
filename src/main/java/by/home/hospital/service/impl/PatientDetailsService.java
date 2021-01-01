@@ -2,6 +2,7 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
+import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.dto.PatientWhisStatusDto;
 import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.enums.PatientStatus;
@@ -22,12 +23,11 @@ import static by.home.hospital.enums.PatientStatus.*;
 public class PatientDetailsService implements IPatientDetailsService {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private PatientDitalesjpaRepository patientDitalesjpaRepository;
 
-    @Override
-    public void savePatientDetails(PatientDetails patientDetails) {
-        patientDitalesjpaRepository.save(patientDetails);
-    }
 
     @Override
     public List<PatientDetails> getPatientDetails() {
@@ -37,6 +37,13 @@ public class PatientDetailsService implements IPatientDetailsService {
     @Override
     public PatientDetails getPatientDetailsById(int id) {
         return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
+    }
+
+    public void savePatientRegister(PatientRegisterDto patientRegisterDto) {
+        PatientDetails patientDetails = new PatientDetails();
+        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setPatient(this.userService.saveUserFromPatientRegisterDto(patientRegisterDto));
+        this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     public PatientDetails save(PatientDetails patientDetails) {
@@ -100,5 +107,10 @@ public class PatientDetailsService implements IPatientDetailsService {
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
+    public PatientDetails setStarusCheckingByPatientId(Integer id) {
+        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
+        patientDetails.setPatientStatus(CHECKING);
+        return this.patientDitalesjpaRepository.save(patientDetails);
+    }
 
 }

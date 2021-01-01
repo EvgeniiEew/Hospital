@@ -1,6 +1,5 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.Credentials;
 import by.home.hospital.domain.DoctorDetails;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.DoctorInfoDto;
@@ -19,8 +18,7 @@ import java.util.stream.Collectors;
 @Transactional
 @Service
 public class DoctorDetailsService implements IDoctorDetailsRepository {
-    @Autowired
-    private CredentialsService credentialsService;
+
 
     @Autowired
     private DoctorDitalesJpaRepository doctorDitalesJpaRepository;

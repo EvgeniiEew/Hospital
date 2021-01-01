@@ -1,6 +1,7 @@
 package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Diagnosis;
+import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.service.IDiagnosisService;
 import by.home.hospital.service.repository.DiagnosisJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class DiagnosisService implements IDiagnosisService {
     }
 
     public Diagnosis save(Diagnosis diagnosis) {
+        return this.diagnosisJpaRepository.save(diagnosis);
+    }
+
+    public Diagnosis createDiagnosisFromExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto) {
+        Diagnosis diagnosis = new Diagnosis();
+        diagnosis.setName(examinationDoctorDto.getDiagnosis());
         return this.diagnosisJpaRepository.save(diagnosis);
     }
 }

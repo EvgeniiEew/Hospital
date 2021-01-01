@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface CredentialsJpaRepository extends JpaRepository<Credentials, Integer> {
     Optional<Credentials> findByLogin(String credentialLogin);
+
     List<Credentials> findAll();
+
     void deleteById(Integer id);
 }

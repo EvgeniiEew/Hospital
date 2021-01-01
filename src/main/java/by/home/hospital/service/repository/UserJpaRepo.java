@@ -10,5 +10,6 @@ public interface UserJpaRepo extends JpaRepository<User, Integer> {
     HashSet<User> findAllByPosition(Position position);
 
     User getUserByCredentials_Id(Integer id);
+
     User getUserById(Integer Id);
 }

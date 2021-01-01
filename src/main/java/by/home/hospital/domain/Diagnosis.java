@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 public class Diagnosis {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

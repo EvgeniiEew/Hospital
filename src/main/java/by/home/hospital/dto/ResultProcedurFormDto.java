@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class ResultProcedurFormDto {
     private String resaultEpicris;
     private Integer idPatientUser;

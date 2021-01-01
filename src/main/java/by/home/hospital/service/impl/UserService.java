@@ -2,6 +2,7 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.DoctorRegisterDto;
+import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.enums.Position;
 import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.repository.UserJpaRepo;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+
+import static by.home.hospital.enums.Position.PATIENT;
 
 
 @Transactional
@@ -49,6 +52,15 @@ public class UserService implements IUserServices {
     public Integer getUserIdByCredentials_login(String login) {
         Integer id = this.credentialsService.findByLogin(login).get().getId();
         return this.userJpaRepo.getUserByCredentials_Id(id).getId();
+    }
+
+    public User saveUserFromPatientRegisterDto(PatientRegisterDto patientRegisterDto) {
+        User user = new User();
+        user.setPosition(PATIENT);
+        user.setFirstName(patientRegisterDto.getFirstName());
+        user.setLastName(patientRegisterDto.getLastName());
+        user.setCredentials(this.credentialsService.createCredentialsFromPatientRegisterDto(patientRegisterDto));
+        return this.userJpaRepo.save(user);
     }
 
     public User saveUserFromDoctorRegisterDto(DoctorRegisterDto doctorRegisterDto) {
