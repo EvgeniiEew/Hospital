@@ -22,11 +22,4 @@ public class Credentials {
     @Length(min = 6, max = 20)
     @Column(nullable = false)
     private String password;
-
-    @JsonIgnore
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "credentials", fetch = FetchType.LAZY)
-    private User user;
-
 }

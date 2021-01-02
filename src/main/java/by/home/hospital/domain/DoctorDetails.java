@@ -1,27 +1,26 @@
 package by.home.hospital.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import by.home.hospital.enums.Position;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@PrimaryKeyJoinColumn(name="User_id")
 @Table(name = "Doctor_Ditales")
-public class DoctorDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class DoctorDetails extends User {
+
     @Column(nullable = false)
     private String name;
 
-    @JsonIgnore
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctorId", referencedColumnName = "id")
-    private User doctor;
+    public DoctorDetails(String firstName, String lastName, Position position,
+                         String avatarFileName, String name ,Credentials credentials) {
+        super(firstName, lastName, position, avatarFileName,  credentials);
+        this.name = name;
+    }
+
 
 }

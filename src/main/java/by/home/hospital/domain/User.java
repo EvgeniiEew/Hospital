@@ -8,14 +8,15 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
-
+@Inheritance(strategy = InheritanceType.JOINED)
+public  class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "User_id")
     private Integer id;
 
     @Column(nullable = false)
@@ -29,39 +30,39 @@ public class User {
 
     private String avatarFileName;
 
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "credential_id", referencedColumnName = "id")
     private Credentials credentials;
 
-    @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "doctor", fetch = FetchType.EAGER)
-    private DoctorDetails doctorDetails;
+//    @EqualsAndHashCode.Exclude
+//    @OneToOne(mappedBy = "doctor", fetch = FetchType.EAGER)
+//    private DoctorDetails doctorDetails;
+//
+//
+//    @EqualsAndHashCode.Exclude
+//    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
+//    private PatientDetails patientDetails;
 
-
-    @EqualsAndHashCode.Exclude
-    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
-    private PatientDetails patientDetails;
-
-    @JsonIgnore
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    public List<AppointmentUsers> appointmentPatient;
-
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    public List<AppointmentUsers> appointmentDoctor;
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User(int id, Position position, Credentials credentials) {
-        this.id = id;
+    public User(String firstName, String lastName, Position position, String avatarFileName,Credentials credentials) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.position = position;
+        this.avatarFileName = avatarFileName;
         this.credentials = credentials;
     }
+
+//    @JsonIgnore
+//    @EqualsAndHashCode.Exclude
+//    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//    public List<AppointmentUsers> appointmentPatient;
+//
+//    @EqualsAndHashCode.Exclude
+//    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//    public List<AppointmentUsers> appointmentDoctor;
+
 
 
 }
