@@ -1,11 +1,9 @@
 package by.home.hospital.domain;
 
 import by.home.hospital.enums.Position;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,7 +27,6 @@ public  class User {
     private Position position;
 
     private String avatarFileName;
-
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

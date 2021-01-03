@@ -5,13 +5,13 @@
 //import by.home.hospital.dto.PatientRegisterDto;
 //import by.home.hospital.enums.Position;
 //import by.home.hospital.service.IUserServices;
-//import by.home.hospital.service.repository.UserJpaRepo;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 //
 //import java.util.HashSet;
 //import java.util.List;
+//import java.util.Optional;
 //
 //import static by.home.hospital.enums.Position.PATIENT;
 //
@@ -33,7 +33,9 @@
 //    public List<User> getUsers() {
 //        return this.userJpaRepo.findAll();
 //    }
-//
+//    public Optional<User> findByUserName(String username){
+//      return   this.userJpaRepo.findByUsername(username);
+//    }
 //
 //    public void deleteUser(Integer number) {
 //        this.userJpaRepo.deleteById(number);

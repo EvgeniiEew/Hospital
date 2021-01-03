@@ -1,5 +1,5 @@
-//package by.home.hospital.service;
-//
-//public interface IEpicrisisService {
-//
-//}
+package by.home.hospital.service;
+
+public interface IEpicrisisService {
+
+}

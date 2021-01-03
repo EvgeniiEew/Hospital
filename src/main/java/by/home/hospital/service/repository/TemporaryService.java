@@ -26,8 +26,6 @@ public class TemporaryService implements InitializingBean {
     @Autowired
     DiagnosisPatientJpaRepository diagnosisPatientJpaRepository;
     @Autowired
-    UserJpaRepo userJpaRepo;
-    @Autowired
     CredentialsJpaRepository credentialsJpaRepository;
     @Autowired
     DoctorDitalesJpaRepository doctorDitalesJpaRepository;
@@ -73,8 +71,6 @@ public class TemporaryService implements InitializingBean {
         appointment.setName("достать хер из жопы");
         appointment.setStatus(DONE);
         appointment.setType(Type.PROCEDURE);
-
-
 
         Epicrisis epicrisis = new Epicrisis();
         epicrisis.setInfo(" поступил с Хуём в жопе");
