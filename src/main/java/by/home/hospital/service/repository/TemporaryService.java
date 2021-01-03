@@ -1,14 +1,24 @@
 package by.home.hospital.service.repository;
 
 import by.home.hospital.domain.*;
+import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.PatientStatus;
 import by.home.hospital.enums.Position;
+import by.home.hospital.enums.Type;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static by.home.hospital.enums.AppointmentStatus.DONE;
+
 @Service
 public class TemporaryService implements InitializingBean {
+    @Autowired
+    EpicrisisJpaRepository epicrisisJpaRepository;
+    @Autowired
+    AppoitmentJpaRepository appoitmentJpaRepository;
+    @Autowired
+    AppointmentUsersJpaRepository   appointmentUsersJpaRepository;
     @Autowired
     PatientDitalesjpaRepository patientDitalesjpaRepository;
     @Autowired
@@ -59,5 +69,24 @@ public class TemporaryService implements InitializingBean {
         this.patientDitalesjpaRepository.save(patientDetails);
         this.diagnosisPatientJpaRepository.save(diagnosisPatient);
 
+        Appointment appointment = new Appointment();
+        appointment.setName("достать хер из жопы");
+        appointment.setStatus(DONE);
+        appointment.setType(Type.PROCEDURE);
+
+
+
+        Epicrisis epicrisis = new Epicrisis();
+        epicrisis.setInfo(" поступил с Хуём в жопе");
+         epicrisis.setAppointment(appointment);
+
+        this.epicrisisJpaRepository.save(epicrisis);
+        this.appoitmentJpaRepository.save(appointment);
+
+        AppointmentUsers appointmentUsers = new AppointmentUsers();
+        appointmentUsers.setAppointment(appointment);
+        appointmentUsers.setPatient(patientDetails);
+        appointmentUsers.setDoctor(doctorDetails);
+        this.appointmentUsersJpaRepository.save(appointmentUsers);
     }
 }

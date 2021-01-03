@@ -2,6 +2,7 @@ package by.home.hospital.domain;
 
 import by.home.hospital.enums.PatientStatus;
 import by.home.hospital.enums.Position;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -36,4 +37,9 @@ public class PatientDetails extends  User{
         super(firstName, lastName, position, avatarFileName,  credentials);
         this.status = status;
     }
+
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public List<AppointmentUsers> appointmentPatient;
 }

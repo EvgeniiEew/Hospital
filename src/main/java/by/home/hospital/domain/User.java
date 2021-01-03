@@ -54,14 +54,14 @@ public  class User {
         this.credentials = credentials;
     }
 
+//    @EqualsAndHashCode.Exclude
+//    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+//    public List<AppointmentUsers> appointmentDoctor;
+//
 //    @JsonIgnore
 //    @EqualsAndHashCode.Exclude
 //    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 //    public List<AppointmentUsers> appointmentPatient;
-//
-//    @EqualsAndHashCode.Exclude
-//    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-//    public List<AppointmentUsers> appointmentDoctor;
 
 
 

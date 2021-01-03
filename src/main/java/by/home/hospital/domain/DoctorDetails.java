@@ -4,6 +4,7 @@ import by.home.hospital.enums.Position;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class DoctorDetails extends User {
         super(firstName, lastName, position, avatarFileName,  credentials);
         this.name = name;
     }
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public List<AppointmentUsers> appointmentDoctor;
+
 
 
 }
