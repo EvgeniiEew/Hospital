@@ -2,6 +2,7 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Credentials;
 import by.home.hospital.dto.DoctorRegisterDto;
+import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.repository.CredentialsJpaRepository;
@@ -33,6 +34,12 @@ public class CredentialsService implements ICredentialsService {
         return this.credentialsJpaRepository.save(credentials);
     }
 
+    public Credentials saveCredentialsFromNurseRegisterDto(NurseRegisterDto nurseRegisterDto){
+        Credentials credentials = new Credentials();
+        credentials.setLogin(nurseRegisterDto.getLogin());
+        credentials.setPassword(nurseRegisterDto.getPassword());
+        return this.credentialsJpaRepository.save(credentials);
+    }
     @Override
     public List<Credentials> getCredentials() {
         return this.credentialsJpaRepository.findAll();
@@ -47,6 +54,7 @@ public class CredentialsService implements ICredentialsService {
     public Optional<Credentials> findByLogin(String credentialLogin) {
         return this.credentialsJpaRepository.findByLogin(credentialLogin);
     }
+
 
 
 }

@@ -2,6 +2,7 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.DoctorRegisterDto;
+import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.enums.Position;
 import by.home.hospital.service.IUserServices;
@@ -71,5 +72,12 @@ public class UserService implements IUserServices {
         user.setCredentials(credentialsService.saveCredentialsFromDoctorRegisterDto(doctorRegisterDto));
         return this.userJpaRepo.save(user);
     }
-
+    public void saveNurse(NurseRegisterDto nurseRegisterDto){
+        User user = new User();
+        user.setFirstName(nurseRegisterDto.getFirstName());
+        user.setLastName(nurseRegisterDto.getLastName());
+        user.setPosition(Position.NURSE);
+        user.setCredentials(credentialsService.saveCredentialsFromNurseRegisterDto(nurseRegisterDto));
+        this.userJpaRepo.save(user);
+    }
 }

@@ -4,6 +4,7 @@ package by.home.hospital.controller;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.Avatar;
 import by.home.hospital.dto.MyViewDto;
+import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.StorageService;
 import by.home.hospital.service.impl.UserService;
@@ -36,7 +37,7 @@ public class UsersController {
     @Autowired
     private StorageService imgService;
     @Autowired
-    private IUserServices repo;
+    private UserService userService;
 
     @GetMapping("/")
     public String homePage() {
@@ -45,7 +46,7 @@ public class UsersController {
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
-        return repo.getUsers();
+        return userService.getUsers();
     }
 
     @GetMapping("/myaccount")
@@ -75,5 +76,11 @@ public class UsersController {
                 IOUtils.copy(is, response.getOutputStream());
             }
         }
+    }
+
+    @PostMapping("nurse/create")
+    public String registerNurse(NurseRegisterDto nurseRegisterDto) {
+        this.userService.saveNurse(nurseRegisterDto);
+        return "redirect:/";
     }
 }
