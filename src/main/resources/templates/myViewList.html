@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <title>Добро пожаловать на вашу страницу</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
@@ -17,6 +18,7 @@
                 <th scope="col">Lastname</th>
                 <th scope="col">Login</th>
                 <th scope="col">Роль на сайте</th>
+                <th sec:authorize="hasRole('ROLE_PATIENT')" scope="col">повторная запись </th>
                 <th scope="col">Upload img</th>
             </tr>
             </thead>
@@ -28,6 +30,8 @@
                 <td th:text="${vie.lastName}"/>
                 <td th:text="${login}"/>
                 <td th:text="${vie.position}"/>
+
+                <td >  <a class="btn btn-primary" role="button" value="повторная запись" sec:authorize="hasRole('ROLE_PATIENT')" th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
                 <td>
                     <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${view.id})}">
                         <table>

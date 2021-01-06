@@ -50,7 +50,7 @@ public class PatientDetailsService implements IPatientDetailsService {
         return this.patientDitalesjpaRepository.save(patientDetails);
     }
 
-    public PatientWhisStatusDto getUserById(Integer id) {
+    public PatientWhisStatusDto getUserByIdPatientDetaisl(Integer id) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.findById(id).get();
         User user = patientDetails.getPatient();
         return new PatientWhisStatusDto(
@@ -61,8 +61,8 @@ public class PatientDetailsService implements IPatientDetailsService {
         );
     }
 
-    public PatientDetails getPatientDetaisByIdUser(Integer idUser) {
-        return this.patientDitalesjpaRepository.findById(idUser).get();
+    public PatientDetails getPatientDetaisByIdPD(Integer idPd) {
+        return this.patientDitalesjpaRepository.findById(idPd).get();
     }
 
     @Override
@@ -72,18 +72,23 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     @Override
     public void patientStatusСhangeToReceptionPending(Integer number) {
-        PatientDetails patientDetails = getPatientDetaisByIdUser(number);
+        PatientDetails patientDetails = getPatientDetaisByIdPD(number);
         patientDetails.setPatientStatus(RECEPTION_PENDING);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
-    public void PatientStatusReceptionPendingToNotExaminet(Integer number) {
-        PatientDetails patientDetails = getPatientDetaisByIdUser(number);
+    public void PatientStatusReceptionPendingToNotExaminet(Integer idNumber) {
+        PatientDetails patientDetails = getPatientDetaisByIdPD(idNumber);
         patientDetails.setPatientStatus(NOT_EXAMINED);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
+    public void resetPatientDetaislStatusFromIdUser(Integer idUser) {
+        PatientDetails patientDetails = getPatientDetailsByPatientId(idUser);
+        patientDetails.setPatientStatus(NOT_EXAMINED);
+        this.patientDitalesjpaRepository.save(patientDetails);
+    }
     public List<PatientWhisStatusDto> getPatientWithStatus(PatientStatus status) {
         HashSet<PatientDetails> patientDetails = this.patientDitalesjpaRepository.findAllByStatus(status);
         List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> {

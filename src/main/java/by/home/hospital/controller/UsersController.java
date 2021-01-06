@@ -7,6 +7,7 @@ import by.home.hospital.dto.MyViewDto;
 import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.StorageService;
+import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class UsersController {
 
     private final String INDEX = "index";
     private final String VIEW = "myViewList";
+
+    @Autowired
+    private PatientDetailsService patientDetailsService;
     @Autowired
     private ConversionService conversionService;
     @Autowired
@@ -78,9 +82,20 @@ public class UsersController {
         }
     }
  //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
-    @PostMapping("nurse/create")
+    @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {
         this.userService.saveNurse(nurseRegisterDto);
+        return "redirect:/";
+    }
+    @GetMapping("/user/discharge")
+    public String dischargeUser(Model model){
+
+
+       return null;
+    }
+    @GetMapping ("user/{id}/overwrite")
+    public String overwriteUser(@PathVariable("id") Integer id) {
+        this.patientDetailsService.resetPatientDetaislStatusFromIdUser(id);
         return "redirect:/";
     }
 }
