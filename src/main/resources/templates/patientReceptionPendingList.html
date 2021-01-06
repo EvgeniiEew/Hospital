@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Getting Started: Serving Web Content</title>
+<title>Кабинет осмотра</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <th:block th:insert="fragments/header.html :: css"/>
+    <th:block th:insert="fragments/head.html :: head"/>
 </head>
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
-    <main class="container">
-        <div class="starter-template text py-5 px-3">
-            <table class="table">
 
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Фамилия</th>
-                    <th scope="col">Статус</th>
-                    <th scope="col">Осмотр пациента в оччереди</th>
-                    <th scope="col">Удалить из очереди</th>
-                </tr>
-                </thead>
+    <div class="main-container">
+        <div class="container">
+            <div class="starter-template text py-5 px-3">
+                <table class="table">
 
-                <tr th:each="patient : ${patientReceptionPending}">
-                    <td th:text="${patient.firstName}"/>
-                    <td th:text="${patient.lastName}"/>
-                    <td th:text="${patient.status}"/>
-                    <form method="POST" enctype="multipart/form-data"
+                    <thead>
+                    <tr>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Фамилия</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Осмотр пациента в оччереди</th>
+                        <th scope="col">Удалить из очереди</th>
+                    </tr>
+                    </thead>
 
-                          th:action="@{/patient/{uid}/inspection (uid=${patient.id})}">
-                        <td><input style="background-color: chartreuse" type="submit" value="Осмотреть"/></td>
-                    </form>
+                    <tr th:each="patient : ${patientReceptionPending}">
+                        <td th:text="${patient.firstName}"/>
+                        <td th:text="${patient.lastName}"/>
+                        <td th:text="${patient.status}"/>
+                        <form method="POST" enctype="multipart/form-data"
+                              th:action="@{/patient/{uid}/inspection (uid=${patient.id})}">
+                            <td>
+                                <input style="background-color: chartreuse" type="submit" value="Осмотреть"/>
+                            </td>
+                        </form>
 
-                    <form method="POST" enctype="multipart/form-data"
-                          th:action="@{/patient/status/{uid}/reset (uid=${patient.id})}">
-                        <td><input style="background-color: indianred" type="submit"
-                                   value="Вернуть в очередь на запись"/></td>
-                    </form>
-                </tr>
-            </table>
+                        <form method="POST" enctype="multipart/form-data"
+                              th:action="@{/patient/status/{uid}/reset (uid=${patient.id})}">
+                            <td><input style="background-color: indianred" type="submit"
+                                       value="Вернуть в очередь на запись"/></td>
+                        </form>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </main>
-    <th:block th:insert="fragments/scripts.html :: js"/>
+    </div>
+
+    <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

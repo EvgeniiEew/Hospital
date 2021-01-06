@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<title>Getting Started: Serving Web Content</title>
+>
+<title>Список врачей</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <th:block th:insert="fragments/header.html :: css"/>
+    <th:block th:insert="fragments/head.html :: head"/>
 </head>
 <body>
-    <body>
-        <th:block th:insert="fragments/navBar.html :: navBar"/>
+    <th:block th:insert="fragments/navBar.html :: navBar"/>
+
+    <div class="main-container doctor-list">
         <main class="container">
             <div class="starter-template text py-5 px-3">
                 <table class="table">
-                    <thead class="thead-dark">
+                    <thead>
                     <tr>
                         <th scope="col">Имя</th>
                         <th scope="col">Фамилия</th>
@@ -28,7 +29,8 @@
                 </table>
             </div>
         </main>
-        <th:block th:insert="fragments/scripts.html :: js"/>
-    </body>
+    </div>
+
+    <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

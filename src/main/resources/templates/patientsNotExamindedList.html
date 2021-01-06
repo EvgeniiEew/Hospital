@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<title>Getting Started: Serving Web Content</title>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<title>Список не обследованных пациентов</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <th:block th:insert="fragments/header.html :: css"/>
+    <th:block th:insert="fragments/head.html :: head"/>
 </head>
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
-    <main class="container">
-        <div class="starter-template text py-5 px-3">
-            <table class="table">
 
-                <thead class="thead-dark">
-                <tr>
-                    <!--                <th scope="col">idPatient</th>-->
-                    <th scope="col">Имя</th>
-                    <th scope="col">Фамилия</th>
-                    <th scope="col">Статус</th>
-                    <th scope="col">Записать пациента на обследование</th>
+    <div class="main-container">
+        <div class="container">
+            <div class="py-5 px-3">
+                <table class="table">
 
-                </tr>
-                </thead>
+                    <thead>
+                    <tr>
+                        <!--                <th scope="col">idPatient</th>-->
+                        <th scope="col">Имя</th>
+                        <th scope="col">Фамилия</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Записать на обследование</th>
 
-                <tr th:each="patient : ${patientsNotExaminded}">
-                    <td th:text="${patient.firstName}"/>
-                    <td th:text="${patient.lastName}"/>
-                    <td th:text="${patient.status}"/>
-                    <form method="POST" enctype="multipart/form-data"
-                          th:action="@{/patient/{uid}/status (uid=${patient.id})}">
-                        <td><input type="submit" value="Записать"/></td>
-                    </form>
-                </tr>
-            </table>
+                    </tr>
+                    </thead>
+
+                    <tr th:each="patient : ${patientsNotExaminded}">
+                        <td th:text="${patient.firstName}"/>
+                        <td th:text="${patient.lastName}"/>
+                        <td th:text="${patient.status}"/>
+                        <form method="POST" enctype="multipart/form-data"
+                              th:action="@{/patient/{uid}/status (uid=${patient.id})}">
+                            <td>
+                                <input class="btn btn-outline-success btn-sm" type="submit" value="Записать"/>
+                            </td>
+                        </form>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </main>
-    <div sec:authorize="isAuthenticated()">
-                    <p>
-                        Добро пожаловать
-                     <span sec:authentication="principal.username">Udefined</span>
-                </p>!
     </div>
-    <th:block th:insert="fragments/scripts.html :: js"/>
+
+    <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

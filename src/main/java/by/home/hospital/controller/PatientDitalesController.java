@@ -30,7 +30,6 @@ public class PatientDitalesController {
         return "redirect:/patient/status";
     }
 
-
     //зарегистрировавшиеся не добавленые на прием  пациенты
     @GetMapping("/patient/status")
     public String getPatientWithStatusNotExamined(Model model) {

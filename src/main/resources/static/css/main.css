@@ -3,6 +3,98 @@
     min-height: 700px;
 }
 
+.best-staff-title {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.best-stuff {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.stuff-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+}
+
+.btn-outline-success {
+    color: #619A00;
+    border-color: #619A00;
+}
+
+.btn-outline-success:hover {
+    color: white;
+    background-color: #619A00;
+}
+
+.error-text {
+    margin-bottom: 1rem;
+    color: coral;
+}
+
+.btn-success {
+    color: white;
+    background-color: #619A00;
+    border-color: #619A00;
+}
+
+.btn-success:hover {
+    background-color: #619A00;
+    border-color: #95EC00;
+}
+
+.form-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    margin-top: 20px;
+}
+
+.register-form {
+    width: 500px;
+    padding: 40px;
+}
+
+.login-form {
+    width: 500px;
+    padding: 40px;
+}
+
+.main-container {
+    color: white;
+    min-height: 1000px;
+    background: transparent;
+}
+
+.background {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url(https://www.pastinfo.am/news_images/323/968506_2/f5e7cba130d959_5e7cba130d99d.jpg);
+    background-blend-mode: multiply;
+    background-color: #102e0deb;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.table {
+    color: white;
+}
+
+.hospital-video {
+    width: 100%;
+}
+
 .main-video-container {
     position: absolute;
     left: 0;
@@ -35,6 +127,7 @@
 
 .navbar {
     color: black;
+    background-color: #03899C;
 }
 
 .action-buttons {
@@ -49,6 +142,7 @@
 .foot {
     display: flex;
     color: white;
+    background-color: #03899C;
 }
 
 .foot-body {
