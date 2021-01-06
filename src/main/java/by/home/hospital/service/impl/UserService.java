@@ -32,16 +32,19 @@ public class UserService implements IUserServices {
     }
 
     public List<User> getUsers() {
-        return this.userJpaRepo.findAll();
+        return this.userJpaRepo.findByOrderByFirstNameAsc();
     }
 
+    public HashSet<User> findAllByPositionOrderByFirstNameDesc(Position position) {
+        return this.userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
+    }
 
     public void deleteUser(Integer number) {
         this.userJpaRepo.deleteById(number);
     }
 
     public HashSet<User> findAllByPosition(Position position) {
-        return this.userJpaRepo.findAllByPosition(position);
+        return this.userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
     }
 
     @Override
@@ -72,7 +75,8 @@ public class UserService implements IUserServices {
         user.setCredentials(credentialsService.saveCredentialsFromDoctorRegisterDto(doctorRegisterDto));
         return this.userJpaRepo.save(user);
     }
-    public void saveNurse(NurseRegisterDto nurseRegisterDto){
+
+    public void saveNurse(NurseRegisterDto nurseRegisterDto) {
         User user = new User();
         user.setFirstName(nurseRegisterDto.getFirstName());
         user.setLastName(nurseRegisterDto.getLastName());

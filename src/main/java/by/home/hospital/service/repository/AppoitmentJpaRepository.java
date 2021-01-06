@@ -7,9 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AppoitmentJpaRepository extends JpaRepository<Appointment, Integer> {
-    List<Appointment> findAll();
+    List<Appointment> findByOrderByTypeAsc();
 
-    List<Appointment> findAllByStatus(AppointmentStatus status);
+    List<Appointment> findByStatusOrderByTypeAsc(AppointmentStatus status);
+    // List<Appointment> findAllByStatus(AppointmentStatus status);
 
     Appointment getById(Integer id);
 

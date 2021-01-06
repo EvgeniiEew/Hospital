@@ -32,7 +32,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<AppointmentFulfillmentDto> findAll() {
-        List<Appointment> appointmentsfromJpa = this.appoitmentJpaRepository.findAll();
+        List<Appointment> appointmentsfromJpa = this.appoitmentJpaRepository.findByOrderByTypeAsc();
         return appointmentsfromJpa.stream().map(appointment -> new AppointmentFulfillmentDto(
                 appointment.getId(),
                 appointment.getName(),
@@ -42,7 +42,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     public List<AppointmentFulfillmentDto> findAllByStatus(AppointmentStatus status) {
-        List<Appointment> appointments = this.appoitmentJpaRepository.findAllByStatus(status);
+        List<Appointment> appointments = this.appoitmentJpaRepository.findByStatusOrderByTypeAsc(status);
         return appointments.stream().map(appointment ->
                 new AppointmentFulfillmentDto(
                         appointment.getId(),

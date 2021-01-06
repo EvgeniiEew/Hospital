@@ -77,7 +77,7 @@ public class UsersController {
             }
         }
     }
-
+ //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
     @PostMapping("nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {
         this.userService.saveNurse(nurseRegisterDto);

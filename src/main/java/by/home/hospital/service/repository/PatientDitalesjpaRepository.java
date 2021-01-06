@@ -19,6 +19,6 @@ public interface PatientDitalesjpaRepository extends JpaRepository<PatientDetail
     void deleteById(Integer id);
 
     List<PatientDetails> findAll();
-
+//    findByIdOrderByFirstNameAsc
 
 }

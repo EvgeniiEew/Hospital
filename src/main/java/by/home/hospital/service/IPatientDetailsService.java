@@ -8,7 +8,6 @@ public interface IPatientDetailsService {
 
     List<PatientDetails> getPatientDetails();
 
-
     PatientDetails getPatientDetailsById(int idPatient);
 
     void deletePatientDetails(Integer number);

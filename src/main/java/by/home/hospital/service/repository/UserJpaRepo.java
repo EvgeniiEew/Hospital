@@ -5,11 +5,14 @@ import by.home.hospital.enums.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.HashSet;
+import java.util.List;
 
 public interface UserJpaRepo extends JpaRepository<User, Integer> {
-    HashSet<User> findAllByPosition(Position position);
+    HashSet<User> findAllByPositionOrderByFirstNameDesc(Position position);
 
     User getUserByCredentials_Id(Integer id);
+
+    List<User> findByOrderByFirstNameAsc();;
 
     User getUserById(Integer Id);
 }
