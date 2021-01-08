@@ -5,7 +5,6 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.Avatar;
 import by.home.hospital.dto.MyViewDto;
 import by.home.hospital.dto.NurseRegisterDto;
-import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.StorageService;
 import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;

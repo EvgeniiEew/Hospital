@@ -14,5 +14,5 @@ public class UserExaminationDto {
     private String nameApointment;
     private String name;
     private String idPatient;
-    private Authentication authentication;
+    private Integer authenticationDoctorId;
 }

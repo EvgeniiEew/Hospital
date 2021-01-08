@@ -1,9 +1,9 @@
 package by.home.hospital.service;
 
-import java.io.IOException;
-
 import by.home.hospital.dto.Avatar;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 
 public interface StorageService {

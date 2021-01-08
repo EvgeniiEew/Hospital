@@ -20,7 +20,7 @@ public class UserExaminatoinDtoToExaminationDoctorDto implements Converter<UserE
     public ExaminationDoctorDto convert(UserExaminationDto userExaminationDto) {
         ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
                 parseInt(userExaminationDto.getIdPatient()),
-                this.userService.getUserIdByCredentials_login(userExaminationDto.getAuthentication().getName()),
+                userExaminationDto.getAuthenticationDoctorId(),
                 userExaminationDto.getDiagnosisDto(),
                 new AppointmentDto(userExaminationDto.getNameApointment(),
                         Type.valueOf(userExaminationDto.getName())),

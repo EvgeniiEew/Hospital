@@ -8,11 +8,8 @@ import by.home.hospital.enums.Position;
 import by.home.hospital.service.IDoctorDetailsRepository;
 import by.home.hospital.service.repository.DoctorDitalesJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashSet;
 import java.util.List;

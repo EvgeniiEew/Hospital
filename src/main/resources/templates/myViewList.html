@@ -31,7 +31,7 @@
                 <td th:text="${login}"/>
                 <td th:text="${vie.position}"/>
 
-                <td >  <a class="btn btn-primary" role="button" value="повторная запись" sec:authorize="hasRole('ROLE_PATIENT')" th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
+                <td >  <a class="btn btn-success"  role="button" value="повторная запись" sec:authorize="hasRole('ROLE_PATIENT')" th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
                 <td>
                     <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${view.id})}">
                         <table>

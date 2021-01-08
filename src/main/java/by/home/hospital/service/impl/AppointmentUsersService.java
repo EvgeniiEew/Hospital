@@ -1,7 +1,10 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.*;
+import by.home.hospital.domain.Appointment;
+import by.home.hospital.domain.AppointmentUsers;
+import by.home.hospital.domain.User;
 import by.home.hospital.dto.ExaminationDoctorDto;
+import by.home.hospital.dto.UserExaminationDto;
 import by.home.hospital.service.IAppointmentUsersService;
 import by.home.hospital.service.repository.AppointmentUsersJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,11 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     @Autowired
     private UserService userService;
 
+    public void setAppointmentsParameters(List<ExaminationDoctorDto> examinationDoctorDto) {
+        for (ExaminationDoctorDto examination : examinationDoctorDto) {
+            this.setAppointmentParameters(examination);
+        }
+    }
 
     public void setAppointmentParameters(ExaminationDoctorDto examinationDoctorDto) {
         Appointment appointment = this.appointmentService.createAppointmentFormExaminationDoctorDto(examinationDoctorDto);

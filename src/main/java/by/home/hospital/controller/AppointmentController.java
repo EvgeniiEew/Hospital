@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,11 +26,13 @@ public class AppointmentController {
     private final String PERFORMANCE_APPOINTMENT = "performanceAppointmentList";
 
     @Autowired
+    private UserService userService;
+    @Autowired
     private ConversionService conversionService;
     @Autowired
     private EpicrisisService epicrisisService;
     @Autowired
-    private AppointmentUsersService service;
+    private AppointmentUsersService appointmentUsersService;
     @Autowired
     private PatientDetailsService patientDetailsService;
     @Autowired
@@ -40,8 +43,20 @@ public class AppointmentController {
 
     @PostMapping("/patient/examination")
     public String examinationPatient(UserExaminationDto userExaminationDto, Authentication authentication) {
-        userExaminationDto.setAuthentication(authentication);
-        this.service.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
+        userExaminationDto.setAuthenticationDoctorId(this.userService.getUserIdByCredentials_login(authentication.getName()));
+        this.appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
+        return "redirect:/patient/status/receptionPending";
+    }
+
+    @PostMapping("/patients/examination")
+    public String examinationsPatient(List<UserExaminationDto> userExaminationDto, Authentication authentication) {
+        List<ExaminationDoctorDto> examinationDoctorDto = new ArrayList<>();
+        Integer idDoctor = this.userService.getUserIdByCredentials_login(authentication.getName());
+        for (UserExaminationDto examination : userExaminationDto) {
+            examination.setAuthenticationDoctorId(idDoctor);
+            examinationDoctorDto.add(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
+        }
+        this.appointmentUsersService.setAppointmentsParameters(examinationDoctorDto);
         return "redirect:/patient/status/receptionPending";
     }
 
