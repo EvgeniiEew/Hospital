@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<title>Вход</title>
+<head>
+    <th:block th:insert="fragments/header.html :: css"/>
+</head>
+<body>
+    <th:block th:insert="fragments/navBar.html :: navBar"/>
+    <div class="main-container">
+        <div class="login-form-wrap">
+            <div class="form-title ">Введите данные</div>
+            <form action="#" th:method="post" th:action="@{/logins}" th:object="${personFormDto}">
+                <div>
+                    <!--                <div class="form-group">-->
+                    <div>Логин</div>
+                    <div>
+                        <input type="text" th:field="*{login}"/>
+                    </div>
+                    <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}">firstName Error</div>
+                    <!--                    <input class="form-control" id="username" type="text" name="username"/>-->
+                </div>
+                <div>Пароль</div>
+                <div>
+                    <input type="text" th:field="*{password}"/>
+                </div>
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</div>
+                <!--                </div>-->
+                <!--                <div class="error-text" th:if="${param.error}">Неверное имя пользователя или пароль!</div>-->
+                <!--                <div class="error-text" th:if="${param.logout}">Вы вышли из системы.</div>-->
+                <!--                <div>-->
+                <button type="submit" class="btn btn-success" value="Войти"></button>
+            </form>
+        </div>
+    </div>
+    <th:block th:insert="fragments/footer.html :: footer"/>
+</body>
+</html>

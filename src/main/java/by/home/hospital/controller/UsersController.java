@@ -86,12 +86,12 @@ public class UsersController {
         this.userService.saveNurse(nurseRegisterDto);
         return "redirect:/";
     }
+
     @GetMapping("/user/discharge")
     public String dischargeUser(Model model){
-
-
        return null;
     }
+
     @GetMapping ("user/{id}/overwrite")
     public String overwriteUser(@PathVariable("id") Integer id) {
         this.patientDetailsService.resetPatientDetaislStatusFromIdUser(id);

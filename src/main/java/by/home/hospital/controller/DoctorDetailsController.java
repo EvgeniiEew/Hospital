@@ -39,11 +39,13 @@ public class DoctorDetailsController {
     public String setDoctor() {
         return this.DOCTOR_CREATE;
     }
-
+//!!!
     @PostMapping(path = "/doctor/register")
     public String registerDoctor(DoctorRegisterDto doctorRegisterDto) {
-        if (doctorRegisterDto.getDoctorDitales() == null) {
-            this.userService.saveNurse(Objects.requireNonNull(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class)));
+        if (doctorRegisterDto.getDoctorDitales().equals("")) {
+            //this.userService.saveNurse(Objects.requireNonNull(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class)));
+            this.userService.saveNurse(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class));
+            return "redirect:/";
         }
         this.doctorDetailsService.registerDoctor(doctorRegisterDto);
         return "redirect:/";

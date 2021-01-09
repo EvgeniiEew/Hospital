@@ -1,6 +1,6 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.Credentials;
+import by.home.hospital.domain.Credential;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.dto.PatientRegisterDto;
@@ -20,28 +20,28 @@ public class CredentialsService implements ICredentialsService {
     @Autowired
     private CredentialsJpaRepository credentialsJpaRepository;
 
-    public Credentials createCredentialsFromPatientRegisterDto(PatientRegisterDto patientRegisterDto) {
-        Credentials credentials = new Credentials();
+    public Credential createCredentialsFromPatientRegisterDto(PatientRegisterDto patientRegisterDto) {
+        Credential credentials = new Credential();
         credentials.setLogin(patientRegisterDto.getLogin());
         credentials.setPassword(patientRegisterDto.getPassword());
         return this.credentialsJpaRepository.save(credentials);
     }
 
-    public Credentials saveCredentialsFromDoctorRegisterDto(DoctorRegisterDto doctorRegisterDto) {
-        Credentials credentials = new Credentials();
+    public Credential saveCredentialsFromDoctorRegisterDto(DoctorRegisterDto doctorRegisterDto) {
+        Credential credentials = new Credential();
         credentials.setLogin(doctorRegisterDto.getLogin());
         credentials.setPassword(doctorRegisterDto.getPassword());
         return this.credentialsJpaRepository.save(credentials);
     }
 
-    public Credentials saveCredentialsFromNurseRegisterDto(NurseRegisterDto nurseRegisterDto){
-        Credentials credentials = new Credentials();
+    public Credential saveCredentialsFromNurseRegisterDto(NurseRegisterDto nurseRegisterDto){
+        Credential credentials = new Credential();
         credentials.setLogin(nurseRegisterDto.getLogin());
         credentials.setPassword(nurseRegisterDto.getPassword());
         return this.credentialsJpaRepository.save(credentials);
     }
     @Override
-    public List<Credentials> getCredentials() {
+    public List<Credential> getCredentials() {
         return this.credentialsJpaRepository.findAll();
     }
 
@@ -51,7 +51,7 @@ public class CredentialsService implements ICredentialsService {
     }
 
     @Override
-    public Optional<Credentials> findByLogin(String credentialLogin) {
+    public Optional<Credential> findByLogin(String credentialLogin) {
         return this.credentialsJpaRepository.findByLogin(credentialLogin);
     }
 

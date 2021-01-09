@@ -33,7 +33,7 @@ public class User {
     @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "credential_id", referencedColumnName = "id")
-    private Credentials credentials;
+    private Credential credentials;
 
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "doctor", fetch = FetchType.EAGER)
@@ -57,7 +57,7 @@ public class User {
         this.id = id;
     }
 
-    public User(int id, Position position, Credentials credentials) {
+    public User(int id, Position position, Credential credentials) {
         this.id = id;
         this.position = position;
         this.credentials = credentials;

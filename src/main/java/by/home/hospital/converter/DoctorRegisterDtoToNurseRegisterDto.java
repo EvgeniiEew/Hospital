@@ -3,7 +3,9 @@ package by.home.hospital.converter;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.NurseRegisterDto;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DoctorRegisterDtoToNurseRegisterDto implements Converter<DoctorRegisterDto, NurseRegisterDto> {
 
     @Override

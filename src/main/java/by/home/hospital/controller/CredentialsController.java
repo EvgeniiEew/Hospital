@@ -1,6 +1,6 @@
 package by.home.hospital.controller;
 
-import by.home.hospital.domain.Credentials;
+import by.home.hospital.domain.Credential;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.impl.PatientDetailsService;
@@ -36,7 +36,7 @@ public class CredentialsController {
 
     @GetMapping("/credanchials")
     public String getCredentials(Model model) {
-        List<Credentials> credentials = credentialsService.getCredentials().stream().collect(Collectors.toList());
+        List<Credential> credentials = credentialsService.getCredentials().stream().collect(Collectors.toList());
         model.addAttribute("credentials", credentials);
         return this.CREDENTIALS;
     }

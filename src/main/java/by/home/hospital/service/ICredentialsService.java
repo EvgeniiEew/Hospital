@@ -1,15 +1,15 @@
 package by.home.hospital.service;
 
-import by.home.hospital.domain.Credentials;
+import by.home.hospital.domain.Credential;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ICredentialsService {
-    List<Credentials> getCredentials();
+    List<Credential> getCredentials();
 
     void deleteCredentials(Integer number);
 
-    Optional<Credentials> findByLogin(String credentialLogin);
+    Optional<Credential> findByLogin(String credentialLogin);
 
 }

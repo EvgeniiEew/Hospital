@@ -10,7 +10,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Credentials {
+@Table(name = "credentials")
+public class Credential {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
