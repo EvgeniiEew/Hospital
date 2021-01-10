@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -41,6 +42,13 @@ public class UserService implements IUserServices {
 
     public void deleteUser(Integer number) {
         this.userJpaRepo.deleteById(number);
+    }
+
+    @Override
+    public List<User> findAllActiveUsersNative() {
+        Collection<Integer> list = this.userJpaRepo.findAllActiveUsersNative();
+        Iterable<Integer> list2 = (Iterable<Integer>) list;
+        return this.userJpaRepo.findAllById(list);
     }
 
     public HashSet<User> findAllByPosition(Position position) {

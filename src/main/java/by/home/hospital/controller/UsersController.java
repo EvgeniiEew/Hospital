@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.List;
 
 // todo CRUD methods
@@ -32,6 +33,7 @@ public class UsersController {
 
     private final String INDEX = "index";
     private final String VIEW = "myViewList";
+    private final String DISCHARGES = "dischargesList";
 
     @Autowired
     private PatientDetailsService patientDetailsService;
@@ -87,9 +89,11 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping("/user/discharge")
-    public String dischargeUser(Model model){
-       return null;
+    @GetMapping("/user/discharges")
+    public String dischargesUser(Model model){
+    List<User> users = this.userService.findAllActiveUsersNative();
+        model.addAttribute("users" , users);
+        return this.DISCHARGES;
     }
 
     @GetMapping ("user/{id}/overwrite")
