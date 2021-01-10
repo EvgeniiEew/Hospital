@@ -8,10 +8,12 @@ import by.home.hospital.enums.Position;
 import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.repository.UserJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -45,8 +47,9 @@ public class UserService implements IUserServices {
     }
 
     @Override
-    public List<User> findAllActiveUsersNative() {
-        return this.userJpaRepo.findAllById(this.userJpaRepo.findAllActiveUsersNative());
+    public Page<User> findAllActiveUsersNative(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.userJpaRepo.findAllByIdIn(this.userJpaRepo.findAllActiveUsersNative(), pageable);
     }
 
     public HashSet<User> findAllByPosition(Position position) {

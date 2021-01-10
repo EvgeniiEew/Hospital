@@ -11,6 +11,7 @@ import by.home.hospital.service.impl.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,21 +83,31 @@ public class UsersController {
             }
         }
     }
- //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
+
+    //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
     @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {
         this.userService.saveNurse(nurseRegisterDto);
         return "redirect:/";
     }
-
     @GetMapping("/user/discharges")
     public String dischargesUser(Model model){
-    List<User> users = this.userService.findAllActiveUsersNative();
-        model.addAttribute("users" , users);
+        return dischargesUserFindPaginated(1,model);
+    }
+
+    @GetMapping("/user/discharges/{pageNo}")
+    public String dischargesUserFindPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+        int pageSize = 5;
+        Page<User> usersPage = this.userService.findAllActiveUsersNative(pageNo, pageSize);
+        List<User> usersList = usersPage.getContent();
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", usersPage.getTotalPages());
+        model.addAttribute("totalItems", usersPage.getTotalElements());
+        model.addAttribute("usersList", usersList);
         return this.DISCHARGES;
     }
 
-    @GetMapping ("user/{id}/overwrite")
+    @GetMapping("user/{id}/overwrite")
     public String overwriteUser(@PathVariable("id") Integer id) {
         this.patientDetailsService.resetPatientDetaislStatusFromIdUser(id);
         return "redirect:/";

@@ -23,7 +23,7 @@
                     </tr>
                     </thead>
 
-                    <tr th:each="user : ${users}">
+                    <tr th:each="user : ${usersList}">
                         <td><img th:src="@{/users/{uid}/img(uid=${user.id})}" width="100"
                                  height="100" alt=""></td>
                         <td th:text="${user.id}"/>
@@ -32,6 +32,29 @@
                         <td th:text="${user.position}"/>
                     </tr>
                 </table>
+                <div th:if = "${totalPages > 1}">
+
+                    <div class="row col-sm-10">
+                        <div class="col-sm-2">
+                        Total Rows: [[${totalItems}]]
+                        </div>
+                        <div class="col-sm-1">
+                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                            <a th:if="${currentPage != i}" th:href="@{'/user/discharges/'+ ${i}}"> [[${i}]]</a>
+                            <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                        </span>
+                        </div>
+                        <div class="col-sm-1">
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/user/discharges/' + ${currentPage + 1}}"> Next </a>
+                            <span th:unless="${currentPage < totalPages}">Next</span>
+                        </div>
+                        <div class="col-sm-1">
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/user/discharges/' + ${totalPages}}"> Last </a>
+                            <span th:unless="${currentPage < totalPages}">Last</span>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </main>
     </div>
