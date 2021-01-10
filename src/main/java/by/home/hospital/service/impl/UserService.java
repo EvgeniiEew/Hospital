@@ -46,9 +46,7 @@ public class UserService implements IUserServices {
 
     @Override
     public List<User> findAllActiveUsersNative() {
-        Collection<Integer> list = this.userJpaRepo.findAllActiveUsersNative();
-        Iterable<Integer> list2 = (Iterable<Integer>) list;
-        return this.userJpaRepo.findAllById(list);
+        return this.userJpaRepo.findAllById(this.userJpaRepo.findAllActiveUsersNative());
     }
 
     public HashSet<User> findAllByPosition(Position position) {
