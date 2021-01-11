@@ -15,9 +15,9 @@
                     <!--                <div class="form-group">-->
                     <div>Логин</div>
                     <div>
-                        <input type="text" th:field="*{login}"/>
+                        <input type="text" th:field="*{email}"/>
                     </div>
-                    <div th:if="${#fields.hasErrors('login')}" th:errors="*{login}">firstName Error</div>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">firstName Error</div>
                     <!--                    <input class="form-control" id="username" type="text" name="username"/>-->
                 </div>
                 <div>Пароль</div>

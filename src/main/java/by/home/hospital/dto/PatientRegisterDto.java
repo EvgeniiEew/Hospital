@@ -19,7 +19,7 @@ public class PatientRegisterDto {
     private String lastName;
     @NotNull
     @Size(min = 6, max = 30)
-    private String login;
+    private String email;
     @NotNull
     @Size(min = 6, max = 30)
     private String password;
@@ -29,7 +29,7 @@ public class PatientRegisterDto {
         return "PatientRegisterDto{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", login='" + login + '\'' +
+                ", login='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

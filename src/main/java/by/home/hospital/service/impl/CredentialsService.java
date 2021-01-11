@@ -22,21 +22,21 @@ public class CredentialsService implements ICredentialsService {
 
     public Credential createCredentialsFromPatientRegisterDto(PatientRegisterDto patientRegisterDto) {
         Credential credentials = new Credential();
-        credentials.setLogin(patientRegisterDto.getLogin());
+        credentials.setEmail(patientRegisterDto.getEmail());
         credentials.setPassword(patientRegisterDto.getPassword());
         return this.credentialsJpaRepository.save(credentials);
     }
 
     public Credential saveCredentialsFromDoctorRegisterDto(DoctorRegisterDto doctorRegisterDto) {
         Credential credentials = new Credential();
-        credentials.setLogin(doctorRegisterDto.getLogin());
+        credentials.setEmail(doctorRegisterDto.getEmail());
         credentials.setPassword(doctorRegisterDto.getPassword());
         return this.credentialsJpaRepository.save(credentials);
     }
 
     public Credential saveCredentialsFromNurseRegisterDto(NurseRegisterDto nurseRegisterDto){
         Credential credentials = new Credential();
-        credentials.setLogin(nurseRegisterDto.getLogin());
+        credentials.setEmail(nurseRegisterDto.getEmail());
         credentials.setPassword(nurseRegisterDto.getPassword());
         return this.credentialsJpaRepository.save(credentials);
     }
@@ -51,8 +51,8 @@ public class CredentialsService implements ICredentialsService {
     }
 
     @Override
-    public Optional<Credential> findByLogin(String credentialLogin) {
-        return this.credentialsJpaRepository.findByLogin(credentialLogin);
+    public Optional<Credential> findByEmail(String credentialEmail) {
+        return this.credentialsJpaRepository.findByEmail(credentialEmail);
     }
 
 

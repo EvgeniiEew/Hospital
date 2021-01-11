@@ -43,7 +43,7 @@ public class AppointmentController {
 
     @PostMapping("/patient/examination")
     public String examinationPatient(UserExaminationDto userExaminationDto, Authentication authentication) {
-        userExaminationDto.setAuthenticationDoctorId(this.userService.getUserIdByCredentials_login(authentication.getName()));
+        userExaminationDto.setAuthenticationDoctorId(this.userService.getUserIdByCredentials_email(authentication.getName()));
         this.appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
         return "redirect:/patient/status/receptionPending";
     }
@@ -51,7 +51,7 @@ public class AppointmentController {
     @PostMapping("/patients/examination")
     public String examinationsPatient(List<UserExaminationDto> userExaminationDto, Authentication authentication) {
         List<ExaminationDoctorDto> examinationDoctorDto = new ArrayList<>();
-        Integer idDoctor = this.userService.getUserIdByCredentials_login(authentication.getName());
+        Integer idDoctor = this.userService.getUserIdByCredentials_email(authentication.getName());
         for (UserExaminationDto examination : userExaminationDto) {
             examination.setAuthenticationDoctorId(idDoctor);
             examinationDoctorDto.add(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));

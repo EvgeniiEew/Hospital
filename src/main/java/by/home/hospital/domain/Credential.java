@@ -16,9 +16,8 @@ public class Credential {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Length(min = 6, max = 20)
     @Column(nullable = false, unique = true, updatable = false)
-    private String login;
+    private String email;
 
     @Length(min = 6, max = 20)
     @Column(nullable = false)
@@ -30,4 +29,11 @@ public class Credential {
     @OneToOne(mappedBy = "credentials", fetch = FetchType.LAZY)
     private User user;
 
+    public String getEmail(String email) {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

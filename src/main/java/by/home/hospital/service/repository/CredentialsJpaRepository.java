@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CredentialsJpaRepository extends JpaRepository<Credential, Integer> {
-    Optional<Credential> findByLogin(String credentialLogin);
+    Optional<Credential> findByEmail(String credentialLogin);
 
     List<Credential> findAll();
 

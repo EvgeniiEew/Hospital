@@ -10,6 +10,6 @@ public interface ICredentialsService {
 
     void deleteCredentials(Integer number);
 
-    Optional<Credential> findByLogin(String credentialLogin);
+    Optional<Credential> findByEmail(String credentialEmail);
 
 }

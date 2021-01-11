@@ -16,7 +16,7 @@
                 <th scope="col">Image</th>
                 <th scope="col">Firstname</th>
                 <th scope="col">Lastname</th>
-                <th scope="col">Login</th>
+                <th scope="col">Email</th>
                 <th scope="col">Роль на сайте</th>
                 <th sec:authorize="hasRole('ROLE_PATIENT')" scope="col">повторная запись </th>
                 <th scope="col">Upload img</th>
@@ -28,7 +28,7 @@
                          height="100" alt=""></td>
                 <td th:text="${vie.firstName}"/>
                 <td th:text="${vie.lastName}"/>
-                <td th:text="${login}"/>
+                <td th:text="${email}"/>
                 <td th:text="${vie.position}"/>
 
                 <td >  <a class="btn btn-success"  role="button" value="повторная запись" sec:authorize="hasRole('ROLE_PATIENT')" th:href="@{/user/{uid}/overwrite(uid=${view.id})}">

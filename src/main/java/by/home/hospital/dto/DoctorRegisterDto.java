@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class DoctorRegisterDto {
     private String firstName;
     private String lastName;
-    private String login;
+    private String email;
     private String password;
     private String doctorDitales;
 

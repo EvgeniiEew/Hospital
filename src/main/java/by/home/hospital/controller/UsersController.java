@@ -61,10 +61,10 @@ public class UsersController {
         if (authentication == null) {
             return "redirect:/login";
         }
-        String login = authentication.getName();
-        MyViewDto view = (conversionService.convert(login, MyViewDto.class));
+        String email = authentication.getName();
+        MyViewDto view = (conversionService.convert(email, MyViewDto.class));
         model.addAttribute("view", view);
-        model.addAttribute("login", login);
+        model.addAttribute("email", email);
         return this.VIEW;
     }
 

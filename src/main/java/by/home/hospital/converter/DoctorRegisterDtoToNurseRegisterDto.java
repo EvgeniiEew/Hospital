@@ -13,7 +13,7 @@ public class DoctorRegisterDtoToNurseRegisterDto implements Converter<DoctorRegi
         NurseRegisterDto nurseRegisterDto = new NurseRegisterDto(
                 source.getFirstName(),
                 source.getLastName(),
-                source.getLogin(),
+                source.getEmail(),
                 source.getPassword());
         return nurseRegisterDto;
     }
