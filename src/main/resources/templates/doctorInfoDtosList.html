@@ -15,13 +15,15 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">Фото</th>
                         <th scope="col">Имя</th>
                         <th scope="col">Фамилия</th>
                         <th scope="col">Направление</th>
                     </tr>
                     </thead>
-
                     <tr th:each="doctor : ${doctorInfoDtos}">
+                        <td><img th:src="@{/users/{uid}/img(uid=${doctor.IdUserDoctor})}" width="100"
+                                 height="100" alt=""></td>
                         <td th:text="${doctor.firstName}"/>
                         <td th:text="${doctor.lastName}"/>
                         <td th:text="${doctor.name}"/>
@@ -30,7 +32,6 @@
             </div>
         </main>
     </div>
-
     <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

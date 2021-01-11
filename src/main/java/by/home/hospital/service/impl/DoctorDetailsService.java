@@ -34,6 +34,7 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
     public List<DoctorInfoDto> getDoctorInfoDto() {
         HashSet<User> users = this.userService.findAllByPositionOrderByFirstNameDesc(Position.DOCTOR);
         return users.stream().map(user -> new DoctorInfoDto(
+                user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getPosition(),

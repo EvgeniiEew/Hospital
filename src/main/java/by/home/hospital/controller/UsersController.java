@@ -83,7 +83,17 @@ public class UsersController {
             }
         }
     }
-
+    //!
+    @GetMapping("/patient/{id}/img")
+    public void getImmagePatient(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
+      Integer idUser = this.patientDetailsService.getUserByIdPatientDetaisl(id).getId();
+       Avatar file = this.imgService.getFile(idUser);
+        if (file != null) {
+            try (InputStream is = file.getData()) {
+                IOUtils.copy(is, response.getOutputStream());
+            }
+        }
+    }
     //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
     @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {

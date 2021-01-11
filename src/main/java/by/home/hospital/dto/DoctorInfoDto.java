@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DoctorInfoDto {
-
+    private Integer IdUserDoctor;
     private String firstName;
     private String lastName;
     private Position position;
