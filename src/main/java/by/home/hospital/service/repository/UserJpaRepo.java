@@ -18,7 +18,7 @@ public interface UserJpaRepo extends JpaRepository<User, Integer> {
     User getUserByCredentials_Id(Integer id);
 
     List<User> findByOrderByFirstNameAsc();
-
+//    HashSet<User> findAllById(List<Integer> id);
     User getUserById(Integer Id);
 
     Page<User> findAllByIdIn(List<Integer> list, Pageable pageable);

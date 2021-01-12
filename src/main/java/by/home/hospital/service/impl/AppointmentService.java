@@ -1,9 +1,6 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.domain.Appointment;
-import by.home.hospital.domain.AppointmentUsers;
-import by.home.hospital.domain.Epicrisis;
-import by.home.hospital.domain.PatientDetails;
+import by.home.hospital.domain.*;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.IAppointmentService;
@@ -12,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,13 +52,21 @@ public class AppointmentService implements IAppointmentService {
 
     // заполнение формы для выполения процедур.операций.лекарств
     public MakingAppointmentsDto getFormForMakingAppointmentsDto(Integer idAppointment) {
-        Epicrisis epicrisis = this.epicrisisService.getByAppointment_Id(idAppointment);
-        Appointment appointment = this.appoitmentJpaRepository.getById(idAppointment);
+        Appointment appointment = this.appoitmentJpaRepository.findAppointmentByIdNative(idAppointment);
         AppointmentUsers appointmentUsers = this.appointmentUsersService.getAppointmentUsersByAppointmentId(idAppointment);
         PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
-        String diagnosis = this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId()).getDiagnosis().getName();
+        //диагноза пациента
+        List<DiagnosisPatient> diagnosisPatient = this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId());
+        List<String> diagnosis = new ArrayList<>();
+        for (DiagnosisPatient dp : diagnosisPatient) {
+            diagnosis.add(dp.getDiagnosis().getName());
+        }
+//        this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId()).getDiagnosis().getName();
+        //String diagnosis = this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId()).getDiagnosis().getName();
+
         return new MakingAppointmentsDto(idAppointment, patientDetails.getId(), appointment.getName(), appointment.getType().toString(),
-                appointment.getStatus().toString(), epicrisis.getInfo(), diagnosis);
+                appointment.getStatus().toString(), this.epicrisisService.getEpicrisesByInfo(idAppointment), diagnosis);
+
     }
 
     //занесение результатов проведения процедур в базу //?
@@ -79,6 +85,13 @@ public class AppointmentService implements IAppointmentService {
         Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(),
                 AppointmentStatus.PENDING);
         return this.appoitmentJpaRepository.save(appointment);
+    }
+
+    public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
+        List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = new ArrayList<>();
+
+
+        return null;
     }
 }
 

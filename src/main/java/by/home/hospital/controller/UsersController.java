@@ -2,9 +2,7 @@ package by.home.hospital.controller;
 
 
 import by.home.hospital.domain.User;
-import by.home.hospital.dto.Avatar;
-import by.home.hospital.dto.MyViewDto;
-import by.home.hospital.dto.NurseRegisterDto;
+import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;
 import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;
@@ -24,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.List;
 
 // todo CRUD methods
@@ -116,7 +113,16 @@ public class UsersController {
         model.addAttribute("usersList", usersList);
         return this.DISCHARGES;
     }
+    @GetMapping("/patient/{id}/discharges")
+    public void dischargeUser(@PathVariable("id") Integer id,Model model){
+//        UserDischarsergeDto userDischarsergeDto = this.userService.;
+//       List<AppointmentDischarsergesDto> list= userDischarsergeDto.getListDischarserge();
+//        model.addAttribute("list" ,list);
+//        model.addAttribute();
+//        return;
+    }
 
+    //todo создать еще пациент длитайлс , а не сбросить старый
     @GetMapping("user/{id}/overwrite")
     public String overwriteUser(@PathVariable("id") Integer id) {
         this.patientDetailsService.resetPatientDetaislStatusFromIdUser(id);

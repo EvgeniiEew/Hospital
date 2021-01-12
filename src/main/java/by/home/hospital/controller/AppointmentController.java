@@ -95,7 +95,9 @@ public class AppointmentController {
     @PostMapping("/patient/FulfillmentOfAppointments/{idAppointment}/")
     public String getPatientForPerfomanceAppointment(@PathVariable("idAppointment") Integer idAppointment, Model model) {
         MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
+        List<String> diagnosis = makingAppointmentsDto.getNameDiagnisis();
         model.addAttribute("makingAppointmentsDto", makingAppointmentsDto);
+        model.addAttribute("diagnosis", diagnosis);
         return this.PERFORMANCE_APPOINTMENT;
     }
 

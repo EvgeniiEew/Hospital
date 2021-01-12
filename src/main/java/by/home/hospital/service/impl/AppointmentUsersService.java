@@ -7,6 +7,7 @@ import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.dto.UserExaminationDto;
 import by.home.hospital.service.IAppointmentUsersService;
 import by.home.hospital.service.repository.AppointmentUsersJpaRepository;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,4 +66,8 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     public void deleteAppointmentUsers(Integer id) {
         this.appointmentUsersJpaRepository.deleteById(id);
     }
+
+//    public List<Integer> getIdDoctorsFromIdPatient(Integer idPatient) {
+//        return  this.appointmentUsersJpaRepository.getIdDoctorsFromIdPatient(idPatient);
+//    }
 }

@@ -42,7 +42,7 @@ public class Appointment {
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "appointment")
+    @OneToMany(mappedBy = "appointment" ,fetch = FetchType.LAZY)
     private List<AppointmentUsers> appointmentUsers;
 
     @EqualsAndHashCode.Exclude

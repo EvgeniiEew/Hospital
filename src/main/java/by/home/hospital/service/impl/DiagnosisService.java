@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,5 +32,14 @@ public class DiagnosisService implements IDiagnosisService {
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setName(examinationDoctorDto.getDiagnosis());
         return this.diagnosisJpaRepository.save(diagnosis);
+    }
+
+    public List<String> findAllPatientDiagnosis(List<Integer> listId) {
+        List<String> diagnisis = new ArrayList<>();
+        List<Diagnosis> lists = this.diagnosisJpaRepository.findAllById(listId);
+        lists.stream().map(list -> diagnisis.add(
+                list.getName()
+        )).collect(Collectors.toList());
+        return diagnisis;
     }
 }

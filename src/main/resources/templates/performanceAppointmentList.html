@@ -16,7 +16,7 @@
                 <th scope="col">Тип выполняемого назначения</th>
                 <th scope="col">Статус процедуры</th>
                 <th scope="col">Предворительная запись в выписке</th>
-                <th scope="col">Назначеный диагноз при поступлении</th>
+
             </tr>
             </thead>
             <tbody>
@@ -26,7 +26,10 @@
                 <td th:text="${makingAppDTO.type}"/>
                 <td th:text="${makingAppDTO.status}"/>
                 <td th:text="${makingAppDTO.info_epicris}"/>
-                <td th:text="${makingAppDTO.nameDiagnisis}"/>
+            </tr>
+            <tr><th scope="col">Рание диагнозы при поступлении</th> </tr>
+            <tr th:each="diagnos : ${diagnosis}">
+                <td th:text=" ${diagnos}"/>
             </tr>
             </tbody>
         </table>

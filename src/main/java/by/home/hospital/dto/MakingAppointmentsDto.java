@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 //Dto для выполнения назначений(операций.процедур.лекарств)
 @Data
 @NoArgsConstructor
@@ -15,6 +17,6 @@ public class MakingAppointmentsDto {
     private String type;
     private String status;
     private String info_epicris;
-    private String nameDiagnisis;
+    private List<String> nameDiagnisis;
 
 }
