@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class AppointmentDischarsergesDto {
     private String nameAppointment;
     private String type;
+    private Data dateOfCompletion;
 
     private String positionDoctorNurse;
     private String firstNameDoctor;

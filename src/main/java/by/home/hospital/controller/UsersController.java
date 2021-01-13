@@ -28,7 +28,7 @@ import java.util.List;
 @Controller
 public class UsersController {
 
-
+    private final  int pageSize = 5;
     private final String INDEX = "index";
     private final String VIEW = "myViewList";
     private final String DISCHARGES = "dischargesList";
@@ -104,7 +104,6 @@ public class UsersController {
 
     @GetMapping("/user/discharges/{pageNo}")
     public String dischargesUserFindPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
-        int pageSize = 5;
         Page<User> usersPage = this.userService.findAllActiveUsersNative(pageNo, pageSize);
         List<User> usersList = usersPage.getContent();
         model.addAttribute("currentPage", pageNo);
@@ -122,7 +121,6 @@ public class UsersController {
 //        return;
     }
 
-    //todo создать еще пациент длитайлс , а не сбросить старый
     @GetMapping("user/{id}/overwrite")
     public String overwriteUser(@PathVariable("id") Integer id) {
         this.patientDetailsService.resetPatientDetaislStatusFromIdUser(id);

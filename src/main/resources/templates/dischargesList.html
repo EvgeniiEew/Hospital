@@ -9,8 +9,8 @@
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
 
-    <div class="main-container doctor-list">
-        <main class="container">
+    <div class="main container doctor-list">
+        <div class="container" >
             <div class="starter-template text py-5 px-3">
                 <table class="table">
                     <thead>
@@ -20,6 +20,7 @@
                         <th scope="col">Имя</th>
                         <th scope="col">Фамилия</th>
                         <th scope="col">Позиция</th>
+                        <th scope="col">Подготовить выписку</th>
                     </tr>
                     </thead>
 
@@ -30,6 +31,12 @@
                         <td th:text="${user.firstName}"/>
                         <td th:text="${user.lastName}"/>
                         <td th:text="${user.position}"/>
+                        <form method="POST" enctype="multipart/form-data"
+                              th:action="@{/patient/{uid}/discharges (uid=${user.id})}">
+                            <td>
+                                <input class="btn btn-outline-success btn-sm" type="submit" value="Выписать"/>
+                            </td>
+                        </form>
                     </tr>
                 </table>
                 <div th:if = "${totalPages > 1}">
@@ -56,7 +63,7 @@
 
                 </div>
             </div>
-        </main>
+        </div>
     </div>
     <th:block th:insert="fragments/footer.html :: footer"/>
 </body>

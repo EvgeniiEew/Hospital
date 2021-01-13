@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,14 +32,18 @@ public class DiagnosisService implements IDiagnosisService {
     public Diagnosis createDiagnosisFromExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto) {
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setName(examinationDoctorDto.getDiagnosis());
+        diagnosis.setDate(new Date());
         return this.diagnosisJpaRepository.save(diagnosis);
+    }
+    public List<Diagnosis> findByDiagnosisDetails_Id(Integer idPatient){
+        return this.diagnosisJpaRepository.findByDiagnosisPatientsId(idPatient);
     }
 
     public List<String> findAllPatientDiagnosis(List<Integer> listId) {
         List<String> diagnisis = new ArrayList<>();
         List<Diagnosis> lists = this.diagnosisJpaRepository.findAllById(listId);
         lists.stream().map(list -> diagnisis.add(
-                list.getName()
+                list.getName() //,list.getDate().toString()
         )).collect(Collectors.toList());
         return diagnisis;
     }

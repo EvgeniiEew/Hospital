@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 @Transactional
 public class AppointmentService implements IAppointmentService {
 
+    @Autowired
+    private DiagnosisService diagnosisService;
     @Autowired
     private DiagnosisPatientService diagnosisPatientService;
     @Autowired
@@ -55,24 +58,16 @@ public class AppointmentService implements IAppointmentService {
         Appointment appointment = this.appoitmentJpaRepository.findAppointmentByIdNative(idAppointment);
         AppointmentUsers appointmentUsers = this.appointmentUsersService.getAppointmentUsersByAppointmentId(idAppointment);
         PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
-        //диагноза пациента
-        List<DiagnosisPatient> diagnosisPatient = this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId());
-        List<String> diagnosis = new ArrayList<>();
-        for (DiagnosisPatient dp : diagnosisPatient) {
-            diagnosis.add(dp.getDiagnosis().getName());
-        }
-//        this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId()).getDiagnosis().getName();
-        //String diagnosis = this.diagnosisPatientService.getDiagnosisPatient(patientDetails.getId()).getDiagnosis().getName();
-
+        List<Diagnosis> listDiagnosis = this.diagnosisService.findByDiagnosisDetails_Id(appointmentUsers.getPatient().getId());
         return new MakingAppointmentsDto(idAppointment, patientDetails.getId(), appointment.getName(), appointment.getType().toString(),
-                appointment.getStatus().toString(), this.epicrisisService.getEpicrisesByInfo(idAppointment), diagnosis);
-
+                appointment.getStatus().toString(), this.epicrisisService.getEpicrisesByInfo(idAppointment), listDiagnosis);
     }
 
     //занесение результатов проведения процедур в базу //?
     public void setPendingAppointmentStatusByID(ResultProcedurFormDto resultProcedurFormDto) {
         Appointment appointment = this.appoitmentJpaRepository.getOne(resultProcedurFormDto.getIdAppointment());
         appointment.setStatus(AppointmentStatus.DONE);
+        appointment.setDate(new Date());
         this.appoitmentJpaRepository.save(appointment);
     }
 

@@ -1,5 +1,6 @@
 package by.home.hospital.dto;
 
+import by.home.hospital.domain.Diagnosis;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,6 @@ public class MakingAppointmentsDto {
     private String type;
     private String status;
     private String info_epicris;
-    private List<String> nameDiagnisis;
+    private List<Diagnosis> diagnoses;
 
 }
