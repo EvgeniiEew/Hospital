@@ -89,6 +89,7 @@ public class PatientDetailsService implements IPatientDetailsService {
         patientDetails.setPatientStatus(NOT_EXAMINED);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
+
     public List<PatientWhisStatusDto> getPatientWithStatus(PatientStatus status) {
         HashSet<PatientDetails> patientDetails = this.patientDitalesjpaRepository.findAllByStatus(status);
         List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> {

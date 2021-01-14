@@ -34,12 +34,13 @@ public class CredentialsService implements ICredentialsService {
         return this.credentialsJpaRepository.save(credentials);
     }
 
-    public Credential saveCredentialsFromNurseRegisterDto(NurseRegisterDto nurseRegisterDto){
+    public Credential saveCredentialsFromNurseRegisterDto(NurseRegisterDto nurseRegisterDto) {
         Credential credentials = new Credential();
         credentials.setEmail(nurseRegisterDto.getEmail());
         credentials.setPassword(nurseRegisterDto.getPassword());
         return this.credentialsJpaRepository.save(credentials);
     }
+
     @Override
     public List<Credential> getCredentials() {
         return this.credentialsJpaRepository.findAll();
@@ -54,7 +55,6 @@ public class CredentialsService implements ICredentialsService {
     public Optional<Credential> findByEmail(String credentialEmail) {
         return this.credentialsJpaRepository.findByEmail(credentialEmail);
     }
-
 
 
 }

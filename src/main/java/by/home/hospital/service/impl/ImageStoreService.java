@@ -17,8 +17,6 @@ public class ImageStoreService implements StorageService {
     @Autowired
     UserService userService;
 
-
-
     @Override
     public void store(Integer id, MultipartFile multipartFile) throws IOException {
         String string = UUID.randomUUID().toString();
@@ -28,7 +26,7 @@ public class ImageStoreService implements StorageService {
         try (InputStream in = multipartFile.getInputStream(); OutputStream out = new FileOutputStream(file)) {
             IOUtils.copy(in, out);
         }
-       this.userService.save(user);
+        this.userService.save(user);
     }
 
     @Override

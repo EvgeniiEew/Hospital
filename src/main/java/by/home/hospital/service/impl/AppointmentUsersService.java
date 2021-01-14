@@ -67,7 +67,4 @@ public class AppointmentUsersService implements IAppointmentUsersService {
         this.appointmentUsersJpaRepository.deleteById(id);
     }
 
-//    public List<Integer> getIdDoctorsFromIdPatient(Integer idPatient) {
-//        return  this.appointmentUsersJpaRepository.getIdDoctorsFromIdPatient(idPatient);
-//    }
 }

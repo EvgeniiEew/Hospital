@@ -35,16 +35,9 @@ public class DiagnosisService implements IDiagnosisService {
         diagnosis.setDate(new Date());
         return this.diagnosisJpaRepository.save(diagnosis);
     }
-    public List<Diagnosis> findByDiagnosisDetails_Id(Integer idPatient){
+
+    public List<Diagnosis> findByDiagnosisDetails_Id(Integer idPatient) {
         return this.diagnosisJpaRepository.findByDiagnosisPatientsId(idPatient);
     }
 
-    public List<String> findAllPatientDiagnosis(List<Integer> listId) {
-        List<String> diagnisis = new ArrayList<>();
-        List<Diagnosis> lists = this.diagnosisJpaRepository.findAllById(listId);
-        lists.stream().map(list -> diagnisis.add(
-                list.getName() //,list.getDate().toString()
-        )).collect(Collectors.toList());
-        return diagnisis;
-    }
 }

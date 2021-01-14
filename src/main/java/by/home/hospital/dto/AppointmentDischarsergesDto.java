@@ -13,6 +13,7 @@ public class AppointmentDischarsergesDto {
     private Data dateOfCompletion;
 
     private String positionDoctorNurse;
+    private String nameDoctorSpecific;
     private String firstNameDoctor;
     private String lastNameDoctor;
 

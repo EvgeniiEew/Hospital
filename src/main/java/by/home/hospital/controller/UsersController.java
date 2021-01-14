@@ -1,6 +1,7 @@
 package by.home.hospital.controller;
 
 
+import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;
@@ -28,10 +29,11 @@ import java.util.List;
 @Controller
 public class UsersController {
 
-    private final  int pageSize = 5;
+    private final int pageSize = 5;
     private final String INDEX = "index";
     private final String VIEW = "myViewList";
     private final String DISCHARGES = "dischargesList";
+    private final String DISCHARGE = "dischargeList";
 
     @Autowired
     private PatientDetailsService patientDetailsService;
@@ -80,26 +82,29 @@ public class UsersController {
             }
         }
     }
+
     //!
     @GetMapping("/patient/{id}/img")
     public void getImmagePatient(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
-      Integer idUser = this.patientDetailsService.getUserByIdPatientDetaisl(id).getId();
-       Avatar file = this.imgService.getFile(idUser);
+        Integer idUser = this.patientDetailsService.getUserByIdPatientDetaisl(id).getId();
+        Avatar file = this.imgService.getFile(idUser);
         if (file != null) {
             try (InputStream is = file.getData()) {
                 IOUtils.copy(is, response.getOutputStream());
             }
         }
     }
+
     //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
     @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {
         this.userService.saveNurse(nurseRegisterDto);
         return "redirect:/";
     }
+
     @GetMapping("/user/discharges")
-    public String dischargesUser(Model model){
-        return dischargesUserFindPaginated(1,model);
+    public String dischargesUser(Model model) {
+        return dischargesUserFindPaginated(1, model);
     }
 
     @GetMapping("/user/discharges/{pageNo}")
@@ -112,13 +117,16 @@ public class UsersController {
         model.addAttribute("usersList", usersList);
         return this.DISCHARGES;
     }
+
     @GetMapping("/patient/{id}/discharges")
-    public void dischargeUser(@PathVariable("id") Integer id,Model model){
-//        UserDischarsergeDto userDischarsergeDto = this.userService.;
-//       List<AppointmentDischarsergesDto> list= userDischarsergeDto.getListDischarserge();
-//        model.addAttribute("list" ,list);
-//        model.addAttribute();
-//        return;
+    public String dischargeUser(@PathVariable("id") Integer id, Model model) {
+        UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
+        List<AppointmentDischarsergesDto> listAppointment = userDischarsergeDto.getListDischarserge();
+        List<Diagnosis> listDiagnosis = userDischarsergeDto.getDiagnosisNameAndDate();
+        model.addAttribute("listAppointment", listAppointment);
+        model.addAttribute("userDischarsergeDto", userDischarsergeDto);
+        model.addAttribute("listDiagnosis", listDiagnosis);
+        return this.DISCHARGE;
     }
 
     @GetMapping("user/{id}/overwrite")

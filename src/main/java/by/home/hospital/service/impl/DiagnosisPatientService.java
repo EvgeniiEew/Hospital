@@ -24,9 +24,6 @@ public class DiagnosisPatientService implements IDiagnosisPatientService {
     @Autowired
     private DiagnosisPatientJpaRepository diagnosisPatientJpaRepository;
 
-    public List< DiagnosisPatient> getDiagnosisPatient(Integer id) {
-        return this.diagnosisPatientJpaRepository.getDiagnosisPatientByPatientDetailsId(id);
-    }
 
     public DiagnosisPatient save(DiagnosisPatient diagnosisPatient) {
         return this.diagnosisPatientJpaRepository.save(diagnosisPatient);
@@ -39,13 +36,4 @@ public class DiagnosisPatientService implements IDiagnosisPatientService {
         this.diagnosisPatientJpaRepository.save(diagnosisPatient);
     }
 
-    public List<String> getAllIdDiagnosisFromListPatientDetailsId(Integer patientId) {
-        PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(patientId);
-        List<Integer> idDiagnosisPatient = new ArrayList<>();
-        for (DiagnosisPatient diagnosispatient : this.diagnosisPatientJpaRepository.findAllById(patientDetails.getId())) {
-            idDiagnosisPatient.add(diagnosispatient.getId());
-        }
-        return this.diagnosisService.findAllPatientDiagnosis(idDiagnosisPatient);
-
-    }
 }

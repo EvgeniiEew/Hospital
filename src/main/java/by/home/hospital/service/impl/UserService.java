@@ -25,11 +25,11 @@ import static by.home.hospital.enums.Position.PATIENT;
 public class UserService implements IUserServices {
 
     @Autowired
-    private  AppointmentUsersService appointmentUsersService;
+    private PatientDetailsService patientDetailsService;
+    @Autowired
+    private DiagnosisService diagnosisService;
     @Autowired
     private AppointmentService appointmentService;
-    @Autowired
-    private DiagnosisPatientService diagnosisPatientService;
     @Autowired
     private UserJpaRepo userJpaRepo;
 
@@ -100,29 +100,14 @@ public class UserService implements IUserServices {
         this.userJpaRepo.save(user);
     }
 
-//    public List<AppointmentDischarsergesDto> extractFromTheDoctor(Integer idPatient){
-//        List<Integer> idDoctors = this.appointmentUsersService.getIdDoctorsFromIdPatient(idPatient);
-//        List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = new ArrayList<>();
-//        HashSet<User> users = this.userJpaRepo.findAllById(idDoctors);
-//        return users.stream().map(user -> new AppointmentDischarsergesDto(
-               // !!!!!
-             //   user.get
-//                user.getFirstName(),
-//                user.getLastName(),
-//                user.getPosition(),
-//                user.getDoctorDetails().getName()
-//        )).collect(Collectors.toList());
-//    }
-
-//    public UserDischarsergeDto generateHospitalDischarge(Integer idPatient) {
-//        User user = this.userJpaRepo.getUserById(idPatient);
-//        UserDischarsergeDto userDischarsergeDto = new UserDischarsergeDto();
-//        userDischarsergeDto.setIdPatientUser(idPatient);
-//        userDischarsergeDto.setFirstNamePatient(user.getFirstName());
-//        userDischarsergeDto.setLastNamePatient(user.getLastName());
-    //todo get Diagnosis from id patient = id USer
-//        userDischarsergeDto.setDiagnosisNameDATE(this.diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
-//        userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
-//    return userDischarsergeDto;
-//    }
+    public UserDischarsergeDto generateHospitalDischarge(Integer idPatient) {
+        User user = this.userJpaRepo.getUserById(idPatient);
+        UserDischarsergeDto userDischarsergeDto = new UserDischarsergeDto();
+        userDischarsergeDto.setIdPatientUser(idPatient);
+        userDischarsergeDto.setFirstNamePatient(user.getFirstName());
+        userDischarsergeDto.setLastNamePatient(user.getLastName());
+        userDischarsergeDto.setDiagnosisNameAndDate(this.diagnosisService.findByDiagnosisDetails_Id(this.patientDetailsService.getPatientDetailsByPatientId(idPatient).getId()));     //this.diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
+        userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
+        return userDischarsergeDto;
+    }
 }

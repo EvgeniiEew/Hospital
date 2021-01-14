@@ -21,8 +21,6 @@ public class AppointmentService implements IAppointmentService {
     @Autowired
     private DiagnosisService diagnosisService;
     @Autowired
-    private DiagnosisPatientService diagnosisPatientService;
-    @Autowired
     private PatientDetailsService patientDetailsService;
     @Autowired
     private AppoitmentJpaRepository appoitmentJpaRepository;
@@ -83,10 +81,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
-        List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = new ArrayList<>();
-
-
-        return null;
+        return appoitmentJpaRepository.findAppointmentDischarsergesDtoByIdNative(idPatient);
     }
 }
 
