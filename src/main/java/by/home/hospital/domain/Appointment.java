@@ -42,11 +42,10 @@ public class Appointment {
         this.status = status;
     }
 
-    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "appointment" ,fetch = FetchType.LAZY)
-    private List<AppointmentUsers> appointmentUsers;
+    @OneToOne(mappedBy = "appointment" ,fetch = FetchType.LAZY)
+    private AppointmentUsers appointmentUsers;
 
     @EqualsAndHashCode.Exclude
     @OneToOne(mappedBy = "appointment", fetch = FetchType.LAZY)

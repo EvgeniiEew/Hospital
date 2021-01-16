@@ -118,16 +118,16 @@ public class UsersController {
         return this.DISCHARGES;
     }
 
-//    @PostMapping("/patient/{id}/discharges")
-//    public String dischargeUser(@PathVariable("id") Integer id, Model model) {
-//        UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
-//        List<AppointmentDischarsergesDto> listAppointment = userDischarsergeDto.getListDischarserge();
-//        List<Diagnosis> listDiagnosis = userDischarsergeDto.getDiagnosisNameAndDate();
-//        model.addAttribute("listAppointment", listAppointment);
-//        model.addAttribute("userDischarsergeDto", userDischarsergeDto);
-//        model.addAttribute("listDiagnosis", listDiagnosis);
-//        return this.DISCHARGE;
-//    }
+    @PostMapping("/patient/{id}/discharges")
+    public String dischargeUser(@PathVariable("id") Integer id, Model model) {
+        UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
+        List<AppointmentDischarsergesDto> listAppointment = userDischarsergeDto.getListDischarserge();
+        List<Diagnosis> listDiagnosis = userDischarsergeDto.getDiagnosisNameAndDate();
+        model.addAttribute("listAppointment", listAppointment);
+        model.addAttribute("userDischarsergeDto", userDischarsergeDto);
+        model.addAttribute("listDiagnosis", listDiagnosis);
+        return this.DISCHARGE;
+    }
 
     @GetMapping("user/{id}/overwrite")
     public String overwriteUser(@PathVariable("id") Integer id) {

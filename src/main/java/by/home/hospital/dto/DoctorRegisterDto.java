@@ -1,5 +1,6 @@
 package by.home.hospital.dto;
 
+import by.home.hospital.enums.Position;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,8 @@ public class DoctorRegisterDto {
     @NotNull
     @Size(min = 6, max = 30)
     private String password;
+
+    private Position position;
 
     private String doctorDitales;
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,12 +79,24 @@ public class AppointmentService implements IAppointmentService {
         return this.appoitmentJpaRepository.save(appointment);
     }
 
-
-//    public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
-////       return appoitmentJpaRepository.findAppointmentDischarsergesDtoById(idPatient);
-//        int result = jdbcTemplate.queryForObject(
-//                "SELECT COUNT(*) FROM EMPLOYEE", Integer.class);
-//    }
+    public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
+        List<Appointment> list = appoitmentJpaRepository.findAppointmentsByPatientId(idPatient);
+        List<AppointmentDischarsergesDto> dtoList = new ArrayList<>();
+        list.forEach(appointment -> {
+            User user = appointment.getAppointmentUsers().getDoctor();
+            DoctorDetails doctorDetails = user.getDoctorDetails();
+            dtoList.add(new AppointmentDischarsergesDto(
+                    appointment.getName(),
+                    appointment.getType().toString(),
+                    appointment.getDate().toString(),
+                    user.getPosition().toString(),
+                    doctorDetails.getName(),
+                    user.getFirstName(),
+                    user.getLastName()
+            ));
+        });
+        return dtoList;
+    }
 }
 
 

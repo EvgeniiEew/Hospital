@@ -98,14 +98,14 @@ public class UserService implements IUserServices {
         this.userJpaRepo.save(user);
     }
 
-//    public UserDischarsergeDto generateHospitalDischarge(Integer idPatient) {
-//        User user = this.userJpaRepo.getUserById(idPatient);
-//        UserDischarsergeDto userDischarsergeDto = new UserDischarsergeDto();
-//        userDischarsergeDto.setIdPatientUser(idPatient);
-//        userDischarsergeDto.setFirstNamePatient(user.getFirstName());
-//        userDischarsergeDto.setLastNamePatient(user.getLastName());
-//        userDischarsergeDto.setDiagnosisNameAndDate(this.diagnosisService.findByDiagnosisDetails_Id(this.patientDetailsService.getPatientDetailsByPatientId(idPatient).getId()));     //this.diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
-//        userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
-//        return userDischarsergeDto;
-//    }
+    public UserDischarsergeDto generateHospitalDischarge(Integer idPatient) {
+        User user = this.userJpaRepo.getUserById(idPatient);
+        UserDischarsergeDto userDischarsergeDto = new UserDischarsergeDto();
+        userDischarsergeDto.setIdPatientUser(idPatient);
+        userDischarsergeDto.setFirstNamePatient(user.getFirstName());
+        userDischarsergeDto.setLastNamePatient(user.getLastName());
+        userDischarsergeDto.setDiagnosisNameAndDate(this.diagnosisService.findByDiagnosisDetails_Id(this.patientDetailsService.getPatientDetailsByPatientId(idPatient).getId()));     //this.diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
+        userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
+        return userDischarsergeDto;
+    }
 }

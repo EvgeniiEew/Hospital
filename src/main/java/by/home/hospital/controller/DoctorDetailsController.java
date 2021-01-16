@@ -3,10 +3,13 @@ package by.home.hospital.controller;
 import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.NurseRegisterDto;
+import by.home.hospital.enums.Position;
 import by.home.hospital.service.impl.DoctorDetailsService;
 import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +39,7 @@ public class DoctorDetailsController {
     }
 
     //doctor/listRegister/
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/doctor/create")
     public String setDoctor(DoctorRegisterDto doctorRegisterDto, Model model) {
         if (doctorRegisterDto == null) {
@@ -52,7 +56,7 @@ public class DoctorDetailsController {
             model.addAttribute("doctorRegisterDto", doctorRegisterDto);
             return this.DOCTOR_CREATE;
         }
-        if (doctorRegisterDto.getDoctorDitales().equals("NURSE")) {
+        if (doctorRegisterDto.getPosition().equals(Position.NURSE)) {
             //this.userService.saveNurse(Objects.requireNonNull(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class)));
             this.userService.saveNurse(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class));
             return "redirect:/";

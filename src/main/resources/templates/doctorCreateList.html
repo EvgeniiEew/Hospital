@@ -5,11 +5,8 @@
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
     <script>
-        function agreeForm(f) {
-            // Если поставлен флажок, снимаем блокирование кнопки
-            if (f.POZITION.true) f.submit.disabled = 0
-            // В противном случае вновь блокируем кнопку
-            else f.doctorDitales.disabled = 1
+        function agreeForm(form, disabled) {
+            form.doctorDitales.disabled = disabled
         }
     </script>
 </head>
@@ -17,37 +14,43 @@
     <th:block th:insert="fragments/navBar.html :: navBar"/>
     <div class="main-container">
         <div class="form-title ">Введите данные доктора</div>
-        <form class="container center_div register-form" action="/doctor/register" method="POST" th:object="${doctorRegisterDto}">
+        <form class="container center_div register-form" action="/doctor/register" method="POST"
+              th:object="${doctorRegisterDto}">
             <div class="form-group">
                 <label for="firstNameInput">Имя:</label>
-                <input class="form-control" id="firstNameInput" type="text" placeholder="" name="firstName" th:field="*{firstName}">
+                <input class="form-control" id="firstNameInput" type="text" placeholder="" name="firstName"
+                       th:field="*{firstName}">
             </div>
             <div class="row justify-content-center alert alert-danger" role="alert"
                  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error
             </div>
             <div class="form-group">
                 <label for="lastNameInput">Фамилия:</label>
-                <input class="form-control" id="lastNameInput" type="text" placeholder="" name="lastName" th:field="*{lastName}">
+                <input class="form-control" id="lastNameInput" type="text" placeholder="" name="lastName"
+                       th:field="*{lastName}">
             </div>
             <div class="row justify-content-center alert alert-danger" role="alert"
                  th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error
             </div>
             <div class="form-group">
                 <label for="EmailNameInput">Mail:</label>
-                <input class="form-control" id="EmailNameInput" type="text" placeholder="" name="email" th:field="*{email}">
+                <input class="form-control" id="EmailNameInput" type="text" placeholder="" name="email"
+                       th:field="*{email}">
             </div>
             <div class="row justify-content-center alert alert-danger" role="alert"
                  th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error
             </div>
             <div class="form-group">
                 <label for="passwordInput">Пароль:</label>
-                <input class="form-control" id="passwordInput" type="text" placeholder="" name="password" th:field="*{password}">
+                <input class="form-control" id="passwordInput" type="text" placeholder="" name="password"
+                       th:field="*{password}">
             </div>
             <div class="row justify-content-center alert alert-danger" role="alert"
                  th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error
             </div>
-<!--            <input name="POZITION" type="radio" value="NURSE">-->
-            <input name="POZITION" type="radio"  onclick="agreeForm(this.form)"> NURSE>
+            <p><input name="position" type="radio" value="NURSE" onclick="agreeForm(this.form, true)">NURSE</p>
+            <p><input name="position" type="radio" value="DOCTOR" onclick="agreeForm(this.form, false)" checked>DOCTOR
+            </p>
             <div class="form-group">
                 <label for="doctorDitales">Направленрие врача:</label>
                 <input class="form-control" id="doctorDitales" type="text" placeholder="" name="doctorDitales">
@@ -59,31 +62,31 @@
 
     <th:block th:insert="fragments/footer.html :: footer"/>
 
-<!--    <form action="/doctor/register" method="POST" class="container center_div" style="width: 400px; padding: 40px">-->
-<!--        <p><b> Выбор регистрируемого персонала </b></p>-->
-<!--        &lt;!&ndash;        <p><input name="POZITION" type="radio" value="NURSE"> NURSE</p>&ndash;&gt;-->
-<!--        <p><input name="POZITION" type="radio" value="DOCTOR" onclick="agreeForm(this.form)"> DOCTOR-->
-<!--        <div class="form-group">-->
-<!--            <label for="firstNameInput">Имя:</label>-->
-<!--            <input class="form-control" id="firstNameInput" type="text" placeholder="" name="firstName">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="lastNameInput">Фамилия:</label>-->
-<!--            <input class="form-control" id="lastNameInput" type="text" placeholder="" name="lastName">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="loginNameInput">Логин:</label>-->
-<!--            <input class="form-control" id="loginNameInput" type="text" placeholder="" name="login">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="passwordInput">Пароль:</label>-->
-<!--            <input class="form-control" id="passwordInput" type="text" placeholder="" name="password">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="doctorDitales">Направленрие врача:</label>-->
-<!--            <input disabled class="form-control" id="doctorDitales" type="text" placeholder="" name="doctorDitales">-->
-<!--        </div>-->
-<!--        <input name="submit" type="submit" class="btn btn-primary" value="Submit" disabled/>-->
-<!--    </form>-->
+    <!--    <form action="/doctor/register" method="POST" class="container center_div" style="width: 400px; padding: 40px">-->
+    <!--        <p><b> Выбор регистрируемого персонала </b></p>-->
+    <!--        &lt;!&ndash;        <p><input name="POZITION" type="radio" value="NURSE"> NURSE</p>&ndash;&gt;-->
+    <!--        <p><input name="POZITION" type="radio" value="DOCTOR" onclick="agreeForm(this.form)"> DOCTOR-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="firstNameInput">Имя:</label>-->
+    <!--            <input class="form-control" id="firstNameInput" type="text" placeholder="" name="firstName">-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="lastNameInput">Фамилия:</label>-->
+    <!--            <input class="form-control" id="lastNameInput" type="text" placeholder="" name="lastName">-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="loginNameInput">Логин:</label>-->
+    <!--            <input class="form-control" id="loginNameInput" type="text" placeholder="" name="login">-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="passwordInput">Пароль:</label>-->
+    <!--            <input class="form-control" id="passwordInput" type="text" placeholder="" name="password">-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="doctorDitales">Направленрие врача:</label>-->
+    <!--            <input disabled class="form-control" id="doctorDitales" type="text" placeholder="" name="doctorDitales">-->
+    <!--        </div>-->
+    <!--        <input name="submit" type="submit" class="btn btn-primary" value="Submit" disabled/>-->
+    <!--    </form>-->
 </body>
 </html>

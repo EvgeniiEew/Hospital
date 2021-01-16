@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentDischarsergesDto {
-    private String nameAppointment;
-    private String type;
-    private String dateOfCompletion;
-    private String positionDoctorNurse;
-    private String nameDoctorSpecific;
-    private String firstNameDoctor;
-    private String lastNameDoctor;
+    private String appointmentName;
+    private String appointmentType;
+    private String appointmentCompletionDate;
+    private String doctorPosition;
+    private String doctorType;
+    private String doctorFirstName;
+    private String doctorLastName;
 
 }
