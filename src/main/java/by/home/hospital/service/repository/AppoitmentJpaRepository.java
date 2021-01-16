@@ -20,6 +20,6 @@ public interface AppoitmentJpaRepository extends JpaRepository<Appointment, Inte
 
     Appointment save(Appointment appointment);
 
-    @Query(value = "select   a.name, a.type, a.date, u.position, dd.name, u.first_name, u.last_name  from  appointment a join appointment_users au on a.id = au.appointment_id and patient_id = ?1  join users u on u.id = au.doctor_id join doctor_ditales dd on dd.doctor_id = u.id order by date desc", nativeQuery = true)
-    List<AppointmentDischarsergesDto> findAppointmentDischarsergesDtoByIdNative(Integer id);
+//    @Query("SELECT new AppointmentDischarsergesDto(a.name AS nameAppointment, a.type , a.date AS dateOfCompletion, u.position AS positionDoctorNurse, dd.name AS nameDoctorSpecific,  u.first_name AS firstNameDoctor, u.last_name AS lastNameDoctor) FROM appointment a join appointment_users au on a.id = au.appointment_id join users u on u.id = au.doctor_id join doctor_ditales dd on dd.doctor_id = u.id where au.patient_id =?1 " + "order by a.date desc ")
+//    List<AppointmentDischarsergesDto> findAppointmentDischarsergesDtoById(Integer id);
 }

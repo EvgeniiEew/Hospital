@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +16,6 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class AppointmentService implements IAppointmentService {
-
     @Autowired
     private DiagnosisService diagnosisService;
     @Autowired
@@ -80,9 +78,10 @@ public class AppointmentService implements IAppointmentService {
         return this.appoitmentJpaRepository.save(appointment);
     }
 
-    public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
-        return appoitmentJpaRepository.findAppointmentDischarsergesDtoByIdNative(idPatient);
-    }
+
+//    public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
+//       return appoitmentJpaRepository.findAppointmentDischarsergesDtoById(idPatient);
+//    }
 }
 
 

@@ -4,18 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppointmentDischarsergesDto {
     private String nameAppointment;
     private String type;
-    private Data dateOfCompletion;
-
+    private String dateOfCompletion;
     private String positionDoctorNurse;
     private String nameDoctorSpecific;
     private String firstNameDoctor;
     private String lastNameDoctor;
-
 
 }

@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <th:block th:insert="fragments/header.html :: css"/>
 </head>
 <body>
-    
+    <body>
+        <th:block th:insert="fragments/navBar.html :: navBar"/>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Личный номер пациента</th>
+                <th scope="col">Фамилия пациента</th>
+                <th scope="col">Имя пациента</th>
+            </tr>
+            </thead>
+            <tr th:each="userDischarge : ${userDischarsergeDto}">
+                <td th:text="${userDischarge.idPatientUser}"/>
+                <td th:text="${userDischarge.firstNamePatient}"/>
+                <td th:text="${userDischarge.lastNamePatient}"/>
+            </tr>
+        </table>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">полный диагноз за последний год</th>
+                <th scope="col">Дата назначения диагноза</th>
+            </tr>
+            </thead>
+            <tr th:each="diagnosis : ${listDiagnosis}">
+                <td th:text="${diagnosis.name}"/>
+                <td th:text="${diagnosis.date}"/>
+            </tr>
+        </table>
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Имя назначения</th>
+                <th scope="col">type назначения</th>
+                <th scope="col">dateOfCompletion</th>
+                <th scope="col">positionDoctorNurse</th>
+                <th scope="col">nameDoctorSpecific</th>
+                <th scope="col">firstNameDoctor</th>
+                <th scope="col">lastNameDoctor</th>
+            </tr>
+            </thead>
+            <tr th:each="list : ${listAppointment}">
+                <td th:text="${list.nameAppointment}"/>
+                <td th:text="${list.type}"/>
+                <td th:text="${list.dateOfCompletion}"/>
+                <td th:text="${list.positionDoctorNurse}"/>
+                <td th:text="${list.nameDoctorSpecific}"/>
+                <td th:text="${list.firstNameDoctor}"/>
+                <td th:text="${list.lastNameDoctor}"/>
+            </tr>
+        </table>
+        <th:block th:insert="fragments/scripts.html :: js"/>
+    </body>
 </body>
 </html>

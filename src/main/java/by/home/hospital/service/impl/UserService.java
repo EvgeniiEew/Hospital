@@ -12,10 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static by.home.hospital.enums.Position.PATIENT;
 
@@ -100,14 +98,14 @@ public class UserService implements IUserServices {
         this.userJpaRepo.save(user);
     }
 
-    public UserDischarsergeDto generateHospitalDischarge(Integer idPatient) {
-        User user = this.userJpaRepo.getUserById(idPatient);
-        UserDischarsergeDto userDischarsergeDto = new UserDischarsergeDto();
-        userDischarsergeDto.setIdPatientUser(idPatient);
-        userDischarsergeDto.setFirstNamePatient(user.getFirstName());
-        userDischarsergeDto.setLastNamePatient(user.getLastName());
-        userDischarsergeDto.setDiagnosisNameAndDate(this.diagnosisService.findByDiagnosisDetails_Id(this.patientDetailsService.getPatientDetailsByPatientId(idPatient).getId()));     //this.diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
-        userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
-        return userDischarsergeDto;
-    }
+//    public UserDischarsergeDto generateHospitalDischarge(Integer idPatient) {
+//        User user = this.userJpaRepo.getUserById(idPatient);
+//        UserDischarsergeDto userDischarsergeDto = new UserDischarsergeDto();
+//        userDischarsergeDto.setIdPatientUser(idPatient);
+//        userDischarsergeDto.setFirstNamePatient(user.getFirstName());
+//        userDischarsergeDto.setLastNamePatient(user.getLastName());
+//        userDischarsergeDto.setDiagnosisNameAndDate(this.diagnosisService.findByDiagnosisDetails_Id(this.patientDetailsService.getPatientDetailsByPatientId(idPatient).getId()));     //this.diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
+//        userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
+//        return userDischarsergeDto;
+//    }
 }
