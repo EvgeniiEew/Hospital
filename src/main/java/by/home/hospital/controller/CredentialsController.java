@@ -7,9 +7,11 @@ import by.home.hospital.service.impl.PatientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,13 +26,21 @@ public class CredentialsController {
     private PatientDetailsService patientDetailsService;
 
     @PostMapping("/patient/registers")
-    public String registerPatient(PatientRegisterDto patientRegisterDto) {
+    public String registerPatient(@Valid PatientRegisterDto patientRegisterDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("patientRegisterDto", patientRegisterDto);
+            return this.PATIENT_REGISTER;
+        }
         this.patientDetailsService.savePatientRegister(patientRegisterDto);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping("/patient/register")
-    public String registerPage() {
+    public String registerPage(PatientRegisterDto patientRegisterDto, Model model) {
+        if (patientRegisterDto == null) {
+            patientRegisterDto = new PatientRegisterDto();
+        }
+        model.addAttribute("patientRegisterDto", patientRegisterDto);
         return this.PATIENT_REGISTER;
     }
 
