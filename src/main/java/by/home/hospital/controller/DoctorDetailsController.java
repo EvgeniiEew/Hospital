@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -35,13 +37,22 @@ public class DoctorDetailsController {
 
     //doctor/listRegister/
     @GetMapping("/doctor/create")
-    public String setDoctor() {
+    public String setDoctor(DoctorRegisterDto doctorRegisterDto, Model model) {
+        if (doctorRegisterDto == null) {
+            doctorRegisterDto = new DoctorRegisterDto();
+        }
+        model.addAttribute("doctorRegisterDto", doctorRegisterDto);
         return this.DOCTOR_CREATE;
     }
-//!!!
+
+    //!!!
     @PostMapping(path = "/doctor/register")
-    public String registerDoctor(DoctorRegisterDto doctorRegisterDto) {
-        if (doctorRegisterDto.getDoctorDitales().equals("")) {
+    public String registerDoctor(@Valid DoctorRegisterDto doctorRegisterDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("doctorRegisterDto", doctorRegisterDto);
+            return this.DOCTOR_CREATE;
+        }
+        if (doctorRegisterDto.getDoctorDitales().equals("NURSE")) {
             //this.userService.saveNurse(Objects.requireNonNull(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class)));
             this.userService.saveNurse(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class));
             return "redirect:/";

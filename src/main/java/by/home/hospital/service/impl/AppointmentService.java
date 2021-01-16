@@ -80,7 +80,9 @@ public class AppointmentService implements IAppointmentService {
 
 
 //    public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
-//       return appoitmentJpaRepository.findAppointmentDischarsergesDtoById(idPatient);
+////       return appoitmentJpaRepository.findAppointmentDischarsergesDtoById(idPatient);
+//        int result = jdbcTemplate.queryForObject(
+//                "SELECT COUNT(*) FROM EMPLOYEE", Integer.class);
 //    }
 }
 
