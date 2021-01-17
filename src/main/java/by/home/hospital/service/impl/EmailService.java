@@ -25,8 +25,8 @@ public class EmailService {
 
         try {
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("Nata.crainova@yandex.ru", true));
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("Nata.crainova@yandex.ru"));
+            msg.setFrom(new InternetAddress("slabysh_yauhen@mail.ru", true));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("slabysh_yauhen@mail.ru"));
             msg.setSubject("Выписка из больницы");
             msg.setContent("Выписка из больницы", "text/html");
             msg.setSentDate(new Date());
