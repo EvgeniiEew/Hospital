@@ -2,9 +2,11 @@ package by.home.hospital.controller;
 
 
 import by.home.hospital.domain.Diagnosis;
+import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;
+import by.home.hospital.service.impl.EpicrisisService;
 import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;
 import org.apache.commons.io.IOUtils;
@@ -35,6 +37,8 @@ public class UsersController {
     private final String DISCHARGES = "dischargesList";
     private final String DISCHARGE = "dischargeList";
 
+    @Autowired
+    private EpicrisisService epicrisisService;
     @Autowired
     private PatientDetailsService patientDetailsService;
     @Autowired
@@ -121,11 +125,10 @@ public class UsersController {
     @PostMapping("/patient/{id}/discharges")
     public String dischargeUser(@PathVariable("id") Integer id, Model model) {
         UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
-        List<AppointmentDischarsergesDto> listAppointment = userDischarsergeDto.getListDischarserge();
-        List<Diagnosis> listDiagnosis = userDischarsergeDto.getDiagnosisNameAndDate();
-        model.addAttribute("listAppointment", listAppointment);
+        model.addAttribute("listAppointment", userDischarsergeDto.getListDischarserge());
         model.addAttribute("userDischarsergeDto", userDischarsergeDto);
-        model.addAttribute("listDiagnosis", listDiagnosis);
+        model.addAttribute("listDiagnosis", userDischarsergeDto.getDiagnosisNameAndDate());
+        model.addAttribute("epicrisisList", this.epicrisisService.getEpicrisisToDiscargeList(id));
         return this.DISCHARGE;
     }
 

@@ -10,11 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 @Transactional
 public class EpicrisisService implements IEpicrisisService {
 
+    @Autowired
+    private AppointmentService appointmentService;
     @Autowired
     private EpicrisisJpaRepository epicrisisJpaRepository;
 
@@ -37,6 +42,18 @@ public class EpicrisisService implements IEpicrisisService {
         epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
         epicrisis.setAppointment(appointment);
         this.epicrisisJpaRepository.save(epicrisis);
+    }
+
+    public List<Epicrisis> getEpicrisisToDiscargeList(Integer idPatient) {
+        List<Appointment> appointmentsList = this.appointmentService.findAppointmentsByPatientId(idPatient);
+        List<Epicrisis> epicrisisList = new ArrayList<>();
+        appointmentsList.forEach(list -> {
+            epicrisisList.add(new Epicrisis(
+                   Integer.valueOf(list.getEpicrisis().getId()),
+                    list.getEpicrisis().getInfo()
+            ));
+        });
+        return epicrisisList;
     }
 
     public void save(Epicrisis epicrisis) {

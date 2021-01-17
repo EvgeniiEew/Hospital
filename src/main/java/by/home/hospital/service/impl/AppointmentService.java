@@ -78,7 +78,9 @@ public class AppointmentService implements IAppointmentService {
                 AppointmentStatus.PENDING);
         return this.appoitmentJpaRepository.save(appointment);
     }
-
+    public List<Appointment> findAppointmentsByPatientId(Integer id){
+        return this.appoitmentJpaRepository.findAppointmentsByPatientId(id);
+    }
     public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
         List<Appointment> list = appoitmentJpaRepository.findAppointmentsByPatientId(idPatient);
         List<AppointmentDischarsergesDto> dtoList = new ArrayList<>();

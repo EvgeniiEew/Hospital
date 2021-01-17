@@ -4,59 +4,81 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/header.html :: css"/>
+
 </head>
 <body>
+
     <body>
         <th:block th:insert="fragments/navBar.html :: navBar"/>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Личный номер пациента</th>
-                <th scope="col">Фамилия пациента</th>
-                <th scope="col">Имя пациента</th>
-            </tr>
-            </thead>
-            <tr th:each="userDischarge : ${userDischarsergeDto}">
-                <td th:text="${userDischarge.idPatientUser}"/>
-                <td th:text="${userDischarge.firstNamePatient}"/>
-                <td th:text="${userDischarge.lastNamePatient}"/>
-            </tr>
-        </table>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">полный диагноз за последний год</th>
-                <th scope="col">Дата назначения диагноза</th>
-            </tr>
-            </thead>
-            <tr th:each="diagnosis : ${listDiagnosis}">
-                <td th:text="${diagnosis.name}"/>
-                <td th:text="${diagnosis.date}"/>
-            </tr>
-        </table>
+        <div class="main container ">
+            <div class="starter-template text-center py-5 px-3">
+                <div align="left" color="white" font-size="h2">Минзрав</div>
+                <div align="right" color="white" font-size="h2">Форма №13443</div>
+                <div align="left" color="white" font-size="h2"><br>Больница №0.</div>
+                <h3>Выписка из медицинской карты больного</h3>
+            </div>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Фото</th>
+                    <th scope="col">Личный номер пациента</th>
+                    <th scope="col">Фамилия пациента</th>
+                    <th scope="col">Имя пациента</th>
+                </tr>
+                </thead>
+                <tr th:each="userDischarge : ${userDischarsergeDto}">
+                    <td align="left"><img th:src="@{/users/{uid}/img(uid=${userDischarge.idPatientUser})}" width="100"
+                                          height="100" alt=""></td>
+                    <td th:text="${userDischarge.idPatientUser}"/>
+                    <td th:text="${userDischarge.firstNamePatient}"/>
+                    <td th:text="${userDischarge.lastNamePatient}"/>
+                </tr>
+            </table>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">полный диагноз за последний год</th>
+                    <th scope="col">Поставили диагноз</th>
+                </tr>
+                </thead>
+                <tr th:each="diagnosis : ${listDiagnosis}">
+                    <td th:text="${diagnosis.name}"/>
+                    <td th:text="${diagnosis.date}"/>
+                </tr>
+            </table>
 
-        <table class="table">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Проведенное лечение</th>
+                    <th scope="col">Тип назначения</th>
+                    <th scope="col">Дата выполнения</th>
+                    <th scope="col">Кем выполнено</th>
+                    <th scope="col">Специализация доктора</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                </tr>
+                </thead>
+                <tr th:each="list : ${listAppointment}">
+                    <td th:text="${list.appointmentName}"/>
+                    <td th:text="${list.appointmentType}"/>
+                    <td th:text="${list.appointmentCompletionDate}"/>
+                    <td th:text="${list.doctorPosition}"/>
+                    <td th:text="${list.doctorType}"/>
+                    <td th:text="${list.doctorFirstName}"/>
+                    <td th:text="${list.doctorLastName}"/>
+                </tr>
+            </table>
+
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Имя назначения</th>
-                <th scope="col">type назначения</th>
-                <th scope="col">dateOfCompletion</th>
-                <th scope="col">positionDoctorNurse</th>
-                <th scope="col">nameDoctorSpecific</th>
-                <th scope="col">firstNameDoctor</th>
-                <th scope="col">lastNameDoctor</th>
+                <th scope="col">Краткий анемиз и рекомендации:</th>
             </tr>
             </thead>
-            <tr th:each="list : ${listAppointment}">
-                <td th:text="${list.nameAppointment}"/>
-                <td th:text="${list.type}"/>
-                <td th:text="${list.dateOfCompletion}"/>
-                <td th:text="${list.positionDoctorNurse}"/>
-                <td th:text="${list.nameDoctorSpecific}"/>
-                <td th:text="${list.firstNameDoctor}"/>
-                <td th:text="${list.lastNameDoctor}"/>
+            <tr th:each="epicris : ${epicrisisList}">
+                <td th:text="${epicris.info}"/>
             </tr>
-        </table>
+        </div>
         <th:block th:insert="fragments/scripts.html :: js"/>
     </body>
 </body>
