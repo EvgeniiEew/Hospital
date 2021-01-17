@@ -10,9 +10,7 @@ import by.home.hospital.service.impl.EpicrisisService;
 import by.home.hospital.service.impl.UserService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -31,26 +29,27 @@ public class EmailController {
     private UserService userService;
     @Autowired
     private EmailService emailService;
+
     @RequestMapping(value = "/sendemail")
     public String sendEmail(String pasword) throws AddressException, MessagingException, IOException {
-        this.emailService.sendmail(pasword);
+        this.emailService.sendmail(pasword );
         return "Email sent successfully";
     }
-//    localhost:8090/user/export/?id=5
-    @GetMapping("user/export/")
-    public void exportToEmail(HttpServletResponse response , Integer id) throws DocumentException,IOException {
+
+    //    localhost:8090/user/export/?id=5
+    @PostMapping("user/export/{id}")
+    public void exportToEmail(@PathVariable("id") Integer id, HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=users_"+ currentDateTime+".pdf";
+        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
-
 
         UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
         List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
-        List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList =  userDischarsergeDto.getListDischarserge();
+        List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
         List<Epicrisis> epicrisisList = this.epicrisisService.getEpicrisisToDiscargeList(id);
 
         UserDischarsergePDFExporter userDischarsergePDFExporter = new UserDischarsergePDFExporter(userDischarsergeDto,

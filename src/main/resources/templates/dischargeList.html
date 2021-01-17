@@ -79,7 +79,13 @@
                 <td th:text="${epicris.info}"/>
             </tr>
         </div>
+        <form method="POST" enctype="multipart/form-data"
+              th:action="@{/user/export/{uid} (uid=${userDischarsergeDto.idPatientUser})}">
+            <td>
+                <input class="btn btn-outline-success btn-sm" type="submit" value="PDF form"/>
+            </td></form>
         <th:block th:insert="fragments/scripts.html :: js"/>
+
     </body>
 </body>
 </html>
