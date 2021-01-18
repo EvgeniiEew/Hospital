@@ -36,7 +36,7 @@ public class EmailService {
             multipart.addBodyPart(messageBodyPart);
              MimeBodyPart attachPart = new MimeBodyPart();
 
-            attachPart.attachFile("E:\\Projects\\ResaulProject\\src\\main\\resources\\templates\\dischargeList.html");
+            attachPart.attachFile("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf");
             multipart.addBodyPart(attachPart);
             msg.setContent(multipart);
 

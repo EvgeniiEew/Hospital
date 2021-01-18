@@ -13,12 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,30 +25,42 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @RequestMapping(value = "/sendemail")
-    public String sendEmail(String pasword) throws AddressException, MessagingException, IOException {
-        this.emailService.sendmail(pasword );
-        return "Email sent successfully";
-    }
+//    @GetMapping("/sendemail")
+////    public String sendEmail() throws MessagingException, IOException {
+////        this.emailService.sendmail("" );
+////        return "Email sent successfully";
+////    }
 
     //    localhost:8090/user/export/?id=5
+//    @PostMapping("user/export/{id}")
+//    public void exportToEmail(@PathVariable("id") Integer id, HttpServletResponse response) throws DocumentException, IOException {
+//        response.setContentType("application/pdf");
+//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+//        String currentDateTime = dateFormatter.format(new Date());
+//
+//        String headerKey = "Content-Disposition";
+//        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+//        response.setHeader(headerKey, headerValue);
+//
+//        UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
+//        List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
+//        List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
+//        List<Epicrisis> epicrisisList = this.epicrisisService.getEpicrisisToDiscargeList(id);
+//
+//        UserDischarsergePDFExporter userDischarsergePDFExporter = new UserDischarsergePDFExporter(userDischarsergeDto,
+//                diagnosisList, appointmentDischarsergesDtoList, epicrisisList);
+//        userDischarsergePDFExporter.export(response);
+//    }
     @PostMapping("user/export/{id}")
-    public void exportToEmail(@PathVariable("id") Integer id, HttpServletResponse response) throws DocumentException, IOException {
-        response.setContentType("application/pdf");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
-
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
-        response.setHeader(headerKey, headerValue);
-
+    public String exportToEmail(@PathVariable("id") Integer id, String password) throws DocumentException, IOException, MessagingException {
         UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
         List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
         List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
         List<Epicrisis> epicrisisList = this.epicrisisService.getEpicrisisToDiscargeList(id);
-
         UserDischarsergePDFExporter userDischarsergePDFExporter = new UserDischarsergePDFExporter(userDischarsergeDto,
                 diagnosisList, appointmentDischarsergesDtoList, epicrisisList);
-        userDischarsergePDFExporter.export(response);
+        userDischarsergePDFExporter.export();
+        this.emailService.sendmail(password);
+        return "Email sent successfully";
     }
 }

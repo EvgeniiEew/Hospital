@@ -12,7 +12,12 @@ import com.lowagie.text.pdf.PdfWriter;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
+import java.io.FileOutputStream;
+import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class UserDischarsergePDFExporter {
@@ -34,6 +39,7 @@ public class UserDischarsergePDFExporter {
             tableDiagnosisList.addCell(String.valueOf(diagnosis.getDate()));
         }
     }
+
     private void writeTableHeaderEpicrisis(PdfPTable tableEpicrisis) {
         for (Epicrisis epicrisis : epicrisisList) {
             tableEpicrisis.addCell(String.valueOf(epicrisis.getInfo()));
@@ -117,9 +123,52 @@ public class UserDischarsergePDFExporter {
         table.addCell(pdfPCell);
     }
 
-    public void export(HttpServletResponse response) throws DocumentException, IOException {
+    //    public void export(HttpServletResponse response) throws DocumentException, IOException {
+//        Document document = new Document(PageSize.A3);
+//            PdfWriter.getInstance(document, response.getOutputStream());
+//            document.open();
+//            Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+//            font.setColor(Color.BLUE);
+//            font.setSize(18);
+//            Paragraph title = new Paragraph("Extract from the patient's medical record", font);
+//            document.add(title);
+//            PdfPTable table = new PdfPTable(3);
+//            table.setWidthPercentage(100);
+//            table.setSpacingBefore(15);
+//            writeTableDataUserDischarsergeDto(table);
+//            writeTableHeaderFromUserDischarserge(table);
+//            document.add(table);
+//
+//            Paragraph titleDiagnosis = new Paragraph("Diagnisis", font);
+//            document.add(titleDiagnosis);
+//            PdfPTable tableDiagnosisList = new PdfPTable(2);
+//            tableDiagnosisList.setWidthPercentage(100);
+//            tableDiagnosisList.setSpacingBefore(15);
+//            writeTableDataDiagnosisList(tableDiagnosisList);
+//            writeTableHeaderDiagnosisList(tableDiagnosisList);
+//            document.add(tableDiagnosisList);
+//
+//            Paragraph titleAppointmentDischarsergesDto = new Paragraph("Appointment Discharserges", font);
+//            document.add(titleAppointmentDischarsergesDto);
+//            PdfPTable tableAppointmentDischarsergesDto = new PdfPTable(7);
+//            tableAppointmentDischarsergesDto.setWidthPercentage(100);
+//            tableAppointmentDischarsergesDto.setSpacingBefore(15);
+//            writeTableDataAppointmentDischarsergesDto(tableAppointmentDischarsergesDto);
+//            writeTableHeaderAppointmentDischarsergesDto(tableAppointmentDischarsergesDto);
+//            document.add(tableAppointmentDischarsergesDto);
+//
+//            Paragraph titleEpicris = new Paragraph("Brief history and recommendations:", font);
+//            document.add(titleEpicris);
+//            PdfPTable tableEpicrisis = new PdfPTable(1);
+//            tableEpicrisis.setWidthPercentage(100);
+//            tableEpicrisis.setSpacingBefore(15);
+//            writeTableHeaderEpicrisis(tableEpicrisis);
+//            document.add(tableEpicrisis);
+//            document.close();
+//    }
+    public void export() throws DocumentException, IOException {
         Document document = new Document(PageSize.A3);
-        PdfWriter.getInstance(document, response.getOutputStream());
+        PdfWriter.getInstance(document, new FileOutputStream("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setColor(Color.BLUE);
@@ -142,7 +191,7 @@ public class UserDischarsergePDFExporter {
         writeTableHeaderDiagnosisList(tableDiagnosisList);
         document.add(tableDiagnosisList);
 
-        Paragraph titleAppointmentDischarsergesDto = new Paragraph("AppointmentDischarserges", font);
+        Paragraph titleAppointmentDischarsergesDto = new Paragraph("Appointment Discharserges", font);
         document.add(titleAppointmentDischarsergesDto);
         PdfPTable tableAppointmentDischarsergesDto = new PdfPTable(7);
         tableAppointmentDischarsergesDto.setWidthPercentage(100);
@@ -158,8 +207,9 @@ public class UserDischarsergePDFExporter {
         tableEpicrisis.setSpacingBefore(15);
         writeTableHeaderEpicrisis(tableEpicrisis);
         document.add(tableEpicrisis);
-
-
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+        document.addTitle(currentDateTime);
         document.close();
     }
 }
