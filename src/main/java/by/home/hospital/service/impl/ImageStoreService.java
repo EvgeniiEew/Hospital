@@ -19,10 +19,10 @@ public class ImageStoreService implements StorageService {
 
     @Override
     public void store(Integer id, MultipartFile multipartFile) throws IOException {
-        String string = UUID.randomUUID().toString();
+        String string ="E:/Projects/ResaulProject/src/main/resources/Photo/" + UUID.randomUUID().toString();
         User user = this.userService.getUserById(id);
         File file = new File(string);
-        user.setAvatarFileName(file.getAbsolutePath());
+        user.setAvatarFileName(file.getAbsolutePath() );
         try (InputStream in = multipartFile.getInputStream(); OutputStream out = new FileOutputStream(file)) {
             IOUtils.copy(in, out);
         }

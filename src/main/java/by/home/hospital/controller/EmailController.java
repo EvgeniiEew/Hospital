@@ -7,6 +7,7 @@ import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.dto.UserDischarsergeDto;
 import by.home.hospital.service.impl.EmailService;
 import by.home.hospital.service.impl.EpicrisisService;
+import by.home.hospital.service.impl.ImageStoreService;
 import by.home.hospital.service.impl.UserService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -52,13 +54,13 @@ public class EmailController {
 //        userDischarsergePDFExporter.export(response);
 //    }
     @PostMapping("user/export/{id}")
-    public String exportToEmail(@PathVariable("id") Integer id, String password) throws DocumentException, IOException, MessagingException {
+    public String exportToEmail(@PathVariable("id") Integer id, String password) throws DocumentException, IOException, MessagingException, URISyntaxException {
         UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
         List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
         List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
         List<Epicrisis> epicrisisList = this.epicrisisService.getEpicrisisToDiscargeList(id);
         UserDischarsergePDFExporter userDischarsergePDFExporter = new UserDischarsergePDFExporter(userDischarsergeDto,
-                diagnosisList, appointmentDischarsergesDtoList, epicrisisList);
+                diagnosisList, appointmentDischarsergesDtoList, epicrisisList,userService);
         userDischarsergePDFExporter.export();
         this.emailService.sendmail(password);
         return "Email sent successfully";

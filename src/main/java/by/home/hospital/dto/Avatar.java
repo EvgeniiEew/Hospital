@@ -18,4 +18,7 @@ public class Avatar {
         return new FileInputStream(new File(fullFilePath));
     }
 
+    public String getFileName() {
+        return fileName;
+    }
 }
