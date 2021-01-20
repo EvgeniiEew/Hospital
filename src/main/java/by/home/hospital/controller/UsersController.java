@@ -1,8 +1,6 @@
 package by.home.hospital.controller;
 
 
-import by.home.hospital.domain.Diagnosis;
-import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;
@@ -72,7 +70,7 @@ public class UsersController {
     }
 
     @PostMapping("/users/{id}/img")
-    public String handleFileUpload(@PathVariable("id") Integer id, @RequestParam("file") MultipartFile file) throws IOException {
+    public String handleFileUpload(@PathVariable("id") Integer id, @RequestParam("files") MultipartFile file) throws IOException {
         imgService.store(id, file);
         return "redirect:/myaccount";
     }

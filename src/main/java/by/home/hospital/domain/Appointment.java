@@ -2,12 +2,10 @@ package by.home.hospital.domain;
 
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Type;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

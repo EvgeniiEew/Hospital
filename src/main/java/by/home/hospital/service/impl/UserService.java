@@ -108,4 +108,8 @@ public class UserService implements IUserServices {
         userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
         return userDischarsergeDto;
     }
+
+    public String getEmailByIdUser(Integer idUser){
+       return this.userJpaRepo.getUserById(idUser).getCredentials().getEmail();
+    }
 }

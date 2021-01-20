@@ -81,16 +81,11 @@
         </div>
         <form method="POST" enctype="multipart/form-data"
               th:action="@{/user/export/{uid} (uid=${userDischarsergeDto.idPatientUser})}">
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input class="form-control" id="password" type="password" name="password"/>
-            </div>
-            <div>
-                <input class="btn btn-outline-success btn-sm" type="submit" value="Export to email"/>
+            <div align="center">
+                <input  class="btn btn-outline-success btn-sm" type="submit" value="Export to email"/>
             </div>
         </form>
         <th:block th:insert="fragments/scripts.html :: js"/>
-
     </body>
 </body>
 </html>

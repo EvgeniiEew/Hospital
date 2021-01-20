@@ -4,7 +4,6 @@ import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.dto.UserDischarsergeDto;
-import by.home.hospital.service.impl.ImageStoreService;
 import by.home.hospital.service.impl.UserService;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
@@ -105,7 +104,10 @@ public class UserDischarsergePDFExporter {
     }
 
     private void writeTableHeaderFromUserDischarserge(PdfPTable table) throws IOException {
-        table.addCell(setAvatarPdf());
+        Image image = setAvatarPdf();
+        if (image != null) {
+            table.addCell(image);
+        }
         table.addCell(String.valueOf(userDischarsergeDto.getIdPatientUser()));
         table.addCell(String.valueOf(userDischarsergeDto.getFirstNamePatient()));
         table.addCell(String.valueOf(userDischarsergeDto.getLastNamePatient()));
@@ -132,13 +134,14 @@ public class UserDischarsergePDFExporter {
     }
 
     public void export() throws DocumentException, IOException, URISyntaxException {
-        Document document = new Document(PageSize.A3);
+        Document document = new Document(PageSize.A3); //E:\Projects\ResaulProject\src\main
         PdfWriter.getInstance(document, new FileOutputStream("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setColor(Color.BLUE);
+        font.setColor(Color.CYAN);
         font.setSize(18);
         Paragraph title = new Paragraph("Extract from the patient's medical record", font);
+
         document.add(title);
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100);
@@ -178,8 +181,13 @@ public class UserDischarsergePDFExporter {
         document.close();
     }
 
-    public Image setAvatarPdf() throws IOException {
-        Path path = Paths.get(this.userService.getUserById(userDischarsergeDto.getIdPatientUser()).getAvatarFileName());
+    private Image setAvatarPdf() throws IOException {
+        String name = this.userService.getUserById(userDischarsergeDto.getIdPatientUser()).getAvatarFileName();
+        if(name!= null) {
+            Path path = Paths.get(name);
+
         return Image.getInstance(path.toAbsolutePath().toString());
+        }
+        return null;
     }
 }
