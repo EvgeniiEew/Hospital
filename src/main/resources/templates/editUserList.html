@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Изменить личные данные</title>
+<head>
+    <th:block th:insert="fragments/head.html :: head"/>
+</head>
+<body>
+    <th:block th:insert="fragments/navBar.html :: navBar"/>
+
+    <div class="main-container">
+        <div class="form-title ">Введите данные </div>
+        <form class="container center_div register-form" action="/user/edit" method="POST"
+              th:object="${userEditDto}">
+            <div class="form-group">
+                <label for="firstNameInput">Имя:</label>
+                <input class="form-control" id="firstNameInput" type="text" placeholder="" name="firstName"
+                       th:field="*{firstName}">
+            </div>
+            <div class="row justify-content-center alert alert-danger" role="alert"
+                 th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error
+            </div>
+            <div class="form-group">
+                <label for="lastNameInput">Фамилия:</label>
+                <input class="form-control" id="lastNameInput" type="text" placeholder="" name="lastName"
+                       th:field="*{lastName}">
+            </div>
+            <div class="row justify-content-center alert alert-danger" role="alert"
+                 th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error
+            </div>
+            <div class="form-group">
+                <label for="emailNameInput">Email:</label>
+                <input class="form-control" id="emailNameInput" type="text" placeholder="" name="email"
+                       th:field="*{email}">
+            </div>
+            <div class="row justify-content-center alert alert-danger" role="alert"
+                 th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error
+            </div>
+            <div class="form-group">
+                <label for="passwordInput">Пароль:</label>
+                <input class="form-control" id="passwordInput" type="text" placeholder="" name="password"
+                       th:field="*{password}">
+            </div>
+            <div class="row justify-content-center alert alert-danger" role="alert"
+                 th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error
+            </div>
+
+            <input type="submit" class="btn btn-success" value="Сохранить"/>
+        </form>
+    </div>
+
+    <th:block th:insert="fragments/footer.html :: footer"/>
+</body>
+</html>

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -34,6 +36,7 @@ public class UsersController {
     private final String VIEW = "myViewList";
     private final String DISCHARGES = "dischargesList";
     private final String DISCHARGE = "dischargeList";
+    private final String EDITUSERLIST = "editUserList";
 
     @Autowired
     private EpicrisisService epicrisisService;
@@ -50,11 +53,26 @@ public class UsersController {
     public String homePage() {
         return this.INDEX;
     }
-//todo
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getUsers();
+
+    //todo
+    @PostMapping("/user/{id}/edit/")
+    public String editUser(@PathVariable("id") Integer id, Model model) {
+        UserEditDto userEditDto = this.userService.getUserEditById(id);
+        model.addAttribute("userEditDto", userEditDto);
+        return this.EDITUSERLIST;
     }
+
+    @PostMapping("/user/edit")
+    public String editUser(@Valid UserEditDto userEditDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("userEditDto", userEditDto);
+            return this.EDITUSERLIST;
+        }
+        //todo edit user
+        this.userService.userEdit(userEditDto);
+        return "redirect:/";
+    }
+
 
     @GetMapping("/myaccount")
     public String getMyView(Authentication authentication, Model model) {

@@ -1,5 +1,6 @@
 package by.home.hospital.service.impl;
 
+import by.home.hospital.domain.Credential;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.Position;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -41,6 +43,8 @@ public class UserService implements IUserServices {
     public List<User> getUsers() {
         return this.userJpaRepo.findByOrderByFirstNameAsc();
     }
+
+
 
     public HashSet<User> findAllByPositionOrderByFirstNameDesc(Position position) {
         return this.userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
@@ -109,7 +113,31 @@ public class UserService implements IUserServices {
         return userDischarsergeDto;
     }
 
-    public String getEmailByIdUser(Integer idUser){
-       return this.userJpaRepo.getUserById(idUser).getCredentials().getEmail();
+    public String getEmailByIdUser(Integer idUser) {
+        return this.userJpaRepo.getUserById(idUser).getCredentials().getEmail();
+    }
+
+    public List<UserEditDto> getUsersEditDto() {
+        List<User> listUsers = this.userJpaRepo.findByOrderByFirstNameAsc();
+        List<UserEditDto> dtoUsersList = new ArrayList<>();
+        listUsers.forEach(user -> {
+            Credential credential = user.getCredentials();
+            dtoUsersList.add(new UserEditDto(
+                    user.getId(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    credential.getEmail(),
+                    credential.getPassword()
+            ));
+        });
+        return dtoUsersList;
+    }
+    public UserEditDto getUserEditById(Integer id){
+        User user  = getUserById(id);
+        return  new UserEditDto(id,user.getFirstName(),user.getLastName(),user.getCredentials().getEmail(),user.getCredentials().getPassword());
+    }
+    @Override
+    public void userEdit(UserEditDto userEditDto) {
+//        this.userJpaRepo.
     }
 }

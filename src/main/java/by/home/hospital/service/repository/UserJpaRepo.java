@@ -33,4 +33,5 @@ public interface UserJpaRepo extends JpaRepository<User, Integer> {
 //                    from appointment ap
 //                            inner join appointment_users au2 on ap.id = au2.appointment_id
 //                            where au2.patient_id = u.id);
+
 }

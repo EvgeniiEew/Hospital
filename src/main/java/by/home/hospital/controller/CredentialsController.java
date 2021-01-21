@@ -1,9 +1,12 @@
 package by.home.hospital.controller;
 
 import by.home.hospital.domain.Credential;
+import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
+import by.home.hospital.dto.UserEditDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.impl.PatientDetailsService;
+import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +22,8 @@ import java.util.stream.Collectors;
 public class CredentialsController {
     private final String CREDENTIALS = "credentialsList";
     private final String PATIENT_REGISTER = "patientRegisterList";
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private ICredentialsService credentialsService;
     @Autowired
@@ -46,8 +50,8 @@ public class CredentialsController {
 
     @GetMapping("/credanchials")
     public String getCredentials(Model model) {
-        List<Credential> credentials = credentialsService.getCredentials().stream().collect(Collectors.toList());
-        model.addAttribute("credentials", credentials);
+        List<UserEditDto> userEditList = this.userService.getUsersEditDto();
+        model.addAttribute("userEditList", userEditList);
         return this.CREDENTIALS;
     }
 }
