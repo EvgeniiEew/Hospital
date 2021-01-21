@@ -41,7 +41,7 @@ public class EmailService {
             multipart.addBodyPart(messageBodyPart);
             MimeBodyPart attachPart = new MimeBodyPart();
 //            url('/files/Extract.pdf')
-            attachPart.attachFile(path + "resources\\Extract.pdf");
+            attachPart.attachFile(path+"/resources/Extract.pdf");
             multipart.addBodyPart(attachPart);
             msg.setContent(multipart);
 

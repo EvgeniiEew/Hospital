@@ -13,13 +13,13 @@
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
+                <th scope="col">Фото</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
                 <th scope="col">Email</th>
                 <th scope="col">Роль на сайте</th>
                 <th sec:authorize="hasRole('ROLE_PATIENT')" scope="col">повторная запись </th>
-                <th scope="col">Upload img</th>
+                <th scope="col">Загрузить фото</th>
             </tr>
             </thead>
 
@@ -31,13 +31,13 @@
                 <td th:text="${email}"/>
                 <td th:text="${vie.position}"/>
 
-                <td >  <a class="btn btn-success"  role="button" value="повторная запись" sec:authorize="hasRole('ROLE_PATIENT')" th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
+                <td sec:authorize="hasRole('ROLE_PATIENT')" >  <a class="btn btn-success"  role="button" value="повторная запись"  th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
                 <td>
                     <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${view.id})}">
                         <table>
                             <tr>
                                 <td>File to upload:</td>
-                                <td><input type="file" name="file"/></td>
+                                <td><input type="file" name="files"/></td>
                             </tr>
                             <tr>
                                 <td></td>

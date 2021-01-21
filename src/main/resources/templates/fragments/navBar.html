@@ -20,40 +20,65 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/patient/status">Очередь пациентов на запись</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/patient/status/receptionPending">Кабинет
-                        осмотра</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"
-                       href="/patient/appointment">Операционная
-                    </a>
-                </li>
+
+                <li class="nav-item dropdown"><a
+                        class="nav-link dropdown-toggle" href="#" id="menu"
+                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> Меню </a>
+                    <div class="dropdown-menu" aria-labelledby="menu">
+                        <a class="dropdown-item" href="/myaccount">Моя страница</a>
+                        <a class="dropdown-item" href="/patient/register">Регистрация посетителя</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/patient/status/receptionPending">Кабинет осмотра</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/patient/appointment">Операционная</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="/doctor/create">Регистрация доктора</a>
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/user/discharges">Список на выписку</a>
+                        <!--                        <li><a class="dropdown-item" href="#">Войти</a></li>-->
+                        <hr class="dropdown-divider"></hr>
+
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
             </ul>
+        </div>
 
-            <!--        Кнопка регистрации должна быть одна на при регистрации будет выбор -->
-            <div class="action-buttons">
-                <div class="register-button">
-                    <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>
-                </div>
+        <!--                                        <li class="nav-item">-->
+        <!--                            <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"-->
+        <!--                               href="/patient/status/receptionPending">Кабинет-->
+        <!--                                осмотра</a>-->
+        <!--                        </li>-->
 
-                <div class="register-button" >
-                    <a class="btn btn-success" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/doctor/create">Регистрация доктора </a>
-                </div>
-                <div class="register-button">
-                    <a class="btn btn-success" href="/myaccount">Моя страница </a>
-                </div>
-                <div class="register-button" >
-                    <a class="btn btn-success" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/user/discharges">Список на выписку </a>
-                </div>
+        <!--                        <li class="nav-item">-->
+        <!--                            <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"-->
+        <!--                               href="/patient/appointment">Операционная-->
+        <!--                            </a>-->
+        <!--                        </li>-->
+        <!--                    </ul>-->
 
-                <div class="login-button">
-                    <form th:action="@{/login}" method="get">
-                        <input type="submit" class="btn btn-success" value="Войти"/>
-                    </form>
-                </div>
-            </div>
+        <!--                    &lt;!&ndash;        Кнопка регистрации должна быть одна на при регистрации будет выбор &ndash;&gt;-->
+        <!--                    <div class="action-buttons">-->
+        <!--                        <div class="register-button">-->
+        <!--                            <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>-->
+        <!--                        </div>-->
+
+        <!--                        <div class="register-button">-->
+        <!--                            <a class="btn btn-success" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"-->
+        <!--                               href="/doctor/create">Регистрация доктора </a>-->
+        <!--                        </div>-->
+        <!--                        <div class="register-button">-->
+        <!--                            <a class="btn btn-success" href="/myaccount">Моя страница </a>-->
+        <!--                        </div>-->
+        <!--                        <div class="register-button">-->
+        <!--                            <a class="btn btn-success" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"-->
+        <!--                               href="/user/discharges">Список на выписку </a>-->
+        <!--                        </div>-->
+
+        <div class="login-button">
+            <form th:action="@{/login}" method="get">
+                <input type="submit" class="btn btn-success" value="Войти"/>
+            </form>
+        </div>
+        <!--                    </div>-->
+        </ul>
         </div>
     </nav>
 </th:block>
