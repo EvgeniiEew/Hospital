@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,15 +55,17 @@ public class EmailController {
 //        userDischarsergePDFExporter.export(response);
 //    }
     @PostMapping("user/export/{id}")
-    public String exportToEmail(@PathVariable("id") Integer id) throws DocumentException, IOException, MessagingException, URISyntaxException {
+    public String exportToEmail(@PathVariable("id") Integer id, HttpServletRequest request) throws DocumentException, IOException, MessagingException, URISyntaxException {
+        ServletContext context = request.getServletContext();
+        String path = context.getRealPath("/");
         UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
         List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
         List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
         List<Epicrisis> epicrisisList = this.epicrisisService.getEpicrisisToDiscargeList(id);
         UserDischarsergePDFExporter userDischarsergePDFExporter = new UserDischarsergePDFExporter(userDischarsergeDto,
                 diagnosisList, appointmentDischarsergesDtoList, epicrisisList, userService);
-        userDischarsergePDFExporter.export();
-        this.emailService.sendmail(this.userService.getEmailByIdUser(id));
+        userDischarsergePDFExporter.export(path);
+        this.emailService.sendmail(this.userService.getEmailByIdUser(id), path);
         return "Email sent successfully";
     }
 }

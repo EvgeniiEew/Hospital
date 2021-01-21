@@ -11,7 +11,10 @@ import com.lowagie.text.Image;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+import org.apache.catalina.core.ApplicationContext;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -133,9 +136,10 @@ public class UserDischarsergePDFExporter {
         table.addCell(pdfPCell);
     }
 
-    public void export() throws DocumentException, IOException, URISyntaxException {
-        Document document = new Document(PageSize.A3); //E:\Projects\ResaulProject\src\main
-        PdfWriter.getInstance(document, new FileOutputStream("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf"));
+    public void export(String path) throws DocumentException, IOException {
+        Document document = new Document(PageSize.A3);
+//       PdfWriter.getInstance(document, new FileOutputStream("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream( path +"resources\\Extract.pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setColor(Color.CYAN);

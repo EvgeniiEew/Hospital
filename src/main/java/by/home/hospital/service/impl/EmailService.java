@@ -10,14 +10,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 
-import static com.lowagie.text.pdf.PdfFileSpecification.url;
 
 @Service
 public class EmailService {
     @Autowired
     private EmailProperties emailConfig;
 
-    public void sendmail(String address) throws AddressException, MessagingException, IOException {
+    public void sendmail(String address, String path) throws IOException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -40,9 +39,9 @@ public class EmailService {
             messageBodyPart.setContent(getMessage(), "text/html");
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
-             MimeBodyPart attachPart = new MimeBodyPart();
+            MimeBodyPart attachPart = new MimeBodyPart();
 //            url('/files/Extract.pdf')
-            attachPart.attachFile("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf");
+            attachPart.attachFile(path + "resources\\Extract.pdf");
             multipart.addBodyPart(attachPart);
             msg.setContent(multipart);
 
