@@ -21,12 +21,12 @@
                     <a class="nav-link" href="/patient/status">Очередь пациентов на запись</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR')" href="/patient/status/receptionPending">Кабинет
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/patient/status/receptionPending">Кабинет
                         осмотра</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR')"
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"
                        href="/patient/appointment">Операционная
                     </a>
                 </li>
@@ -38,14 +38,14 @@
                     <a class="btn btn-success" href="/patient/register">Регистрация посетителя </a>
                 </div>
 
-                <div class="register-button">
-                    <a class="btn btn-success" href="/doctor/create">Регистрация доктора </a>
+                <div class="register-button" >
+                    <a class="btn btn-success" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/doctor/create">Регистрация доктора </a>
                 </div>
                 <div class="register-button">
                     <a class="btn btn-success" href="/myaccount">Моя страница </a>
                 </div>
-                <div class="register-button">
-                    <a class="btn btn-success" href="/user/discharges">Список на выписку </a>
+                <div class="register-button" >
+                    <a class="btn btn-success" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/user/discharges">Список на выписку </a>
                 </div>
 
                 <div class="login-button">

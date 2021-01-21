@@ -50,7 +50,7 @@ public class UsersController {
     public String homePage() {
         return this.INDEX;
     }
-
+//todo
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getUsers();

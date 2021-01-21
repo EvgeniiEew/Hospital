@@ -39,7 +39,6 @@ public class DoctorDetailsController {
     }
 
     //doctor/listRegister/
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/doctor/create")
     public String setDoctor(DoctorRegisterDto doctorRegisterDto, Model model) {
         if (doctorRegisterDto == null) {

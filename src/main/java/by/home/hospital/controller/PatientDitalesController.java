@@ -32,7 +32,6 @@ public class PatientDitalesController {
     }
 
     //зарегистрировавшиеся не добавленые на прием  пациенты
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/patient/status")
     public String getPatientWithStatusNotExamined(Model model) {
         List<PatientWhisStatusDto> patientsNotExaminded = this.patientDetailsService.getPatientWithStatus(NOT_EXAMINED);

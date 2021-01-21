@@ -139,7 +139,8 @@ public class UserDischarsergePDFExporter {
     public void export(String path) throws DocumentException, IOException {
         Document document = new Document(PageSize.A3);
 //       PdfWriter.getInstance(document, new FileOutputStream("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf"));
-        PdfWriter.getInstance(document, new FileOutputStream( path +"resources\\Extract.pdf"));
+//        PdfWriter.getInstance(document, new FileOutputStream( path +"resources\\Extract.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream( "Extract.pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setColor(Color.CYAN);
