@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,8 +55,8 @@ public class UsersController {
         return this.INDEX;
     }
 
-    //todo
     @PostMapping("/users/{id}/edit/")
+    @PreAuthorize("@editUserVouter.checkUserId(authentication,#id) or hasRole('ADMIN')")
     public String editUser(@PathVariable("id") Integer id, Model model) {
         UserEditDto userEditDto = this.userService.getUserEditById(id);
         model.addAttribute("userEditDto", userEditDto);
