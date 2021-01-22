@@ -12,4 +12,5 @@ public interface CredentialsJpaRepository extends JpaRepository<Credential, Inte
     List<Credential> findAll();
 
     void deleteById(Integer id);
+
 }

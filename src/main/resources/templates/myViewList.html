@@ -17,36 +17,46 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Фамилия</th>
                 <th scope="col">Email</th>
-                <th scope="col">Роль на сайте</th>
-                <th sec:authorize="hasRole('ROLE_PATIENT')" scope="col">повторная запись </th>
+                <th scope="col">Роль</th>
+                <th sec:authorize="hasRole('ROLE_PATIENT')" scope="col">Повторная запись</th>
                 <th scope="col">Загрузить фото</th>
+                <th scope="col">Изменить данные</th>
             </tr>
             </thead>
 
             <tr th:each="vie : ${view}">
-                <td><img th:src="@{/users/{uid}/img(uid=${view.id})}" width="100"
-                         height="100" alt=""></td>
-                <td th:text="${vie.firstName}"/>
-                <td th:text="${vie.lastName}"/>
-                <td th:text="${email}"/>
-                <td th:text="${vie.position}"/>
+            <td><img th:src="@{/users/{uid}/img(uid=${view.id})}" width="100"
+                     height="100" alt=""></td>
+            <td th:text="${vie.firstName}"/>
+            <td th:text="${vie.lastName}"/>
+            <td th:text="${email}"/>
+            <td th:text="${vie.position}"/>
 
-                <td sec:authorize="hasRole('ROLE_PATIENT')" >  <a class="btn btn-success"  role="button" value="повторная запись"  th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
-                <td>
-                    <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${view.id})}">
-                        <table>
-                            <tr>
-                                <td>File to upload:</td>
-                                <td><input type="file" name="files"/></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" value="Upload"/></td>
-                            </tr>
-                        </table>
-                    </form>
-                </td>
+            <td sec:authorize="hasRole('ROLE_PATIENT')"><a class="btn btn-success" role="button"
+                                                           value="повторная запись"
+                                                           th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
+            <td>
+                <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${view.id})}">
+                    <table>
+                        <tr>
+                            <td>File to upload:</td>
+                            <td><input type="file" name="files"/></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="Upload"/></td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+            <td>
+                <form method="POST" enctype="multipart/form-data"
+                      th:action="@{/users/{uid}/edit/ (uid=${view.id})}">
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Изменить"/>
+                </form>
+            </td>
             </tr>
+            </table>
         </table>
     </main>
     <th:block th:insert="fragments/scripts.html :: js"/>

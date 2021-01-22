@@ -9,7 +9,7 @@
 
     <div class="main-container">
         <div class="form-title ">Введите данные </div>
-        <form class="container center_div register-form" action="/user/edit" method="POST"
+        <form class="container center_div register-form" th:action="@{/user/edit/{uid}/ (uid=${userEditDto.id})}" method="POST"
               th:object="${userEditDto}">
             <div class="form-group">
                 <label for="firstNameInput">Имя:</label>

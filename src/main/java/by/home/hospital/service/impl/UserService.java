@@ -45,7 +45,6 @@ public class UserService implements IUserServices {
     }
 
 
-
     public HashSet<User> findAllByPositionOrderByFirstNameDesc(Position position) {
         return this.userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
     }
@@ -132,12 +131,23 @@ public class UserService implements IUserServices {
         });
         return dtoUsersList;
     }
-    public UserEditDto getUserEditById(Integer id){
-        User user  = getUserById(id);
-        return  new UserEditDto(id,user.getFirstName(),user.getLastName(),user.getCredentials().getEmail(),user.getCredentials().getPassword());
+
+    public UserEditDto getUserEditById(Integer id) {
+        User user = getUserById(id);
+        return new UserEditDto(id, user.getFirstName(), user.getLastName(), user.getCredentials().getEmail(), user.getCredentials().getPassword());
     }
+
     @Override
     public void userEdit(UserEditDto userEditDto) {
-//        this.userJpaRepo.
+        User user = userJpaRepo.getUserById(userEditDto.getId());
+        Credential credential = user.getCredentials();
+        user.setLastName(userEditDto.getLastName());
+        user.setFirstName(userEditDto.getFirstName());
+
+        credential.setEmail(userEditDto.getEmail());
+        credential.setPassword(userEditDto.getPassword());
+        user.setCredentials(credential);
+        this.credentialsService.editCredential(credential);
+        this.userJpaRepo.save(user);
     }
 }

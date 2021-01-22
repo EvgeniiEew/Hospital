@@ -55,20 +55,20 @@ public class UsersController {
     }
 
     //todo
-    @PostMapping("/user/{id}/edit/")
+    @PostMapping("/users/{id}/edit/")
     public String editUser(@PathVariable("id") Integer id, Model model) {
         UserEditDto userEditDto = this.userService.getUserEditById(id);
         model.addAttribute("userEditDto", userEditDto);
         return this.EDITUSERLIST;
     }
 
-    @PostMapping("/user/edit")
-    public String editUser(@Valid UserEditDto userEditDto, BindingResult bindingResult, Model model) {
+    @PostMapping("/user/edit/{id}/")
+    public String editUser(@PathVariable("id") Integer id, @Valid UserEditDto userEditDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userEditDto", userEditDto);
             return this.EDITUSERLIST;
         }
-        //todo edit user
+        userEditDto.setId(id);
         this.userService.userEdit(userEditDto);
         return "redirect:/";
     }

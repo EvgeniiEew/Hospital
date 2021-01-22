@@ -25,8 +25,6 @@ public class CredentialsController {
     @Autowired
     private UserService userService;
     @Autowired
-    private ICredentialsService credentialsService;
-    @Autowired
     private PatientDetailsService patientDetailsService;
 
     @PostMapping("/patient/registers")

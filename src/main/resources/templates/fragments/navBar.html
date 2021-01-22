@@ -29,14 +29,13 @@
                     <div class="dropdown-menu" aria-labelledby="menu">
                         <a class="dropdown-item" href="/myaccount">Моя страница</a>
                         <a class="dropdown-item" href="/patient/register">Регистрация посетителя</a>
+                        <hr class="dropdown-divider">
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/patient/status/receptionPending">Кабинет осмотра</a>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/patient/appointment">Операционная</a>
-                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="/doctor/create">Регистрация доктора</a>
                         <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')" href="/user/discharges">Список на выписку</a>
-                        <!--                        <li><a class="dropdown-item" href="#">Войти</a></li>-->
-                        <hr class="dropdown-divider"></hr>
-
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="/doctor/create">Регистрация доктора</a>
+                        <a class="dropdown-item"  sec:authorize="hasRole('ROLE_ADMIN')" href="/credanchials">Редактировать пользователей</a>
                     </div>
             </ul>
         </div>
