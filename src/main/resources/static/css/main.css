@@ -3,14 +3,111 @@
     min-height: 700px;
 }
 
+body {
+    color: white;
+}
+
+.profile-card-header {
+    background: #1C6EA4;
+    color: white;
+    display: flex;
+    height: 50px;
+    justify-content: space-around;
+}
+
+.profile-data {
+    flex-grow: 0.5;
+    font-size: 1.2rem;
+}
+
+.profile-photo {
+    border: 1px solid #1C6EA4;
+    border-radius: 14px;
+    width: 135px;
+    height: 135px;
+}
+
+.profile-card-data {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.profile-edit-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.profile-card-header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    flex-grow: 0.1;
+}
+
+.profile-card-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.profile-container {
+    padding: 18px 0;
+    color: black;
+    background: white;
+    box-shadow: 9px 10px 9px 1px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    width: 440px;
+    height: 250px;
+    border: 4px solid #1C6EA4;
+    border-radius: 23px;
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.profile-data-row {
+    display: flex;
+}
+
+.profile-data-title {
+    min-width: 100px;
+}
+
+.btn {
+    margin: 0 5px 0 5px;
+}
+
+.best-staff-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .best-staff-title {
     font-size: 1.8rem;
     text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.best-staff-title:hover {
+    color: #03899C;
 }
 
 .best-stuff {
+    width: 100%;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     margin-top: 2rem;
 }
 
@@ -96,12 +193,13 @@
 }
 
 .main-video-container {
-    position: absolute;
-    left: 0;
+    position: fixed;
     right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
     overflow: hidden;
     z-index: -1;
-    height: 700px;
 }
 
 .main-video-container-overlay {
@@ -111,7 +209,6 @@
     top: 0;
     bottom: 0;
     width: 100%;
-    height: 700px;
 }
 
 .main-video {
@@ -126,7 +223,7 @@
 }
 
 .navbar {
-    color: black;
+    color: white;
     background-color: #03899C;
 }
 

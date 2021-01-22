@@ -16,9 +16,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers( "/doctor/create","/credanchials","/doctor/register","user/export/{id}","/patient/**").hasAuthority("ROLE_ADMIN").and().
-               authorizeRequests().antMatchers("user/export/{id}","/patient/**").hasAuthority("ROLE_DOCTOR")
-                .antMatchers("error/eror","/doctors", "/login", "/patient/register", "/patient/registers", "/webjars/**","/footer/**","/head/**","/navBar/**","/scripts/**", "/" ,"/users/**", "/css/**","/favicon.ico")
+                .authorizeRequests().antMatchers("/doctor/create", "/credanchials", "/doctor/register", "user/export/{id}")
+                .hasAuthority("ROLE_ADMIN").and()
+                .authorizeRequests().antMatchers("user/export/{id}", "/patient/**")
+                .hasAnyAuthority("ROLE_DOCTOR", "ROLE_ADMIN")
+                .antMatchers("/doctors", "/login", "/patient/register", "/patient/registers", "/webjars/**", "/footer/**", "/head/**", "/navBar/**", "/scripts/**", "/", "/users/**", "/css/**", "/favicon.ico")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

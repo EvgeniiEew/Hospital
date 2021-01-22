@@ -19,8 +19,8 @@
                         <th scope="col">Имя</th>
                         <th scope="col">Фамилия</th>
                         <th scope="col">Статус</th>
-                        <th scope="col">Осмотр пациента в оччереди</th>
-                        <th scope="col">Удалить из очереди</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
 
@@ -33,14 +33,13 @@
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/{uid}/inspection (uid=${patient.id})}">
                             <td>
-                                <input style="background-color: chartreuse" type="submit" value="Осмотреть"/>
+                                <input class="btn btn-success" type="submit" value="Осмотреть"/>
                             </td>
                         </form>
 
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/status/{uid}/reset (uid=${patient.id})}">
-                            <td><input style="background-color: indianred" type="submit"
-                                       value="Вернуть в очередь на запись"/></td>
+                            <td><input class="btn btn-danger" type="submit" value="Вернуть в очередь на запись"/></td>
                         </form>
                     </tr>
                 </table>

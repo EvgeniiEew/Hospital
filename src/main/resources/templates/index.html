@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>Добро пожаловать на сайт Больницы №0</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
 </head>
@@ -22,23 +21,28 @@
         </div>
     </div>
 
-    <div class="main container">
+    <div class="main">
         <div class="starter-template text-center py-5 px-3">
             <h1>Добро пожаловать на сайт Больницы №0</h1>
-            <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.
-                <br> На осмотр можно записаться в разделе регистрации</p>
+            <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.</p>
+            <!--            todo if user не залогинен-->
+            <p> На осмотр можно записаться после прохождения регистрации.</p>
         </div>
 
         <!--    todo get random doctors photos-->
-        <div class="best-staff-title">Вас примут наши лучшие специалисты</div>
-        <div class="best-stuff">
-            <img class="stuff-photo"
-                 src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
-            <img class="stuff-photo"
-                 src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
-            <img class="stuff-photo"
-                 src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
+        <div class="best-staff-container">
+            <a href="/doctors" class="best-staff-title">Вас примут наши лучшие специалисты</a>
+
+            <div class="best-stuff">
+                <img class="stuff-photo"
+                     src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
+                <img class="stuff-photo"
+                     src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
+                <img class="stuff-photo"
+                     src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
+            </div>
         </div>
+
     </div>
 
     <th:block th:insert="fragments/footer.html :: footer"/>

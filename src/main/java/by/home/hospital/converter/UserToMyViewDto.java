@@ -17,7 +17,10 @@ public class UserToMyViewDto implements Converter<String, MyViewDto> {
         User user = this.userService.getUserByCredentialsEmail(source);
         MyViewDto myViewDto = new MyViewDto(
                 user.getId(),
-                user.getFirstName(), user.getLastName(), user.getPosition().toString()
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPosition().toString(),
+                user.getCredentials().getEmail()
         );
         return myViewDto;
     }

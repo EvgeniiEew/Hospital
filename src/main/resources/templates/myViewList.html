@@ -1,63 +1,93 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <title>Добро пожаловать на вашу страницу</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <title>Моя страница</title>
     <th:block th:insert="fragments/header.html :: css"/>
 </head>
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
-    <main>
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Фото</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Фамилия</th>
-                <th scope="col">Email</th>
-                <th scope="col">Роль</th>
-                <th sec:authorize="hasRole('ROLE_PATIENT')" scope="col">Повторная запись</th>
-                <th scope="col">Загрузить фото</th>
-                <th scope="col">Изменить данные</th>
-            </tr>
-            </thead>
+    <main class="profile">
+        <div class="profile-container">
+            <div class="profile-card-header">
+                <img class="profile-card-icon" alt="Snake icon" width="30" height="30"
+                     src="https://img.icons8.com/ultraviolet/344/rod-of-asclepius.png">
+                <div class="profile-card-header-title">Больница №0</div>
+            </div>
+            <div class="profile-card-data">
+                <img th:src="@{/users/{uid}/img(uid=${view.id})}" class="profile-photo" alt="">
 
-            <tr th:each="vie : ${view}">
-            <td><img th:src="@{/users/{uid}/img(uid=${view.id})}" width="100"
-                     height="100" alt=""></td>
-            <td th:text="${vie.firstName}"/>
-            <td th:text="${vie.lastName}"/>
-            <td th:text="${email}"/>
-            <td th:text="${vie.position}"/>
+                <div class="profile-data" th:object="${view}">
+                    <div class="profile-data-row">
+                        <div class="profile-data-title">Имя:</div>
+                        <div class="profile-data-value" th:text="*{firstName}"></div>
+                    </div>
+                    <div class="profile-data-row">
+                        <div class="profile-data-title">Фамилия:</div>
+                        <div class="profile-data-value" th:text="*{lastName}"></div>
+                    </div>
+                    <div class="profile-data-row">
+                        <div class="profile-data-title">Email:</div>
+                        <div class="profile-data-value" th:text="*{email}"></div>
+                    </div>
+                    <div class="profile-edit-button">
+                        <form method="POST" enctype="multipart/form-data"
+                              th:action="@{/users/{uid}/edit/ (uid=${view.id})}">
+                            <input class="btn btn-outline-success btn-sm" type="submit" value="Изменить"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <td sec:authorize="hasRole('ROLE_PATIENT')"><a class="btn btn-success" role="button"
-                                                           value="повторная запись"
-                                                           th:href="@{/user/{uid}/overwrite(uid=${view.id})}">
-            <td>
-                <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${view.id})}">
-                    <table>
-                        <tr>
-                            <td>File to upload:</td>
-                            <td><input type="file" name="files"/></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><input type="submit" value="Upload"/></td>
-                        </tr>
-                    </table>
-                </form>
-            </td>
-            <td>
-                <form method="POST" enctype="multipart/form-data"
-                      th:action="@{/users/{uid}/edit/ (uid=${view.id})}">
-                    <input class="btn btn-outline-success btn-sm" type="submit" value="Изменить"/>
-                </form>
-            </td>
-            </tr>
-            </table>
-        </table>
+
+        <!--        <table class="table">-->
+        <!--            <thead class="thead-dark">-->
+        <!--            <tr>-->
+        <!--                <th scope="col">Фото</th>-->
+        <!--                <th scope="col">Имя</th>-->
+        <!--                <th scope="col">Фамилия</th>-->
+        <!--                <th scope="col">Email</th>-->
+        <!--                <th scope="col">Роль</th>-->
+        <!--                <th sec:authorize="hasRole('ROLE_PATIENT')" scope="col">Повторная запись</th>-->
+        <!--                <th scope="col">Загрузить фото</th>-->
+        <!--                <th scope="col">Изменить данные</th>-->
+        <!--            </tr>-->
+        <!--            </thead>-->
+
+        <!--            <tr th:each="vie : ${view}">-->
+        <!--                <td><img th:src="@{/users/{uid}/img(uid=${view.id})}" width="100"-->
+        <!--                         height="100" alt=""></td>-->
+        <!--                <td th:text="${vie.firstName}"/>-->
+        <!--                <td th:text="${vie.lastName}"/>-->
+        <!--                <td th:text="${email}"/>-->
+        <!--                <td th:text="${vie.position}"/>-->
+
+        <!--                <td sec:authorize="hasRole('ROLE_PATIENT')"><a class="btn btn-success" role="button"-->
+        <!--                                                               value="повторная запись"-->
+        <!--                                                               th:href="@{/user/{uid}/overwrite(uid=${view.id})}">-->
+        <!--                <td>-->
+        <!--                    <form method="POST" enctype="multipart/form-data" th:action="@{/users/{uid}/img(uid=${view.id})}">-->
+        <!--                        <table>-->
+        <!--                            <tr>-->
+        <!--                                <td>File to upload:</td>-->
+        <!--                                <td><input type="file" name="files"/></td>-->
+        <!--                            </tr>-->
+        <!--                            <tr>-->
+        <!--                                <td></td>-->
+        <!--                                <td><input type="submit" value="Upload"/></td>-->
+        <!--                            </tr>-->
+        <!--                        </table>-->
+        <!--                    </form>-->
+        <!--                </td>-->
+        <!--                <td>-->
+        <!--                    <form method="POST" enctype="multipart/form-data"-->
+        <!--                          th:action="@{/users/{uid}/edit/ (uid=${view.id})}">-->
+        <!--                        <input class="btn btn-outline-success btn-sm" type="submit" value="Изменить"/>-->
+        <!--                    </form>-->
+        <!--                </td>-->
+        <!--            </tr>-->
+        <!--        </table>-->
     </main>
     <th:block th:insert="fragments/scripts.html :: js"/>
 </body>
