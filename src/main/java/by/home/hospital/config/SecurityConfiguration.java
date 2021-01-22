@@ -18,7 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests().antMatchers( "/doctor/create","/credanchials","/doctor/register","user/export/{id}","/patient/**").hasAuthority("ROLE_ADMIN").and().
                authorizeRequests().antMatchers("user/export/{id}","/patient/**").hasAuthority("ROLE_DOCTOR")
-                .antMatchers("/doctors", "/login", "/patient/register", "/patient/registers", "/webjars/**","/footer/**","/head/**","/navBar/**","/scripts/**", "/" ,"/users/**", "/css/**","/favicon.ico")
+                .antMatchers("error/eror","/doctors", "/login", "/patient/register", "/patient/registers", "/webjars/**","/footer/**","/head/**","/navBar/**","/scripts/**", "/" ,"/users/**", "/css/**","/favicon.ico")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

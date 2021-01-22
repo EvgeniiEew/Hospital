@@ -15,6 +15,8 @@ import java.util.List;
 public interface UserJpaRepo extends JpaRepository<User, Integer> {
     HashSet<User> findAllByPositionOrderByFirstNameDesc(Position position);
 
+    User getUserByCredentialsEmail(String email);
+
     User getUserByCredentials_Id(Integer id);
 
     List<User> findByOrderByFirstNameAsc();

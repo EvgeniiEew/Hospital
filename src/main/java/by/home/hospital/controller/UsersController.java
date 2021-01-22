@@ -3,6 +3,7 @@ package by.home.hospital.controller;
 
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
+import by.home.hospital.exception.ApiRequestException;
 import by.home.hospital.service.StorageService;
 import by.home.hospital.service.impl.EpicrisisService;
 import by.home.hospital.service.impl.PatientDetailsService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -64,19 +66,23 @@ public class UsersController {
     }
 
     @PostMapping("/user/edit/{id}/")
-    public String editUser(@PathVariable("id") Integer id, @Valid UserEditDto userEditDto, BindingResult bindingResult, Model model) {
+    public String editUser(@PathVariable("id") Integer id, @Valid UserEditDto userEditDto, HttpServletRequest request, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userEditDto", userEditDto);
             return this.EDITUSERLIST;
         }
         userEditDto.setId(id);
         this.userService.userEdit(userEditDto);
-        return "redirect:/";
+        if (request.isUserInRole("ADMIN")) {
+            return "redirect:/credanchials";
+        }
+        return "redirect:/myaccount";
     }
 
 
     @GetMapping("/myaccount")
     public String getMyView(Authentication authentication, Model model) {
+//        throw new ApiRequestException("w");
 
         if (authentication == null) {
             return "redirect:/login";

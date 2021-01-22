@@ -150,4 +150,8 @@ public class UserService implements IUserServices {
         this.credentialsService.editCredential(credential);
         this.userJpaRepo.save(user);
     }
+
+    public User getUserByCredentialsEmail(String email) {
+        return this.userJpaRepo.getUserByCredentialsEmail(email);
+    }
 }
