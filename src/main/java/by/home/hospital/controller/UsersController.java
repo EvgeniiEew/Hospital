@@ -153,9 +153,12 @@ public class UsersController {
         return this.DISCHARGE;
     }
 
-    @GetMapping("user/{id}/overwrite")
-    public String overwriteUser(@PathVariable("id") Integer id) {
-        this.patientDetailsService.resetPatientDetaislStatusFromIdUser(id);
+    @GetMapping("user/overwrite")
+    public String overwriteUser(Authentication authentication) {
+        if (authentication == null) {
+            return "redirect:/login";
+        }
+        this.patientDetailsService.resetPatientDetaislStatusFromIdUser(((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername());
         return "redirect:/";
     }
 }

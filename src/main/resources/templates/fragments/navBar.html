@@ -46,6 +46,9 @@
                     доктора</a>
                 <a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" href="/credanchials">Редактировать
                     пользователей</a>
+
+                <a class="dropdown-item" sec:authorize="hasRole('ROLE_PATIENT')" href="/user/overwrite">Повторная запись
+                </a>
                 <!--                //-->
             </div>
         </div>
