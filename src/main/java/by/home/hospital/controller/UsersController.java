@@ -3,7 +3,7 @@ package by.home.hospital.controller;
 
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
-import by.home.hospital.exception.ApiRequestException;
+//import by.home.hospital.dto.MyViewDto;
 import by.home.hospital.service.StorageService;
 import by.home.hospital.service.impl.EpicrisisService;
 import by.home.hospital.service.impl.PatientDetailsService;
@@ -82,8 +82,6 @@ public class UsersController {
 
     @GetMapping("/myaccount")
     public String getMyView(Authentication authentication, Model model) {
-//        throw new ApiRequestException("w");
-
         if (authentication == null) {
             return "redirect:/login";
         }
