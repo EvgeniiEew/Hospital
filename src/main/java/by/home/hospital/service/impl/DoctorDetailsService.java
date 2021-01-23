@@ -54,4 +54,8 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
     public void deleteDoctorDetails(Integer number) {
         this.doctorDitalesJpaRepository.deleteById(number);
     }
+
+    public void save(DoctorDetails doctorDetails) {
+        this.doctorDitalesJpaRepository.save(doctorDetails);
+    }
 }

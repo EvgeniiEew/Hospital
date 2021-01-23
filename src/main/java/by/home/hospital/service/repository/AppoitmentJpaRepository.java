@@ -3,6 +3,7 @@ package by.home.hospital.service.repository;
 import by.home.hospital.domain.Appointment;
 import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.enums.AppointmentStatus;
+import by.home.hospital.enums.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,6 +13,8 @@ public interface AppoitmentJpaRepository extends JpaRepository<Appointment, Inte
     List<Appointment> findByOrderByTypeAsc();
 
     List<Appointment> findByStatusOrderByTypeAsc(AppointmentStatus status);
+
+    List<Appointment> findByStatusAndTypeNotLike(AppointmentStatus status, Type type);
 
     @Query(value = "SELECT * FROM appointment a where a.id = ?1", nativeQuery = true)
     Appointment findAppointmentByIdNative(Integer id);

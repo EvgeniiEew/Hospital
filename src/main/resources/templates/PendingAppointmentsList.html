@@ -3,7 +3,7 @@
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <th:block th:insert="fragments/header.html :: css"/>
+    <th:block th:insert="fragments/head.html :: head"/>
 </head>
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
@@ -33,6 +33,6 @@
         Добро пожаловать
         <span sec:authentication="principal.username">Udefined</span>
     </p>!
-    <th:block th:insert="fragments/scripts.html :: js"/>
+    <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

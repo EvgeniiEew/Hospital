@@ -11,14 +11,10 @@ import com.lowagie.text.Image;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import org.apache.catalina.core.ApplicationContext;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import java.awt.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;

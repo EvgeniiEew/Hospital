@@ -25,8 +25,9 @@
 
         <div class="profile-menu dropdown">
             <div class="nav-link dropdown-toggle" role="button" id="menu" data-toggle="dropdown"
-               aria-haspopup="true"
-               aria-expanded="false"> Меню </div>
+                 aria-haspopup="true"
+                 aria-expanded="false"> Меню
+            </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menu">
                 <a class="dropdown-item" href="/myaccount">Моя страница</a>
                 <hr class="dropdown-divider">
@@ -38,6 +39,8 @@
                    href="/patient/appointment">Операционная</a>
                 <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"
                    href="/user/discharges">Список на выписку</a>
+                <a class="dropdown-item" sec:authorize="hasRole('ROLE_NURSE')"
+                   href="/nurse/appointment">Операционная</a>
                 <!--                //-->
 
                 <hr class="dropdown-divider">

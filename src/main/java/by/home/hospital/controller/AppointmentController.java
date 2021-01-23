@@ -1,10 +1,12 @@
 package by.home.hospital.controller;
 
 import by.home.hospital.domain.Diagnosis;
+import by.home.hospital.domain.UserWIthId;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.SecurityContext;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,7 +28,7 @@ public class AppointmentController {
     private final String PERFORMANCE_APPOINTMENT = "performanceAppointmentList";
 
     @Autowired
-    private UserService userService;
+    private  CredentialAuthService credentialAuthService;
     @Autowired
     private ConversionService conversionService;
     @Autowired
@@ -42,16 +44,16 @@ public class AppointmentController {
 
 
     @PostMapping("/patient/examination")
-    public String examinationPatient(UserExaminationDto userExaminationDto, Authentication authentication) {
-        userExaminationDto.setAuthenticationDoctorId(this.userService.getUserIdByCredentials_email(authentication.getName()));
+    public String examinationPatient(UserExaminationDto userExaminationDto) {
+        userExaminationDto.setAuthenticationDoctorId(this.credentialAuthService.getIdAutUser());
         this.appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
         return "redirect:/patient/status/receptionPending";
     }
 
     @PostMapping("/patients/examination")
-    public String examinationsPatient(List<UserExaminationDto> userExaminationDto, Authentication authentication) {
+    public String examinationsPatient(List<UserExaminationDto> userExaminationDto) {
         List<ExaminationDoctorDto> examinationDoctorDto = new ArrayList<>();
-        Integer idDoctor = this.userService.getUserIdByCredentials_email(authentication.getName());
+        Integer idDoctor =  this.credentialAuthService.getIdAutUser();
         for (UserExaminationDto examination : userExaminationDto) {
             examination.setAuthenticationDoctorId(idDoctor);
             examinationDoctorDto.add(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));

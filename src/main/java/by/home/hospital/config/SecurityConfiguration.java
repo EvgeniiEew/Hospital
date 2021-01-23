@@ -17,10 +17,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/doctor/create", "/credanchials", "/doctor/register", "user/export/{id}")
-                .hasAuthority("ROLE_ADMIN").and()//.exceptionHandling().accessDeniedPage("/error/403").and()
-                .authorizeRequests().antMatchers("user/export/{id}", "/patient/**")
+                .hasAuthority("ROLE_ADMIN").and().authorizeRequests().antMatchers("/nurse/appointment", "/patient/FulfillmentOfAppointments/**", "/patient/addAppointmentToTheDatabase").hasAnyAuthority("ROLE_NURSE" ,"ROLE_DOCTOR").//.exceptionHandling().accessDeniedPage("/error/403").and()
+                and().authorizeRequests().antMatchers("user/export/{id}", "/patient/**")
                 .hasAnyAuthority("ROLE_DOCTOR", "ROLE_ADMIN")
-                .antMatchers("/error/**","/doctors", "/login", "/patient/register", "/patient/registers", "/webjars/**", "/footer/**", "/head/**", "/navBar/**", "/scripts/**", "/", "/users/**", "/css/**", "/favicon.ico")
+                .antMatchers("/error/**", "/doctors", "/login", "/patient/register", "/patient/registers", "/webjars/**", "/footer/**", "/head/**", "/navBar/**", "/scripts/**", "/", "/users/**", "/css/**", "/favicon.ico")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

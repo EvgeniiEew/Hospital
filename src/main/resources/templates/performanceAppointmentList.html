@@ -1,60 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
-    <th:block th:insert="fragments/header.html :: css"/>
+    <th:block th:insert="fragments/head.html :: head"/>
 </head>
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
     <h2>Выполение процедур</h2>
-    <div>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Назаначение №</th>
-                <th scope="col">Информация назначения</th>
-                <th scope="col">Тип выполняемого назначения</th>
-                <th scope="col">Статус процедуры</th>
-                <th scope="col">Предворительная запись в выписке</th>
+    <div class="main-container">
+        <div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Назаначение №</th>
+                    <th scope="col">Информация назначения</th>
+                    <th scope="col">Тип выполняемого назначения</th>
+                    <th scope="col">Статус процедуры</th>
+                    <th scope="col">Предворительная запись в выписке</th>
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="makingAppDTO : ${makingAppointmentsDto}">
-                <td th:text="${makingAppDTO.idApointment}"/>
-                <td th:text="${makingAppDTO.infoAppointment}"/>
-                <td th:text="${makingAppDTO.type}"/>
-                <td th:text="${makingAppDTO.status}"/>
-                <td th:text="${makingAppDTO.info_epicris}"/>
-            </tr>
-<!--            <tr><th scope="col">Рание диагнозы при поступлении</th> </tr>-->
-<!--            <tr th:each="diagnos : ${diagnosis}">-->
-<!--                <td th:text=" ${diagnos}"/>-->
-<!--            </tr>-->
-            </tbody>
-        </table>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="makingAppDTO : ${makingAppointmentsDto}">
+                    <td th:text="${makingAppDTO.idApointment}"/>
+                    <td th:text="${makingAppDTO.infoAppointment}"/>
+                    <td th:text="${makingAppDTO.type}"/>
+                    <td th:text="${makingAppDTO.status}"/>
+                    <td th:text="${makingAppDTO.info_epicris}"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-container">
+            <form METHOD="post" action="/patient/addAppointmentToTheDatabase">
+                <fieldset>
+                    <legend>Дописать результат проведения</legend>
+                    <div class="form-group">
+                        <label for="resaultEpicris">Инфо к выполняемому назначению, заметки.</label>
+                        <input type="text" class="form-control" id="resaultEpicris" name="resaultEpicris"
+                               placeholder="epicris..">
+                    </div>
+                    <div class="form-group" th:object="${makingAppointmentsDto}">
+                        <label for="idPatientUser"></label>
+                        <input hidden="hidden" type="text" id="idPatientUser" name="idPatientUser"
+                               th:value="*{idPatientDitales}">
+                    </div>
+                    <div class="form-group" th:object="${makingAppointmentsDto}">
+                        <label for="idAppointment"></label>
+                        <input hidden="hidden" type="text" id="idAppointment" name="idAppointment"
+                               th:value="*{idApointment}">
+                    </div>
+                    <button type="submit" class="btn btn-success">Выполнить назначение</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
-    <div class="form-container">
-        <form METHOD="post" action="/patient/addAppointmentToTheDatabase">
-            <fieldset>
-                <legend>Дописать результат проведения</legend>
-                <div class="form-group">
-                    <label for="resaultEpicris">Инфо к выполняемому назначению, заметки.</label>
-                    <input type="text" class="form-control" id="resaultEpicris" name="resaultEpicris"
-                           placeholder="epicris..">
-                </div>
-                <div class="form-group" th:object="${makingAppointmentsDto}">
-                    <label for="idPatientUser"></label>
-                    <input hidden="hidden" type="text" id="idPatientUser" name="idPatientUser" th:value="*{idPatientDitales}">
-                </div>
-                <div class="form-group" th:object="${makingAppointmentsDto}">
-                    <label for="idAppointment"></label>
-                    <input hidden="hidden" type="text" id="idAppointment" name="idAppointment" th:value="*{idApointment}">
-                </div>
-                <button type="submit" class="btn btn-success">Выполнить назначение</button>
-            </fieldset>
-        </form>
-    </div>
-    <th:block th:insert="fragments/scripts.html :: js"/>
+    <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

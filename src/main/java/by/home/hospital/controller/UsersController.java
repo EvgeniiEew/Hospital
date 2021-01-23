@@ -3,8 +3,8 @@ package by.home.hospital.controller;
 
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
-//import by.home.hospital.dto.MyViewDto;
 import by.home.hospital.service.StorageService;
+import by.home.hospital.service.impl.CredentialAuthService;
 import by.home.hospital.service.impl.EpicrisisService;
 import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;
@@ -41,6 +41,8 @@ public class UsersController {
     private final String DISCHARGE = "dischargeList";
     private final String EDITUSERLIST = "editUserList";
 
+    @Autowired
+    private CredentialAuthService credentialAuthService;
     @Autowired
     private EpicrisisService epicrisisService;
     @Autowired
@@ -158,7 +160,7 @@ public class UsersController {
         if (authentication == null) {
             return "redirect:/login";
         }
-        this.patientDetailsService.resetPatientDetaislStatusFromIdUser(((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername());
+        this.patientDetailsService.resetPatientDetaislStatusFromIdUser(this.credentialAuthService.getIdAutUser());
         return "redirect:/";
     }
 }

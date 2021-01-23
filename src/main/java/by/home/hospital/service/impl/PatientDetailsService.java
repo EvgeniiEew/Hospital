@@ -84,8 +84,8 @@ public class PatientDetailsService implements IPatientDetailsService {
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
-    public void resetPatientDetaislStatusFromIdUser(String userName) {
-        PatientDetails patientDetails = getPatientDetailsByPatientId(this.userService.getUserIdByCredentials_email(userName));
+    public void resetPatientDetaislStatusFromIdUser(Integer idPatient) {
+        PatientDetails patientDetails = getPatientDetailsByPatientId(idPatient);
         patientDetails.setPatientStatus(NOT_EXAMINED);
         this.patientDitalesjpaRepository.save(patientDetails);
     }

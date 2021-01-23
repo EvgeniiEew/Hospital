@@ -3,6 +3,7 @@ package by.home.hospital.service.impl;
 import by.home.hospital.domain.*;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
+import by.home.hospital.enums.Type;
 import by.home.hospital.service.IAppointmentService;
 import by.home.hospital.service.repository.AppoitmentJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,18 @@ public class AppointmentService implements IAppointmentService {
                 )).collect(Collectors.toList());
     }
 
+    public List<AppointmentFulfillmentDto> nurseFindAllByStatus(AppointmentStatus status) {
+//        String type = Type.OPERATION.toString();
+        List<Appointment> appointments = this.appoitmentJpaRepository.findByStatusAndTypeNotLike(status, Type.OPERATION);
+        return appointments.stream().map(appointment ->
+                new AppointmentFulfillmentDto(
+                        appointment.getId(),
+                        appointment.getName(),
+                        appointment.getType().toString(),
+                        appointment.getStatus().toString()
+                )).collect(Collectors.toList());
+    }
+
     // заполнение формы для выполения процедур.операций.лекарств
     public MakingAppointmentsDto getFormForMakingAppointmentsDto(Integer idAppointment) {
         Appointment appointment = this.appoitmentJpaRepository.findAppointmentByIdNative(idAppointment);
@@ -78,24 +91,36 @@ public class AppointmentService implements IAppointmentService {
                 AppointmentStatus.PENDING);
         return this.appoitmentJpaRepository.save(appointment);
     }
-    public List<Appointment> findAppointmentsByPatientId(Integer id){
+
+    public List<Appointment> findAppointmentsByPatientId(Integer id) {
         return this.appoitmentJpaRepository.findAppointmentsByPatientId(id);
     }
+
     public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
         List<Appointment> list = appoitmentJpaRepository.findAppointmentsByPatientId(idPatient);
         List<AppointmentDischarsergesDto> dtoList = new ArrayList<>();
         list.forEach(appointment -> {
             User user = appointment.getAppointmentUsers().getDoctor();
-            DoctorDetails doctorDetails = user.getDoctorDetails();
-            dtoList.add(new AppointmentDischarsergesDto(
-                    appointment.getName(),
-                    appointment.getType().toString(),
-                    appointment.getDate().toString(),
-                    user.getPosition().toString(),
-                    doctorDetails.getName(),
-                    user.getFirstName(),
-                    user.getLastName()
-            ));
+            try {
+                DoctorDetails doctorDetails = user.getDoctorDetails();
+                dtoList.add(new AppointmentDischarsergesDto(
+                        appointment.getName(),
+                        appointment.getType().toString(),
+                        appointment.getDate().toString(),
+                        user.getPosition().toString(),
+                        doctorDetails.getName(),
+                        user.getFirstName(),
+                        user.getLastName()));
+            } catch (NullPointerException exp) {
+                dtoList.add(new AppointmentDischarsergesDto(
+                        appointment.getName(),
+                        appointment.getType().toString(),
+                        appointment.getDate().toString(),
+                        user.getPosition().toString(),
+                        "Nurse",
+                        user.getFirstName(),
+                        user.getLastName()));
+            }
         });
         return dtoList;
     }

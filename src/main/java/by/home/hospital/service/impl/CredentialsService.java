@@ -61,4 +61,7 @@ public class CredentialsService implements ICredentialsService {
        this.credentialsJpaRepository.save(credential);
     }
 
+    public void save(Credential credentials) {
+        this.credentialsJpaRepository.save(credentials);
+    }
 }
