@@ -101,26 +101,15 @@ public class AppointmentService implements IAppointmentService {
         List<AppointmentDischarsergesDto> dtoList = new ArrayList<>();
         list.forEach(appointment -> {
             User user = appointment.getAppointmentUsers().getDoctor();
-            try {
-                DoctorDetails doctorDetails = user.getDoctorDetails();
-                dtoList.add(new AppointmentDischarsergesDto(
-                        appointment.getName(),
-                        appointment.getType().toString(),
-                        appointment.getDate().toString(),
-                        user.getPosition().toString(),
-                        doctorDetails.getName(),
-                        user.getFirstName(),
-                        user.getLastName()));
-            } catch (NullPointerException exp) {
-                dtoList.add(new AppointmentDischarsergesDto(
-                        appointment.getName(),
-                        appointment.getType().toString(),
-                        appointment.getDate().toString(),
-                        user.getPosition().toString(),
-                        "Nurse",
-                        user.getFirstName(),
-                        user.getLastName()));
-            }
+            DoctorDetails doctorDetails = user.getDoctorDetails();
+            dtoList.add(new AppointmentDischarsergesDto(
+                    appointment.getName(),
+                    appointment.getType().toString(),
+                    appointment.getDate().toString(),
+                    user.getPosition().toString(),
+                    doctorDetails == null ? "Nurse" : doctorDetails.getName(),
+                    user.getFirstName(),
+                    user.getLastName()));
         });
         return dtoList;
     }

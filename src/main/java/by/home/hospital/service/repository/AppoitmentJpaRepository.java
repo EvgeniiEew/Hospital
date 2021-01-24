@@ -1,7 +1,6 @@
 package by.home.hospital.service.repository;
 
 import by.home.hospital.domain.Appointment;
-import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Type;
 import org.springframework.data.jpa.repository.JpaRepository;

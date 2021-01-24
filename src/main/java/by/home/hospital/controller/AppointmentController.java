@@ -1,14 +1,11 @@
 package by.home.hospital.controller;
 
 import by.home.hospital.domain.Diagnosis;
-import by.home.hospital.domain.UserWIthId;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.SecurityContext;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

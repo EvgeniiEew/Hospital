@@ -12,11 +12,11 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +39,7 @@ public class UsersController {
     private final String VIEW = "myViewList";
     private final String DISCHARGES = "dischargesList";
     private final String DISCHARGE = "dischargeList";
-    private final String EDITUSERLIST = "editUserList";
+    private final String EDIT_USER_LIST = "editUserList";
 
     @Autowired
     private CredentialAuthService credentialAuthService;
@@ -64,17 +64,18 @@ public class UsersController {
     public String editUser(@PathVariable("id") Integer id, Model model) {
         UserEditDto userEditDto = this.userService.getUserEditById(id);
         model.addAttribute("userEditDto", userEditDto);
-        return this.EDITUSERLIST;
+        return this.EDIT_USER_LIST;
     }
 
     @PostMapping("/user/edit/{id}/")
     public String editUser(@PathVariable("id") Integer id, @Valid UserEditDto userEditDto, HttpServletRequest request, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userEditDto", userEditDto);
-            return this.EDITUSERLIST;
+            return this.EDIT_USER_LIST;
         }
         userEditDto.setId(id);
         this.userService.userEdit(userEditDto);
+
         if (request.isUserInRole("ADMIN")) {
             return "redirect:/credanchials";
         }

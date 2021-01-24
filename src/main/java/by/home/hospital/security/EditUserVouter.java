@@ -2,8 +2,8 @@ package by.home.hospital.security;
 
 import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
 @Component("editUserVouter")
 public class EditUserVouter {

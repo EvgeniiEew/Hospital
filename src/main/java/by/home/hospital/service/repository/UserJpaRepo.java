@@ -2,13 +2,11 @@ package by.home.hospital.service.repository;
 
 import by.home.hospital.domain.User;
 import by.home.hospital.enums.Position;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 

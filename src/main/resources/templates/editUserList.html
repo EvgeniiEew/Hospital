@@ -8,9 +8,16 @@
     <th:block th:insert="fragments/navBar.html :: navBar"/>
 
     <div class="main-container">
-        <div class="form-title ">Введите данные </div>
-        <form class="container center_div register-form" th:action="@{/user/edit/{uid}/ (uid=${userEditDto.id})}" method="POST"
+        <div class="form-title ">Введите данные</div>
+        <form class="container center_div register-form" th:action="@{/user/edit/{uid}/ (uid=${userEditDto.id})}"
+              method="POST"
               th:object="${userEditDto}">
+
+            <div class="form-group">
+                <img th:src="@{/users/{uid}/img(uid=${userEditDto.id})}" width="100" height="100" alt="">
+                <input class="form-control" type="file" placeholder="" name="files" th:field="*{photo}">
+            </div>
+
             <div class="form-group">
                 <label for="firstNameInput">Имя:</label>
                 <input class="form-control" id="firstNameInput" type="text" placeholder="" name="firstName"
@@ -45,6 +52,37 @@
             </div>
 
             <input type="submit" class="btn btn-success" value="Сохранить"/>
+        </form>
+    </div>
+
+    <!--    todo phhoto edit-->
+    <div class="main-container">
+        <form>
+            <div>
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Фото</th>
+                    <th scope="col">Загрузить фото</th>
+                </tr>
+                </thead>
+                <td>
+                </td>
+                <td>
+                    <form enctype="multipart/form-data" method="POST"
+                          th:action="@{/users/{uid}/img(uid=${userEditDto.id})}">
+                        <table>
+                            <tr>
+                                <td>File to upload:</td>
+                                <td><input type="file" name="files"/></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" value="Upload"/></td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </div>
         </form>
     </div>
 

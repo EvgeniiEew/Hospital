@@ -4,7 +4,6 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.UserEditDto;
 import org.springframework.data.domain.Page;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface IUserServices {

@@ -6,8 +6,8 @@ import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static by.home.hospital.enums.PatientStatus.NOT_EXAMINED;
 import static by.home.hospital.enums.Position.*;

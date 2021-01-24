@@ -5,9 +5,9 @@ import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.dto.UserDischarsergeDto;
 import by.home.hospital.service.impl.UserService;
-import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
+import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -102,10 +102,12 @@ public class UserDischarsergePDFExporter {
 
     }
 
-    private void writeTableHeaderFromUserDischarserge(PdfPTable table) throws IOException {
-        Image image = setAvatarPdf();
-        if (image != null) {
+    private void writeTableHeaderFromUserDischarserge(PdfPTable table) {
+        try {
+            Image image = setAvatarPdf();
             table.addCell(image);
+        } catch (Exception e) {
+            table.addCell("photo");
         }
         table.addCell(String.valueOf(userDischarsergeDto.getIdPatientUser()));
         table.addCell(String.valueOf(userDischarsergeDto.getFirstNamePatient()));
@@ -136,7 +138,7 @@ public class UserDischarsergePDFExporter {
         Document document = new Document(PageSize.A3);
 //       PdfWriter.getInstance(document, new FileOutputStream("E:\\Projects\\ResaulProject\\src\\main\\resources\\Extract.pdf"));
 //        PdfWriter.getInstance(document, new FileOutputStream( path +"resources\\Extract.pdf"));
-        PdfWriter.getInstance(document, new FileOutputStream( path+"/resources/Extract.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(path + "/resources/Extract.pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setColor(Color.CYAN);
@@ -182,13 +184,12 @@ public class UserDischarsergePDFExporter {
         document.close();
     }
 
-    private Image setAvatarPdf() throws IOException {
+    private Image setAvatarPdf() throws IOException, NullPointerException {
         String name = this.userService.getUserById(userDischarsergeDto.getIdPatientUser()).getAvatarFileName();
-        if(name!= null) {
-            Path path = Paths.get(name);
-
-        return Image.getInstance(path.toAbsolutePath().toString());
+        if (name == null) {
+            throw new NullPointerException("File name not found");
         }
-        return null;
+        Path path = Paths.get(name);
+        return Image.getInstance(path.toAbsolutePath().toString());
     }
 }

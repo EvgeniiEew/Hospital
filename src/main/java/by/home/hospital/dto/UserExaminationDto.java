@@ -3,7 +3,6 @@ package by.home.hospital.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.Authentication;
 
 @Data
 @AllArgsConstructor

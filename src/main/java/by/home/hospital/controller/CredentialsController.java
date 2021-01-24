@@ -1,10 +1,7 @@
 package by.home.hospital.controller;
 
-import by.home.hospital.domain.Credential;
-import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.dto.UserEditDto;
-import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class CredentialsController {
