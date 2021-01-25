@@ -61,7 +61,7 @@ public class UsersController {
     @PostMapping("/users/{id}/edit/")
     @PreAuthorize("@editUserVouter.checkUserId(authentication,#id) or hasRole('ADMIN')")
     public String editUser(Authentication authentication, @PathVariable("id") Integer id, Model model) {
-        String email = authentication.getName();
+       String email = this.userService.getEmailByIdUser(id);
         MyViewDto view = (conversionService.convert(email, MyViewDto.class));
         UserEditDto userEditDto = this.userService.getUserEditById(id);
         model.addAttribute("userEditDto", userEditDto);
@@ -71,21 +71,19 @@ public class UsersController {
 
     @PostMapping("/user/edit/{id}/")
     public String editUser(@PathVariable("id") Integer id, @Valid UserEditDto userEditDto,
-                           HttpServletRequest request,
                            BindingResult bindingResult,
-                           Model model,
-                           Authentication authentication) {
+                           HttpServletRequest request,
+                           Model model) {
         if (bindingResult.hasErrors()) {
             userEditDto.setId(id);
-            model.addAttribute("userEditDto", userEditDto);
-            String email = authentication.getName();
+            String email = this.userService.getEmailByIdUser(id);
             MyViewDto view = (conversionService.convert(email, MyViewDto.class));
+            model.addAttribute("userEditDto", userEditDto);
             model.addAttribute("view", view);
             return this.EDIT_USER_LIST;
         }
         userEditDto.setId(id);
         this.userService.userEdit(userEditDto);
-
         if (request.isUserInRole("ADMIN")) {
             return "redirect:/credanchials";
         }
@@ -109,6 +107,7 @@ public class UsersController {
     public String handleFileUpload(@PathVariable("id") Integer id, @RequestParam("files") MultipartFile file) throws IOException {
         imgService.store(id, file);
         return "redirect:/myaccount";
+//        return  "redirect:/users/"+ id +"/edit/";
     }
 
     @GetMapping("/users/{id}/img")
