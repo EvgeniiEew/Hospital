@@ -4,10 +4,7 @@ package by.home.hospital.controller;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;
-import by.home.hospital.service.impl.CredentialAuthService;
-import by.home.hospital.service.impl.EpicrisisService;
-import by.home.hospital.service.impl.PatientDetailsService;
-import by.home.hospital.service.impl.UserService;
+import by.home.hospital.service.impl.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -42,6 +39,8 @@ public class UsersController {
     private final String EDIT_USER_LIST = "editUserList";
 
     @Autowired
+    private CredentialsService credentialsService;
+    @Autowired
     private CredentialAuthService credentialAuthService;
     @Autowired
     private EpicrisisService epicrisisService;
@@ -61,16 +60,27 @@ public class UsersController {
 
     @PostMapping("/users/{id}/edit/")
     @PreAuthorize("@editUserVouter.checkUserId(authentication,#id) or hasRole('ADMIN')")
-    public String editUser(@PathVariable("id") Integer id, Model model) {
+    public String editUser(Authentication authentication, @PathVariable("id") Integer id, Model model) {
+        String email = authentication.getName();
+        MyViewDto view = (conversionService.convert(email, MyViewDto.class));
         UserEditDto userEditDto = this.userService.getUserEditById(id);
         model.addAttribute("userEditDto", userEditDto);
+        model.addAttribute("view", view);
         return this.EDIT_USER_LIST;
     }
 
     @PostMapping("/user/edit/{id}/")
-    public String editUser(@PathVariable("id") Integer id, @Valid UserEditDto userEditDto, HttpServletRequest request, BindingResult bindingResult, Model model) {
+    public String editUser(@PathVariable("id") Integer id, @Valid UserEditDto userEditDto,
+                           HttpServletRequest request,
+                           BindingResult bindingResult,
+                           Model model,
+                           Authentication authentication) {
         if (bindingResult.hasErrors()) {
+            userEditDto.setId(id);
             model.addAttribute("userEditDto", userEditDto);
+            String email = authentication.getName();
+            MyViewDto view = (conversionService.convert(email, MyViewDto.class));
+            model.addAttribute("view", view);
             return this.EDIT_USER_LIST;
         }
         userEditDto.setId(id);

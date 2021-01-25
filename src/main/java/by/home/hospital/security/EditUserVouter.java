@@ -3,6 +3,7 @@ package by.home.hospital.security;
 import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 @Component("editUserVouter")
@@ -12,8 +13,10 @@ public class EditUserVouter {
 
     public boolean checkUserId(Authentication authentication, Integer id) {
         String email = this.userService.getUserById(id).getCredentials().getEmail();
-        String username = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
-
+        if (authentication.getPrincipal().equals("anonymousUser")) {
+            return false;
+        }
+        String username = ((User) authentication.getPrincipal()).getUsername();
         return username.equals(email);
     }
 }

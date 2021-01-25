@@ -16,7 +16,7 @@ public class Credential {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(nullable = false, unique = true, updatable = true)
+    @Column(nullable = false, unique = true, updatable = false)
     private String email;
 
     @Length(min = 6, max = 20)

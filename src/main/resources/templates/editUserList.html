@@ -9,14 +9,18 @@
 
     <div class="main-container">
         <div class="form-title ">Введите данные</div>
-        <form class="container center_div register-form" th:action="@{/user/edit/{uid}/ (uid=${userEditDto.id})}"
-              method="POST"
-              th:object="${userEditDto}">
+        <div class="photo-edit-form">
+            <img th:src="@{/users/{uid}/img(uid=${view.id})}" class="profile-photo" alt="">
 
-            <div class="form-group">
-                <img th:src="@{/users/{uid}/img(uid=${userEditDto.id})}" width="100" height="100" alt="">
-                <input class="form-control" type="file" placeholder="" name="files" th:field="*{photo}">
-            </div>
+            <form style="padding-top: 14px" method="POST" enctype="multipart/form-data"
+                  th:action="@{/users/{uid}/img(uid=${view.id})}">
+                <input type="file" name="files"/>
+                <input class="btn btn-success" type="submit" value="Загрузить"/>
+            </form>
+        </div>
+
+        <form class="container center_div register-form" th:action="@{/user/edit/{uid}/ (uid=${userEditDto.id})}"
+              method="POST" th:object="${userEditDto}">
 
             <div class="form-group">
                 <label for="firstNameInput">Имя:</label>
@@ -56,35 +60,35 @@
     </div>
 
     <!--    todo phhoto edit-->
-    <div class="main-container">
-        <form>
-            <div>
-                <thead>
-                <tr>
-                    <th scope="col">Фото</th>
-                    <th scope="col">Загрузить фото</th>
-                </tr>
-                </thead>
-                <td>
-                </td>
-                <td>
-                    <form enctype="multipart/form-data" method="POST"
-                          th:action="@{/users/{uid}/img(uid=${userEditDto.id})}">
-                        <table>
-                            <tr>
-                                <td>File to upload:</td>
-                                <td><input type="file" name="files"/></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" value="Upload"/></td>
-                            </tr>
-                        </table>
-                    </form>
-                </td>
-            </div>
-        </form>
-    </div>
+    <!--    <div class="main-container">-->
+    <!--        <form>-->
+    <!--            <div>-->
+    <!--                <thead>-->
+    <!--                <tr>-->
+    <!--                    <th scope="col">Фото</th>-->
+    <!--                    <th scope="col">Загрузить фото</th>-->
+    <!--                </tr>-->
+    <!--                </thead>-->
+    <!--                <td>-->
+    <!--                </td>-->
+    <!--                <td>-->
+    <!--                    <form enctype="multipart/form-data" method="POST"-->
+    <!--                          th:action="@{/users/{uid}/img(uid=${userEditDto.id})}">-->
+    <!--                        <table>-->
+    <!--                            <tr>-->
+    <!--                                <td>File to upload:</td>-->
+    <!--                                <td><input type="file" name="files"/></td>-->
+    <!--                            </tr>-->
+    <!--                            <tr>-->
+    <!--                                <td></td>-->
+    <!--                                <td><input type="submit" value="Upload"/></td>-->
+    <!--                            </tr>-->
+    <!--                        </table>-->
+    <!--                    </form>-->
+    <!--                </td>-->
+    <!--            </div>-->
+    <!--        </form>-->
+    <!--    </div>-->
 
     <th:block th:insert="fragments/footer.html :: footer"/>
 </body>

@@ -54,6 +54,13 @@ body {
     background-color: #084d01a1;;
 }
 
+.photo-edit-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 .profile-card-header {
     background: #1C6EA4;
     color: white;

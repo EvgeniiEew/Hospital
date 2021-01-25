@@ -4,6 +4,7 @@ import by.home.hospital.domain.Credential;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.dto.PatientRegisterDto;
+import by.home.hospital.dto.UserEditDto;
 import by.home.hospital.service.ICredentialsService;
 import by.home.hospital.service.repository.CredentialsJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +57,22 @@ public class CredentialsService implements ICredentialsService {
         return this.credentialsJpaRepository.findByEmail(credentialEmail);
     }
 
-    public void editCredential(Credential credential){
-       this.credentialsJpaRepository.save(credential);
+    public void editCredential(Credential credential) {
+        this.credentialsJpaRepository.save(credential);
     }
 
     public void save(Credential credentials) {
         this.credentialsJpaRepository.save(credentials);
     }
+
+//    public boolean existsByEmail(UserEditDto userEditDto) {
+//        Credential credential = this.credentialsJpaRepository.getByEmail(userEditDto.getEmail());
+//        if (credential != null) {
+//            return !credential.getUser().getId().equals(userEditDto.getId());
+//        }
+//        if (!this.credentialsJpaRepository.existsByEmail(userEditDto.getEmail())) {
+//            return false;
+//        }
+//        return true;
+//    }
 }
