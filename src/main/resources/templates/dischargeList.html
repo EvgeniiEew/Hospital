@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Getting Started: Serving Web Content</title>
+<title>Выписка</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -18,7 +18,7 @@
                 <h3>Выписка из медицинской карты больного</h3>
             </div>
             <table class="table">
-                <thead class="thead-dark">
+                <thead>
                 <tr>
                     <th scope="col">Фото</th>
                     <th scope="col">Личный номер пациента</th>
@@ -35,7 +35,7 @@
                 </tr>
             </table>
             <table class="table">
-                <thead class="thead-dark">
+                <thead>
                 <tr>
                     <th scope="col">полный диагноз за последний год</th>
                     <th scope="col">Поставили диагноз</th>
@@ -48,7 +48,7 @@
             </table>
 
             <table class="table">
-                <thead class="thead-dark">
+                <thead>
                 <tr>
                     <th scope="col">Проведенное лечение</th>
                     <th scope="col">Тип назначения</th>
@@ -70,7 +70,7 @@
                 </tr>
             </table>
 
-            <thead class="thead-dark">
+            <thead>
             <tr>
                 <th scope="col">Краткий анемиз и рекомендации:</th>
             </tr>
@@ -78,13 +78,13 @@
             <tr th:each="epicris : ${epicrisisList}">
                 <td th:text="${epicris.info}"/>
             </tr>
+            <form method="POST" enctype="multipart/form-data"
+                  th:action="@{/user/export/{uid} (uid=${userDischarsergeDto.idPatientUser})}">
+                <div align="center">
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Export to email"/>
+                </div>
+            </form>
         </div>
-        <form method="POST" enctype="multipart/form-data"
-              th:action="@{/user/export/{uid} (uid=${userDischarsergeDto.idPatientUser})}">
-            <div align="center">
-                <input  class="btn btn-outline-success btn-sm" type="submit" value="Export to email"/>
-            </div>
-        </form>
         <th:block th:insert="fragments/footer.html :: footer"/>
     </body>
 </body>

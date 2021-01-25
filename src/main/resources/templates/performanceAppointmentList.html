@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<title>Getting Started: Serving Web Content</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Выполнение процедур</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
 </head>
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
-    <h2>Выполение процедур</h2>
-    <div class="main-container">
+    <div class="main container">
+        <h2>Выполение процедур</h2>
         <div>
-            <table class="table table-hover">
+            <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Назаначение №</th>
@@ -41,18 +41,18 @@
                         <input type="text" class="form-control" id="resaultEpicris" name="resaultEpicris"
                                placeholder="epicris..">
                     </div>
-                    <div class="form-group" th:object="${makingAppointmentsDto}">
+                    <div class="form-group d-none" th:object="${makingAppointmentsDto}">
                         <label for="idPatientUser"></label>
                         <input hidden="hidden" type="text" id="idPatientUser" name="idPatientUser"
                                th:value="*{idPatientDitales}">
                     </div>
-                    <div class="form-group" th:object="${makingAppointmentsDto}">
+                    <div class="form-group d-none" th:object="${makingAppointmentsDto}">
                         <label for="idAppointment"></label>
                         <input hidden="hidden" type="text" id="idAppointment" name="idAppointment"
                                th:value="*{idApointment}">
                     </div>
-                    <button type="submit" class="btn btn-success">Выполнить назначение</button>
                 </fieldset>
+                <button type="submit" class="btn btn-success">Выполнить назначение</button>
             </form>
         </div>
     </div>

@@ -1,10 +1,57 @@
 .main {
     color: white;
     min-height: 700px;
+    padding: 20px 0;
 }
 
 body {
     color: white;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #03899C;
+}
+
+.error-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.error-title {
+    padding-bottom: 10px;
+}
+
+.error-code {
+    font-size: 100px;
+}
+
+.error-background-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -1;
+}
+
+.error-background {
+    position: relative;
+    height: 100%;
+    z-index: -1;
+}
+
+.error-background-overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+    background-color: #084d01a1;;
 }
 
 .profile-card-header {
@@ -174,7 +221,7 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: -4;
     pointer-events: none;
     background-image: url(https://www.pastinfo.am/news_images/323/968506_2/f5e7cba130d959_5e7cba130d99d.jpg);
     background-blend-mode: multiply;

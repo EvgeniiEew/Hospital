@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<title>Getting Started: Serving Web Content</title>
+<title>Назначения</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -11,7 +11,7 @@
         <div class="starter-template text py-5 px-3">
             <table class="table">
 
-                <thead class="thead-dark">
+                <thead>
                 <tr>
                     <th scope="col">ID_Назначения</th>
                     <th scope="col">Назначение</th>
@@ -29,10 +29,6 @@
             </table>
         </div>
     </main>
-    <p>
-        Добро пожаловать
-        <span sec:authentication="principal.username">Udefined</span>
-    </p>!
     <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>
