@@ -3,6 +3,7 @@ package by.home.hospital.controller;
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
+import by.home.hospital.enums.Position;
 import by.home.hospital.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -25,7 +26,7 @@ public class AppointmentController {
     private final String PERFORMANCE_APPOINTMENT = "performanceAppointmentList";
 
     @Autowired
-    private  CredentialAuthService credentialAuthService;
+    private CredentialAuthService credentialAuthService;
     @Autowired
     private ConversionService conversionService;
     @Autowired
@@ -36,6 +37,8 @@ public class AppointmentController {
     private PatientDetailsService patientDetailsService;
     @Autowired
     private AppointmentService appointmentService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private DiagnosisService diagnosisService;
 
@@ -50,7 +53,7 @@ public class AppointmentController {
     @PostMapping("/patients/examination")
     public String examinationsPatient(List<UserExaminationDto> userExaminationDto) {
         List<ExaminationDoctorDto> examinationDoctorDto = new ArrayList<>();
-        Integer idDoctor =  this.credentialAuthService.getIdAutUser();
+        Integer idDoctor = this.credentialAuthService.getIdAutUser();
         for (UserExaminationDto examination : userExaminationDto) {
             examination.setAuthenticationDoctorId(idDoctor);
             examinationDoctorDto.add(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
@@ -67,6 +70,7 @@ public class AppointmentController {
     public String getRoomForExamination(@PathVariable("id") Integer id, Model model) {
         PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetaisl(id);
         model.addAttribute("user", user);
+
         return this.ROOM_EXAMINATION;
     }
 
@@ -106,6 +110,9 @@ public class AppointmentController {
         this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
         this.patientDetailsService.setStatusCheckoutPatientById(resultProcedurFormDto);
         this.epicrisisService.saveEpicrisFromResultProcedureDto(resultProcedurFormDto);
+        if (this.userService.getPositionByIdUser(this.credentialAuthService.getIdAutUser()).equals(Position.NURSE)) {
+            return "redirect:/";
+        }
         return "redirect:/patient/appointment";
     }
 }

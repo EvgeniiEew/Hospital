@@ -17,8 +17,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/doctors">Врачи</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/patient/status">Очередь пациентов на запись</a>
+                <li  sec:authorize="hasRole('ROLE_DOCTOR')" class="nav-item">
+                    <a class="nav-link" href="/patient/status">Приемное отделение</a>
                 </li>
             </ul>
         </div>
@@ -33,14 +33,14 @@
                 <hr class="dropdown-divider">
 
                 <!--                 todo if user - doctor или admin-->
-                <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"
+                <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR')"
                    href="/patient/status/receptionPending">Кабинет осмотра</a>
-                <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"
+                <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') "
                    href="/patient/appointment">Операционная</a>
-                <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') or hasRole('ROLE_ADMIN')"
+                <a class="dropdown-item" sec:authorize="hasRole('ROLE_DOCTOR') "
                    href="/user/discharges">Список на выписку</a>
                 <a class="dropdown-item" sec:authorize="hasRole('ROLE_NURSE')"
-                   href="/nurse/appointment">Операционная</a>
+                   href="/nurse/appointment">Назначения</a>
                 <!--                //-->
 
                 <hr class="dropdown-divider">
@@ -53,11 +53,14 @@
                 <a class="dropdown-item" sec:authorize="hasRole('ROLE_PATIENT')" href="/user/overwrite">Повторная запись
                 </a>
                 <!--                //-->
+                <a class="dropdown-item"   sec:authorize="hasRole('ROLE_DOCTOR')or hasRole('ROLE_PATIENT') or hasRole('ROLE_ADMIN') or hasRole('ROLE_NURSE')" href="/logout">Выйти</a>
             </div>
         </div>
-        <div class="auth-buttons">
-            <a class="auth-buttons__login btn btn-success" href="/login">Войти</a>
+<!--        sec:authorize="isAuthenticated()"-->
+        <div sec:authorize="isAnonymous()" class="auth-buttons">
+            <a class="auth-buttons__login btn btn-success"  href="/login">Войти</a>
             <a class="auth-buttons__register btn btn-success" href="/patient/register">Регистрация</a>
+
         </div>
 
     </nav>

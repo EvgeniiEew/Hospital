@@ -154,4 +154,8 @@ public class UserService implements IUserServices {
     public User getUserByCredentialsEmail(String email) {
         return this.userJpaRepo.getUserByCredentialsEmail(email);
     }
+
+    public Position getPositionByIdUser(Integer idUser) {
+        return this.userJpaRepo.getUserById(idUser).getPosition();
+    }
 }

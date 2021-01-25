@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <title>Добро пожаловать на сайт Больницы №0</title>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -26,7 +26,7 @@
             <h1>Добро пожаловать на сайт Больницы №0</h1>
             <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.</p>
             <!--            todo if user не залогинен-->
-            <p> На осмотр можно записаться после прохождения регистрации.</p>
+            <p sec:authorize="isAnonymous()"> На осмотр можно записаться после прохождения регистрации.</p>
         </div>
 
         <!--    todo get random doctors photos-->
