@@ -19,11 +19,12 @@ public class DiagnosisPatientService implements IDiagnosisPatientService {
     @Autowired
     private DiagnosisPatientJpaRepository diagnosisPatientJpaRepository;
 
-
+    @Override
     public DiagnosisPatient save(DiagnosisPatient diagnosisPatient) {
         return this.diagnosisPatientJpaRepository.save(diagnosisPatient);
     }
 
+    @Override
     public void saveDiagnosisPatientFromExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto) {
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
         diagnosisPatient.setPatientDetails(this.patientDetailsService.setStarusCheckingByPatientId(examinationDoctorDto.getPatientId()));

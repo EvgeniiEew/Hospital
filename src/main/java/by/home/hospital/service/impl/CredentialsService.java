@@ -21,6 +21,7 @@ public class CredentialsService implements ICredentialsService {
     @Autowired
     private CredentialsJpaRepository credentialsJpaRepository;
 
+    @Override
     public Credential createCredentialsFromPatientRegisterDto(PatientRegisterDto patientRegisterDto) {
         Credential credentials = new Credential();
         credentials.setEmail(patientRegisterDto.getEmail());
@@ -28,6 +29,7 @@ public class CredentialsService implements ICredentialsService {
         return this.credentialsJpaRepository.save(credentials);
     }
 
+    @Override
     public Credential saveCredentialsFromDoctorRegisterDto(DoctorRegisterDto doctorRegisterDto) {
         Credential credentials = new Credential();
         credentials.setEmail(doctorRegisterDto.getEmail());
@@ -35,6 +37,7 @@ public class CredentialsService implements ICredentialsService {
         return this.credentialsJpaRepository.save(credentials);
     }
 
+    @Override
     public Credential saveCredentialsFromNurseRegisterDto(NurseRegisterDto nurseRegisterDto) {
         Credential credentials = new Credential();
         credentials.setEmail(nurseRegisterDto.getEmail());
@@ -57,10 +60,12 @@ public class CredentialsService implements ICredentialsService {
         return this.credentialsJpaRepository.findByEmail(credentialEmail);
     }
 
+    @Override
     public void editCredential(Credential credential) {
         this.credentialsJpaRepository.save(credential);
     }
 
+    @Override
     public void save(Credential credentials) {
         this.credentialsJpaRepository.save(credentials);
     }

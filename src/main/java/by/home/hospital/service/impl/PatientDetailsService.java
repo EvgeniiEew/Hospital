@@ -39,6 +39,7 @@ public class PatientDetailsService implements IPatientDetailsService {
         return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
     }
 
+    @Override
     public void savePatientRegister(PatientRegisterDto patientRegisterDto) {
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setPatientStatus(NOT_EXAMINED);
@@ -46,11 +47,12 @@ public class PatientDetailsService implements IPatientDetailsService {
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
+    @Override
     public PatientDetails save(PatientDetails patientDetails) {
         return this.patientDitalesjpaRepository.save(patientDetails);
     }
-
-    public PatientWhisStatusDto getUserByIdPatientDetaisl(Integer id) {
+@Override
+    public PatientWhisStatusDto getUserByIdPatientDetails(Integer id) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.findById(id).get();
         User user = patientDetails.getPatient();
         return new PatientWhisStatusDto(

@@ -23,10 +23,12 @@ public class DiagnosisService implements IDiagnosisService {
         return this.diagnosisJpaRepository.findAll();
     }
 
+    @Override
     public Diagnosis save(Diagnosis diagnosis) {
         return this.diagnosisJpaRepository.save(diagnosis);
     }
 
+    @Override
     public Diagnosis createDiagnosisFromExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto) {
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setName(examinationDoctorDto.getDiagnosis());
@@ -34,6 +36,7 @@ public class DiagnosisService implements IDiagnosisService {
         return this.diagnosisJpaRepository.save(diagnosis);
     }
 
+    @Override
     public List<Diagnosis> findByDiagnosisDetails_Id(Integer idPatient) {
         return this.diagnosisJpaRepository.findByDiagnosisPatientsId(idPatient);
     }

@@ -15,4 +15,7 @@ public interface IDoctorDetailsRepository {
     void addDoctorDetails(DoctorDetails doctorDetails);
 
     void deleteDoctorDetails(Integer number);
+
+    void save(DoctorDetails doctorDetails);
+
 }

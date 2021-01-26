@@ -51,6 +51,7 @@ public class AppointmentService implements IAppointmentService {
                 )).collect(Collectors.toList());
     }
 
+    @Override
     public List<AppointmentFulfillmentDto> nurseFindAllByStatus(AppointmentStatus status) {
 //        String type = Type.OPERATION.toString();
         List<Appointment> appointments = this.appoitmentJpaRepository.findByStatusAndTypeNotLike(status, Type.OPERATION);
@@ -85,6 +86,7 @@ public class AppointmentService implements IAppointmentService {
         return this.appoitmentJpaRepository.save(appointment);
     }
 
+    @Override
     public Appointment createAppointmentFormExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto) {
         AppointmentDto appointmentDto = examinationDoctorDto.getAppointmentDto();
         Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(),
@@ -92,10 +94,12 @@ public class AppointmentService implements IAppointmentService {
         return this.appoitmentJpaRepository.save(appointment);
     }
 
+    @Override
     public List<Appointment> findAppointmentsByPatientId(Integer id) {
         return this.appoitmentJpaRepository.findAppointmentsByPatientId(id);
     }
 
+    @Override
     public List<AppointmentDischarsergesDto> getAppontmentDischarsergesDto(Integer idPatient) {
         List<Appointment> list = appoitmentJpaRepository.findAppointmentsByPatientId(idPatient);
         List<AppointmentDischarsergesDto> dtoList = new ArrayList<>();

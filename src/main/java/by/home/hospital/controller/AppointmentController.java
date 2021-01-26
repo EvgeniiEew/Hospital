@@ -68,7 +68,7 @@ public class AppointmentController {
     //  - осмотреть
     @PostMapping("/patient/{id}/inspection")
     public String getRoomForExamination(@PathVariable("id") Integer id, Model model) {
-        PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetaisl(id);
+        PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetails(id);
         model.addAttribute("user", user);
 
         return this.ROOM_EXAMINATION;

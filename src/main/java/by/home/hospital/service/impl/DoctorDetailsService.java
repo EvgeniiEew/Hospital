@@ -31,6 +31,7 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         this.doctorDitalesJpaRepository.save(doctorDetails);
     }
 
+    @Override
     public List<DoctorInfoDto> getDoctorInfoDto() {
         HashSet<User> users = this.userService.findAllByPositionOrderByFirstNameDesc(Position.DOCTOR);
         return users.stream().map(user -> new DoctorInfoDto(
@@ -55,6 +56,7 @@ public class DoctorDetailsService implements IDoctorDetailsRepository {
         this.doctorDitalesJpaRepository.deleteById(number);
     }
 
+    @Override
     public void save(DoctorDetails doctorDetails) {
         this.doctorDitalesJpaRepository.save(doctorDetails);
     }

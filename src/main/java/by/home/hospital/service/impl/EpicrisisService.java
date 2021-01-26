@@ -23,14 +23,17 @@ public class EpicrisisService implements IEpicrisisService {
     @Autowired
     private EpicrisisJpaRepository epicrisisJpaRepository;
 
-    public Epicrisis getByAppointment_Id(Integer apointmentId) {
-        return this.epicrisisJpaRepository.getByAppointment_Id(apointmentId);
+    @Override
+    public Epicrisis getByAppointment_Id(Integer appointmentId) {
+        return this.epicrisisJpaRepository.getByAppointment_Id(appointmentId);
     }
 
-    public String getEpicrisesByInfo(Integer apointmentId) {
-        return this.epicrisisJpaRepository.findAllActiveEpicrisisNative(apointmentId);
+    @Override
+    public String getEpicrisesByInfo(Integer appointmentId) {
+        return this.epicrisisJpaRepository.findAllActiveEpicrisisNative(appointmentId);
     }
 
+    @Override
     public void saveEpicrisFromResultProcedureDto(ResultProcedurFormDto resultProcedurFormDto) {
         Epicrisis epicrisis = getByAppointment_Id(resultProcedurFormDto.getIdAppointment());
         epicrisis.setInfo(epicrisis.getInfo().concat(" " + resultProcedurFormDto.getResaultEpicris()));
@@ -44,18 +47,20 @@ public class EpicrisisService implements IEpicrisisService {
         this.epicrisisJpaRepository.save(epicrisis);
     }
 
+    @Override
     public List<Epicrisis> getEpicrisisToDiscargeList(Integer idPatient) {
         List<Appointment> appointmentsList = this.appointmentService.findAppointmentsByPatientId(idPatient);
         List<Epicrisis> epicrisisList = new ArrayList<>();
         appointmentsList.forEach(list -> {
             epicrisisList.add(new Epicrisis(
-                   Integer.valueOf(list.getEpicrisis().getId()),
+                    Integer.valueOf(list.getEpicrisis().getId()),
                     list.getEpicrisis().getInfo()
             ));
         });
         return epicrisisList;
     }
 
+    @Override
     public void save(Epicrisis epicrisis) {
         this.epicrisisJpaRepository.save(epicrisis);
     }

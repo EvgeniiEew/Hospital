@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import static by.home.hospital.enums.PatientStatus.NOT_EXAMINED;
 import static by.home.hospital.enums.Position.*;
 
@@ -64,6 +65,7 @@ public class InitializationClassService implements InitializingBean {
 
         User user1 = new User();
         user1.setId(5);
+        user1.setAvatarFileName("src/main/webapp/resources/photo/1.jpg");
         user1.setPosition(DOCTOR);
         user1.setFirstName("Doctor1FName");
         user1.setLastName("Doctor1LName");
@@ -119,6 +121,7 @@ public class InitializationClassService implements InitializingBean {
 
         User user4 = new User();
         user4.setId(12);
+        user4.setAvatarFileName("src/main/webapp/resources/photo/3.jpg");
         user4.setPosition(DOCTOR);
         user4.setFirstName("Doctor2FName");
         user4.setLastName("Doctor2LName");
@@ -141,6 +144,7 @@ public class InitializationClassService implements InitializingBean {
 
         User user5 = new User();
         user5.setId(15);
+        user5.setAvatarFileName("src/main/webapp/resources/photo/2.jpg");
         user5.setPosition(DOCTOR);
         user5.setFirstName("Doctor3FName");
         user5.setLastName("Doctor3LName");

@@ -28,12 +28,14 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     @Autowired
     private UserService userService;
 
+    @Override
     public void setAppointmentsParameters(List<ExaminationDoctorDto> examinationDoctorDto) {
         for (ExaminationDoctorDto examination : examinationDoctorDto) {
             this.setAppointmentParameters(examination);
         }
     }
 
+    @Override
     public void setAppointmentParameters(ExaminationDoctorDto examinationDoctorDto) {
         Appointment appointment = this.appointmentService.createAppointmentFormExaminationDoctorDto(examinationDoctorDto);
         this.epicrisisService.saveEpicrisFromExaminationDoctorDto(examinationDoctorDto, appointment);
@@ -52,6 +54,7 @@ public class AppointmentUsersService implements IAppointmentUsersService {
         return this.appointmentUsersJpaRepository.findAll();
     }
 
+    @Override
     public AppointmentUsers getAppointmentUsersByAppointmentId(Integer IdAppointment) {
         return this.appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(IdAppointment);
     }
@@ -66,7 +69,7 @@ public class AppointmentUsersService implements IAppointmentUsersService {
         this.appointmentUsersJpaRepository.deleteById(id);
     }
 
-    public void getAppontmentDischarsergesDto(Integer idPatient){
+    public void getAppontmentDischarsergesDto(Integer idPatient) {
         Optional<AppointmentUsers> appointmentUsersList = this.appointmentUsersJpaRepository.findByPatientId(idPatient);
 //        appointmentUsersList.
     }

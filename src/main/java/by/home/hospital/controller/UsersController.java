@@ -123,7 +123,7 @@ public class UsersController {
     //!
     @GetMapping("/patient/{id}/img")
     public void getImmagePatient(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
-        Integer idUser = this.patientDetailsService.getUserByIdPatientDetaisl(id).getId();
+        Integer idUser = this.patientDetailsService.getUserByIdPatientDetails(id).getId();
         Avatar file = this.imgService.getFile(idUser);
         if (file != null) {
             try (InputStream is = file.getData()) {
