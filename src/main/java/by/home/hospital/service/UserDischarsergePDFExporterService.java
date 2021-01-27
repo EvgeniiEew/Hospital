@@ -1,4 +1,4 @@
-package by.home.hospital.converter;
+package by.home.hospital.service;
 
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.Epicrisis;
@@ -22,14 +22,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class UserDischarsergePDFExporter {
+public class UserDischarsergePDFExporterService {
     UserDischarsergeDto userDischarsergeDto;
     private List<Diagnosis> diagnosisList;
     private List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList;
     private List<Epicrisis> epicrisisList;
     private UserService userService;
 
-    public UserDischarsergePDFExporter(UserDischarsergeDto userDischarsergeDto, List<Diagnosis> diagnosisList, List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList, List<Epicrisis> epicrisisList, UserService userService) {
+    public UserDischarsergePDFExporterService(UserDischarsergeDto userDischarsergeDto, List<Diagnosis> diagnosisList, List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList, List<Epicrisis> epicrisisList, UserService userService) {
         this.userDischarsergeDto = userDischarsergeDto;
         this.diagnosisList = diagnosisList;
         this.appointmentDischarsergesDtoList = appointmentDischarsergesDtoList;

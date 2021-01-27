@@ -6,7 +6,7 @@ import by.home.hospital.dto.DoctorRegisterDto;
 
 import java.util.List;
 
-public interface IDoctorDetailsRepository {
+public interface IDoctorDetailsService {
 
     List<DoctorInfoDto> getDoctorInfoDto();
 

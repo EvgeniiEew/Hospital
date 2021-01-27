@@ -1,6 +1,7 @@
 package by.home.hospital.controller;
 
 
+import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;

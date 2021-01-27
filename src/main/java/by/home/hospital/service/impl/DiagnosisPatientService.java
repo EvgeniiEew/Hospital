@@ -1,7 +1,7 @@
 package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.DiagnosisPatient;
-import by.home.hospital.dto.ExaminationDoctorDto;
+import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.service.IDiagnosisPatientService;
 import by.home.hospital.service.repository.DiagnosisPatientJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +25,10 @@ public class DiagnosisPatientService implements IDiagnosisPatientService {
     }
 
     @Override
-    public void saveDiagnosisPatientFromExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto) {
+    public void saveDiagnosisPatientFromExaminationDoctorDto(ExaminationDoctor examinationDoctor) {
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
-        diagnosisPatient.setPatientDetails(this.patientDetailsService.setStarusCheckingByPatientId(examinationDoctorDto.getPatientId()));
-        diagnosisPatient.setDiagnosis(this.diagnosisService.createDiagnosisFromExaminationDoctorDto(examinationDoctorDto));
+        diagnosisPatient.setPatientDetails(this.patientDetailsService.setStarusCheckingByPatientId(examinationDoctor.getPatientId()));
+        diagnosisPatient.setDiagnosis(this.diagnosisService.createDiagnosisFromExaminationDoctorDto(examinationDoctor));
         this.diagnosisPatientJpaRepository.save(diagnosisPatient);
     }
 

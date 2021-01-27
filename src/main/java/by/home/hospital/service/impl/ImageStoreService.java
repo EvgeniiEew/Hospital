@@ -19,7 +19,6 @@ public class ImageStoreService implements StorageService {
 
     @Override
     public void store(Integer id, MultipartFile multipartFile) throws IOException {
-        //"E:/Projects/ResaulProject/src/main/resources/Photo/" +
         String string = UUID.randomUUID().toString();
         User user = this.userService.getUserById(id);
         File file = new File(string);

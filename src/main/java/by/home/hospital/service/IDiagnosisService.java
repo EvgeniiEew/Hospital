@@ -1,7 +1,7 @@
 package by.home.hospital.service;
 
 import by.home.hospital.domain.Diagnosis;
-import by.home.hospital.dto.ExaminationDoctorDto;
+import by.home.hospital.domain.ExaminationDoctor;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface IDiagnosisService {
 
     Diagnosis save(Diagnosis diagnosis);
 
-    Diagnosis createDiagnosisFromExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto);
+    Diagnosis createDiagnosisFromExaminationDoctorDto(ExaminationDoctor examinationDoctor);
 
     List<Diagnosis> findByDiagnosisDetails_Id(Integer idPatient);
 }

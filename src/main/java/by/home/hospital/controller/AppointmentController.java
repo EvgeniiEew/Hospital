@@ -1,6 +1,7 @@
 package by.home.hospital.controller;
 
 import by.home.hospital.domain.Diagnosis;
+import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Position;
@@ -46,19 +47,19 @@ public class AppointmentController {
     @PostMapping("/patient/examination")
     public String examinationPatient(UserExaminationDto userExaminationDto) {
         userExaminationDto.setAuthenticationDoctorId(this.credentialAuthService.getIdAutUser());
-        this.appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
+        this.appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
         return "redirect:/patient/status/receptionPending";
     }
 
     @PostMapping("/patients/examination")
     public String examinationsPatient(List<UserExaminationDto> userExaminationDto) {
-        List<ExaminationDoctorDto> examinationDoctorDto = new ArrayList<>();
+        List<ExaminationDoctor> examinationDoctor = new ArrayList<>();
         Integer idDoctor = this.credentialAuthService.getIdAutUser();
         for (UserExaminationDto examination : userExaminationDto) {
             examination.setAuthenticationDoctorId(idDoctor);
-            examinationDoctorDto.add(conversionService.convert(userExaminationDto, ExaminationDoctorDto.class));
+            examinationDoctor.add(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
         }
-        this.appointmentUsersService.setAppointmentsParameters(examinationDoctorDto);
+        this.appointmentUsersService.setAppointmentsParameters(examinationDoctor);
         return "redirect:/patient/status/receptionPending";
     }
 

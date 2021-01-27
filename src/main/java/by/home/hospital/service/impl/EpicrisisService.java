@@ -2,7 +2,7 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Appointment;
 import by.home.hospital.domain.Epicrisis;
-import by.home.hospital.dto.ExaminationDoctorDto;
+import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.service.IEpicrisisService;
 import by.home.hospital.service.repository.EpicrisisJpaRepository;
@@ -40,9 +40,9 @@ public class EpicrisisService implements IEpicrisisService {
         this.epicrisisJpaRepository.save(epicrisis);
     }
 
-    public void saveEpicrisFromExaminationDoctorDto(ExaminationDoctorDto examinationDoctorDto, Appointment appointment) {
+    public void saveEpicrisFromExaminationDoctorDto(ExaminationDoctor examinationDoctor, Appointment appointment) {
         Epicrisis epicrisis = new Epicrisis();
-        epicrisis.setInfo(examinationDoctorDto.getEpicrisis());
+        epicrisis.setInfo(examinationDoctor.getEpicrisis());
         epicrisis.setAppointment(appointment);
         this.epicrisisJpaRepository.save(epicrisis);
     }

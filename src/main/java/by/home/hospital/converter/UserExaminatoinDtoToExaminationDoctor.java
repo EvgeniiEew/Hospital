@@ -1,7 +1,7 @@
 package by.home.hospital.converter;
 
 import by.home.hospital.dto.AppointmentDto;
-import by.home.hospital.dto.ExaminationDoctorDto;
+import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.dto.UserExaminationDto;
 import by.home.hospital.enums.Type;
 import by.home.hospital.service.impl.UserService;
@@ -12,19 +12,17 @@ import org.springframework.stereotype.Component;
 import static java.lang.Integer.parseInt;
 
 @Component
-public class UserExaminatoinDtoToExaminationDoctorDto implements Converter<UserExaminationDto, ExaminationDoctorDto> {
-    @Autowired
-    private UserService userService;
+public class UserExaminatoinDtoToExaminationDoctor implements Converter<UserExaminationDto, ExaminationDoctor> {
 
     @Override
-    public ExaminationDoctorDto convert(UserExaminationDto userExaminationDto) {
-        ExaminationDoctorDto examinationDoctorDto = new ExaminationDoctorDto(
+    public ExaminationDoctor convert(UserExaminationDto userExaminationDto) {
+        ExaminationDoctor examinationDoctor = new ExaminationDoctor(
                 parseInt(userExaminationDto.getIdPatient()),
                 userExaminationDto.getAuthenticationDoctorId(),
                 userExaminationDto.getDiagnosisDto(),
                 new AppointmentDto(userExaminationDto.getNameApointment(),
                         Type.valueOf(userExaminationDto.getName())),
                 userExaminationDto.getEpicrisis());
-        return examinationDoctorDto;
+        return examinationDoctor;
     }
 }

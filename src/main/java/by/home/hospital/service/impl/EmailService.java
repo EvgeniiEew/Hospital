@@ -19,7 +19,7 @@ public class EmailService {
     @Autowired
     private EmailProperties emailConfig;
 
-    public void sendmail(String address, String path) throws IOException {
+    public void sendmail(String address, String path)  {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -44,12 +44,16 @@ public class EmailService {
             multipart.addBodyPart(messageBodyPart);
             MimeBodyPart attachPart = new MimeBodyPart();
 //            url('/files/Extract.pdf')
-            attachPart.attachFile(path+"/resources/Extract.pdf");
+            try {
+                attachPart.attachFile(path+"/resources/Extract.pdf");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             multipart.addBodyPart(attachPart);
             msg.setContent(multipart);
 
             Transport.send(msg);
-        } catch (MessagingException mex) {
+        } catch (MessagingException mex ) {
             throw new RuntimeException(mex);
         }
     }

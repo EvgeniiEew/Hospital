@@ -3,7 +3,7 @@ package by.home.hospital.service.impl;
 import by.home.hospital.domain.Appointment;
 import by.home.hospital.domain.AppointmentUsers;
 import by.home.hospital.domain.User;
-import by.home.hospital.dto.ExaminationDoctorDto;
+import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.service.IAppointmentUsersService;
 import by.home.hospital.service.repository.AppointmentUsersJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,24 +29,24 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     private UserService userService;
 
     @Override
-    public void setAppointmentsParameters(List<ExaminationDoctorDto> examinationDoctorDto) {
-        for (ExaminationDoctorDto examination : examinationDoctorDto) {
+    public void setAppointmentsParameters(List<ExaminationDoctor> examinationDoctor) {
+        for (ExaminationDoctor examination : examinationDoctor) {
             this.setAppointmentParameters(examination);
         }
     }
 
     @Override
-    public void setAppointmentParameters(ExaminationDoctorDto examinationDoctorDto) {
-        Appointment appointment = this.appointmentService.createAppointmentFormExaminationDoctorDto(examinationDoctorDto);
-        this.epicrisisService.saveEpicrisFromExaminationDoctorDto(examinationDoctorDto, appointment);
-        User patient = this.userService.getUserById(examinationDoctorDto.getPatientId());
-        User doctor = this.userService.getUserById(examinationDoctorDto.getIdDoctor());
+    public void setAppointmentParameters(ExaminationDoctor examinationDoctor) {
+        Appointment appointment = this.appointmentService.createAppointmentFormExaminationDoctorDto(examinationDoctor);
+        this.epicrisisService.saveEpicrisFromExaminationDoctorDto(examinationDoctor, appointment);
+        User patient = this.userService.getUserById(examinationDoctor.getPatientId());
+        User doctor = this.userService.getUserById(examinationDoctor.getIdDoctor());
         AppointmentUsers appointmentUsers = new AppointmentUsers();
         appointmentUsers.setAppointment(appointment);
         appointmentUsers.setDoctor(doctor);
         appointmentUsers.setPatient(patient);
         this.appointmentUsersJpaRepository.save(appointmentUsers);
-        this.diagnosisPatientService.saveDiagnosisPatientFromExaminationDoctorDto(examinationDoctorDto);
+        this.diagnosisPatientService.saveDiagnosisPatientFromExaminationDoctorDto(examinationDoctor);
     }
 
     @Override

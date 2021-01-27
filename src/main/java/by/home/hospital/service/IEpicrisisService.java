@@ -1,8 +1,6 @@
 package by.home.hospital.service;
 
-import by.home.hospital.domain.Appointment;
 import by.home.hospital.domain.Epicrisis;
-import by.home.hospital.dto.ExaminationDoctorDto;
 import by.home.hospital.dto.ResultProcedurFormDto;
 
 import java.util.List;

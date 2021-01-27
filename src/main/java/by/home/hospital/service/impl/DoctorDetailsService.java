@@ -5,7 +5,7 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.enums.Position;
-import by.home.hospital.service.IDoctorDetailsRepository;
+import by.home.hospital.service.IDoctorDetailsService;
 import by.home.hospital.service.repository.DoctorDitalesJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Transactional
 @Service
-public class DoctorDetailsService implements IDoctorDetailsRepository {
+public class DoctorDetailsService implements IDoctorDetailsService {
 
 
     @Autowired

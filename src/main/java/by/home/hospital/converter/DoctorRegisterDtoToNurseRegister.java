@@ -6,7 +6,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DoctorRegisterDtoToNurseRegisterDto implements Converter<DoctorRegisterDto, NurseRegisterDto> {
+public class DoctorRegisterDtoToNurseRegister implements Converter<DoctorRegisterDto, NurseRegisterDto> {
 
     @Override
     public NurseRegisterDto convert(DoctorRegisterDto source) {
