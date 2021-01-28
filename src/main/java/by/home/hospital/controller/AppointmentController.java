@@ -53,9 +53,7 @@ public class AppointmentController {
                                      BindingResult bindingResult,
                                      Model model) {
         if (bindingResult.hasErrors()) {
-            PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetails(id);
-            model.addAttribute("idPatient", id);
-            model.addAttribute("user", user);
+            getModelExamination(id, model);
             return this.ROOM_EXAMINATION;
         }
         userExaminationDto.setAuthenticationDoctorId(this.credentialAuthService.getIdAutUser());
@@ -68,10 +66,9 @@ public class AppointmentController {
     //отправляет поля для ExaminationDoctorDto
     //  - осмотреть
     @PostMapping("/patient/{id}/inspection")
-    public String getRoomForExamination(@PathVariable("id") Integer id, Model model) {
-        PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetails(id);
-        model.addAttribute("idPatient", id);
-        model.addAttribute("user", user);
+    public String getRoomForExamination(@PathVariable("id") Integer id,
+                                        Model model) {
+        getModelExamination(id, model);
         return this.ROOM_EXAMINATION;
     }
 //    @PostMapping("/patients/examination")
@@ -110,21 +107,18 @@ public class AppointmentController {
     //  -выполнить назаначение
     @PostMapping("/patient/FulfillmentOfAppointments/{idAppointment}/")
     public String getPatientForPerfomanceAppointment(@PathVariable("idAppointment") Integer idAppointment, Model model) {
-        MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
-        List<Diagnosis> diagnosis = makingAppointmentsDto.getDiagnoses();
-        model.addAttribute("makingAppointmentsDto", makingAppointmentsDto);
-        model.addAttribute("diagnosis", diagnosis);
+        getModelAppointment(idAppointment, model);
         return this.PERFORMANCE_APPOINTMENT;
     }
 
     // занесение результатов конечного выполнения процедур в базу
     @PostMapping("/patient/addAppointmentToTheDatabase/{idAppointment}")
-    public String getResultProcedures(@PathVariable("idAppointment") Integer idAppointment, @Valid ResultProcedurFormDto resultProcedurFormDto, BindingResult bindingResult, Model model) {
+    public String getResultProcedures(@PathVariable("idAppointment") Integer idAppointment,
+                                      @Valid ResultProcedurFormDto resultProcedurFormDto,
+                                      BindingResult bindingResult,
+                                      Model model) {
         if (bindingResult.hasErrors()) {
-            MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
-            List<Diagnosis> diagnosis = makingAppointmentsDto.getDiagnoses();
-            model.addAttribute("makingAppointmentsDto", makingAppointmentsDto);
-            model.addAttribute("diagnosis", diagnosis);
+            getModelAppointment(idAppointment, model);
             return this.PERFORMANCE_APPOINTMENT;
         }
         this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
@@ -134,5 +128,20 @@ public class AppointmentController {
             return "redirect:/";
         }
         return "redirect:/patient/appointment";
+    }
+
+    private Model getModelAppointment(Integer idAppointment, Model model) {
+        MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
+        List<Diagnosis> diagnosis = makingAppointmentsDto.getDiagnoses();
+        model.addAttribute("makingAppointmentsDto", makingAppointmentsDto);
+        model.addAttribute("diagnosis", diagnosis);
+        return model;
+    }
+
+    private Model getModelExamination(Integer id, Model model) {
+        PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetails(id);
+        model.addAttribute("idPatient", id);
+        model.addAttribute("user", user);
+        return model;
     }
 }
