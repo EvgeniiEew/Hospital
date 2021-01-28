@@ -16,6 +16,7 @@ public class NurseController {
     private final String FULFILLMENT_OF_APPOINTMENT = "FulfillmentOfAppointmentsList";
     @Autowired
     private AppointmentService appointmentService;
+
     //NURSE
     @GetMapping("/nurse/appointment")
     public String getPatientForFulfillmentOfAppointments(Model model) {

@@ -51,7 +51,8 @@ public class PatientDetailsService implements IPatientDetailsService {
     public PatientDetails save(PatientDetails patientDetails) {
         return this.patientDitalesjpaRepository.save(patientDetails);
     }
-@Override
+
+    @Override
     public PatientWhisStatusDto getUserByIdPatientDetails(Integer id) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.findById(id).get();
         User user = patientDetails.getPatient();

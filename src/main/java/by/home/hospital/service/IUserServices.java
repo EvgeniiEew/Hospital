@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IUserServices {
     List<User> getUsers();
+
     void userEdit(UserEditDto userEditDto);
 
     void save(User user);

@@ -17,6 +17,7 @@ public class PdfFileExportService implements IFileExport {
     private EpicrisisService epicrisisService;
     @Autowired
     private UserService userService;
+
     @Override
     public String pdfFileExport(String path, Integer id) {
         UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
@@ -30,8 +31,9 @@ public class PdfFileExportService implements IFileExport {
                         appointmentDischarsergesDtoList,
                         epicrisisList,
                         userService);
-        try { String fileName = userDischarsergePDFExporterService.export(path);
-         return fileName;
+        try {
+            String fileName = userDischarsergePDFExporterService.export(path);
+            return fileName;
         } catch (IOException e) {
             e.printStackTrace();
         }

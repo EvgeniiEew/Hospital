@@ -13,6 +13,7 @@ public interface IEpicrisisService {
     void saveEpicrisFromResultProcedureDto(ResultProcedurFormDto resultProcedurFormDto);
 
     String getEpicrisesByInfo(Integer appointmentId);
+
     Epicrisis getByAppointment_Id(Integer appointmentId);
 
 }

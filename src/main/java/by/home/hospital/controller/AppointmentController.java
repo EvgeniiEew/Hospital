@@ -6,14 +6,17 @@ import by.home.hospital.dto.*;
 import by.home.hospital.enums.AppointmentStatus;
 import by.home.hospital.enums.Position;
 import by.home.hospital.service.impl.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,23 +46,20 @@ public class AppointmentController {
     @Autowired
     private DiagnosisService diagnosisService;
 
-
-    @PostMapping("/patient/examination")
-    public String examinationPatient(UserExaminationDto userExaminationDto) {
+    //todo
+    @PostMapping("/patient/examination/{id}/")
+    public String examinationPatient(@PathVariable("id") Integer id,
+                                     @Valid UserExaminationDto userExaminationDto,
+                                     BindingResult bindingResult,
+                                     Model model) {
+        if (bindingResult.hasErrors()) {
+            PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetails(id);
+            model.addAttribute("idPatient", id);
+            model.addAttribute("user", user);
+            return this.ROOM_EXAMINATION;
+        }
         userExaminationDto.setAuthenticationDoctorId(this.credentialAuthService.getIdAutUser());
         this.appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
-        return "redirect:/patient/status/receptionPending";
-    }
-
-    @PostMapping("/patients/examination")
-    public String examinationsPatient(List<UserExaminationDto> userExaminationDto) {
-        List<ExaminationDoctor> examinationDoctor = new ArrayList<>();
-        Integer idDoctor = this.credentialAuthService.getIdAutUser();
-        for (UserExaminationDto examination : userExaminationDto) {
-            examination.setAuthenticationDoctorId(idDoctor);
-            examinationDoctor.add(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
-        }
-        this.appointmentUsersService.setAppointmentsParameters(examinationDoctor);
         return "redirect:/patient/status/receptionPending";
     }
 
@@ -70,10 +70,22 @@ public class AppointmentController {
     @PostMapping("/patient/{id}/inspection")
     public String getRoomForExamination(@PathVariable("id") Integer id, Model model) {
         PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetails(id);
+        model.addAttribute("idPatient", id);
         model.addAttribute("user", user);
-
         return this.ROOM_EXAMINATION;
     }
+//    @PostMapping("/patients/examination")
+//    public String examinationsPatient(List<UserExaminationDto> userExaminationDto) {
+//        List<ExaminationDoctor> examinationDoctor = new ArrayList<>();
+//        Integer idDoctor = this.credentialAuthService.getIdAutUser();
+//        for (UserExaminationDto examination : userExaminationDto) {
+//            examination.setAuthenticationDoctorId(idDoctor);
+//            examinationDoctor.add(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
+//        }
+//        this.appointmentUsersService.setAppointmentsParameters(examinationDoctor);
+//        return "redirect:/patient/status/receptionPending";
+//    }
+
 
     //комната со списком всех  Назначений для выбора на выполнение
     @GetMapping("/patient/appointment")
@@ -106,8 +118,15 @@ public class AppointmentController {
     }
 
     // занесение результатов конечного выполнения процедур в базу
-    @PostMapping("/patient/addAppointmentToTheDatabase")
-    public String getResultProcedures(ResultProcedurFormDto resultProcedurFormDto) {
+    @PostMapping("/patient/addAppointmentToTheDatabase/{idAppointment}")
+    public String getResultProcedures(@PathVariable("idAppointment") Integer idAppointment, @Valid ResultProcedurFormDto resultProcedurFormDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
+            List<Diagnosis> diagnosis = makingAppointmentsDto.getDiagnoses();
+            model.addAttribute("makingAppointmentsDto", makingAppointmentsDto);
+            model.addAttribute("diagnosis", diagnosis);
+            return this.PERFORMANCE_APPOINTMENT;
+        }
         this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
         this.patientDetailsService.setStatusCheckoutPatientById(resultProcedurFormDto);
         this.epicrisisService.saveEpicrisFromResultProcedureDto(resultProcedurFormDto);

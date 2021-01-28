@@ -27,9 +27,8 @@
                 </tbody>
             </table>
         </div>
-
         <div class="form-container">
-            <form METHOD="post" action="/patient/examination">
+            <form METHOD="post" th:action="@{/patient/examination/{id}/ (id=${idPatient})}">
                 <fieldset>
                     <legend>Добавить назначение</legend>
                     <div class="form-group">

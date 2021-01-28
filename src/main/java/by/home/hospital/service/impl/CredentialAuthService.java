@@ -39,11 +39,11 @@ public class CredentialAuthService implements UserDetailsService {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + findByUserName.getUser().getPosition()));
     }
 
-    public Integer getIdAutUser(){
+    public Integer getIdAutUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication !=null){
+        if (authentication != null) {
             UserWIthId principal = (UserWIthId) authentication.getPrincipal();
-          return   principal.getId();
+            return principal.getId();
         }
         return 0;
     }

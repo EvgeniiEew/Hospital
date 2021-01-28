@@ -180,15 +180,15 @@ public class UserDischarsergePDFExporterService {
         String currentDateTime = dateFormatter.format(new Date());
         document.addTitle(currentDateTime);
         document.close();
-        return  fileName;
+        return fileName;
     }
 
-    private String generateFileNameByUser(){
+    private String generateFileNameByUser() {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
         String currentDateTime = dateFormatter.format(new Date());
-        String patientFirstName =  userDischarsergeDto.getFirstNamePatient();
-        String patientLastName =  userDischarsergeDto.getLastNamePatient();
-        return patientFirstName.concat(patientLastName).concat(currentDateTime);
+        String patientFirstName = userDischarsergeDto.getFirstNamePatient();
+        String patientLastName = userDischarsergeDto.getLastNamePatient();
+        return patientFirstName.concat("_" + patientLastName).concat("_" + currentDateTime);
 
     }
 

@@ -40,8 +40,6 @@ public class UsersController {
     private final String EDIT_USER_LIST = "editUserList";
 
     @Autowired
-    private CredentialsService credentialsService;
-    @Autowired
     private CredentialAuthService credentialAuthService;
     @Autowired
     private EpicrisisService epicrisisService;
@@ -62,7 +60,7 @@ public class UsersController {
     @PostMapping("/users/{id}/edit/")
     @PreAuthorize("@editUserVouter.checkUserId(authentication,#id) or hasRole('ADMIN')")
     public String editUser(Authentication authentication, @PathVariable("id") Integer id, Model model) {
-       String email = this.userService.getEmailByIdUser(id);
+        String email = this.userService.getEmailByIdUser(id);
         MyViewDto view = (conversionService.convert(email, MyViewDto.class));
         UserEditDto userEditDto = this.userService.getUserEditById(id);
         model.addAttribute("userEditDto", userEditDto);
