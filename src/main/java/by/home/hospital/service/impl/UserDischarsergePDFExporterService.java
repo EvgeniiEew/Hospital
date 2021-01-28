@@ -1,10 +1,9 @@
-package by.home.hospital.service;
+package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.dto.UserDischarsergeDto;
-import by.home.hospital.service.impl.UserService;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.*;
@@ -134,9 +133,10 @@ public class UserDischarsergePDFExporterService {
         table.addCell(pdfPCell);
     }
 
-    public void export(String path) throws DocumentException, IOException {
+    public String export(String path) throws DocumentException, IOException {
         Document document = new Document(PageSize.A3);
-        PdfWriter.getInstance(document, new FileOutputStream(path + "/resources/Extract.pdf"));
+        String fileName = generateFileNameByUser();
+        PdfWriter.getInstance(document, new FileOutputStream(path + "/resources/" + fileName + ".pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setColor(Color.CYAN);
@@ -180,6 +180,16 @@ public class UserDischarsergePDFExporterService {
         String currentDateTime = dateFormatter.format(new Date());
         document.addTitle(currentDateTime);
         document.close();
+        return  fileName;
+    }
+
+    private String generateFileNameByUser(){
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        String currentDateTime = dateFormatter.format(new Date());
+        String patientFirstName =  userDischarsergeDto.getFirstNamePatient();
+        String patientLastName =  userDischarsergeDto.getLastNamePatient();
+        return patientFirstName.concat(patientLastName).concat(currentDateTime);
+
     }
 
     private Image setAvatarPdf() throws IOException, NullPointerException {

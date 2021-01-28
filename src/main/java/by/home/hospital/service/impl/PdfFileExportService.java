@@ -1,6 +1,5 @@
 package by.home.hospital.service.impl;
 
-import by.home.hospital.service.UserDischarsergePDFExporterService;
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.dto.AppointmentDischarsergesDto;
@@ -19,7 +18,7 @@ public class PdfFileExportService implements IFileExport {
     @Autowired
     private UserService userService;
     @Override
-    public void pdfFileExport(String path, Integer id) {
+    public String pdfFileExport(String path, Integer id) {
         UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
         List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
         List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
@@ -31,12 +30,13 @@ public class PdfFileExportService implements IFileExport {
                         appointmentDischarsergesDtoList,
                         epicrisisList,
                         userService);
-        try {
-           userDischarsergePDFExporterService.export(path);
+        try { String fileName = userDischarsergePDFExporterService.export(path);
+         return fileName;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        return "fileName";
     }
 
 }

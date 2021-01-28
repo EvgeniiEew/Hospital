@@ -2,5 +2,5 @@ package by.home.hospital.service;
 
 
 public interface IFileExport {
-    void pdfFileExport(String path , Integer id);
+    String pdfFileExport(String path , Integer id);
 }

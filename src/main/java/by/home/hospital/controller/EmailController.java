@@ -24,8 +24,8 @@ public class EmailController {
     public String exportToEmail(@PathVariable("id") Integer id, HttpServletRequest request) {
         ServletContext context = request.getServletContext();
         String path = context.getRealPath("/");
-        this.pdfFileExportService.pdfFileExport(path, id);
-        this.emailService.sendmail(this.userService.getEmailByIdUser(id), path);
+        String fileName =  this.pdfFileExportService.pdfFileExport(path, id);
+        this.emailService.sendmail(this.userService.getEmailByIdUser(id), path, fileName);
         return "Email sent successfully";
     }
 }

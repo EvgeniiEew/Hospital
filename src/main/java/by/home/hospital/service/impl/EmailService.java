@@ -19,7 +19,7 @@ public class EmailService {
     @Autowired
     private EmailProperties emailConfig;
 
-    public void sendmail(String address, String path)  {
+    public void sendmail(String address, String path,String fileName)  {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -45,7 +45,7 @@ public class EmailService {
             MimeBodyPart attachPart = new MimeBodyPart();
 //            url('/files/Extract.pdf')
             try {
-                attachPart.attachFile(path+"/resources/Extract.pdf");
+                attachPart.attachFile(path+"/resources/" + fileName + ".pdf");
             } catch (IOException e) {
                 e.printStackTrace();
             }
