@@ -60,12 +60,17 @@ public class UsersController {
     @PostMapping("/users/{id}/edit/")
     @PreAuthorize("@editUserVouter.checkUserId(authentication,#id) or hasRole('ADMIN')")
     public String editUser(Authentication authentication, @PathVariable("id") Integer id, Model model) {
+        UserEditDto userEditDto = this.userService.getUserEditById(id);
+        getEditModel(id, model, userEditDto);
+        return this.EDIT_USER_LIST;
+    }
+
+    private Model getEditModel(Integer id, Model model, UserEditDto userEditDto) {
         String email = this.userService.getEmailByIdUser(id);
         MyViewDto view = (conversionService.convert(email, MyViewDto.class));
-        UserEditDto userEditDto = this.userService.getUserEditById(id);
         model.addAttribute("userEditDto", userEditDto);
         model.addAttribute("view", view);
-        return this.EDIT_USER_LIST;
+        return model;
     }
 
     @PostMapping("/user/edit/{id}/")
@@ -75,10 +80,7 @@ public class UsersController {
                            Model model) {
         if (bindingResult.hasErrors()) {
             userEditDto.setId(id);
-            String email = this.userService.getEmailByIdUser(id);
-            MyViewDto view = (conversionService.convert(email, MyViewDto.class));
-            model.addAttribute("userEditDto", userEditDto);
-            model.addAttribute("view", view);
+            getEditModel(id, model, userEditDto);
             return this.EDIT_USER_LIST;
         }
         userEditDto.setId(id);
@@ -111,28 +113,29 @@ public class UsersController {
 
     @GetMapping("/users/{id}/img")
     public void getImmage(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) throws IOException {
-   getUserImgage(id, response, request);
+        getUserImgage(id, response, request);
     }
 
     @GetMapping("/patient/{idUser}/img")
     public void getImmagePatient(@PathVariable("idUser") Integer idUser, HttpServletResponse response, HttpServletRequest request) throws IOException {
         Integer id = this.patientDetailsService.getUserByIdPatientDetails(idUser).getId();
-           getUserImgage(id, response, request);
+        getUserImgage(id, response, request);
     }
 
-  private void getUserImgage(Integer id , HttpServletResponse response, HttpServletRequest request) throws IOException {
-       Avatar file = this.imgService.getFile(id);
-       if (file != null) {
-           try (InputStream is = file.getData()) {
-               IOUtils.copy(is, response.getOutputStream());
-           }
-       } else {
-           ServletContext context = request.getServletContext();
-           String path = context.getRealPath("/");
-           String fullFilePath = path.concat("/resources/photo/no_avatar.png");
-           IOUtils.copy(new FileInputStream(new File(fullFilePath)), response.getOutputStream());
-       }
-   }
+    private void getUserImgage(Integer id, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        Avatar file = this.imgService.getFile(id);
+        if (file != null) {
+            try (InputStream is = file.getData()) {
+                IOUtils.copy(is, response.getOutputStream());
+            }
+        } else {
+            ServletContext context = request.getServletContext();
+            String path = context.getRealPath("/");
+            String fullFilePath = path.concat("/resources/photo/no_avatar.png");
+            IOUtils.copy(new FileInputStream(new File(fullFilePath)), response.getOutputStream());
+        }
+    }
+
     //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
     @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {

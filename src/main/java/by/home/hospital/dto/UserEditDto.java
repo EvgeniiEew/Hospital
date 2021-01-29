@@ -17,6 +17,6 @@ public class UserEditDto {
     private String lastName;
     @Size(min = 6, max = 30)
     private String email;
-    @Size(min = 6, max = 30)
+    @Size(min = 6, max = 20)
     private String password;
 }
