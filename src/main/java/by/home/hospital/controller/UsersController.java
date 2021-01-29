@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 // todo CRUD methods
@@ -110,27 +110,29 @@ public class UsersController {
     }
 
     @GetMapping("/users/{id}/img")
-    public void getImmage(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
-        Avatar file = this.imgService.getFile(id);
-        if (file != null) {
-            try (InputStream is = file.getData()) {
-                IOUtils.copy(is, response.getOutputStream());
-            }
-        }
+    public void getImmage(@PathVariable("id") Integer id, HttpServletResponse response, HttpServletRequest request) throws IOException {
+   getUserImgage(id, response, request);
     }
 
-    //!
-    @GetMapping("/patient/{id}/img")
-    public void getImmagePatient(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException {
-        Integer idUser = this.patientDetailsService.getUserByIdPatientDetails(id).getId();
-        Avatar file = this.imgService.getFile(idUser);
-        if (file != null) {
-            try (InputStream is = file.getData()) {
-                IOUtils.copy(is, response.getOutputStream());
-            }
-        }
+    @GetMapping("/patient/{idUser}/img")
+    public void getImmagePatient(@PathVariable("idUser") Integer idUser, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        Integer id = this.patientDetailsService.getUserByIdPatientDetails(idUser).getId();
+           getUserImgage(id, response, request);
     }
 
+  private void getUserImgage(Integer id , HttpServletResponse response, HttpServletRequest request) throws IOException {
+       Avatar file = this.imgService.getFile(id);
+       if (file != null) {
+           try (InputStream is = file.getData()) {
+               IOUtils.copy(is, response.getOutputStream());
+           }
+       } else {
+           ServletContext context = request.getServletContext();
+           String path = context.getRealPath("/");
+           String fullFilePath = path.concat("/resources/photo/no_avatar.png");
+           IOUtils.copy(new FileInputStream(new File(fullFilePath)), response.getOutputStream());
+       }
+   }
     //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
     @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {
