@@ -28,7 +28,6 @@ import javax.validation.Valid;
 import java.io.*;
 import java.util.List;
 
-// todo CRUD methods
 @Controller
 public class UsersController {
 
@@ -108,7 +107,6 @@ public class UsersController {
     public String handleFileUpload(@PathVariable("id") Integer id, @RequestParam("files") MultipartFile file) throws IOException {
         imgService.store(id, file);
         return "redirect:/myaccount";
-//        return  "redirect:/users/"+ id +"/edit/";
     }
 
     @GetMapping("/users/{id}/img")
@@ -136,7 +134,6 @@ public class UsersController {
         }
     }
 
-    //в форме доктора регистрации добавить радиобаттон для регистрации доктора или медсесты с разным пост urlom
     @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {
         this.userService.saveNurse(nurseRegisterDto);
@@ -174,7 +171,7 @@ public class UsersController {
         if (authentication == null) {
             return "redirect:/login";
         }
-        this.patientDetailsService.resetPatientDetaislStatusFromIdUser(this.credentialAuthService.getIdAutUser());
+        this.patientDetailsService.resetPatientDetailslStatusFromIdUser(this.credentialAuthService.getIdAutUser());
         return "redirect:/";
     }
 }

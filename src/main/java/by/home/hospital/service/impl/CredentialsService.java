@@ -69,14 +69,4 @@ public class CredentialsService implements ICredentialsService {
         this.credentialsJpaRepository.save(credentials);
     }
 
-//    public boolean existsByEmail(UserEditDto userEditDto) {
-//        Credential credential = this.credentialsJpaRepository.getByEmail(userEditDto.getEmail());
-//        if (credential != null) {
-//            return !credential.getUser().getId().equals(userEditDto.getId());
-//        }
-//        if (!this.credentialsJpaRepository.existsByEmail(userEditDto.getEmail())) {
-//            return false;
-//        }
-//        return true;
-//    }
 }

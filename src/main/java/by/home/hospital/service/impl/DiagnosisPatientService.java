@@ -27,7 +27,7 @@ public class DiagnosisPatientService implements IDiagnosisPatientService {
     @Override
     public void saveDiagnosisPatientFromExaminationDoctorDto(ExaminationDoctor examinationDoctor) {
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
-        diagnosisPatient.setPatientDetails(this.patientDetailsService.setStarusCheckingByPatientId(examinationDoctor.getPatientId()));
+        diagnosisPatient.setPatientDetails(this.patientDetailsService.setStatusCheckingByPatientId(examinationDoctor.getPatientId()));
         diagnosisPatient.setDiagnosis(this.diagnosisService.createDiagnosisFromExaminationDoctorDto(examinationDoctor));
         this.diagnosisPatientJpaRepository.save(diagnosisPatient);
     }

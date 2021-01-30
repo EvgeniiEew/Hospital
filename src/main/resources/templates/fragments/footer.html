@@ -5,10 +5,10 @@
         <div class="foot-body container">
             <div class="row">
                 <div class="copyright">
-                    <p>Copyright © 2001 - 2020 Больница №0™<br>
-                        Все права защищены.<br>
+                    <p>Copyright © 2001 - 2020 <span th:text="#{label.footer.hospital}"> Больница</span> №0™<br>
+                        <span th:text="#{label.footer.hospital.all}"> Все права защищены. </span><br>
                     </p>
-                    <p>Все используемые товарные знаки являются собственностью их владельцев.</p>
+                    <p th:text="#{label.footer.hospital.trademarks}">Все используемые товарные знаки являются собственностью их владельцев.</p>
                 </div>
             </div>
         </div>

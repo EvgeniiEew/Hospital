@@ -36,7 +36,6 @@ public class DoctorDetailsController {
         return this.DOCTOR_INFO_DTO;
     }
 
-    //doctor/listRegister/
     @GetMapping("/doctor/create")
     public String setDoctor(DoctorRegisterDto doctorRegisterDto, Model model) {
         if (doctorRegisterDto == null) {
@@ -46,7 +45,6 @@ public class DoctorDetailsController {
         return this.DOCTOR_CREATE;
     }
 
-    //!!!
     @PostMapping(path = "/doctor/register")
     public String registerDoctor(@Valid DoctorRegisterDto doctorRegisterDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -54,7 +52,6 @@ public class DoctorDetailsController {
             return this.DOCTOR_CREATE;
         }
         if (doctorRegisterDto.getPosition().equals(Position.NURSE)) {
-            //this.userService.saveNurse(Objects.requireNonNull(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class)));
             this.userService.saveNurse(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class));
             return "redirect:/";
         }

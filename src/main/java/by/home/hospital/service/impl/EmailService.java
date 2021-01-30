@@ -43,7 +43,6 @@ public class EmailService {
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
             MimeBodyPart attachPart = new MimeBodyPart();
-//            url('/files/Extract.pdf')
             try {
                 attachPart.attachFile(path + "/resources/" + fileName + ".pdf");
             } catch (IOException e) {
@@ -59,8 +58,6 @@ public class EmailService {
     }
 
     private String getMessage() {
-        return new StringBuilder("Hello ") //.append(user.getFirstName()).append("! ")
-                .append("To  your account discharge").toString(); //.append(emailConfig.getDomainHost())
-//                .append("/activate/").toString();//.append(user.getId()).toString();
+        return new StringBuilder("Hello. ").append("To  your account discharge").toString();
     }
 }

@@ -30,7 +30,6 @@ public class PatientDitalesController {
         return "redirect:/patient/status";
     }
 
-    //зарегистрировавшиеся не добавленые на прием  пациенты
     @GetMapping("/patient/status")
     public String getPatientWithStatusNotExamined(Model model) {
         List<PatientWhisStatusDto> patientsNotExaminded = this.patientDetailsService.getPatientWithStatus(NOT_EXAMINED);
@@ -38,7 +37,6 @@ public class PatientDitalesController {
         return this.PATIENT_NOT_EXAMID;
     }
 
-    //записаны на прием в ожидании назначения
     @GetMapping("/patient/status/receptionPending")
     public String getPatientWithStatusReceptionPending(Model model) {
         List<PatientWhisStatusDto> patientReceptionPending = this.patientDetailsService.getPatientWithStatus(RECEPTION_PENDING);

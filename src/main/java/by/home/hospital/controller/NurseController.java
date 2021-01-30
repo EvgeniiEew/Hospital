@@ -17,7 +17,6 @@ public class NurseController {
     @Autowired
     private AppointmentService appointmentService;
 
-    //NURSE
     @GetMapping("/nurse/appointment")
     public String getPatientForFulfillmentOfAppointments(Model model) {
         List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.nurseFindAllByStatus(AppointmentStatus.PENDING);

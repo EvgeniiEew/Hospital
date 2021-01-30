@@ -23,10 +23,6 @@ public class CredentialAuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        return credentialsService.findByLogin(credentialLogin)
-//                .map(credentials -> new User(credentials.getLogin(),
-//                credentials.getPassword(), toAuthorities(credentials)))
-//                .orElse(null);
         try {
             Credential credential = credentialsService.findByEmail(email).get();
             return new UserWIthId(credential.getUser().getId(), credential.getEmail(), credential.getPassword(), toAuthorities(credential));

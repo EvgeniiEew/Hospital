@@ -53,7 +53,6 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<AppointmentFulfillmentDto> nurseFindAllByStatus(AppointmentStatus status) {
-//        String type = Type.OPERATION.toString();
         List<Appointment> appointments = this.appoitmentJpaRepository.findByStatusAndTypeNotLike(status, Type.OPERATION);
         return appointments.stream().map(appointment ->
                 new AppointmentFulfillmentDto(
@@ -64,7 +63,6 @@ public class AppointmentService implements IAppointmentService {
                 )).collect(Collectors.toList());
     }
 
-    // заполнение формы для выполения процедур.операций.лекарств
     public MakingAppointmentsDto getFormForMakingAppointmentsDto(Integer idAppointment) {
         Appointment appointment = this.appoitmentJpaRepository.findAppointmentByIdNative(idAppointment);
         AppointmentUsers appointmentUsers = this.appointmentUsersService.getAppointmentUsersByAppointmentId(idAppointment);
@@ -74,7 +72,6 @@ public class AppointmentService implements IAppointmentService {
                 appointment.getStatus().toString(), this.epicrisisService.getEpicrisesByInfo(idAppointment), listDiagnosis);
     }
 
-    //занесение результатов проведения процедур в базу //?
     public void setPendingAppointmentStatusByID(ResultProcedurFormDto resultProcedurFormDto) {
         Appointment appointment = this.appoitmentJpaRepository.getOne(resultProcedurFormDto.getIdAppointment());
         appointment.setStatus(AppointmentStatus.DONE);

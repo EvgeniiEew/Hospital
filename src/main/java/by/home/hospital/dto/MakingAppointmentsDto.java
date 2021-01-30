@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-//Dto для выполнения назначений(операций.процедур.лекарств)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

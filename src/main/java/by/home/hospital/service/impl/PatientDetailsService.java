@@ -64,7 +64,7 @@ public class PatientDetailsService implements IPatientDetailsService {
         );
     }
 
-    public PatientDetails getPatientDetaisByIdPD(Integer idPd) {
+    public PatientDetails getPatientDetailsByIdPD(Integer idPd) {
         return this.patientDitalesjpaRepository.findById(idPd).get();
     }
 
@@ -75,19 +75,19 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     @Override
     public void patientStatusСhangeToReceptionPending(Integer number) {
-        PatientDetails patientDetails = getPatientDetaisByIdPD(number);
+        PatientDetails patientDetails = getPatientDetailsByIdPD(number);
         patientDetails.setPatientStatus(RECEPTION_PENDING);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
     public void PatientStatusReceptionPendingToNotExaminet(Integer idNumber) {
-        PatientDetails patientDetails = getPatientDetaisByIdPD(idNumber);
+        PatientDetails patientDetails = getPatientDetailsByIdPD(idNumber);
         patientDetails.setPatientStatus(NOT_EXAMINED);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
-    public void resetPatientDetaislStatusFromIdUser(Integer idPatient) {
+    public void resetPatientDetailslStatusFromIdUser(Integer idPatient) {
         PatientDetails patientDetails = getPatientDetailsByPatientId(idPatient);
         patientDetails.setPatientStatus(NOT_EXAMINED);
         this.patientDitalesjpaRepository.save(patientDetails);
@@ -116,7 +116,7 @@ public class PatientDetailsService implements IPatientDetailsService {
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
-    public PatientDetails setStarusCheckingByPatientId(Integer id) {
+    public PatientDetails setStatusCheckingByPatientId(Integer id) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
         patientDetails.setPatientStatus(CHECKING);
         return this.patientDitalesjpaRepository.save(patientDetails);
