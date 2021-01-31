@@ -31,7 +31,7 @@ public class InitializationClassService implements InitializingBean {
         Credential credentials = new Credential();
         credentials.setId(1);
         credentials.setEmail("Jack130a@mail.ru");
-        credentials.setPassword("2134asd");
+        credentials.setPassword("Jack130a@mail.ru");
         this.credentialsService.save(credentials);
 
         User user = new User();
@@ -59,8 +59,8 @@ public class InitializationClassService implements InitializingBean {
     public void createDoctor() {
         Credential credentials1 = new Credential();
         credentials1.setId(4);
-        credentials1.setEmail("Doctor1");
-        credentials1.setPassword("Doctor1");
+        credentials1.setEmail("Doctor1.@mail.ru");
+        credentials1.setPassword("Doctor1.@mail.ru");
         this.credentialsService.save(credentials1);
 
         User user1 = new User();
@@ -82,8 +82,8 @@ public class InitializationClassService implements InitializingBean {
     public void createAdmin() {
         Credential credentials2 = new Credential();
         credentials2.setId(7);
-        credentials2.setEmail("admin@mail.ru");
-        credentials2.setPassword("admin@mail.ru");
+        credentials2.setEmail("Admin@mail.ru");
+        credentials2.setPassword("Admin@mail.ru");
         this.credentialsService.save(credentials2);
 
         User user2 = new User();
@@ -99,8 +99,8 @@ public class InitializationClassService implements InitializingBean {
     public void createNurse() {
         Credential credentials3 = new Credential();
         credentials3.setId(9);
-        credentials3.setEmail("Nurse1");
-        credentials3.setPassword("Nurse1");
+        credentials3.setEmail("Nurse1.@mail.ru");
+        credentials3.setPassword("Nurse1.@mail.ru");
         this.credentialsService.save(credentials3);
 
         User user3 = new User();
@@ -115,8 +115,8 @@ public class InitializationClassService implements InitializingBean {
     public void createDoctor2() {
         Credential credentials4 = new Credential();
         credentials4.setId(11);
-        credentials4.setEmail("Doctor2");
-        credentials4.setPassword("Doctor2");
+        credentials4.setEmail("Doctor2.@mail.ru");
+        credentials4.setPassword("Doctor2.@mail.ru");
         this.credentialsService.save(credentials4);
 
         User user4 = new User();
@@ -138,8 +138,8 @@ public class InitializationClassService implements InitializingBean {
     public void createDoctor3() {
         Credential credentials5 = new Credential();
         credentials5.setId(14);
-        credentials5.setEmail("Doctor3");
-        credentials5.setPassword("Doctor3");
+        credentials5.setEmail("Doctor3.@mail.ru");
+        credentials5.setPassword("Doctor3.@mail.ru");
         this.credentialsService.save(credentials5);
 
         User user5 = new User();

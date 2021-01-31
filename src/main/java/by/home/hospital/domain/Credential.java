@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +16,6 @@ public class Credential {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @Column(nullable = false, unique = true, updatable = false)
     private String email;
 
