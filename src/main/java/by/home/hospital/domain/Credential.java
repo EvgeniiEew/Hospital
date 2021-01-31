@@ -19,7 +19,7 @@ public class Credential {
     @Column(nullable = false, unique = true, updatable = false)
     private String email;
 
-    @Length(min = 6, max = 20)
+    @Length(min = 6, max = 30)
     @Column(nullable = false)
     private String password;
 

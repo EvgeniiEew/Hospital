@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Выписка</title>
+<title th:text="#{label.discharge.extract}">Выписка</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -12,18 +12,18 @@
         <th:block th:insert="fragments/navBar.html :: navBar"/>
         <div class="main container ">
             <div class="starter-template text-center py-5 px-3">
-                <div align="left" color="white" font-size="h2">Минзрав</div>
-                <div align="right" color="white" font-size="h2">Форма №13443</div>
-                <div align="left" color="white" font-size="h2"><br>Больница №0.</div>
-                <h3>Выписка из медицинской карты больного</h3>
+                <div align="left" color="white" font-size="h2" th:text="#{label.discharge.ministry.of.health}">Минзрав</div>
+                <div align="right" color="white" font-size="h2" th:text="#{label.discharge.form}">Форма №13443</div>
+                <div align="left" color="white" font-size="h2"><br th:text="#{label.my.view.hospital}">Больница №0.</div>
+                <h3 th:text="#{label.discharge.patient}">Выписка из медицинской карты больного</h3>
             </div>
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Фото</th>
-                    <th scope="col">Личный номер пациента</th>
-                    <th scope="col">Фамилия пациента</th>
-                    <th scope="col">Имя пациента</th>
+                    <th scope="col" th:text="#{label.photo}">Фото</th>
+                    <th scope="col" th:text="#{label.persinal.namber}">Личный номер пациента</th>
+                    <th scope="col" th:text="#{label.discharge.patient.surname}">Фамилия пациента</th>
+                    <th scope="col" th:text="#{label.disharge.patient.name}">Имя пациента</th>
                 </tr>
                 </thead>
                 <tr th:each="userDischarge : ${userDischarsergeDto}">
@@ -37,8 +37,8 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">полный диагноз за последний год</th>
-                    <th scope="col">Поставили диагноз</th>
+                    <th scope="col" th:text="#{label.disharge.complete.diagnosis}">полный диагноз за последний год</th>
+                    <th scope="col" th:text="#{label.disharge.diagnosed}">Поставили диагноз</th>
                 </tr>
                 </thead>
                 <tr th:each="diagnosis : ${listDiagnosis}">
@@ -50,13 +50,13 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Проведенное лечение</th>
-                    <th scope="col">Тип назначения</th>
-                    <th scope="col">Дата выполнения</th>
-                    <th scope="col">Кем выполнено</th>
-                    <th scope="col">Специализация доктора</th>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Фамилия</th>
+                    <th scope="col" th:text="#{label.disharge.treatment.performed}">Проведенное лечение</th>
+                    <th scope="col" th:text="#{label.disharge.destination.type}">Тип назначения</th>
+                    <th scope="col" th:text="#{label.disharge.date.of.completion}">Дата выполнения</th>
+                    <th scope="col" th:text="#{label.disharge.by.whom}">Кем выполнено</th>
+                    <th scope="col" th:text="#{label.disharge.doctors.specialization}">Специализация доктора</th>
+                    <th scope="col" th:text="#{label.my.view.fname}">Имя</th>
+                    <th scope="col" th:text="#{label.my.view.lname}">Фамилия</th>
                 </tr>
                 </thead>
                 <tr th:each="list : ${listAppointment}">
@@ -72,7 +72,7 @@
 
             <thead>
             <tr>
-                <th scope="col">Краткий анемиз и рекомендации:</th>
+                <th scope="col" th:text="#{label.disharge.brief.anemiz.and.recommendations}">Краткий анемиз и рекомендации:</th>
             </tr>
             </thead>
             <tr th:each="epicris : ${epicrisisList}">
@@ -81,7 +81,7 @@
             <form method="POST" enctype="multipart/form-data"
                   th:action="@{/user/export/{uid} (uid=${userDischarsergeDto.idPatientUser})}">
                 <div align="center">
-                    <input class="btn btn-outline-success btn-sm" type="submit" value="Export to email"/>
+                    <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.disharge.export.email}"/>
                 </div>
             </form>
         </div>

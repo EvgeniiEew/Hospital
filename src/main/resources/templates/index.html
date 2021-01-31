@@ -23,23 +23,23 @@
 
     <div class="main">
         <div class="starter-template text-center py-5 px-3">
-            <h1>Добро пожаловать на сайт Больницы №0</h1>
-            <p class="lead"> В нашей больнице осуществляют осмотр и прием врачи.</p>
+            <h1> <span th:text="#{label.index.hello}"> Добро пожаловать на сайт Больницы </span> №0 <span th:text="#{label.index.hello.en}"></span> </h1>
+            <p class="lead" th:text="#{label.index.doctor}"> В нашей больнице осуществляют осмотр и прием врачи.</p>
             <!--            todo if user не залогинен-->
-            <p sec:authorize="isAnonymous()"> На осмотр можно записаться после прохождения регистрации.</p>
+            <p sec:authorize="isAnonymous()"  th:text="#{label.index.register}"> На осмотр можно записаться после прохождения регистрации.</p>
         </div>
 
         <!--    todo get random doctors photos-->
         <div class="best-staff-container">
-            <a href="/doctors" class="best-staff-title">Вас примут наши лучшие специалисты</a>
+            <a href="/doctors" class="best-staff-title"  th:text="#{label.index.spec}">Вас примут наши лучшие специалисты</a>
 
             <div class="best-stuff">
                 <img class="stuff-photo"
-                     src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
+                     src="https://img3.stockfresh.com/files/l/lightfieldstudios/m/31/8530411_stock-photo-young-african-american-doctor-in-hospital.jpg">
                 <img class="stuff-photo"
-                     src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
+                     src="https://st3.depositphotos.com/10654668/i/600/depositphotos_138447116-stock-photo-male-doctor-with-stethoscope.jpg">
                 <img class="stuff-photo"
-                     src="https://image.freepik.com/free-vector/doctor-character-background_1270-84.jpg">
+                     src="https://thumbs.dreamstime.com/b/male-black-doctor-worker-tablet-computer-standing-hospital-male-black-doctor-worker-tablet-computer-standing-184773534.jpg">
             </div>
         </div>
 

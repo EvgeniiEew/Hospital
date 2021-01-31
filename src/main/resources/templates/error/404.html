@@ -12,9 +12,9 @@
     <div class="main-container color-inherit white-30 text-center">
         <div class="error-page-container">
             <p class="error-code">404</p>
-            <h2 class="error-title">Страница не найдена</h2>
-            <p>
-                Упс...Ссылка на которую вы кликнули возможно сломана <br> или страница была удалена. Извините.
+            <h2 class="error-title" th:text="#{label.error.not.found}">Страница не найдена</h2>
+            <p> <span th:text="#{label.error.not.found.broken}">
+                Упс...Ссылка на которую вы кликнули возможно сломана </span> <br><span th:text="#{label.error.not.found.sorry}"> или страница была удалена. Извините.</span>
             </p>
         </div>
     </div>
