@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 >
-<title>Список не обследованных пациентов</title>
+<title th:text="#{label.patient.sign.up.for.examination}">Список не обследованных пациентов</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -17,10 +17,10 @@
                     <thead>
                     <tr>
                         <!--                <th scope="col">idPatient</th>-->
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фамилия</th>
-                        <th scope="col">Статус</th>
-                        <th scope="col">Записать на обследование</th>
+                        <th scope="col" th:text="#{label.discharges.name}">Имя</th>
+                        <th scope="col" th:text="#{label.discharges.lname}">Фамилия</th>
+                        <th scope="col" th:text="#{label.patient.reception.pending.status}">Статус</th>
+                        <th scope="col" th:text="#{label.patient.not.examinded.list}">Записать на обследование</th>
 
                     </tr>
                     </thead>
@@ -32,7 +32,7 @@
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/{uid}/status (uid=${patient.id})}">
                             <td>
-                                <input class="btn btn-outline-success btn-sm" type="submit" value="Записать"/>
+                                <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.patient.not.examinded}"/>
                             </td>
                         </form>
                     </tr>

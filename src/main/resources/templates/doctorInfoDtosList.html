@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 >
-<title>Список врачей</title>
+<title th:text="#{label.doctor.info}">Список врачей</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -15,10 +15,10 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Фото</th>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фамилия</th>
-                        <th scope="col">Направление</th>
+                        <th scope="col" th:text="#{label.photo}">Фото</th>
+                        <th scope="col" th:text="#{label.discharges.name}">Имя</th>
+                        <th scope="col" th:text="#{label.discharges.lname}">Фамилия</th>
+                        <th scope="col" th:text="#{label.doctor.referral}">Направление</th>
                     </tr>
                     </thead>
                     <tr th:each="doctor : ${doctorInfoDtos}">

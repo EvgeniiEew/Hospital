@@ -13,17 +13,17 @@
         <div class="main container ">
             <div class="starter-template text-center py-5 px-3">
                 <div align="left" color="white" font-size="h2" th:text="#{label.discharge.ministry.of.health}">Минзрав</div>
-                <div align="right" color="white" font-size="h2" th:text="#{label.discharge.form}">Форма №13443</div>
-                <div align="left" color="white" font-size="h2"><br th:text="#{label.my.view.hospital}">Больница №0.</div>
+                <div align="right" color="white" font-size="h2"><span th:text="#{label.discharge.form}">Форма</span> №13443</div>
+                <div align="left" color="white" font-size="h2"><br> <span  th:text="#{label.my.view.hospital}">Больница</span> №0.</div>
                 <h3 th:text="#{label.discharge.patient}">Выписка из медицинской карты больного</h3>
             </div>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col" th:text="#{label.photo}">Фото</th>
-                    <th scope="col" th:text="#{label.persinal.namber}">Личный номер пациента</th>
+                    <th scope="col" th:text="#{label.personal.number}">Личный номер пациента</th>
                     <th scope="col" th:text="#{label.discharge.patient.surname}">Фамилия пациента</th>
-                    <th scope="col" th:text="#{label.disharge.patient.name}">Имя пациента</th>
+                    <th scope="col" th:text="#{label.discharge.patient.name}">Имя пациента</th>
                 </tr>
                 </thead>
                 <tr th:each="userDischarge : ${userDischarsergeDto}">
@@ -37,8 +37,8 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col" th:text="#{label.disharge.complete.diagnosis}">полный диагноз за последний год</th>
-                    <th scope="col" th:text="#{label.disharge.diagnosed}">Поставили диагноз</th>
+                    <th scope="col" th:text="#{label.discharge.complete.diagnosis}">полный диагноз за последний год</th>
+                    <th scope="col" th:text="#{label.discharge.diagnosed}">Поставили диагноз</th>
                 </tr>
                 </thead>
                 <tr th:each="diagnosis : ${listDiagnosis}">
@@ -50,11 +50,11 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col" th:text="#{label.disharge.treatment.performed}">Проведенное лечение</th>
-                    <th scope="col" th:text="#{label.disharge.destination.type}">Тип назначения</th>
-                    <th scope="col" th:text="#{label.disharge.date.of.completion}">Дата выполнения</th>
-                    <th scope="col" th:text="#{label.disharge.by.whom}">Кем выполнено</th>
-                    <th scope="col" th:text="#{label.disharge.doctors.specialization}">Специализация доктора</th>
+                    <th scope="col" th:text="#{label.discharge.treatment.performed}">Проведенное лечение</th>
+                    <th scope="col" th:text="#{label.discharge.destination.type}">Тип назначения</th>
+                    <th scope="col" th:text="#{label.discharge.date.of.completion}">Дата выполнения</th>
+                    <th scope="col" th:text="#{label.discharge.by.whom}">Кем выполнено</th>
+                    <th scope="col" th:text="#{label.discharge.doctors.specialization}">Специализация доктора</th>
                     <th scope="col" th:text="#{label.my.view.fname}">Имя</th>
                     <th scope="col" th:text="#{label.my.view.lname}">Фамилия</th>
                 </tr>
@@ -72,7 +72,7 @@
 
             <thead>
             <tr>
-                <th scope="col" th:text="#{label.disharge.brief.anemiz.and.recommendations}">Краткий анемиз и рекомендации:</th>
+                <th scope="col" th:text="#{label.discharge.brief.anemiz.and.recommendations}">Краткий анемиз и рекомендации:</th>
             </tr>
             </thead>
             <tr th:each="epicris : ${epicrisisList}">
@@ -81,7 +81,7 @@
             <form method="POST" enctype="multipart/form-data"
                   th:action="@{/user/export/{uid} (uid=${userDischarsergeDto.idPatientUser})}">
                 <div align="center">
-                    <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.disharge.export.email}"/>
+                    <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.discharge.export.email}"/>
                 </div>
             </form>
         </div>

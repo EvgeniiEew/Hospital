@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Выполнение процедур</title>
+<title th:text="#{label.performance}">Выполнение процедур</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -8,16 +8,16 @@
 <body>
     <th:block th:insert="fragments/navBar.html :: navBar"/>
     <div class="main container">
-        <h2>Выполение процедур</h2>
+        <h2 th:text="#{label.performance}">Выполение процедур</h2>
         <div>
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">№ Назначения</th>
-                    <th scope="col">Что выпоняем</th>
-                    <th scope="col">Тип выполняемого назначения</th>
-                    <th scope="col">Статус процедуры</th>
-                    <th scope="col">Предворительная запись в выписке</th>
+                    <th scope="col" th:text="#{label.appointment.list}">Номер назначения</th>
+                    <th scope="col" th:text="#{label.performance.what.we.do}">Что выпоняем</th>
+                    <th scope="col" th:text="#{label.performance.type}">Тип выполняемого назначения</th>
+                    <th scope="col" th:text="#{label.performance.status}">Статус процедуры</th>
+                    <th scope="col" th:text="#{label.performance.discharges}">Предворительная запись в выписке</th>
 
                 </tr>
                 </thead>
@@ -36,9 +36,9 @@
 
             <form METHOD="post"  th:action="@{/patient/addAppointmentToTheDatabase/{uid}/ (uid=${makingAppointmentsDto.idApointment})}" >
                 <fieldset>
-                    <legend>Дописать результат проведения</legend>
+                    <legend th:text="#{label.performance.result}">Дописать результат проведения</legend>
                     <div class="form-group">
-                        <label for="resaultEpicris">Информация к выполняемому назначению, заметки.</label>
+                        <label for="resaultEpicris" th:text="#{label.performance.info.epicrisis}">Информация к выполняемому назначению, заметки.</label>
                         <input type="text" class="form-control" id="resaultEpicris" name="resaultEpicris"
                                placeholder="epicris..">
                     </div>
@@ -53,7 +53,7 @@
                                th:value="*{idApointment}">
                     </div>
                 </fieldset>
-                <button type="submit" class="btn btn-success">Выполнить назначение</button>
+                <button type="submit" class="btn btn-success" th:text="#{label.appointment.complete.assignment}">Выполнить назначение</button>
             </form>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 >
-<title>Список пациентов на выписку</title>
+<title th:text="#{label.discharge.ministry.of.health}">Список пациентов на выписку</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -15,12 +15,12 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Фото</th>
-                        <th scope="col">id</th>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Фамилия</th>
-                        <th scope="col">Позиция</th>
-                        <th scope="col">Подготовить выписку</th>
+                        <th scope="col" th:text="#{label.photo}">Фото</th>
+                        <th scope="col" th:text="#{label.discharges.number}">Личный номер</th>
+                        <th scope="col" th:text="#{label.discharges.name}">Имя</th>
+                        <th scope="col" th:text="#{label.discharges.lname}">Фамилия</th>
+                        <th scope="col" th:text="#{label.discharges.position}">Позиция</th>
+                        <th scope="col" th:text="#{label.discharges.create}">Подготовить выписку</th>
                     </tr>
                     </thead>
 
@@ -34,7 +34,7 @@
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/{uid}/discharges (uid=${user.id})}">
                             <td>
-                                <input class="btn btn-outline-success btn-sm" type="submit" value="Выписать"/>
+                                <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.discharges.write.out}"/>
                             </td>
                         </form>
                     </tr>

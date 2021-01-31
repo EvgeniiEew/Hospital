@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<title>Назначения</title>
+<title th:text="#{label.pending.appointments}">Назначения</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
@@ -13,10 +13,10 @@
 
                 <thead>
                 <tr>
-                    <th scope="col">ID_Назначения</th>
-                    <th scope="col">Назначение</th>
-                    <th scope="col">тип назанчения</th>
-                    <th scope="col">Статус назначения</th>
+                    <th scope="col" th:text="#{label.appointment.list}">Номер назначения</th>
+                    <th scope="col" th:text="#{label.appointment}">Назначение</th>
+                    <th scope="col" th:text="#{label.appointment.destination.type}">Тип назначения</th>
+                    <th scope="col" th:text="#{label.appointment.status}">Статус назначения</th>
                 </tr>
                 </thead>
 

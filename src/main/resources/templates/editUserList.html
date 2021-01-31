@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Изменить личные данные</title>
+<title th:text="#{label.edit.user.list}">Изменить личные данные</title>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
 </head>
@@ -8,14 +8,14 @@
     <th:block th:insert="fragments/navBar.html :: navBar"/>
 
     <div class="main-container">
-        <div class="form-title ">Введите данные</div>
+        <div class="form-title" th:text="#{label.login.info}">Введите данные</div>
         <div class="photo-edit-form">
             <img th:src="@{/users/{uid}/img(uid=${view.id})}" class="profile-photo" alt="">
 
             <form style="padding-top: 14px" method="POST" enctype="multipart/form-data"
                   th:action="@{/users/{uid}/img(uid=${view.id})}">
                 <input type="file" name="files"/>
-                <input class="btn btn-success" type="submit" value="Загрузить"/>
+                <input class="btn btn-success" type="submit" th:value="#{label.edit.user.list.download}"/>
             </form>
         </div>
 
@@ -23,7 +23,7 @@
               method="POST" th:object="${userEditDto}">
 
             <div class="form-group">
-                <label for="firstNameInput">Имя:</label>
+                <label for="firstNameInput" th:text="#{label.my.view.fname}">Имя:</label>
                 <input class="form-control" id="firstNameInput" type="text" placeholder="" name="firstName"
                        th:field="*{firstName}">
             </div>
@@ -31,7 +31,7 @@
                  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error
             </div>
             <div class="form-group">
-                <label for="lastNameInput">Фамилия:</label>
+                <label for="lastNameInput"  th:text="#{label.my.view.lname}">Фамилия:</label>
                 <input class="form-control" id="lastNameInput" type="text" placeholder="" name="lastName"
                        th:field="*{lastName}">
             </div>
@@ -39,7 +39,7 @@
                  th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error
             </div>
             <div class="form-group">
-                <label for="emailNameInput">Email:</label>
+                <label for="emailNameInput" th:text="#{label.my.view.email}">Email:</label>
                 <input class="form-control" id="emailNameInput" readonly type="text" placeholder="" name="email"
                        th:field="*{email}">
             </div>
@@ -47,7 +47,7 @@
                  th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error
             </div>
             <div class="form-group">
-                <label for="passwordInput">Пароль:</label>
+                <label for="passwordInput" th:text="#{label.register.doctor.password}">Пароль:</label>
                 <input class="form-control" id="passwordInput" type="text" placeholder="" name="password"
                        th:field="*{password}">
             </div>
@@ -55,7 +55,7 @@
                  th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error
             </div>
 
-            <input type="submit" class="btn btn-success" value="Сохранить"/>
+            <input type="submit" class="btn btn-success" th:value="#{label.register.doctor.save}"/>
         </form>
     </div>
 

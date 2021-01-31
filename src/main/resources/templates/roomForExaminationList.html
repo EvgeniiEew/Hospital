@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>Осмотр пациента</title>
+<title th:text="#{label.examination.patient}">Осмотр пациента</title>
 <head>
     <th:block th:insert="fragments/head.html :: head"/>
 </head>
@@ -9,13 +9,13 @@
 
     <div class="main container">
         <div class="inspection-patient-info">
-            <h2>Осмотр пациента</h2>
+            <h2 th:text="#{label.examination.patient}">Осмотр пациента</h2>
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Фамилия</th>
-                    <th scope="col">Статус</th>
+                    <th scope="col" th:text="#{label.discharges.name}">Имя</th>
+                    <th scope="col" th:text="#{label.discharges.lname}">Фамилия</th>
+                    <th scope="col" th:text="#{label.patient.reception.pending.status}">Статус</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -30,24 +30,24 @@
         <div class="form-container">
             <form METHOD="post" th:action="@{/patient/examination/{id}/ (id=${idPatient})}">
                 <fieldset>
-                    <legend>Добавить назначение</legend>
+                    <legend th:text="#{label.examination.patient.appointment}">Добавить назначение</legend>
                     <div class="form-group">
-                        <label for="diagnosisDtoId">Диагноз пациента</label>
+                        <label for="diagnosisDtoId" th:text="#{label.examination.patient.diagnosis}">Диагноз пациента</label>
                         <input type="text" class="form-control" id="diagnosisDtoId" name="diagnosisDto"
                                placeholder="diagnosisDto..">
                     </div>
                     <div class="form-group">
-                        <label for="epicrisisId">Запись в выписку</label>
+                        <label for="epicrisisId" th:text="#{label.examination.patient.epicrisis}">Запись в выписку</label>
                         <input type="text" class="form-control" id="epicrisisId" name="epicrisis"
                                placeholder="epicrisis..">
                     </div>
                     <div class="form-group">
-                        <label for="nameId">Пометка к выполняемым процедурам</label>
+                        <label for="nameId" th:text="#{label.examination.patient.procedure.flagging}">Пометка к выполняемым процедурам</label>
                         <input type="text" class="form-control" id="nameId" name="nameApointment"
                                placeholder="nameAppoitment..">
                     </div>
                     <div class="form-group">
-                        <label for="exampleSelect1">Тип назначения</label>
+                        <label for="exampleSelect1" th:text="#{label.appointment.destination.type}">Тип назначения</label>
                         <select class="form-control" id="exampleSelect1" name="name">
                             <option value="PROCEDURE">PROCEDURE</option>
                             <option value="DRUG">DRUG</option>
@@ -59,7 +59,7 @@
                         <input hidden="hidden" type="text" id="idPatient" name="idPatient" th:value="*{id}">
                     </div>
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        <button type="submit" class="btn btn-success" th:text="#{label.register.doctor.save}">Сохранить</button>
                     </div>
                 </fieldset>
             </form>
