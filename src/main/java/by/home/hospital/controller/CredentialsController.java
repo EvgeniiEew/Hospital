@@ -2,6 +2,7 @@ package by.home.hospital.controller;
 
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.dto.UserEditDto;
+import by.home.hospital.service.impl.CredentialsService;
 import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,15 @@ public class CredentialsController {
     private final String CREDENTIALS = "credentialsList";
     private final String PATIENT_REGISTER = "patientRegisterList";
     @Autowired
+    private CredentialsService credentialsService;
+    @Autowired
     private UserService userService;
     @Autowired
     private PatientDetailsService patientDetailsService;
 
     @PostMapping("/patient/registers")
     public String registerPatient(@Valid PatientRegisterDto patientRegisterDto, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || this.credentialsService.existsByEmail(patientRegisterDto.getEmail())) {
             model.addAttribute("patientRegisterDto", patientRegisterDto);
             return this.PATIENT_REGISTER;
         }

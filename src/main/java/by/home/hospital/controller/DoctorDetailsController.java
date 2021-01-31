@@ -4,6 +4,7 @@ import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.enums.Position;
+import by.home.hospital.service.impl.CredentialsService;
 import by.home.hospital.service.impl.DoctorDetailsService;
 import by.home.hospital.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class DoctorDetailsController {
     private final String DOCTOR_INFO_DTO = "doctorInfoDtosList";
     private final String DOCTOR_CREATE = "doctorCreateList";
 
+    @Autowired
+    private CredentialsService credentialsService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -47,7 +50,7 @@ public class DoctorDetailsController {
 
     @PostMapping(path = "/doctor/register")
     public String registerDoctor(@Valid DoctorRegisterDto doctorRegisterDto, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || this.credentialsService.existsByEmail(doctorRegisterDto.getEmail())) {
             model.addAttribute("doctorRegisterDto", doctorRegisterDto);
             return this.DOCTOR_CREATE;
         }
