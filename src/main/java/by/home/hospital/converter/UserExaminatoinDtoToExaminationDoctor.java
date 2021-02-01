@@ -3,9 +3,7 @@ package by.home.hospital.converter;
 import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.dto.UserExaminationDto;
-import by.home.hospital.enums.Type;
-import by.home.hospital.service.impl.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import by.home.hospital.domain.Type;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

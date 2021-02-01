@@ -3,11 +3,11 @@ package by.home.hospital.controller;
 import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.NurseRegisterDto;
-import by.home.hospital.enums.Position;
+import by.home.hospital.domain.Position;
 import by.home.hospital.service.impl.CredentialsService;
 import by.home.hospital.service.impl.DoctorDetailsService;
 import by.home.hospital.service.impl.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +19,15 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class DoctorDetailsController {
     private final String DOCTOR_INFO_DTO = "doctorInfoDtosList";
     private final String DOCTOR_CREATE = "doctorCreateList";
 
-    @Autowired
-    private CredentialsService credentialsService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private ConversionService conversionService;
-    @Autowired
-    private DoctorDetailsService doctorDetailsService;
+    private final CredentialsService credentialsService;
+    private final UserService userService;
+    private final ConversionService conversionService;
+    private final DoctorDetailsService doctorDetailsService;
 
     @GetMapping("/doctors")
     public String getDoctorDetails(Model model) {

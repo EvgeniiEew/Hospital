@@ -10,7 +10,7 @@ public interface IPatientDetailsService {
 
     List<PatientDetails> getPatientDetails();
 
-    void savePatientRegister(PatientRegisterDto patientRegisterDto);
+    PatientDetails savePatientRegister(PatientRegisterDto patientRegisterDto);
 
     PatientDetails save(PatientDetails patientDetails);
 

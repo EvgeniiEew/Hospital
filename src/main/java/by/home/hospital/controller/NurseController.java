@@ -1,7 +1,7 @@
 package by.home.hospital.controller;
 
 import by.home.hospital.dto.AppointmentFulfillmentDto;
-import by.home.hospital.enums.AppointmentStatus;
+import by.home.hospital.domain.AppointmentStatus;
 import by.home.hospital.service.impl.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

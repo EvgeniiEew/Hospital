@@ -1,6 +1,5 @@
 package by.home.hospital.domain;
 
-import by.home.hospital.enums.Position;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 

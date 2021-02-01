@@ -1,7 +1,5 @@
 package by.home.hospital.domain;
 
-import by.home.hospital.enums.AppointmentStatus;
-import by.home.hospital.enums.Type;
 import lombok.*;
 
 import javax.persistence.*;

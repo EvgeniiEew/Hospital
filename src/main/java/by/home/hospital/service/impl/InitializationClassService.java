@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import static by.home.hospital.enums.PatientStatus.NOT_EXAMINED;
-import static by.home.hospital.enums.Position.*;
+import static by.home.hospital.domain.PatientStatus.NOT_EXAMINED;
+import static by.home.hospital.domain.Position.*;
 
 @Service
 @Transactional

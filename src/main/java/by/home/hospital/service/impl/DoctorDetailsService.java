@@ -4,7 +4,7 @@ import by.home.hospital.domain.DoctorDetails;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.dto.DoctorRegisterDto;
-import by.home.hospital.enums.Position;
+import by.home.hospital.domain.Position;
 import by.home.hospital.service.IDoctorDetailsService;
 import by.home.hospital.service.repository.DoctorDitalesJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

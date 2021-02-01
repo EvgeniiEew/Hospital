@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-import static by.home.hospital.enums.PatientStatus.NOT_EXAMINED;
-import static by.home.hospital.enums.PatientStatus.RECEPTION_PENDING;
+import static by.home.hospital.domain.PatientStatus.NOT_EXAMINED;
+import static by.home.hospital.domain.PatientStatus.RECEPTION_PENDING;
 
 @Controller
 public class PatientDitalesController {

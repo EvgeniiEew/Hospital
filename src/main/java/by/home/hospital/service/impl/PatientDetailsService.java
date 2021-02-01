@@ -5,7 +5,7 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.dto.PatientWhisStatusDto;
 import by.home.hospital.dto.ResultProcedurFormDto;
-import by.home.hospital.enums.PatientStatus;
+import by.home.hospital.domain.PatientStatus;
 import by.home.hospital.service.IPatientDetailsService;
 import by.home.hospital.service.repository.PatientDitalesjpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static by.home.hospital.enums.PatientStatus.*;
+import static by.home.hospital.domain.PatientStatus.*;
 
 @Transactional
 @Service
@@ -40,11 +40,11 @@ public class PatientDetailsService implements IPatientDetailsService {
     }
 
     @Override
-    public void savePatientRegister(PatientRegisterDto patientRegisterDto) {
+    public PatientDetails savePatientRegister(PatientRegisterDto patientRegisterDto) {
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setPatientStatus(NOT_EXAMINED);
         patientDetails.setPatient(this.userService.saveUserFromPatientRegisterDto(patientRegisterDto));
-        this.patientDitalesjpaRepository.save(patientDetails);
+        return this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override

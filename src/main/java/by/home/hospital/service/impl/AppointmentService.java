@@ -2,8 +2,8 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.*;
 import by.home.hospital.dto.*;
-import by.home.hospital.enums.AppointmentStatus;
-import by.home.hospital.enums.Type;
+import by.home.hospital.domain.AppointmentStatus;
+import by.home.hospital.domain.Type;
 import by.home.hospital.service.IAppointmentService;
 import by.home.hospital.service.repository.AppoitmentJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

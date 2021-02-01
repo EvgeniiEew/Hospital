@@ -1,6 +1,6 @@
 package by.home.hospital.dto;
 
-import by.home.hospital.enums.Type;
+import by.home.hospital.domain.Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

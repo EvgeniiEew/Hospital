@@ -4,7 +4,7 @@ import by.home.hospital.domain.Credential;
 import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
-import by.home.hospital.enums.Position;
+import by.home.hospital.domain.Position;
 import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.repository.UserJpaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import static by.home.hospital.enums.Position.PATIENT;
+import static by.home.hospital.domain.Position.PATIENT;
 
 
 @Transactional

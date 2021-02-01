@@ -1,7 +1,7 @@
 package by.home.hospital.service.repository;
 
 import by.home.hospital.domain.User;
-import by.home.hospital.enums.Position;
+import by.home.hospital.domain.Position;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

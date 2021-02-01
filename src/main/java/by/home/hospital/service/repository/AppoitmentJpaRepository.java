@@ -1,8 +1,8 @@
 package by.home.hospital.service.repository;
 
 import by.home.hospital.domain.Appointment;
-import by.home.hospital.enums.AppointmentStatus;
-import by.home.hospital.enums.Type;
+import by.home.hospital.domain.AppointmentStatus;
+import by.home.hospital.domain.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
