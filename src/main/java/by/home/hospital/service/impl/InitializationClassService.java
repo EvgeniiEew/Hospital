@@ -53,7 +53,8 @@ public class InitializationClassService implements InitializingBean {
         createNurse();
         createDoctor2();
         createDoctor3();
-
+        createPatient2();
+        createPatient3();
     }
 
     public void createDoctor() {
@@ -156,5 +157,48 @@ public class InitializationClassService implements InitializingBean {
         doctorDetails2.setDoctor(user5);
         doctorDetails2.setName("Therapist");
         this.doctorDetailsService.save(doctorDetails2);
+    }
+
+    public void createPatient2() {
+        Credential credentials = new Credential();
+        credentials.setId(17);
+        credentials.setEmail("Patient2@mail.ru");
+        credentials.setPassword("Patient2@mail.ru");
+        this.credentialsService.save(credentials);
+
+        User user = new User();
+        user.setId(18);
+        user.setPosition(PATIENT);
+        user.setFirstName("Patient2FName");
+        user.setLastName("Patient2LName");
+        user.setCredentials(credentials);
+        this.userService.save(user);
+
+        PatientDetails patientDetails = new PatientDetails();
+        patientDetails.setId(19);
+        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setPatient(user);
+        this.patientDetailsService.save(patientDetails);
+    }
+    private void createPatient3(){
+        Credential credentials = new Credential();
+        credentials.setId(20);
+        credentials.setEmail("Patient3@mail.ru");
+        credentials.setPassword("Patient3@mail.ru");
+        this.credentialsService.save(credentials);
+
+        User user = new User();
+        user.setId(21);
+        user.setPosition(PATIENT);
+        user.setFirstName("Patient3FName");
+        user.setLastName("Patient3LName");
+        user.setCredentials(credentials);
+        this.userService.save(user);
+
+        PatientDetails patientDetails = new PatientDetails();
+        patientDetails.setId(22);
+        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setPatient(user);
+        this.patientDetailsService.save(patientDetails);
     }
 }

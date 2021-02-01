@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>by.pvt.grodno</groupId>
-    <artifactId>Shabyh</artifactId>
+    <artifactId>shabyh</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Resalt Project</name>
+    <name>hospital</name>
     <url>http://maven.apache.org</url>
 
     <properties>

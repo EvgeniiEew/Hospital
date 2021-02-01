@@ -26,7 +26,7 @@ public class PatientDitalesController {
 
     @PostMapping("/patient/{id}/status")
     public String resetPatientStatusNotExaminedToReceptionPending(@PathVariable("id") Integer id) {
-        service.patientStatusСhangeToReceptionPending(id);
+        service.patientStatusChangeToReceptionPending(id);
         return "redirect:/patient/status";
     }
 

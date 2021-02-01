@@ -74,7 +74,7 @@ public class PatientDetailsService implements IPatientDetailsService {
     }
 
     @Override
-    public void patientStatusСhangeToReceptionPending(Integer number) {
+    public void patientStatusChangeToReceptionPending(Integer number) {
         PatientDetails patientDetails = getPatientDetailsByIdPD(number);
         patientDetails.setPatientStatus(RECEPTION_PENDING);
         this.patientDitalesjpaRepository.save(patientDetails);

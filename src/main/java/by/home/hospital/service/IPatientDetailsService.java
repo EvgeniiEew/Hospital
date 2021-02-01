@@ -20,7 +20,7 @@ public interface IPatientDetailsService {
 
     void deletePatientDetails(Integer number);
 
-    void patientStatusСhangeToReceptionPending(Integer id);
+    void patientStatusChangeToReceptionPending(Integer id);
 
     void PatientStatusReceptionPendingToNotExaminet(Integer id);
 }
