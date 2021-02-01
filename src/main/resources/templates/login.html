@@ -23,7 +23,7 @@
                 <div class="error-text" th:if="${param.error}" th:text="#{label.login.error.password}" >Неверное имя пользователя или пароль!</div>
                 <div class="error-text" th:if="${param.logout}" th:text="#{label.login.logout}">Вы вышли из системы.</div>
                 <div>
-                    <input type="submit" class="btn btn-success" value="Войти"/>
+                    <input type="submit" class="btn btn-success" th:value="#{label.come.in}"/>
                 </div>
             </form>
         </div>

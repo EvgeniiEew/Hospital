@@ -31,6 +31,7 @@
             <form METHOD="post" th:action="@{/patient/examination/{id}/ (id=${idPatient})}">
                 <fieldset>
                     <legend th:text="#{label.examination.patient.appointment}">Добавить назначение</legend>
+                    <label for="diagnosisDtoId" th:text="#{label.light.info}">Информация должна быть длинной от 3х символов</label>
                     <div class="form-group">
                         <label for="diagnosisDtoId" th:text="#{label.examination.patient.diagnosis}">Диагноз пациента</label>
                         <input type="text" class="form-control" id="diagnosisDtoId" name="diagnosisDto"

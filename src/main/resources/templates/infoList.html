@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>Info</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <th:block th:insert="fragments/head.html :: head"/>
+</head>
+<body>
+    <th:block th:insert="fragments/navBar.html :: navBar"/>
+    <div class="main-container">
+        <div class="container">
+            <div class="alert alert-primary" role="alert" th:text="#{label.info.email}">Выписка успешно отправлена
+                пациенту.
+            </div>
+        </div>
+    </div>
+    <th:block th:insert="fragments/footer.html :: footer"/>
+</body>
+</html>
+

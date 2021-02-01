@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="DEV__HOME" value="e:/logs"/>
+    <property name="DEV__HOME" value="c:/logs"/>
 
     <appender name="FILE-AUDIT"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -24,7 +24,7 @@
 
     </appender>
 
-    <logger name="com.mkyong" level="debug"
+    <logger name="com.info" level="debug"
             additivity="false">
         <appender-ref ref="FILE-AUDIT"/>
     </logger>

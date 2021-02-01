@@ -37,10 +37,11 @@
             <form METHOD="post"  th:action="@{/patient/addAppointmentToTheDatabase/{uid}/ (uid=${makingAppointmentsDto.idApointment})}" >
                 <fieldset>
                     <legend th:text="#{label.performance.result}">Дописать результат проведения</legend>
+                    <label  th:text="#{label.light.info}">Информация должна быть длинной от 3х символов</label>
                     <div class="form-group">
                         <label for="resaultEpicris" th:text="#{label.performance.info.epicrisis}">Информация к выполняемому назначению, заметки.</label>
                         <input type="text" class="form-control" id="resaultEpicris" name="resaultEpicris"
-                               placeholder="epicris..">
+                               placeholder="epicris.." >
                     </div>
                     <div class="form-group d-none" th:object="${makingAppointmentsDto}">
                         <label for="idPatientUser"></label>
