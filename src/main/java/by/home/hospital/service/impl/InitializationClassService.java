@@ -37,6 +37,7 @@ public class InitializationClassService implements InitializingBean {
         User user = new User();
         user.setId(2);
         user.setPosition(PATIENT);
+        user.setAvatarFileName("src/main/webapp/resources/photo/siluet.jpg");
         user.setFirstName("Patient1FName");
         user.setLastName("Patient1LName");
         user.setCredentials(credentials);
@@ -168,6 +169,7 @@ public class InitializationClassService implements InitializingBean {
 
         User user = new User();
         user.setId(18);
+        user.setAvatarFileName("src/main/webapp/resources/photo/siluet2.png");
         user.setPosition(PATIENT);
         user.setFirstName("Patient2FName");
         user.setLastName("Patient2LName");
@@ -189,6 +191,7 @@ public class InitializationClassService implements InitializingBean {
 
         User user = new User();
         user.setId(21);
+        user.setAvatarFileName("src/main/webapp/resources/photo/siluet3.png");
         user.setPosition(PATIENT);
         user.setFirstName("Patient3FName");
         user.setLastName("Patient3LName");
