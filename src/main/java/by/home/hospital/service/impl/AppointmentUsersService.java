@@ -69,8 +69,5 @@ public class AppointmentUsersService implements IAppointmentUsersService {
         this.appointmentUsersJpaRepository.deleteById(id);
     }
 
-    public void getAppontmentDischarsergesDto(Integer idPatient) {
-        Optional<AppointmentUsers> appointmentUsersList = this.appointmentUsersJpaRepository.findByPatientId(idPatient);
-//        appointmentUsersList.
-    }
+
 }

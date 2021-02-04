@@ -31,7 +31,8 @@
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/{uid}/status (uid=${patient.id})}">
                             <td>
-                                <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.patient.not.examinded}"/>
+                                <input class="btn btn-outline-success btn-sm" type="submit"
+                                       th:value="#{label.patient.not.examinded}"/>
                             </td>
                         </form>
                     </tr>

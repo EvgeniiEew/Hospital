@@ -37,7 +37,7 @@ public class CredentialAuthService implements UserDetailsService {
 
     public Integer getIdAutUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
+        if (authentication != null && authentication.getPrincipal() != "anonymousUser") {
             UserWIthId principal = (UserWIthId) authentication.getPrincipal();
             return principal.getId();
         }

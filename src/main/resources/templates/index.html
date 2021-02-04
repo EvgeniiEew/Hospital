@@ -23,15 +23,17 @@
 
     <div class="main">
         <div class="starter-template text-center py-5 px-3">
-            <h1> <span th:text="#{label.index.hello}"> Добро пожаловать на сайт Больницы </span> №0 <span th:text="#{label.index.hello.en}"></span> </h1>
+            <h1><span th:text="#{label.index.hello}"> Добро пожаловать на сайт Больницы </span> №0 <span
+                    th:text="#{label.index.hello.en}"></span></h1>
             <p class="lead" th:text="#{label.index.doctor}"> В нашей больнице осуществляют осмотр и прием врачи.</p>
-            <!--            todo if user не залогинен-->
-            <p sec:authorize="isAnonymous()"  th:text="#{label.index.register}"> На осмотр можно записаться после прохождения регистрации.</p>
+            <p sec:authorize="isAnonymous()" th:text="#{label.index.register}"> На осмотр можно записаться после
+                прохождения регистрации.</p>
         </div>
 
-        <!--    todo get random doctors photos-->
+
         <div class="best-staff-container">
-            <a href="/doctors" class="best-staff-title"  th:text="#{label.index.spec}">Вас примут наши лучшие специалисты</a>
+            <a href="/doctors" class="best-staff-title" th:text="#{label.index.spec}">Вас примут наши лучшие
+                специалисты</a>
 
             <div class="best-stuff">
                 <img class="stuff-photo"
@@ -42,9 +44,7 @@
                      src="https://d.radikal.ru/d23/2102/c7/c939f2b0d585.jpg">
             </div>
         </div>
-
     </div>
-
     <th:block th:insert="fragments/footer.html :: footer"/>
 </body>
 </html>

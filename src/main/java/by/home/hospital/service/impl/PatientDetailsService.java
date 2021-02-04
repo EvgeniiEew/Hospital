@@ -122,4 +122,8 @@ public class PatientDetailsService implements IPatientDetailsService {
         return this.patientDitalesjpaRepository.save(patientDetails);
     }
 
+    public PatientStatus getStatusByUserId(Integer userId) {
+        return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(userId).getStatus();
+    }
+
 }

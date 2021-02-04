@@ -28,7 +28,7 @@
                         <td th:text="${appoitmentColumn.status}"/>
                         <form method="Post" enctype="multipart/form-data"
                               th:action="@{/patient/FulfillmentOfAppointments/{uid}/ (uid=${appoitmentColumn.idApointment})}">
-                            <td><input type="submit"  th:value="#{label.appointment.complete}"/></td>
+                            <td><input type="submit" th:value="#{label.appointment.complete}"/></td>
                         </form>
                     </tr>
                 </table>

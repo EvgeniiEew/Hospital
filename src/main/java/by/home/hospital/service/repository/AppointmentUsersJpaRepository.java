@@ -9,6 +9,7 @@ public interface AppointmentUsersJpaRepository extends JpaRepository<Appointment
     AppointmentUsers getAppointmentUsersByAppointmentId(Integer IdAppointment);
 
     AppointmentUsers save(AppointmentUsers appointmentUsers);
+
     Optional<AppointmentUsers> findByPatientId(Integer idPatient);
 //    @Query("select doctor.id from appointment_users where patient_id = ?1")
 //    List<Integer> getIdDoctorsFromIdPatient(Integer patient_id);

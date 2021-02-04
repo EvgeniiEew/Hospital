@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 public class UserDischarsergePDFExporterService {
-    UserDischarsergeDto userDischarsergeDto;
+    private UserDischarsergeDto userDischarsergeDto;
     private List<Diagnosis> diagnosisList;
     private List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList;
     private List<Epicrisis> epicrisisList;
@@ -65,7 +65,7 @@ public class UserDischarsergePDFExporterService {
 
     private void writeTableDataAppointmentDischarsergesDto(PdfPTable tableAppointmentDischarsergesDto) {
         PdfPCell pdfPCell = new PdfPCell();
-        pdfPCell.setBackgroundColor(Color.BLUE);
+        pdfPCell.setBackgroundColor(Color.gray);
         pdfPCell.setPadding(5);
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
@@ -90,7 +90,7 @@ public class UserDischarsergePDFExporterService {
 
     private void writeTableDataDiagnosisList(PdfPTable tableDiagnosisList) {
         PdfPCell pdfPCell = new PdfPCell();
-        pdfPCell.setBackgroundColor(Color.BLUE);
+        pdfPCell.setBackgroundColor(Color.gray);
         pdfPCell.setPadding(5);
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
@@ -115,7 +115,7 @@ public class UserDischarsergePDFExporterService {
 
     private void writeTableDataUserDischarsergeDto(PdfPTable table) {
         PdfPCell pdfPCell = new PdfPCell();
-        pdfPCell.setBackgroundColor(Color.BLUE);
+        pdfPCell.setBackgroundColor(Color.gray);
         pdfPCell.setPadding(5);
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
@@ -139,7 +139,7 @@ public class UserDischarsergePDFExporterService {
         PdfWriter.getInstance(document, new FileOutputStream(path + "/resources/" + fileName + ".pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setColor(Color.CYAN);
+        font.setColor(Color.BLACK);
         font.setSize(18);
         Paragraph title = new Paragraph("Extract from the patient's medical record", font);
 

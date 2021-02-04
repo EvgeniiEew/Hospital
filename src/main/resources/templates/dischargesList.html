@@ -10,7 +10,7 @@
     <th:block th:insert="fragments/navBar.html :: navBar"/>
 
     <div class="main container doctor-list">
-        <div class="container" >
+        <div class="container">
             <div class="starter-template text py-5 px-3">
                 <table class="table">
                     <thead>
@@ -34,16 +34,17 @@
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/{uid}/discharges (uid=${user.id})}">
                             <td>
-                                <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.discharges.write.out}"/>
+                                <input class="btn btn-outline-success btn-sm" type="submit"
+                                       th:value="#{label.discharges.write.out}"/>
                             </td>
                         </form>
                     </tr>
                 </table>
-                <div th:if = "${totalPages > 1}">
+                <div th:if="${totalPages > 1}">
 
                     <div class="row col-sm-10">
                         <div class="col-sm-2">
-                        Всего: [[${totalItems}]]
+                            Всего: [[${totalItems}]]
                         </div>
                         <div class="col-sm-1">
                         <span th:each="i: ${#numbers.sequence(1, totalPages)}">
@@ -52,11 +53,13 @@
                         </span>
                         </div>
                         <div class="col-sm-1">
-                            <a th:if="${currentPage < totalPages}" th:href="@{'/user/discharges/' + ${currentPage + 1}}"> Next </a>
+                            <a th:if="${currentPage < totalPages}"
+                               th:href="@{'/user/discharges/' + ${currentPage + 1}}"> Next </a>
                             <span th:unless="${currentPage < totalPages}">Next</span>
                         </div>
                         <div class="col-sm-1">
-                            <a th:if="${currentPage < totalPages}" th:href="@{'/user/discharges/' + ${totalPages}}"> Last </a>
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/user/discharges/' + ${totalPages}}">
+                                Last </a>
                             <span th:unless="${currentPage < totalPages}">Last</span>
                         </div>
                     </div>

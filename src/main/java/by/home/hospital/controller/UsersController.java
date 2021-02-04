@@ -1,6 +1,7 @@
 package by.home.hospital.controller;
 
 
+import by.home.hospital.domain.Position;
 import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
@@ -52,7 +53,11 @@ public class UsersController {
     private UserService userService;
 
     @GetMapping("/")
-    public String homePage() {
+    public String homePage(Model model) {
+        Integer userId = this.credentialAuthService.getIdAutUser();
+        if (userId != 0 && this.userService.getUserById(userId).getPosition().equals(Position.PATIENT)) {
+            model.addAttribute("patientStatus", this.patientDetailsService.getStatusByUserId(userId).toString());
+        }
         return this.INDEX;
     }
 

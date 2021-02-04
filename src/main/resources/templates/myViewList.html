@@ -12,7 +12,8 @@
             <div class="profile-card-header">
                 <img class="profile-card-icon" alt="Snake icon" width="30" height="30"
                      src="https://img.icons8.com/ultraviolet/344/rod-of-asclepius.png">
-                <div class="profile-card-header-title"><span th:text="#{label.my.view.hospital}">Больница</span>&nbsp;№0</div>
+                <div class="profile-card-header-title"><span th:text="#{label.my.view.hospital}">Больница</span>&nbsp;№0
+                </div>
             </div>
             <div class="profile-card-data">
                 <img th:src="@{/users/{uid}/img(uid=${view.id})}" class="profile-photo" alt="">
@@ -33,8 +34,8 @@
                     <div class="profile-edit-button">
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/users/{uid}/edit/ (uid=${view.id})}">
-                            <input class="btn btn-outline-success btn-sm" type="submit"    th:value="#{label.my.view.edit}"/>
-<!--                                   value="Изменить"/>-->
+                            <input class="btn btn-outline-success btn-sm" type="submit"
+                                   th:value="#{label.my.view.edit}"/>
                         </form>
                     </div>
                 </div>

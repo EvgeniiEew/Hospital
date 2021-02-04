@@ -32,13 +32,15 @@
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/{uid}/inspection (uid=${patient.id})}">
                             <td>
-                                <input class="btn btn-success" type="submit" th:value="#{label.patient.reception.pending.inspect}"/>
+                                <input class="btn btn-success" type="submit"
+                                       th:value="#{label.patient.reception.pending.inspect}"/>
                             </td>
                         </form>
 
                         <form method="POST" enctype="multipart/form-data"
                               th:action="@{/patient/status/{uid}/reset (uid=${patient.id})}">
-                            <td><input class="btn btn-danger" type="submit" th:value="#{label.patient.reception.pending.break}"/></td>
+                            <td><input class="btn btn-danger" type="submit"
+                                       th:value="#{label.patient.reception.pending.break}"/></td>
                         </form>
                     </tr>
                 </table>

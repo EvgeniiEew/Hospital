@@ -68,7 +68,8 @@ public class CredentialsService implements ICredentialsService {
     public void save(Credential credentials) {
         this.credentialsJpaRepository.save(credentials);
     }
-   public boolean existsByEmail(String email){
-    return  this.credentialsJpaRepository.existsByEmail(email);
-   }
+
+    public boolean existsByEmail(String email) {
+        return this.credentialsJpaRepository.existsByEmail(email);
+    }
 }

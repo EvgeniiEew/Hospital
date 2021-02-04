@@ -12,9 +12,14 @@
         <th:block th:insert="fragments/navBar.html :: navBar"/>
         <div class="main container ">
             <div class="starter-template text-center py-5 px-3">
-                <div align="left" color="white" font-size="h2" th:text="#{label.discharge.ministry.of.health}">Минзрав</div>
-                <div align="right" color="white" font-size="h2"><span th:text="#{label.discharge.form}">Форма</span> №13443</div>
-                <div align="left" color="white" font-size="h2"><br> <span  th:text="#{label.my.view.hospital}">Больница</span> №0.</div>
+                <div align="left" color="white" font-size="h2" th:text="#{label.discharge.ministry.of.health}">Минзрав
+                </div>
+                <div align="right" color="white" font-size="h2"><span th:text="#{label.discharge.form}">Форма</span>
+                    №13443
+                </div>
+                <div align="left" color="white" font-size="h2"><br> <span
+                        th:text="#{label.my.view.hospital}">Больница</span> №0.
+                </div>
                 <h3 th:text="#{label.discharge.patient}">Выписка из медицинской карты больного</h3>
             </div>
             <table class="table">
@@ -72,7 +77,9 @@
 
             <thead>
             <tr>
-                <th scope="col" th:text="#{label.discharge.brief.anemiz.and.recommendations}">Краткий анемиз и рекомендации:</th>
+                <th scope="col" th:text="#{label.discharge.brief.anemiz.and.recommendations}">Краткий анемиз и
+                    рекомендации:
+                </th>
             </tr>
             </thead>
             <tr th:each="epicris : ${epicrisisList}">
@@ -81,7 +88,8 @@
             <form method="POST" enctype="multipart/form-data"
                   th:action="@{/user/export/{uid} (uid=${userDischarsergeDto.idPatientUser})}">
                 <div align="center">
-                    <input class="btn btn-outline-success btn-sm" type="submit" th:value="#{label.discharge.export.email}"/>
+                    <input class="btn btn-outline-success btn-sm" type="submit"
+                           th:value="#{label.discharge.export.email}"/>
                 </div>
             </form>
         </div>

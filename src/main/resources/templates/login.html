@@ -13,15 +13,18 @@
             <div class="form-title " th:text="#{label.login.info}">Введите данные</div>
             <form class="container center_div login-form" th:action="@{/login}" method="post">
                 <div class="form-group">
-                    <label for="username" th:text="#{label.login.email}" >Email</label>
+                    <label for="username" th:text="#{label.login.email}">Email</label>
                     <input class="form-control" id="username" type="text" name="username"/>
                 </div>
                 <div class="form-group">
-                    <label for="password" th:text="#{label.login.password}" >Пароль</label>
+                    <label for="password" th:text="#{label.login.password}">Пароль</label>
                     <input class="form-control" id="password" type="password" name="password"/>
                 </div>
-                <div class="error-text" th:if="${param.error}" th:text="#{label.login.error.password}" >Неверное имя пользователя или пароль!</div>
-                <div class="error-text" th:if="${param.logout}" th:text="#{label.login.logout}">Вы вышли из системы.</div>
+                <div class="error-text" th:if="${param.error}" th:text="#{label.login.error.password}">Неверное имя
+                    пользователя или пароль!
+                </div>
+                <div class="error-text" th:if="${param.logout}" th:text="#{label.login.logout}">Вы вышли из системы.
+                </div>
                 <div>
                     <input type="submit" class="btn btn-success" th:value="#{label.come.in}"/>
                 </div>
