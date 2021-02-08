@@ -17,7 +17,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/favicon.ico","/doctor/create", "/credanchials", "/doctor/register", "user/export/{id}")
-                .hasAuthority("ROLE_ADMIN").and().authorizeRequests().antMatchers("/patient/register", "/patient/registers").hasAuthority("IS_AUTHENTICATED_ANONYMOUSLY").and().authorizeRequests().antMatchers("/nurse/appointment", "/patient/status", "/patient/FulfillmentOfAppointments/**", "/patient/addAppointmentToTheDatabase", "/favicon.ico").hasAnyAuthority("ROLE_NURSE", "ROLE_DOCTOR").//.exceptionHandling().accessDeniedPage("/error/403").and()
+                .hasAuthority("ROLE_ADMIN").and().authorizeRequests().antMatchers("/patient/register", "/patient/registers").hasAuthority("IS_AUTHENTICATED_ANONYMOUSLY").and().authorizeRequests().antMatchers("/nurse/appointment", "/patient/status", "/patient/FulfillmentOfAppointments/**", "/patient/addAppointmentToTheDatabase/**", "/favicon.ico").hasAnyAuthority("ROLE_NURSE", "ROLE_DOCTOR").//.exceptionHandling().accessDeniedPage("/error/403").and()
                 and().authorizeRequests().antMatchers("user/export/{id}", "/patient/**","/favicon.ico")
                 .hasAnyAuthority("ROLE_DOCTOR", "ROLE_ADMIN")
                 .antMatchers("/error/**", "/doctors", "/login", "/patient/register", "/patient/registers", "/webjars/**", "/footer/**", "/head/**", "/navBar/**", "/scripts/**", "/", "/users/**", "/css/**", "/favicon.ico")
