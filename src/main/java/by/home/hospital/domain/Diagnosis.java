@@ -16,10 +16,6 @@ public class Diagnosis {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    public Diagnosis(String name) {
-        this.name = name;
-    }
-
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

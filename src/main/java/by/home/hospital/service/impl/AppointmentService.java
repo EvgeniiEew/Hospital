@@ -86,8 +86,10 @@ public class AppointmentService implements IAppointmentService {
     @Override
     public Appointment createAppointmentFormExaminationDoctorDto(ExaminationDoctor examinationDoctor) {
         AppointmentDto appointmentDto = examinationDoctor.getAppointmentDto();
-        Appointment appointment = new Appointment(appointmentDto.getName(), appointmentDto.getType(),
-                AppointmentStatus.PENDING);
+        Appointment appointment = new Appointment();
+        appointment.setName(appointmentDto.getName());
+        appointment.setType(appointmentDto.getType());
+        appointment.setStatus(AppointmentStatus.PENDING);
         return this.appoitmentJpaRepository.save(appointment);
     }
 

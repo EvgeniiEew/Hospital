@@ -9,5 +9,4 @@ public interface DiagnosisPatientJpaRepository extends JpaRepository<DiagnosisPa
 
     List<DiagnosisPatient> findAllById(Integer id);
 
-    DiagnosisPatient save(DiagnosisPatient diagnosisPatient);
 }

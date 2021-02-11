@@ -3,6 +3,7 @@ package by.home.hospital.controller;
 import by.home.hospital.service.IFileExport;
 import by.home.hospital.service.impl.EmailService;
 import by.home.hospital.service.impl.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,14 +13,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@RequiredArgsConstructor
 public class EmailController {
     private final String INFO = "infoList";
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private EmailService emailService;
-    @Autowired
-    private IFileExport pdfFileExportService;
+    private final UserService userService;
+    private final EmailService emailService;
+    private final IFileExport pdfFileExportService;
 
     @PostMapping("user/export/{id}")
     public String exportToEmail(@PathVariable("id") Integer id, HttpServletRequest request) {

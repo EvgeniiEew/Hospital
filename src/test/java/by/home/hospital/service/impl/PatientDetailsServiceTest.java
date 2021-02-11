@@ -30,16 +30,11 @@ class PatientDetailsServiceTest {
     @InjectMocks
     private PatientDetailsService patientDetailsService;
 
-//    Credential credential = new Credential(1, "Email@mail.ru", "1234567");
-//    User user = new User(2, Position.PATIENT, "FNamePanient", "LNamePatient");
-//    this.user.setCredential(this.credential);
-//    PatientDetails patientDetails = new PatientDetails();
-//    User patient = new User();
-
-
     @Test
     void savePatientRegister() {
-        PatientDetails patientDetailsMock = new PatientDetails(1, NOT_EXAMINED);
+        PatientDetails patientDetailsMock = new PatientDetails();
+        patientDetailsMock.setId(1);
+        patientDetailsMock.setStatus(NOT_EXAMINED);
         PatientRegisterDto patientRegisterDto = new PatientRegisterDto(
                 "FNamePanient",
                 "LNamePatient",
@@ -58,7 +53,9 @@ class PatientDetailsServiceTest {
 
     @Test
     void getUserByIdPatientDetailsTest() {
-        PatientDetails patientDetailsMock = new PatientDetails(1, NOT_EXAMINED);
+        PatientDetails patientDetailsMock = new PatientDetails();
+        patientDetailsMock.setId(1);
+        patientDetailsMock.setStatus(NOT_EXAMINED);
         patientDetailsMock.setPatient(new User());
 
         Mockito.when(this.patientDitalesjpaRepository.findById(1)).thenReturn(Optional.of(patientDetailsMock));

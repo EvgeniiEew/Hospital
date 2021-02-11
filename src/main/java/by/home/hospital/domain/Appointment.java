@@ -21,22 +21,8 @@ public class Appointment {
 
     private Date date;
 
-    public void setStatus(AppointmentStatus status) {
-        this.status = status;
-    }
-
-    public AppointmentStatus getStatus() {
-        return status;
-    }
-
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
-
-    public Appointment(String name, Type type, AppointmentStatus status) {
-        this.name = name;
-        this.type = type;
-        this.status = status;
-    }
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

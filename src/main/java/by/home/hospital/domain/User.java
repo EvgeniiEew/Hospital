@@ -52,15 +52,4 @@ public class User {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     public List<AppointmentUsers> appointmentDoctor;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User(int id, Position position, Credential credentials) {
-        this.id = id;
-        this.position = position;
-        this.credentials = credentials;
-    }
-
-
 }

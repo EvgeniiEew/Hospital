@@ -23,8 +23,4 @@ public class Epicrisis {
     @JoinColumn(name = "appointment_id", referencedColumnName = "id")
     private Appointment appointment;
 
-    public Epicrisis(Integer id, String info) {
-        this.id = id;
-        this.info = info;
-    }
 }

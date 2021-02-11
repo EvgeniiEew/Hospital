@@ -7,6 +7,7 @@ import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;
 import by.home.hospital.service.impl.*;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -30,6 +31,7 @@ import java.io.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class UsersController {
 
     private final int pageSize = 5;
@@ -39,18 +41,12 @@ public class UsersController {
     private final String DISCHARGE = "dischargeList";
     private final String EDIT_USER_LIST = "editUserList";
 
-    @Autowired
-    private CredentialAuthService credentialAuthService;
-    @Autowired
-    private EpicrisisService epicrisisService;
-    @Autowired
-    private PatientDetailsService patientDetailsService;
-    @Autowired
-    private ConversionService conversionService;
-    @Autowired
-    private StorageService imgService;
-    @Autowired
-    private UserService userService;
+    private final CredentialAuthService credentialAuthService;
+    private final EpicrisisService epicrisisService;
+    private final PatientDetailsService patientDetailsService;
+    private final ConversionService conversionService;
+    private final StorageService imgService;
+    private final UserService userService;
 
     @GetMapping("/")
     public String homePage(Model model) {

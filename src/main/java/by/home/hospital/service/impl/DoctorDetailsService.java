@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorDetailsService implements IDoctorDetailsService {
 
-
     @Autowired
     private DoctorDitalesJpaRepository doctorDitalesJpaRepository;
 

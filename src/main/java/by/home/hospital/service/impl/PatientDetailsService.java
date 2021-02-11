@@ -8,6 +8,7 @@ import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.domain.PatientStatus;
 import by.home.hospital.service.IPatientDetailsService;
 import by.home.hospital.service.repository.PatientDitalesjpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,13 +21,12 @@ import static by.home.hospital.domain.PatientStatus.*;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class PatientDetailsService implements IPatientDetailsService {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private PatientDitalesjpaRepository patientDitalesjpaRepository;
+    private final PatientDitalesjpaRepository patientDitalesjpaRepository;
 
 
     @Override
@@ -42,7 +42,7 @@ public class PatientDetailsService implements IPatientDetailsService {
     @Override
     public PatientDetails savePatientRegister(PatientRegisterDto patientRegisterDto) {
         PatientDetails patientDetails = new PatientDetails();
-        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setStatus(NOT_EXAMINED);
         patientDetails.setPatient(this.userService.saveUserFromPatientRegisterDto(patientRegisterDto));
         return this.patientDitalesjpaRepository.save(patientDetails);
     }
@@ -76,20 +76,20 @@ public class PatientDetailsService implements IPatientDetailsService {
     @Override
     public void patientStatusChangeToReceptionPending(Integer number) {
         PatientDetails patientDetails = getPatientDetailsByIdPD(number);
-        patientDetails.setPatientStatus(RECEPTION_PENDING);
+        patientDetails.setStatus(RECEPTION_PENDING);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
     public void PatientStatusReceptionPendingToNotExaminet(Integer idNumber) {
         PatientDetails patientDetails = getPatientDetailsByIdPD(idNumber);
-        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setStatus(NOT_EXAMINED);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
     public void resetPatientDetailslStatusFromIdUser(Integer idPatient) {
         PatientDetails patientDetails = getPatientDetailsByPatientId(idPatient);
-        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setStatus(NOT_EXAMINED);
         this.patientDitalesjpaRepository.save(patientDetails);
     }
 
@@ -118,7 +118,7 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     public PatientDetails setStatusCheckingByPatientId(Integer id) {
         PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
-        patientDetails.setPatientStatus(CHECKING);
+        patientDetails.setStatus(CHECKING);
         return this.patientDitalesjpaRepository.save(patientDetails);
     }
 

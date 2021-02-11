@@ -4,6 +4,7 @@ import by.home.hospital.domain.Credential;
 import by.home.hospital.domain.DoctorDetails;
 import by.home.hospital.domain.PatientDetails;
 import by.home.hospital.domain.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,15 +16,12 @@ import static by.home.hospital.domain.Position.*;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class InitializationClassService implements InitializingBean {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private CredentialsService credentialsService;
-    @Autowired
-    private DoctorDetailsService doctorDetailsService;
-    @Autowired
-    private PatientDetailsService patientDetailsService;
+    private final UserService userService;
+    private final CredentialsService credentialsService;
+    private final DoctorDetailsService doctorDetailsService;
+    private final PatientDetailsService patientDetailsService;
 
 
     @Override
@@ -45,7 +43,7 @@ public class InitializationClassService implements InitializingBean {
 
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setId(3);
-        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setStatus(NOT_EXAMINED);
         patientDetails.setPatient(user);
         this.patientDetailsService.save(patientDetails);
 
@@ -178,7 +176,7 @@ public class InitializationClassService implements InitializingBean {
 
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setId(19);
-        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setStatus(NOT_EXAMINED);
         patientDetails.setPatient(user);
         this.patientDetailsService.save(patientDetails);
     }
@@ -200,7 +198,7 @@ public class InitializationClassService implements InitializingBean {
 
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setId(22);
-        patientDetails.setPatientStatus(NOT_EXAMINED);
+        patientDetails.setStatus(NOT_EXAMINED);
         patientDetails.setPatient(user);
         this.patientDetailsService.save(patientDetails);
     }

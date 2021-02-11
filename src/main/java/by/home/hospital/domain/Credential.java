@@ -29,11 +29,4 @@ public class Credential {
     @OneToOne(mappedBy = "credentials", fetch = FetchType.LAZY)
     private User user;
 
-    public String getEmail(String email) {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

@@ -4,20 +4,19 @@ import by.home.hospital.domain.DiagnosisPatient;
 import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.service.IDiagnosisPatientService;
 import by.home.hospital.service.repository.DiagnosisPatientJpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class DiagnosisPatientService implements IDiagnosisPatientService {
 
-    @Autowired
-    private DiagnosisService diagnosisService;
-    @Autowired
-    private PatientDetailsService patientDetailsService;
-    @Autowired
-    private DiagnosisPatientJpaRepository diagnosisPatientJpaRepository;
+    private final DiagnosisService diagnosisService;
+    private final PatientDetailsService patientDetailsService;
+    private final DiagnosisPatientJpaRepository diagnosisPatientJpaRepository;
 
     @Override
     public DiagnosisPatient save(DiagnosisPatient diagnosisPatient) {

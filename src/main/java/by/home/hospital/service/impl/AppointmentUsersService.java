@@ -6,6 +6,7 @@ import by.home.hospital.domain.User;
 import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.service.IAppointmentUsersService;
 import by.home.hospital.service.repository.AppointmentUsersJpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,17 +17,13 @@ import java.util.Optional;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class AppointmentUsersService implements IAppointmentUsersService {
-    @Autowired
-    private AppointmentUsersJpaRepository appointmentUsersJpaRepository;
-    @Autowired
-    private EpicrisisService epicrisisService;
-    @Autowired
-    private AppointmentService appointmentService;
-    @Autowired
-    private DiagnosisPatientService diagnosisPatientService;
-    @Autowired
-    private UserService userService;
+    private final AppointmentUsersJpaRepository appointmentUsersJpaRepository;
+    private final EpicrisisService epicrisisService;
+    private final AppointmentService appointmentService;
+    private final DiagnosisPatientService diagnosisPatientService;
+    private final UserService userService;
 
     @Override
     public void setAppointmentsParameters(List<ExaminationDoctor> examinationDoctor) {

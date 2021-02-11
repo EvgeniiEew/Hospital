@@ -6,7 +6,7 @@ import by.home.hospital.dto.*;
 import by.home.hospital.domain.AppointmentStatus;
 import by.home.hospital.domain.Position;
 import by.home.hospital.service.impl.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +20,7 @@ import java.util.List;
 
 
 @Controller
+@RequiredArgsConstructor
 public class AppointmentController {
 
     private final String ROOM_EXAMINATION = "roomForExaminationList";
@@ -27,22 +28,14 @@ public class AppointmentController {
     private final String STATUS_PENDING_APPOINTMENT = "PendingAppointmentsList";
     private final String PERFORMANCE_APPOINTMENT = "performanceAppointmentList";
 
-    @Autowired
-    private CredentialAuthService credentialAuthService;
-    @Autowired
-    private ConversionService conversionService;
-    @Autowired
-    private EpicrisisService epicrisisService;
-    @Autowired
-    private AppointmentUsersService appointmentUsersService;
-    @Autowired
-    private PatientDetailsService patientDetailsService;
-    @Autowired
-    private AppointmentService appointmentService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private DiagnosisService diagnosisService;
+    private final CredentialAuthService credentialAuthService;
+    private final ConversionService conversionService;
+    private final EpicrisisService epicrisisService;
+    private final AppointmentUsersService appointmentUsersService;
+    private final PatientDetailsService patientDetailsService;
+    private final AppointmentService appointmentService;
+    private final UserService userService;
+    private final DiagnosisService diagnosisService;
 
     @PostMapping("/patient/examination/{id}/")
     public String examinationPatient(@PathVariable("id") Integer id,

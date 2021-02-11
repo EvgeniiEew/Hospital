@@ -5,6 +5,7 @@ import by.home.hospital.dto.UserEditDto;
 import by.home.hospital.service.impl.CredentialsService;
 import by.home.hospital.service.impl.PatientDetailsService;
 import by.home.hospital.service.impl.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +17,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CredentialsController {
     private final String CREDENTIALS = "credentialsList";
     private final String PATIENT_REGISTER = "patientRegisterList";
-    @Autowired
-    private CredentialsService credentialsService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private PatientDetailsService patientDetailsService;
+    private final CredentialsService credentialsService;
+    private final UserService userService;
+    private final PatientDetailsService patientDetailsService;
 
     @PostMapping("/patient/registers")
     public String registerPatient(@Valid PatientRegisterDto patientRegisterDto, BindingResult bindingResult, Model model) {

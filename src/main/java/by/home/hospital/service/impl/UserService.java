@@ -7,6 +7,7 @@ import by.home.hospital.dto.*;
 import by.home.hospital.domain.Position;
 import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.repository.UserJpaRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +25,6 @@ import static by.home.hospital.domain.Position.PATIENT;
 @Transactional
 @Service
 public class UserService implements IUserServices {
-
     @Autowired
     private PatientDetailsService patientDetailsService;
     @Autowired

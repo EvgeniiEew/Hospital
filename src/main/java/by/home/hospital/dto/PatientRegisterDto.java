@@ -26,13 +26,4 @@ public class PatientRegisterDto {
     @Size(min = 6, max = 30)
     private String password;
 
-    @Override
-    public String toString() {
-        return "PatientRegisterDto{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", login='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

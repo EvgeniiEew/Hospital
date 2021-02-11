@@ -18,10 +18,6 @@ public interface AppoitmentJpaRepository extends JpaRepository<Appointment, Inte
     @Query(value = "SELECT * FROM appointment a where a.id = ?1", nativeQuery = true)
     Appointment findAppointmentByIdNative(Integer id);
 
-    Appointment getOne(Integer id);
-
-    Appointment save(Appointment appointment);
-
     @Query(value = "select * from appointment a join appointment_users au on a.id = au.appointment_id where au.patient_id =:id order by date desc;", nativeQuery = true)
     List<Appointment> findAppointmentsByPatientId(Integer id);
 }

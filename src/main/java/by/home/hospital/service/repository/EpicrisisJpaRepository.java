@@ -7,10 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface EpicrisisJpaRepository extends JpaRepository<Epicrisis, Integer> {
     Epicrisis getByAppointment_Id(Integer apointmentId);
 
-    Epicrisis saveAndFlush(Epicrisis epicrisis);
-
-    Epicrisis save(Epicrisis epicrisis);
-
-    @Query(value = "SELECT info FROM public.epicrisis where appointment_id = ?1",  nativeQuery = true)
+    @Query(value = "SELECT info FROM public.epicrisis where appointment_id = ?1", nativeQuery = true)
     String findAllActiveEpicrisisNative(Integer idAppointment);
 }

@@ -32,16 +32,4 @@ public class PatientDetails {
     @OneToMany(mappedBy = "patientDetails", cascade = CascadeType.REMOVE)
     private List<DiagnosisPatient> diagnosisPatients;
 
-    public PatientDetails(int id, PatientStatus patientStatus) {
-        this.id = id;
-        this.status = patientStatus;
-    }
-
-    public void setPatientStatus(PatientStatus patientStatus) {
-        this.status = patientStatus;
-    }
-
-    public void setDoctor(User doctor) {
-        this.patient = doctor;
-    }
 }

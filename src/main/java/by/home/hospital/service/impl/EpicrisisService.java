@@ -6,6 +6,7 @@ import by.home.hospital.domain.ExaminationDoctor;
 import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.service.IEpicrisisService;
 import by.home.hospital.service.repository.EpicrisisJpaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +17,11 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class EpicrisisService implements IEpicrisisService {
 
-    @Autowired
-    private AppointmentService appointmentService;
-    @Autowired
-    private EpicrisisJpaRepository epicrisisJpaRepository;
+    private final AppointmentService appointmentService;
+    private final EpicrisisJpaRepository epicrisisJpaRepository;
 
     @Override
     public Epicrisis getByAppointment_Id(Integer appointmentId) {
@@ -46,7 +46,6 @@ public class EpicrisisService implements IEpicrisisService {
         epicrisis.setAppointment(appointment);
         this.epicrisisJpaRepository.save(epicrisis);
     }
-
     @Override
     public List<Epicrisis> getEpicrisisToDiscargeList(Integer idPatient) {
         List<Appointment> appointmentsList = this.appointmentService.findAppointmentsByPatientId(idPatient);
@@ -54,7 +53,7 @@ public class EpicrisisService implements IEpicrisisService {
         appointmentsList.forEach(list -> {
             epicrisisList.add(new Epicrisis(
                     Integer.valueOf(list.getEpicrisis().getId()),
-                    list.getEpicrisis().getInfo()
+                    list.getEpicrisis().getInfo(),list.getEpicrisis().getAppointment()
             ));
         });
         return epicrisisList;
