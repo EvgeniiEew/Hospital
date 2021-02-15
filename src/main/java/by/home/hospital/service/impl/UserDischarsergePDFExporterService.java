@@ -29,11 +29,11 @@ public class UserDischarsergePDFExporterService {
     private UserService userService;
 
     public UserDischarsergePDFExporterService(UserDischarsergeDto userDischarsergeDto, List<Diagnosis> diagnosisList, List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList, List<Epicrisis> epicrisisList, UserService userService) {
-        userDischarsergeDto = userDischarsergeDto;
-        diagnosisList = diagnosisList;
-        appointmentDischarsergesDtoList = appointmentDischarsergesDtoList;
-        epicrisisList = epicrisisList;
-        userService = userService;
+        this.userDischarsergeDto = userDischarsergeDto;
+        this.diagnosisList = diagnosisList;
+        this.appointmentDischarsergesDtoList = appointmentDischarsergesDtoList;
+        this.epicrisisList = epicrisisList;
+        this.userService = userService;
     }
 
     private void writeTableHeaderDiagnosisList(PdfPTable tableDiagnosisList) {
