@@ -19,8 +19,8 @@ public class NurseController {
 
     @GetMapping("/nurse/appointment")
     public String getPatientForFulfillmentOfAppointments(Model model) {
-        List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.nurseFindAllByStatus(AppointmentStatus.PENDING);
+        List<AppointmentFulfillmentDto> appointmentUsers = appointmentService.nurseFindAllByStatus(AppointmentStatus.PENDING);
         model.addAttribute("appointmentUsers", appointmentUsers);
-        return this.FULFILLMENT_OF_APPOINTMENT;
+        return FULFILLMENT_OF_APPOINTMENT;
     }
 }

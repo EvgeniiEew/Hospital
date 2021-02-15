@@ -28,42 +28,42 @@ public class AppointmentUsersService implements IAppointmentUsersService {
     @Override
     public void setAppointmentsParameters(List<ExaminationDoctor> examinationDoctor) {
         for (ExaminationDoctor examination : examinationDoctor) {
-            this.setAppointmentParameters(examination);
+            setAppointmentParameters(examination);
         }
     }
 
     @Override
     public void setAppointmentParameters(ExaminationDoctor examinationDoctor) {
-        Appointment appointment = this.appointmentService.createAppointmentFormExaminationDoctorDto(examinationDoctor);
-        this.epicrisisService.saveEpicrisFromExaminationDoctorDto(examinationDoctor, appointment);
-        User patient = this.userService.getUserById(examinationDoctor.getPatientId());
-        User doctor = this.userService.getUserById(examinationDoctor.getIdDoctor());
+        Appointment appointment = appointmentService.createAppointmentFormExaminationDoctorDto(examinationDoctor);
+        epicrisisService.saveEpicrisFromExaminationDoctorDto(examinationDoctor, appointment);
+        User patient = userService.getUserById(examinationDoctor.getPatientId());
+        User doctor = userService.getUserById(examinationDoctor.getIdDoctor());
         AppointmentUsers appointmentUsers = new AppointmentUsers();
         appointmentUsers.setAppointment(appointment);
         appointmentUsers.setDoctor(doctor);
         appointmentUsers.setPatient(patient);
-        this.appointmentUsersJpaRepository.save(appointmentUsers);
-        this.diagnosisPatientService.saveDiagnosisPatientFromExaminationDoctorDto(examinationDoctor);
+        appointmentUsersJpaRepository.save(appointmentUsers);
+        diagnosisPatientService.saveDiagnosisPatientFromExaminationDoctorDto(examinationDoctor);
     }
 
     @Override
     public List<AppointmentUsers> getAppointmentUsers() {
-        return this.appointmentUsersJpaRepository.findAll();
+        return appointmentUsersJpaRepository.findAll();
     }
 
     @Override
     public AppointmentUsers getAppointmentUsersByAppointmentId(Integer IdAppointment) {
-        return this.appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(IdAppointment);
+        return appointmentUsersJpaRepository.getAppointmentUsersByAppointmentId(IdAppointment);
     }
 
     public AppointmentUsers save(AppointmentUsers appointmentUsers) {
-        return this.appointmentUsersJpaRepository.save(appointmentUsers);
+        return appointmentUsersJpaRepository.save(appointmentUsers);
     }
 
 
     @Override
     public void deleteAppointmentUsers(Integer id) {
-        this.appointmentUsersJpaRepository.deleteById(id);
+        appointmentUsersJpaRepository.deleteById(id);
     }
 
 

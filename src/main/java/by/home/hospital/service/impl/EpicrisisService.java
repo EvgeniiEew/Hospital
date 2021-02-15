@@ -25,30 +25,30 @@ public class EpicrisisService implements IEpicrisisService {
 
     @Override
     public Epicrisis getByAppointment_Id(Integer appointmentId) {
-        return this.epicrisisJpaRepository.getByAppointment_Id(appointmentId);
+        return epicrisisJpaRepository.getByAppointment_Id(appointmentId);
     }
 
     @Override
     public String getEpicrisesByInfo(Integer appointmentId) {
-        return this.epicrisisJpaRepository.findAllActiveEpicrisisNative(appointmentId);
+        return epicrisisJpaRepository.findAllActiveEpicrisisNative(appointmentId);
     }
 
     @Override
     public void saveEpicrisFromResultProcedureDto(ResultProcedurFormDto resultProcedurFormDto) {
         Epicrisis epicrisis = getByAppointment_Id(resultProcedurFormDto.getIdAppointment());
         epicrisis.setInfo(epicrisis.getInfo().concat(" " + resultProcedurFormDto.getResaultEpicris()));
-        this.epicrisisJpaRepository.save(epicrisis);
+        epicrisisJpaRepository.save(epicrisis);
     }
 
     public void saveEpicrisFromExaminationDoctorDto(ExaminationDoctor examinationDoctor, Appointment appointment) {
         Epicrisis epicrisis = new Epicrisis();
         epicrisis.setInfo(examinationDoctor.getEpicrisis());
         epicrisis.setAppointment(appointment);
-        this.epicrisisJpaRepository.save(epicrisis);
+        epicrisisJpaRepository.save(epicrisis);
     }
     @Override
     public List<Epicrisis> getEpicrisisToDiscargeList(Integer idPatient) {
-        List<Appointment> appointmentsList = this.appointmentService.findAppointmentsByPatientId(idPatient);
+        List<Appointment> appointmentsList = appointmentService.findAppointmentsByPatientId(idPatient);
         List<Epicrisis> epicrisisList = new ArrayList<>();
         appointmentsList.forEach(list -> {
             epicrisisList.add(new Epicrisis(
@@ -61,6 +61,6 @@ public class EpicrisisService implements IEpicrisisService {
 
     @Override
     public void save(Epicrisis epicrisis) {
-        this.epicrisisJpaRepository.save(epicrisis);
+        epicrisisJpaRepository.save(epicrisis);
     }
 }

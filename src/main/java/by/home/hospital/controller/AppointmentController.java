@@ -44,7 +44,7 @@ public class AppointmentController {
                                      Model model) {
         if (bindingResult.hasErrors()) {
             getModelExamination(id, model);
-            return this.ROOM_EXAMINATION;
+            return ROOM_EXAMINATION;
         }
         userExaminationDto.setAuthenticationDoctorId(credentialAuthService.getIdAutUser());
         appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
@@ -77,7 +77,7 @@ public class AppointmentController {
     @PostMapping("/patient/FulfillmentOfAppointments/{idAppointment}/")
     public String getPatientForPerfomanceAppointment(@PathVariable("idAppointment") Integer idAppointment, Model model) {
         getModelAppointment(idAppointment, model);
-        return this.PERFORMANCE_APPOINTMENT;
+        return PERFORMANCE_APPOINTMENT;
     }
 
     @PostMapping("/patient/addAppointmentToTheDatabase/{idAppointment}")
@@ -87,19 +87,19 @@ public class AppointmentController {
                                       Model model) {
         if (bindingResult.hasErrors()) {
             getModelAppointment(idAppointment, model);
-            return this.PERFORMANCE_APPOINTMENT;
+            return PERFORMANCE_APPOINTMENT;
         }
-        this.appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
-        this.patientDetailsService.setStatusCheckoutPatientById(resultProcedurFormDto);
-        this.epicrisisService.saveEpicrisFromResultProcedureDto(resultProcedurFormDto);
-        if (this.userService.getPositionByIdUser(this.credentialAuthService.getIdAutUser()).equals(Position.NURSE)) {
+        appointmentService.setPendingAppointmentStatusByID(resultProcedurFormDto);
+        patientDetailsService.setStatusCheckoutPatientById(resultProcedurFormDto);
+        epicrisisService.saveEpicrisFromResultProcedureDto(resultProcedurFormDto);
+        if (userService.getPositionByIdUser(credentialAuthService.getIdAutUser()).equals(Position.NURSE)) {
             return "redirect:/";
         }
         return "redirect:/patient/appointment";
     }
 
     private Model getModelAppointment(Integer idAppointment, Model model) {
-        MakingAppointmentsDto makingAppointmentsDto = this.appointmentService.getFormForMakingAppointmentsDto(idAppointment);
+        MakingAppointmentsDto makingAppointmentsDto = appointmentService.getFormForMakingAppointmentsDto(idAppointment);
         List<Diagnosis> diagnosis = makingAppointmentsDto.getDiagnoses();
         model.addAttribute("makingAppointmentsDto", makingAppointmentsDto);
         model.addAttribute("diagnosis", diagnosis);
@@ -107,7 +107,7 @@ public class AppointmentController {
     }
 
     private Model getModelExamination(Integer id, Model model) {
-        PatientWhisStatusDto user = this.patientDetailsService.getUserByIdPatientDetails(id);
+        PatientWhisStatusDto user = patientDetailsService.getUserByIdPatientDetails(id);
         model.addAttribute("idPatient", id);
         model.addAttribute("user", user);
         return model;

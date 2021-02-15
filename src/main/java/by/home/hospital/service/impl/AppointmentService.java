@@ -31,7 +31,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<AppointmentFulfillmentDto> findAll() {
-        List<Appointment> appointmentsfromJpa = this.appoitmentJpaRepository.findByOrderByTypeAsc();
+        List<Appointment> appointmentsfromJpa = appoitmentJpaRepository.findByOrderByTypeAsc();
         return appointmentsfromJpa.stream().map(appointment -> new AppointmentFulfillmentDto(
                 appointment.getId(),
                 appointment.getName(),
@@ -41,7 +41,7 @@ public class AppointmentService implements IAppointmentService {
     }
 
     public List<AppointmentFulfillmentDto> findAllByStatus(AppointmentStatus status) {
-        List<Appointment> appointments = this.appoitmentJpaRepository.findByStatusOrderByTypeAsc(status);
+        List<Appointment> appointments = appoitmentJpaRepository.findByStatusOrderByTypeAsc(status);
         return appointments.stream().map(appointment ->
                 new AppointmentFulfillmentDto(
                         appointment.getId(),
@@ -53,7 +53,7 @@ public class AppointmentService implements IAppointmentService {
 
     @Override
     public List<AppointmentFulfillmentDto> nurseFindAllByStatus(AppointmentStatus status) {
-        List<Appointment> appointments = this.appoitmentJpaRepository.findByStatusAndTypeNotLike(status, Type.OPERATION);
+        List<Appointment> appointments = appoitmentJpaRepository.findByStatusAndTypeNotLike(status, Type.OPERATION);
         return appointments.stream().map(appointment ->
                 new AppointmentFulfillmentDto(
                         appointment.getId(),
@@ -64,23 +64,23 @@ public class AppointmentService implements IAppointmentService {
     }
 
     public MakingAppointmentsDto getFormForMakingAppointmentsDto(Integer idAppointment) {
-        Appointment appointment = this.appoitmentJpaRepository.findAppointmentByIdNative(idAppointment);
-        AppointmentUsers appointmentUsers = this.appointmentUsersService.getAppointmentUsersByAppointmentId(idAppointment);
-        PatientDetails patientDetails = this.patientDetailsService.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
-        List<Diagnosis> listDiagnosis = this.diagnosisService.findByDiagnosisDetails_Id(appointmentUsers.getPatient().getId());
+        Appointment appointment = appoitmentJpaRepository.findAppointmentByIdNative(idAppointment);
+        AppointmentUsers appointmentUsers = appointmentUsersService.getAppointmentUsersByAppointmentId(idAppointment);
+        PatientDetails patientDetails = patientDetailsService.getPatientDetailsByPatientId(appointmentUsers.getPatient().getId());
+        List<Diagnosis> listDiagnosis = diagnosisService.findByDiagnosisDetails_Id(appointmentUsers.getPatient().getId());
         return new MakingAppointmentsDto(idAppointment, patientDetails.getId(), appointment.getName(), appointment.getType().toString(),
-                appointment.getStatus().toString(), this.epicrisisService.getEpicrisesByInfo(idAppointment), listDiagnosis);
+                appointment.getStatus().toString(), epicrisisService.getEpicrisesByInfo(idAppointment), listDiagnosis);
     }
 
     public void setPendingAppointmentStatusByID(ResultProcedurFormDto resultProcedurFormDto) {
-        Appointment appointment = this.appoitmentJpaRepository.getOne(resultProcedurFormDto.getIdAppointment());
+        Appointment appointment = appoitmentJpaRepository.getOne(resultProcedurFormDto.getIdAppointment());
         appointment.setStatus(AppointmentStatus.DONE);
         appointment.setDate(new Date());
-        this.appoitmentJpaRepository.save(appointment);
+        appoitmentJpaRepository.save(appointment);
     }
 
     public Appointment save(Appointment appointment) {
-        return this.appoitmentJpaRepository.save(appointment);
+        return appoitmentJpaRepository.save(appointment);
     }
 
     @Override
@@ -90,12 +90,12 @@ public class AppointmentService implements IAppointmentService {
         appointment.setName(appointmentDto.getName());
         appointment.setType(appointmentDto.getType());
         appointment.setStatus(AppointmentStatus.PENDING);
-        return this.appoitmentJpaRepository.save(appointment);
+        return appoitmentJpaRepository.save(appointment);
     }
 
     @Override
     public List<Appointment> findAppointmentsByPatientId(Integer id) {
-        return this.appoitmentJpaRepository.findAppointmentsByPatientId(id);
+        return appoitmentJpaRepository.findAppointmentsByPatientId(id);
     }
 
     @Override

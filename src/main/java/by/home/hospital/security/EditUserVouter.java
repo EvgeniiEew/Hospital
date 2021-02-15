@@ -12,7 +12,7 @@ public class EditUserVouter {
     private UserService userService;
 
     public boolean checkUserId(Authentication authentication, Integer id) {
-        String email = this.userService.getUserById(id).getCredentials().getEmail();
+        String email = userService.getUserById(id).getCredentials().getEmail();
         if (authentication.getPrincipal().equals("anonymousUser")) {
             return false;
         }

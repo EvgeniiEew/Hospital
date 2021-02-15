@@ -13,6 +13,6 @@ public class UserWIthId extends org.springframework.security.core.userdetails.Us
 
     public UserWIthId(Integer id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
-        this.id = id;
+        id = id;
     }
 }

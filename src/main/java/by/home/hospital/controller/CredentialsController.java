@@ -27,11 +27,11 @@ public class CredentialsController {
 
     @PostMapping("/patient/registers")
     public String registerPatient(@Valid PatientRegisterDto patientRegisterDto, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors() || this.credentialsService.existsByEmail(patientRegisterDto.getEmail())) {
+        if (bindingResult.hasErrors() || credentialsService.existsByEmail(patientRegisterDto.getEmail())) {
             model.addAttribute("patientRegisterDto", patientRegisterDto);
-            return this.PATIENT_REGISTER;
+            return PATIENT_REGISTER;
         }
-        this.patientDetailsService.savePatientRegister(patientRegisterDto);
+        patientDetailsService.savePatientRegister(patientRegisterDto);
         return "redirect:/login";
     }
 
@@ -41,13 +41,13 @@ public class CredentialsController {
             patientRegisterDto = new PatientRegisterDto();
         }
         model.addAttribute("patientRegisterDto", patientRegisterDto);
-        return this.PATIENT_REGISTER;
+        return PATIENT_REGISTER;
     }
 
     @GetMapping("/credanchials")
     public String getCredentials(Model model) {
-        List<UserEditDto> userEditList = this.userService.getUsersEditDto();
+        List<UserEditDto> userEditList = userService.getUsersEditDto();
         model.addAttribute("userEditList", userEditList);
-        return this.CREDENTIALS;
+        return CREDENTIALS;
     }
 }

@@ -27,12 +27,12 @@ public class DoctorDetailsService implements IDoctorDetailsService {
 
     @Override
     public void addDoctorDetails(DoctorDetails doctorDetails) {
-        this.doctorDitalesJpaRepository.save(doctorDetails);
+        doctorDitalesJpaRepository.save(doctorDetails);
     }
 
     @Override
     public List<DoctorInfoDto> getDoctorInfoDto() {
-        HashSet<User> users = this.userService.findAllByPositionOrderByFirstNameDesc(Position.DOCTOR);
+        HashSet<User> users = userService.findAllByPositionOrderByFirstNameDesc(Position.DOCTOR);
         return users.stream().map(user -> new DoctorInfoDto(
                 user.getId(),
                 user.getFirstName(),
@@ -45,18 +45,18 @@ public class DoctorDetailsService implements IDoctorDetailsService {
     @Override
     public void registerDoctor(DoctorRegisterDto doctorRegisterDto) {
         DoctorDetails doctorDetails = new DoctorDetails();
-        doctorDetails.setDoctor(this.userService.saveUserFromDoctorRegisterDto(doctorRegisterDto));
+        doctorDetails.setDoctor(userService.saveUserFromDoctorRegisterDto(doctorRegisterDto));
         doctorDetails.setName(doctorRegisterDto.getDoctorDitales());
         doctorDitalesJpaRepository.save(doctorDetails);
     }
 
     @Override
     public void deleteDoctorDetails(Integer number) {
-        this.doctorDitalesJpaRepository.deleteById(number);
+        doctorDitalesJpaRepository.deleteById(number);
     }
 
     @Override
     public void save(DoctorDetails doctorDetails) {
-        this.doctorDitalesJpaRepository.save(doctorDetails);
+        doctorDitalesJpaRepository.save(doctorDetails);
     }
 }

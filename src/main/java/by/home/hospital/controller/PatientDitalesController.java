@@ -29,16 +29,16 @@ public class PatientDitalesController {
 
     @GetMapping("/patient/status")
     public String getPatientWithStatusNotExamined(Model model) {
-        List<PatientWhisStatusDto> patientsNotExaminded = this.iPatientDetailsService.getPatientWithStatus(NOT_EXAMINED);
+        List<PatientWhisStatusDto> patientsNotExaminded = iPatientDetailsService.getPatientWithStatus(NOT_EXAMINED);
         model.addAttribute("patientsNotExaminded", patientsNotExaminded);
-        return this.PATIENT_NOT_EXAMID;
+        return PATIENT_NOT_EXAMID;
     }
 
     @GetMapping("/patient/status/receptionPending")
     public String getPatientWithStatusReceptionPending(Model model) {
-        List<PatientWhisStatusDto> patientReceptionPending = this.iPatientDetailsService.getPatientWithStatus(RECEPTION_PENDING);
+        List<PatientWhisStatusDto> patientReceptionPending = iPatientDetailsService.getPatientWithStatus(RECEPTION_PENDING);
         model.addAttribute("patientReceptionPending", patientReceptionPending);
-        return this.PATIENT_RECEPTION_PENDING;
+        return PATIENT_RECEPTION_PENDING;
     }
 
     @PostMapping("/patient/status/{id}/reset")

@@ -36,25 +36,25 @@ public class PatientDetailsService implements IPatientDetailsService {
 
     @Override
     public PatientDetails getPatientDetailsById(int id) {
-        return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
+        return patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
     }
 
     @Override
     public PatientDetails savePatientRegister(PatientRegisterDto patientRegisterDto) {
         PatientDetails patientDetails = new PatientDetails();
         patientDetails.setStatus(NOT_EXAMINED);
-        patientDetails.setPatient(this.userService.saveUserFromPatientRegisterDto(patientRegisterDto));
-        return this.patientDitalesjpaRepository.save(patientDetails);
+        patientDetails.setPatient(userService.saveUserFromPatientRegisterDto(patientRegisterDto));
+        return patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
     public PatientDetails save(PatientDetails patientDetails) {
-        return this.patientDitalesjpaRepository.save(patientDetails);
+        return patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
     public PatientWhisStatusDto getUserByIdPatientDetails(Integer id) {
-        PatientDetails patientDetails = this.patientDitalesjpaRepository.findById(id).get();
+        PatientDetails patientDetails = patientDitalesjpaRepository.findById(id).get();
         User user = patientDetails.getPatient();
         return new PatientWhisStatusDto(
                 user.getId(),
@@ -65,36 +65,36 @@ public class PatientDetailsService implements IPatientDetailsService {
     }
 
     public PatientDetails getPatientDetailsByIdPD(Integer idPd) {
-        return this.patientDitalesjpaRepository.findById(idPd).get();
+        return patientDitalesjpaRepository.findById(idPd).get();
     }
 
     @Override
     public void deletePatientDetails(Integer number) {
-        this.patientDitalesjpaRepository.deleteById(number);
+        patientDitalesjpaRepository.deleteById(number);
     }
 
     @Override
     public void patientStatusChangeToReceptionPending(Integer number) {
         PatientDetails patientDetails = getPatientDetailsByIdPD(number);
         patientDetails.setStatus(RECEPTION_PENDING);
-        this.patientDitalesjpaRepository.save(patientDetails);
+        patientDitalesjpaRepository.save(patientDetails);
     }
 
     @Override
     public void PatientStatusReceptionPendingToNotExaminet(Integer idNumber) {
         PatientDetails patientDetails = getPatientDetailsByIdPD(idNumber);
         patientDetails.setStatus(NOT_EXAMINED);
-        this.patientDitalesjpaRepository.save(patientDetails);
+        patientDitalesjpaRepository.save(patientDetails);
     }
 
     public void resetPatientDetailslStatusFromIdUser(Integer idPatient) {
         PatientDetails patientDetails = getPatientDetailsByPatientId(idPatient);
         patientDetails.setStatus(NOT_EXAMINED);
-        this.patientDitalesjpaRepository.save(patientDetails);
+        patientDitalesjpaRepository.save(patientDetails);
     }
 
     public List<PatientWhisStatusDto> getPatientWithStatus(PatientStatus status) {
-        HashSet<PatientDetails> patientDetails = this.patientDitalesjpaRepository.findAllByStatus(status);
+        HashSet<PatientDetails> patientDetails = patientDitalesjpaRepository.findAllByStatus(status);
         List<PatientWhisStatusDto> patientWhisStatusDtos = patientDetails.stream().map(patientDetails1 -> {
             User user = patientDetails1.getPatient();
             return new PatientWhisStatusDto(
@@ -107,23 +107,23 @@ public class PatientDetailsService implements IPatientDetailsService {
     }
 
     public PatientDetails getPatientDetailsByPatientId(Integer id) {
-        return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
+        return patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
     }
 
     public void setStatusCheckoutPatientById(ResultProcedurFormDto resultProcedurFormDto) {
-        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsById(resultProcedurFormDto.getIdPatientUser());
+        PatientDetails patientDetails = patientDitalesjpaRepository.getPatientDetailsById(resultProcedurFormDto.getIdPatientUser());
         patientDetails.setStatus(CHECKOUT);
-        this.patientDitalesjpaRepository.save(patientDetails);
+        patientDitalesjpaRepository.save(patientDetails);
     }
 
     public PatientDetails setStatusCheckingByPatientId(Integer id) {
-        PatientDetails patientDetails = this.patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
+        PatientDetails patientDetails = patientDitalesjpaRepository.getPatientDetailsByPatientId(id);
         patientDetails.setStatus(CHECKING);
-        return this.patientDitalesjpaRepository.save(patientDetails);
+        return patientDitalesjpaRepository.save(patientDetails);
     }
 
     public PatientStatus getStatusByUserId(Integer userId) {
-        return this.patientDitalesjpaRepository.getPatientDetailsByPatientId(userId).getStatus();
+        return patientDitalesjpaRepository.getPatientDetailsByPatientId(userId).getStatus();
     }
 
 }

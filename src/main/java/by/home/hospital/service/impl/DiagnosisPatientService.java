@@ -20,15 +20,15 @@ public class DiagnosisPatientService implements IDiagnosisPatientService {
 
     @Override
     public DiagnosisPatient save(DiagnosisPatient diagnosisPatient) {
-        return this.diagnosisPatientJpaRepository.save(diagnosisPatient);
+        return diagnosisPatientJpaRepository.save(diagnosisPatient);
     }
 
     @Override
     public void saveDiagnosisPatientFromExaminationDoctorDto(ExaminationDoctor examinationDoctor) {
         DiagnosisPatient diagnosisPatient = new DiagnosisPatient();
-        diagnosisPatient.setPatientDetails(this.patientDetailsService.setStatusCheckingByPatientId(examinationDoctor.getPatientId()));
-        diagnosisPatient.setDiagnosis(this.diagnosisService.createDiagnosisFromExaminationDoctorDto(examinationDoctor));
-        this.diagnosisPatientJpaRepository.save(diagnosisPatient);
+        diagnosisPatient.setPatientDetails(patientDetailsService.setStatusCheckingByPatientId(examinationDoctor.getPatientId()));
+        diagnosisPatient.setDiagnosis(diagnosisService.createDiagnosisFromExaminationDoctorDto(examinationDoctor));
+        diagnosisPatientJpaRepository.save(diagnosisPatient);
     }
 
 }

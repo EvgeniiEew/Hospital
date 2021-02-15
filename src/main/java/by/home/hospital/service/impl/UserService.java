@@ -38,40 +38,40 @@ public class UserService implements IUserServices {
     private CredentialsService credentialsService;
 
     public User getUserById(Integer id) {
-        return this.userJpaRepo.getUserById(id);
+        return userJpaRepo.getUserById(id);
     }
 
     public List<User> getUsers() {
-        return this.userJpaRepo.findByOrderByFirstNameAsc();
+        return userJpaRepo.findByOrderByFirstNameAsc();
     }
 
 
     public HashSet<User> findAllByPositionOrderByFirstNameDesc(Position position) {
-        return this.userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
+        return userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
     }
 
     public void deleteUser(Integer number) {
-        this.userJpaRepo.deleteById(number);
+        userJpaRepo.deleteById(number);
     }
 
     @Override
     public Page<User> findAllActiveUsersNative(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        return this.userJpaRepo.findAllByIdIn(this.userJpaRepo.findAllActiveUsersNative(), pageable);
+        return userJpaRepo.findAllByIdIn(userJpaRepo.findAllActiveUsersNative(), pageable);
     }
 
     public HashSet<User> findAllByPosition(Position position) {
-        return this.userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
+        return userJpaRepo.findAllByPositionOrderByFirstNameDesc(position);
     }
 
     @Override
     public void save(User user) {
-        this.userJpaRepo.save(user);
+        userJpaRepo.save(user);
     }
 
     public Integer getUserIdByCredentials_email(String email) {
-        Integer id = this.credentialsService.findByEmail(email).get().getId();
-        return this.userJpaRepo.getUserByCredentials_Id(id).getId();
+        Integer id = credentialsService.findByEmail(email).get().getId();
+        return userJpaRepo.getUserByCredentials_Id(id).getId();
     }
 
     public User saveUserFromPatientRegisterDto(PatientRegisterDto patientRegisterDto) {
@@ -79,8 +79,8 @@ public class UserService implements IUserServices {
         user.setPosition(PATIENT);
         user.setFirstName(patientRegisterDto.getFirstName());
         user.setLastName(patientRegisterDto.getLastName());
-        user.setCredentials(this.credentialsService.createCredentialsFromPatientRegisterDto(patientRegisterDto));
-        return this.userJpaRepo.save(user);
+        user.setCredentials(credentialsService.createCredentialsFromPatientRegisterDto(patientRegisterDto));
+        return userJpaRepo.save(user);
     }
 
     public User saveUserFromDoctorRegisterDto(DoctorRegisterDto doctorRegisterDto) {
@@ -89,7 +89,7 @@ public class UserService implements IUserServices {
         user.setLastName(doctorRegisterDto.getLastName());
         user.setPosition(Position.DOCTOR);
         user.setCredentials(credentialsService.saveCredentialsFromDoctorRegisterDto(doctorRegisterDto));
-        return this.userJpaRepo.save(user);
+        return userJpaRepo.save(user);
     }
 
     public void saveNurse(NurseRegisterDto nurseRegisterDto) {
@@ -98,26 +98,26 @@ public class UserService implements IUserServices {
         user.setLastName(nurseRegisterDto.getLastName());
         user.setPosition(Position.NURSE);
         user.setCredentials(credentialsService.saveCredentialsFromNurseRegisterDto(nurseRegisterDto));
-        this.userJpaRepo.save(user);
+        userJpaRepo.save(user);
     }
 
     public UserDischarsergeDto generateHospitalDischarge(Integer idPatient) {
-        User user = this.userJpaRepo.getUserById(idPatient);
+        User user = userJpaRepo.getUserById(idPatient);
         UserDischarsergeDto userDischarsergeDto = new UserDischarsergeDto();
         userDischarsergeDto.setIdPatientUser(idPatient);
         userDischarsergeDto.setFirstNamePatient(user.getFirstName());
         userDischarsergeDto.setLastNamePatient(user.getLastName());
-        userDischarsergeDto.setDiagnosisNameAndDate(this.diagnosisService.findByDiagnosisDetails_Id(this.patientDetailsService.getPatientDetailsByPatientId(idPatient).getId()));     //this.diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
-        userDischarsergeDto.setListDischarserge(this.appointmentService.getAppontmentDischarsergesDto(idPatient));
+        userDischarsergeDto.setDiagnosisNameAndDate(diagnosisService.findByDiagnosisDetails_Id(patientDetailsService.getPatientDetailsByPatientId(idPatient).getId()));     //diagnosisPatientService.getAllIdDiagnosisFromListPatientDetailsId(idPatient));
+        userDischarsergeDto.setListDischarserge(appointmentService.getAppontmentDischarsergesDto(idPatient));
         return userDischarsergeDto;
     }
 
     public String getEmailByIdUser(Integer idUser) {
-        return this.userJpaRepo.getUserById(idUser).getCredentials().getEmail();
+        return userJpaRepo.getUserById(idUser).getCredentials().getEmail();
     }
 
     public List<UserEditDto> getUsersEditDto() {
-        List<User> listUsers = this.userJpaRepo.findByOrderByFirstNameAsc();
+        List<User> listUsers = userJpaRepo.findByOrderByFirstNameAsc();
         List<UserEditDto> dtoUsersList = new ArrayList<>();
         listUsers.forEach(user -> {
             Credential credential = user.getCredentials();
@@ -147,15 +147,15 @@ public class UserService implements IUserServices {
         credential.setEmail(userEditDto.getEmail());
         credential.setPassword(userEditDto.getPassword());
         user.setCredentials(credential);
-        this.credentialsService.editCredential(credential);
-        this.userJpaRepo.save(user);
+        credentialsService.editCredential(credential);
+        userJpaRepo.save(user);
     }
 
     public User getUserByCredentialsEmail(String email) {
-        return this.userJpaRepo.getUserByCredentialsEmail(email);
+        return userJpaRepo.getUserByCredentialsEmail(email);
     }
 
     public Position getPositionByIdUser(Integer idUser) {
-        return this.userJpaRepo.getUserById(idUser).getPosition();
+        return userJpaRepo.getUserById(idUser).getPosition();
     }
 }

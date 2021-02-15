@@ -14,7 +14,7 @@ public class UserToMyViewDto implements Converter<String, MyViewDto> {
 
     @Override
     public MyViewDto convert(String source) {
-        User user = this.userService.getUserByCredentialsEmail(source);
+        User user = userService.getUserByCredentialsEmail(source);
         MyViewDto myViewDto = new MyViewDto(
                 user.getId(),
                 user.getFirstName(),

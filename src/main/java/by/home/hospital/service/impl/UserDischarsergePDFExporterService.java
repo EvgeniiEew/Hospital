@@ -29,11 +29,11 @@ public class UserDischarsergePDFExporterService {
     private UserService userService;
 
     public UserDischarsergePDFExporterService(UserDischarsergeDto userDischarsergeDto, List<Diagnosis> diagnosisList, List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList, List<Epicrisis> epicrisisList, UserService userService) {
-        this.userDischarsergeDto = userDischarsergeDto;
-        this.diagnosisList = diagnosisList;
-        this.appointmentDischarsergesDtoList = appointmentDischarsergesDtoList;
-        this.epicrisisList = epicrisisList;
-        this.userService = userService;
+        userDischarsergeDto = userDischarsergeDto;
+        diagnosisList = diagnosisList;
+        appointmentDischarsergesDtoList = appointmentDischarsergesDtoList;
+        epicrisisList = epicrisisList;
+        userService = userService;
     }
 
     private void writeTableHeaderDiagnosisList(PdfPTable tableDiagnosisList) {
@@ -193,7 +193,7 @@ public class UserDischarsergePDFExporterService {
     }
 
     private Image setAvatarPdf() throws IOException, NullPointerException {
-        String name = this.userService.getUserById(userDischarsergeDto.getIdPatientUser()).getAvatarFileName();
+        String name = userService.getUserById(userDischarsergeDto.getIdPatientUser()).getAvatarFileName();
         if (name == null) {
             throw new NullPointerException("File name not found");
         }

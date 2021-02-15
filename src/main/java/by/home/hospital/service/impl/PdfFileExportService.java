@@ -20,10 +20,10 @@ public class PdfFileExportService implements IFileExport {
 
     @Override
     public String pdfFileExport(String path, Integer id) {
-        UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
+        UserDischarsergeDto userDischarsergeDto = userService.generateHospitalDischarge(id);
         List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
         List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
-        List<Epicrisis> epicrisisList = this.epicrisisService.getEpicrisisToDiscargeList(id);
+        List<Epicrisis> epicrisisList = epicrisisService.getEpicrisisToDiscargeList(id);
         UserDischarsergePDFExporterService userDischarsergePDFExporterService =
                 new UserDischarsergePDFExporterService(
                         userDischarsergeDto,

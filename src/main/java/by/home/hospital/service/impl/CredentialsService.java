@@ -25,7 +25,7 @@ public class CredentialsService implements ICredentialsService {
         Credential credentials = new Credential();
         credentials.setEmail(patientRegisterDto.getEmail());
         credentials.setPassword(patientRegisterDto.getPassword());
-        return this.credentialsJpaRepository.save(credentials);
+        return credentialsJpaRepository.save(credentials);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class CredentialsService implements ICredentialsService {
         Credential credentials = new Credential();
         credentials.setEmail(doctorRegisterDto.getEmail());
         credentials.setPassword(doctorRegisterDto.getPassword());
-        return this.credentialsJpaRepository.save(credentials);
+        return credentialsJpaRepository.save(credentials);
     }
 
     @Override
@@ -41,35 +41,35 @@ public class CredentialsService implements ICredentialsService {
         Credential credentials = new Credential();
         credentials.setEmail(nurseRegisterDto.getEmail());
         credentials.setPassword(nurseRegisterDto.getPassword());
-        return this.credentialsJpaRepository.save(credentials);
+        return credentialsJpaRepository.save(credentials);
     }
 
     @Override
     public List<Credential> getCredentials() {
-        return this.credentialsJpaRepository.findAll();
+        return credentialsJpaRepository.findAll();
     }
 
     @Override
     public void deleteCredentials(Integer number) {
-        this.credentialsJpaRepository.deleteById(number);
+        credentialsJpaRepository.deleteById(number);
     }
 
     @Override
     public Optional<Credential> findByEmail(String credentialEmail) {
-        return this.credentialsJpaRepository.findByEmail(credentialEmail);
+        return credentialsJpaRepository.findByEmail(credentialEmail);
     }
 
     @Override
     public void editCredential(Credential credential) {
-        this.credentialsJpaRepository.save(credential);
+        credentialsJpaRepository.save(credential);
     }
 
     @Override
     public void save(Credential credentials) {
-        this.credentialsJpaRepository.save(credentials);
+        credentialsJpaRepository.save(credentials);
     }
 
     public boolean existsByEmail(String email) {
-        return this.credentialsJpaRepository.existsByEmail(email);
+        return credentialsJpaRepository.existsByEmail(email);
     }
 }

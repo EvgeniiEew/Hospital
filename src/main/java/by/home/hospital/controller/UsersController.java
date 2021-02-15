@@ -50,23 +50,23 @@ public class UsersController {
 
     @GetMapping("/")
     public String homePage(Model model) {
-        Integer userId = this.credentialAuthService.getIdAutUser();
-        if (userId != 0 && this.userService.getUserById(userId).getPosition().equals(Position.PATIENT)) {
-            model.addAttribute("patientStatus", this.patientDetailsService.getStatusByUserId(userId).toString());
+        Integer userId = credentialAuthService.getIdAutUser();
+        if (userId != 0 && userService.getUserById(userId).getPosition().equals(Position.PATIENT)) {
+            model.addAttribute("patientStatus", patientDetailsService.getStatusByUserId(userId).toString());
         }
-        return this.INDEX;
+        return INDEX;
     }
 
     @PostMapping("/users/{id}/edit/")
     @PreAuthorize("@editUserVouter.checkUserId(authentication,#id) or hasRole('ADMIN')")
     public String editUser(Authentication authentication, @PathVariable("id") Integer id, Model model) {
-        UserEditDto userEditDto = this.userService.getUserEditById(id);
+        UserEditDto userEditDto = userService.getUserEditById(id);
         getEditModel(id, model, userEditDto);
-        return this.EDIT_USER_LIST;
+        return EDIT_USER_LIST;
     }
 
     private Model getEditModel(Integer id, Model model, UserEditDto userEditDto) {
-        String email = this.userService.getEmailByIdUser(id);
+        String email = userService.getEmailByIdUser(id);
         MyViewDto view = (conversionService.convert(email, MyViewDto.class));
         model.addAttribute("userEditDto", userEditDto);
         model.addAttribute("view", view);
@@ -81,10 +81,10 @@ public class UsersController {
         if (bindingResult.hasErrors()) {
             userEditDto.setId(id);
             getEditModel(id, model, userEditDto);
-            return this.EDIT_USER_LIST;
+            return EDIT_USER_LIST;
         }
         userEditDto.setId(id);
-        this.userService.userEdit(userEditDto);
+        userService.userEdit(userEditDto);
         if (request.isUserInRole("ADMIN")) {
             return "redirect:/credanchials";
         }
@@ -101,7 +101,7 @@ public class UsersController {
         MyViewDto view = (conversionService.convert(email, MyViewDto.class));
         model.addAttribute("view", view);
         model.addAttribute("email", email);
-        return this.VIEW;
+        return VIEW;
     }
 
     @PostMapping("/users/{id}/img")
@@ -117,12 +117,12 @@ public class UsersController {
 
     @GetMapping("/patient/{idUser}/img")
     public void getImmagePatient(@PathVariable("idUser") Integer idUser, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        Integer id = this.patientDetailsService.getUserByIdPatientDetails(idUser).getId();
+        Integer id = patientDetailsService.getUserByIdPatientDetails(idUser).getId();
         getUserImgage(id, response, request);
     }
 
     private void getUserImgage(Integer id, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        Avatar file = this.imgService.getFile(id);
+        Avatar file = imgService.getFile(id);
         if (file != null) {
             try (InputStream is = file.getData()) {
                 IOUtils.copy(is, response.getOutputStream());
@@ -137,7 +137,7 @@ public class UsersController {
 
     @PostMapping("/nurse/create")
     public String registerNurse(NurseRegisterDto nurseRegisterDto) {
-        this.userService.saveNurse(nurseRegisterDto);
+        userService.saveNurse(nurseRegisterDto);
         return "redirect:/";
     }
 
@@ -148,23 +148,23 @@ public class UsersController {
 
     @GetMapping("/user/discharges/{pageNo}")
     public String dischargesUserFindPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
-        Page<User> usersPage = this.userService.findAllActiveUsersNative(pageNo, pageSize);
+        Page<User> usersPage = userService.findAllActiveUsersNative(pageNo, pageSize);
         List<User> usersList = usersPage.getContent();
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", usersPage.getTotalPages());
         model.addAttribute("totalItems", usersPage.getTotalElements());
         model.addAttribute("usersList", usersList);
-        return this.DISCHARGES;
+        return DISCHARGES;
     }
 
     @PostMapping("/patient/{id}/discharges")
     public String dischargeUser(@PathVariable("id") Integer id, Model model) {
-        UserDischarsergeDto userDischarsergeDto = this.userService.generateHospitalDischarge(id);
+        UserDischarsergeDto userDischarsergeDto = userService.generateHospitalDischarge(id);
         model.addAttribute("listAppointment", userDischarsergeDto.getListDischarserge());
         model.addAttribute("userDischarsergeDto", userDischarsergeDto);
         model.addAttribute("listDiagnosis", userDischarsergeDto.getDiagnosisNameAndDate());
-        model.addAttribute("epicrisisList", this.epicrisisService.getEpicrisisToDiscargeList(id));
-        return this.DISCHARGE;
+        model.addAttribute("epicrisisList", epicrisisService.getEpicrisisToDiscargeList(id));
+        return DISCHARGE;
     }
 
     @GetMapping("user/overwrite")
@@ -172,7 +172,7 @@ public class UsersController {
         if (authentication == null) {
             return "redirect:/login";
         }
-        this.patientDetailsService.resetPatientDetailslStatusFromIdUser(this.credentialAuthService.getIdAutUser());
+        patientDetailsService.resetPatientDetailslStatusFromIdUser(credentialAuthService.getIdAutUser());
         return "redirect:/";
     }
 }

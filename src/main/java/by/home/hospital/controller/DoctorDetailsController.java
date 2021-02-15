@@ -31,9 +31,9 @@ public class DoctorDetailsController {
 
     @GetMapping("/doctors")
     public String getDoctorDetails(Model model) {
-        List<DoctorInfoDto> doctorInfoDtos = this.doctorDetailsService.getDoctorInfoDto();
+        List<DoctorInfoDto> doctorInfoDtos = doctorDetailsService.getDoctorInfoDto();
         model.addAttribute("doctorInfoDtos", doctorInfoDtos);
-        return this.DOCTOR_INFO_DTO;
+        return DOCTOR_INFO_DTO;
     }
 
     @GetMapping("/doctor/create")
@@ -42,20 +42,20 @@ public class DoctorDetailsController {
             doctorRegisterDto = new DoctorRegisterDto();
         }
         model.addAttribute("doctorRegisterDto", doctorRegisterDto);
-        return this.DOCTOR_CREATE;
+        return DOCTOR_CREATE;
     }
 
     @PostMapping(path = "/doctor/register")
     public String registerDoctor(@Valid DoctorRegisterDto doctorRegisterDto, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors() || this.credentialsService.existsByEmail(doctorRegisterDto.getEmail())) {
+        if (bindingResult.hasErrors() || credentialsService.existsByEmail(doctorRegisterDto.getEmail())) {
             model.addAttribute("doctorRegisterDto", doctorRegisterDto);
-            return this.DOCTOR_CREATE;
+            return DOCTOR_CREATE;
         }
         if (doctorRegisterDto.getPosition().equals(Position.NURSE)) {
-            this.userService.saveNurse(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class));
+            userService.saveNurse(conversionService.convert(doctorRegisterDto, NurseRegisterDto.class));
             return "redirect:/";
         }
-        this.doctorDetailsService.registerDoctor(doctorRegisterDto);
+        doctorDetailsService.registerDoctor(doctorRegisterDto);
         return "redirect:/";
     }
 

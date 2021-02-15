@@ -42,10 +42,10 @@ class PatientDetailsServiceTest {
                 "1234567"
         );
 
-        Mockito.when(this.userService.saveUserFromPatientRegisterDto(patientRegisterDto)).thenReturn(new User());
-        Mockito.when(this.patientDitalesjpaRepository.save(any(PatientDetails.class))).thenReturn(patientDetailsMock);
+        Mockito.when(userService.saveUserFromPatientRegisterDto(patientRegisterDto)).thenReturn(new User());
+        Mockito.when(patientDitalesjpaRepository.save(any(PatientDetails.class))).thenReturn(patientDetailsMock);
 
-        PatientDetails patientDetails = this.patientDetailsService.savePatientRegister(patientRegisterDto);
+        PatientDetails patientDetails = patientDetailsService.savePatientRegister(patientRegisterDto);
 
         assertNotNull(patientDetails.getStatus());
         assertEquals(NOT_EXAMINED, patientDetails.getStatus());
@@ -58,9 +58,9 @@ class PatientDetailsServiceTest {
         patientDetailsMock.setStatus(NOT_EXAMINED);
         patientDetailsMock.setPatient(new User());
 
-        Mockito.when(this.patientDitalesjpaRepository.findById(1)).thenReturn(Optional.of(patientDetailsMock));
+        Mockito.when(patientDitalesjpaRepository.findById(1)).thenReturn(Optional.of(patientDetailsMock));
 
-        PatientWhisStatusDto patientWhisStatusDto = this.patientDetailsService.getUserByIdPatientDetails(1);
+        PatientWhisStatusDto patientWhisStatusDto = patientDetailsService.getUserByIdPatientDetails(1);
 
         assertNotNull(patientWhisStatusDto);
         assertEquals(NOT_EXAMINED, patientWhisStatusDto.getStatus());

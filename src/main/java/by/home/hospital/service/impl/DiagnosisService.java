@@ -21,12 +21,12 @@ public class DiagnosisService implements IDiagnosisService {
 
     @Override
     public List<Diagnosis> findAll() {
-        return this.diagnosisJpaRepository.findAll();
+        return diagnosisJpaRepository.findAll();
     }
 
     @Override
     public Diagnosis save(Diagnosis diagnosis) {
-        return this.diagnosisJpaRepository.save(diagnosis);
+        return diagnosisJpaRepository.save(diagnosis);
     }
 
     @Override
@@ -34,12 +34,12 @@ public class DiagnosisService implements IDiagnosisService {
         Diagnosis diagnosis = new Diagnosis();
         diagnosis.setName(examinationDoctor.getDiagnosis());
         diagnosis.setDate(new Date());
-        return this.diagnosisJpaRepository.save(diagnosis);
+        return diagnosisJpaRepository.save(diagnosis);
     }
 
     @Override
     public List<Diagnosis> findByDiagnosisDetails_Id(Integer idPatient) {
-        return this.diagnosisJpaRepository.findByDiagnosisPatientsId(idPatient);
+        return diagnosisJpaRepository.findByDiagnosisPatientsId(idPatient);
     }
 
 }
