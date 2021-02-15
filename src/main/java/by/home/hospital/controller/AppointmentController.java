@@ -46,8 +46,8 @@ public class AppointmentController {
             getModelExamination(id, model);
             return this.ROOM_EXAMINATION;
         }
-        userExaminationDto.setAuthenticationDoctorId(this.credentialAuthService.getIdAutUser());
-        this.appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
+        userExaminationDto.setAuthenticationDoctorId(credentialAuthService.getIdAutUser());
+        appointmentUsersService.setAppointmentParameters(conversionService.convert(userExaminationDto, ExaminationDoctor.class));
         return "redirect:/patient/status/receptionPending";
     }
 
@@ -55,23 +55,23 @@ public class AppointmentController {
     public String getRoomForExamination(@PathVariable("id") Integer id,
                                         Model model) {
         getModelExamination(id, model);
-        return this.ROOM_EXAMINATION;
+        return ROOM_EXAMINATION;
     }
 
     @GetMapping("/patient/appointment")
     public String getPatientForFulfillmentOfAppointments(Model model) {
-        List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.PENDING);
+        List<AppointmentFulfillmentDto> appointmentUsers = appointmentService.findAllByStatus(AppointmentStatus.PENDING);
         model.addAttribute("appointmentUsers", appointmentUsers);
-        return this.FULFILLMENT_OF_APPOINTMENT;
+        return FULFILLMENT_OF_APPOINTMENT;
     }
 
     @GetMapping("/patient/getAppointment")
     public String getPatientWhereStatusApointmentPending(Model model) {
-        List<AppointmentFulfillmentDto> appointmentUsers = this.appointmentService.findAllByStatus(AppointmentStatus.DONE);
-        List<Diagnosis> diagnoses = this.diagnosisService.findAll();
+        List<AppointmentFulfillmentDto> appointmentUsers = appointmentService.findAllByStatus(AppointmentStatus.DONE);
+        List<Diagnosis> diagnoses = diagnosisService.findAll();
         model.addAttribute("appointmentUsers", appointmentUsers);
         model.addAttribute("diagnoses", diagnoses);
-        return this.STATUS_PENDING_APPOINTMENT;
+        return STATUS_PENDING_APPOINTMENT;
     }
 
     @PostMapping("/patient/FulfillmentOfAppointments/{idAppointment}/")
