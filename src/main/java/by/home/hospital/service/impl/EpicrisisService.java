@@ -7,7 +7,6 @@ import by.home.hospital.dto.ResultProcedurFormDto;
 import by.home.hospital.service.IEpicrisisService;
 import by.home.hospital.service.repository.EpicrisisJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -4,7 +4,6 @@ import by.home.hospital.service.IFileExport;
 import by.home.hospital.service.impl.EmailService;
 import by.home.hospital.service.impl.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

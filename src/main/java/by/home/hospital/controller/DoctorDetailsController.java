@@ -1,9 +1,9 @@
 package by.home.hospital.controller;
 
+import by.home.hospital.domain.Position;
 import by.home.hospital.dto.DoctorInfoDto;
 import by.home.hospital.dto.DoctorRegisterDto;
 import by.home.hospital.dto.NurseRegisterDto;
-import by.home.hospital.domain.Position;
 import by.home.hospital.service.impl.CredentialsService;
 import by.home.hospital.service.impl.DoctorDetailsService;
 import by.home.hospital.service.impl.UserService;

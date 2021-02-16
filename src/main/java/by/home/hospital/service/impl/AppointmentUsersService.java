@@ -2,17 +2,15 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Appointment;
 import by.home.hospital.domain.AppointmentUsers;
-import by.home.hospital.domain.User;
 import by.home.hospital.domain.ExaminationDoctor;
+import by.home.hospital.domain.User;
 import by.home.hospital.service.IAppointmentUsersService;
 import by.home.hospital.service.repository.AppointmentUsersJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Transactional

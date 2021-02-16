@@ -1,9 +1,9 @@
 package by.home.hospital.converter;
 
-import by.home.hospital.dto.AppointmentDto;
 import by.home.hospital.domain.ExaminationDoctor;
-import by.home.hospital.dto.UserExaminationDto;
 import by.home.hospital.domain.Type;
+import by.home.hospital.dto.AppointmentDto;
+import by.home.hospital.dto.UserExaminationDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

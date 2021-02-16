@@ -2,14 +2,15 @@ package by.home.hospital.controller;
 
 
 import by.home.hospital.domain.Position;
-import by.home.hospital.dto.NurseRegisterDto;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
 import by.home.hospital.service.StorageService;
-import by.home.hospital.service.impl.*;
+import by.home.hospital.service.impl.CredentialAuthService;
+import by.home.hospital.service.impl.EpicrisisService;
+import by.home.hospital.service.impl.PatientDetailsService;
+import by.home.hospital.service.impl.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,7 +28,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Controller

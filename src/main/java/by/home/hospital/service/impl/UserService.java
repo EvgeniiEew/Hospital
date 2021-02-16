@@ -1,13 +1,11 @@
 package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Credential;
-import by.home.hospital.dto.NurseRegisterDto;
+import by.home.hospital.domain.Position;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.*;
-import by.home.hospital.domain.Position;
 import by.home.hospital.service.IUserServices;
 import by.home.hospital.service.repository.UserJpaRepo;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

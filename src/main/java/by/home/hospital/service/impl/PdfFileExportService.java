@@ -6,7 +6,6 @@ import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.dto.UserDischarsergeDto;
 import by.home.hospital.service.IFileExport;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

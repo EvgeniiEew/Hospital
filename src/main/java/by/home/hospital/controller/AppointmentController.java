@@ -1,10 +1,10 @@
 package by.home.hospital.controller;
 
+import by.home.hospital.domain.AppointmentStatus;
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.ExaminationDoctor;
-import by.home.hospital.dto.*;
-import by.home.hospital.domain.AppointmentStatus;
 import by.home.hospital.domain.Position;
+import by.home.hospital.dto.*;
 import by.home.hospital.service.impl.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;

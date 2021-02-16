@@ -1,15 +1,14 @@
 package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.PatientDetails;
+import by.home.hospital.domain.PatientStatus;
 import by.home.hospital.domain.User;
 import by.home.hospital.dto.PatientRegisterDto;
 import by.home.hospital.dto.PatientWhisStatusDto;
 import by.home.hospital.dto.ResultProcedurFormDto;
-import by.home.hospital.domain.PatientStatus;
 import by.home.hospital.service.IPatientDetailsService;
 import by.home.hospital.service.repository.PatientDitalesjpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
