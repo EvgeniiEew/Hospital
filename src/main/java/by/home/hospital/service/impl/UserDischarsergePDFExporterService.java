@@ -22,6 +22,27 @@ import java.util.Date;
 import java.util.List;
 
 public class UserDischarsergePDFExporterService {
+    private final String NAME_APPOINTMENT_FIELD = "Name appointment";
+    private final String TYPE_APPOINTMENT_FIELD = "Type appointment";
+    private final String APPOINTMENT_COMPLETION_DATE_FIELD = "Appointment completion  date ";
+    private final String DOCTOR_POSITION_FIELD = "Doctor position";
+    private final String DOCTOR_SPECIALIZATION_FIELD = "doctor's specialization";
+    private final String FIRST_NAME_FIELD = "FirstName";
+    private final String LAST_NAME_FIELD = "LastName";
+    private final String COMPLETE_DIAGNOSIS_FIELD = "complete diagnosis in a year";
+    private final String DIAGNOSED_FIELD = "Diagnosed";
+    private final String PATIENT_PHOTO_FIELD = "Patient photo";
+    private final String NUMBER_PATIENT_FIELD = "Number Patient";
+    private final String FIRST_NAME_PATIENT_FIELD = "FirstNamePatient";
+    private final String LAST_NAME_PATIENT_FIELD = "LastNamePatient";
+    private final String EXTRACT_FIELD = "Extract from the patient's medical record";
+    private final String DIAGNISIS_FIELD = "Diagnisis";
+    private final String APPOINTMENT_DISCHARSERGES_FIELD = "Appointment Discharserges";
+    private final String BRIEF_HISTORY_FIELD = "Brief history and recommendations:";
+    private final String DATE_FORMAT_FIELD = "yyyy_MM_dd_HH_mm_ss";
+    private final String FILE_NAME_NOTFOUND_FIELD = "File name not found";
+
+
     private UserDischarsergeDto userDischarsergeDto;
     private List<Diagnosis> diagnosisList;
     private List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList;
@@ -69,22 +90,20 @@ public class UserDischarsergePDFExporterService {
         pdfPCell.setPadding(5);
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
-        pdfPCell.setPhrase(new Phrase("Name appointment", font));
+        writeTableDisharserges(tableAppointmentDischarsergesDto, pdfPCell, font, NAME_APPOINTMENT_FIELD, TYPE_APPOINTMENT_FIELD, APPOINTMENT_COMPLETION_DATE_FIELD);
+        writeTableDisharserges(tableAppointmentDischarsergesDto, pdfPCell, font, DOCTOR_POSITION_FIELD, DOCTOR_SPECIALIZATION_FIELD, FIRST_NAME_FIELD);
+        pdfPCell.setPhrase(new Phrase(LAST_NAME_FIELD, font));
+        tableAppointmentDischarsergesDto.addCell(pdfPCell);
+    }
+
+    private void writeTableDisharserges(PdfPTable tableAppointmentDischarsergesDto, PdfPCell pdfPCell, Font font, String name_appointment, String type_appointment, String appointment_completion_date) {
+        pdfPCell.setPhrase(new Phrase(name_appointment, font));
         tableAppointmentDischarsergesDto.addCell(pdfPCell);
 
-        pdfPCell.setPhrase(new Phrase("Type appointment", font));
+        pdfPCell.setPhrase(new Phrase(type_appointment, font));
         tableAppointmentDischarsergesDto.addCell(pdfPCell);
 
-        pdfPCell.setPhrase(new Phrase("Appointment completion  date ", font));
-        tableAppointmentDischarsergesDto.addCell(pdfPCell);
-
-        pdfPCell.setPhrase(new Phrase("Doctor position", font));
-        tableAppointmentDischarsergesDto.addCell(pdfPCell);
-        pdfPCell.setPhrase(new Phrase("doctor's specialization", font));
-        tableAppointmentDischarsergesDto.addCell(pdfPCell);
-        pdfPCell.setPhrase(new Phrase("FirstName", font));
-        tableAppointmentDischarsergesDto.addCell(pdfPCell);
-        pdfPCell.setPhrase(new Phrase("LastName", font));
+        pdfPCell.setPhrase(new Phrase(appointment_completion_date, font));
         tableAppointmentDischarsergesDto.addCell(pdfPCell);
     }
 
@@ -94,11 +113,10 @@ public class UserDischarsergePDFExporterService {
         pdfPCell.setPadding(5);
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
-        pdfPCell.setPhrase(new Phrase("complete diagnosis in a year", font));
+        pdfPCell.setPhrase(new Phrase(COMPLETE_DIAGNOSIS_FIELD, font));
         tableDiagnosisList.addCell(pdfPCell);
-        pdfPCell.setPhrase(new Phrase("Diagnosed", font));
+        pdfPCell.setPhrase(new Phrase(DIAGNOSED_FIELD, font));
         tableDiagnosisList.addCell(pdfPCell);
-
     }
 
     private void writeTableHeaderFromUserDischarserge(PdfPTable table) {
@@ -119,17 +137,17 @@ public class UserDischarsergePDFExporterService {
         pdfPCell.setPadding(5);
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
-        pdfPCell.setPhrase(new Phrase("Patient photo", font));
+        pdfPCell.setPhrase(new Phrase(PATIENT_PHOTO_FIELD, font));
 
         table.addCell(pdfPCell);
-        pdfPCell.setPhrase(new Phrase("Number Patient", font));
+        pdfPCell.setPhrase(new Phrase(NUMBER_PATIENT_FIELD, font));
 
         table.addCell(pdfPCell);
 
-        pdfPCell.setPhrase(new Phrase("FirstNamePatient", font));
+        pdfPCell.setPhrase(new Phrase(FIRST_NAME_PATIENT_FIELD, font));
         table.addCell(pdfPCell);
 
-        pdfPCell.setPhrase(new Phrase("LastNamePatient", font));
+        pdfPCell.setPhrase(new Phrase(LAST_NAME_PATIENT_FIELD, font));
         table.addCell(pdfPCell);
     }
 
@@ -138,10 +156,7 @@ public class UserDischarsergePDFExporterService {
         String fileName = generateFileNameByUser();
         PdfWriter.getInstance(document, new FileOutputStream(path + "/resources/" + fileName + ".pdf"));
         document.open();
-        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setColor(Color.BLACK);
-        font.setSize(18);
-        Paragraph title = new Paragraph("Extract from the patient's medical record", font);
+        Paragraph title = new Paragraph(EXTRACT_FIELD, getFont());
 
         document.add(title);
         PdfPTable table = new PdfPTable(4);
@@ -151,7 +166,7 @@ public class UserDischarsergePDFExporterService {
         writeTableHeaderFromUserDischarserge(table);
         document.add(table);
 
-        Paragraph titleDiagnosis = new Paragraph("Diagnisis", font);
+        Paragraph titleDiagnosis = new Paragraph(DIAGNISIS_FIELD, getFont());
         document.add(titleDiagnosis);
         PdfPTable tableDiagnosisList = new PdfPTable(2);
         tableDiagnosisList.setWidthPercentage(100);
@@ -160,7 +175,7 @@ public class UserDischarsergePDFExporterService {
         writeTableHeaderDiagnosisList(tableDiagnosisList);
         document.add(tableDiagnosisList);
 
-        Paragraph titleAppointmentDischarsergesDto = new Paragraph("Appointment Discharserges", font);
+        Paragraph titleAppointmentDischarsergesDto = new Paragraph(APPOINTMENT_DISCHARSERGES_FIELD, getFont());
         document.add(titleAppointmentDischarsergesDto);
         PdfPTable tableAppointmentDischarsergesDto = new PdfPTable(7);
         tableAppointmentDischarsergesDto.setWidthPercentage(100);
@@ -169,14 +184,14 @@ public class UserDischarsergePDFExporterService {
         writeTableHeaderAppointmentDischarsergesDto(tableAppointmentDischarsergesDto);
         document.add(tableAppointmentDischarsergesDto);
 
-        Paragraph titleEpicris = new Paragraph("Brief history and recommendations:", font);
+        Paragraph titleEpicris = new Paragraph(BRIEF_HISTORY_FIELD, getFont());
         document.add(titleEpicris);
         PdfPTable tableEpicrisis = new PdfPTable(1);
         tableEpicrisis.setWidthPercentage(100);
         tableEpicrisis.setSpacingBefore(15);
         writeTableHeaderEpicrisis(tableEpicrisis);
         document.add(tableEpicrisis);
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        DateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT_FIELD);
         String currentDateTime = dateFormatter.format(new Date());
         document.addTitle(currentDateTime);
         document.close();
@@ -184,7 +199,7 @@ public class UserDischarsergePDFExporterService {
     }
 
     private String generateFileNameByUser() {
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        DateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT_FIELD);
         String currentDateTime = dateFormatter.format(new Date());
         String patientFirstName = userDischarsergeDto.getFirstNamePatient();
         String patientLastName = userDischarsergeDto.getLastNamePatient();
@@ -195,9 +210,16 @@ public class UserDischarsergePDFExporterService {
     private Image setAvatarPdf() throws IOException, NullPointerException {
         String name = userService.getUserById(userDischarsergeDto.getIdPatientUser()).getAvatarFileName();
         if (name == null) {
-            throw new NullPointerException("File name not found");
+            throw new NullPointerException(FILE_NAME_NOTFOUND_FIELD);
         }
         Path path = Paths.get(name);
         return Image.getInstance(path.toAbsolutePath().toString());
+    }
+
+    private Font getFont() {
+        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font.setColor(Color.BLACK);
+        font.setSize(18);
+        return font;
     }
 }
