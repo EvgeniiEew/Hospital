@@ -1,9 +1,10 @@
-package by.home.hospital.service.impl;
+package by.home.hospital.domain;
 
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.Epicrisis;
 import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.dto.UserDischarsergeDto;
+import by.home.hospital.service.impl.UserService;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
 import com.lowagie.text.*;
@@ -21,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class UserDischarsergePDFExporterService {
+public class UserDischarsergePDFExporter {
     private final String NAME_APPOINTMENT_FIELD = "Name appointment";
     private final String TYPE_APPOINTMENT_FIELD = "Type appointment";
     private final String APPOINTMENT_COMPLETION_DATE_FIELD = "Appointment completion  date ";
@@ -49,7 +50,7 @@ public class UserDischarsergePDFExporterService {
     private List<Epicrisis> epicrisisList;
     private UserService userService;
 
-    public UserDischarsergePDFExporterService(UserDischarsergeDto userDischarsergeDto, List<Diagnosis> diagnosisList, List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList, List<Epicrisis> epicrisisList, UserService userService) {
+    public UserDischarsergePDFExporter(UserDischarsergeDto userDischarsergeDto, List<Diagnosis> diagnosisList, List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList, List<Epicrisis> epicrisisList, UserService userService) {
         this.userDischarsergeDto = userDischarsergeDto;
         this.diagnosisList = diagnosisList;
         this.appointmentDischarsergesDtoList = appointmentDischarsergesDtoList;

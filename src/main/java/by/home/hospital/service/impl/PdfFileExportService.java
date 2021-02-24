@@ -2,6 +2,7 @@ package by.home.hospital.service.impl;
 
 import by.home.hospital.domain.Diagnosis;
 import by.home.hospital.domain.Epicrisis;
+import by.home.hospital.domain.UserDischarsergePDFExporter;
 import by.home.hospital.dto.AppointmentDischarsergesDto;
 import by.home.hospital.dto.UserDischarsergeDto;
 import by.home.hospital.service.IFileExport;
@@ -23,15 +24,15 @@ public class PdfFileExportService implements IFileExport {
         List<Diagnosis> diagnosisList = userDischarsergeDto.getDiagnosisNameAndDate();
         List<AppointmentDischarsergesDto> appointmentDischarsergesDtoList = userDischarsergeDto.getListDischarserge();
         List<Epicrisis> epicrisisList = epicrisisService.getEpicrisisToDiscargeList(id);
-        UserDischarsergePDFExporterService userDischarsergePDFExporterService =
-                new UserDischarsergePDFExporterService(
+        UserDischarsergePDFExporter userDischarsergePDFExporter =
+                new UserDischarsergePDFExporter(
                         userDischarsergeDto,
                         diagnosisList,
                         appointmentDischarsergesDtoList,
                         epicrisisList,
                         userService);
         try {
-            String fileName = userDischarsergePDFExporterService.export(path);
+            String fileName = userDischarsergePDFExporter.export(path);
             return fileName;
         } catch (IOException e) {
             e.printStackTrace();
